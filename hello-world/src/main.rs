@@ -33,11 +33,11 @@ fn main() -> error::Result<()> {
     let import_object = imports! {};
 
     // Let's create an instance of wasm module running in the wasmer-runtime
-    let mut instance = instantiate(wasm_bytes, import_object)?;
+    let instance = instantiate(wasm_bytes, &import_object)?;
 
     // Let's call the exported "add_one" function ont the wasm module.
     let values = instance
-        .func("add_one")?
+        .dyn_func("add_one")?
         .call(&[Value::I32(42)])?;
 
     // Asserting that the returned value from the function is our expected value.
