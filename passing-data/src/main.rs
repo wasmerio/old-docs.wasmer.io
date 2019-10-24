@@ -21,7 +21,7 @@ fn main() -> error::Result<()> {
 
     // Let's open the file.
     // The file path may be different depending where you run `cargo run`, and where you place the file.
-    let mut file = File::open("./strings_wasm_is_cool.wasm").expect("Incorrect file path to wasm module.");
+    let mut file = File::open("../example_rust_wasm_crates/strings-wasm-is-cool/pkg/strings_wasm_is_cool_bg.wasm").expect("Incorrect file path to wasm module.");
 
     // Let's read the file into a Vec
     let mut wasm_vec = Vec::new();
@@ -51,8 +51,6 @@ fn main() -> error::Result<()> {
     let response = get_wasm_memory_buffer_pointer.call().unwrap() as u32;
     let wasm_buffer_pointer: WasmPtr<u8, Array> = WasmPtr::new(response);
 
-    println!("hiiii");
-
     // Let's write a string to the wasm memory
     let original_string = "Did you know";
     let memory_writer = wasm_buffer_pointer.deref(wasm_instance_memory, 0, original_string.len() as u32).unwrap();
@@ -60,14 +58,10 @@ fn main() -> error::Result<()> {
         memory_writer[i].set(b);
     }
 
-    println!("fjsdkfljsdjf");
-
     let add_wasm_is_cool: Func<u32, i32> = instance.func("add_wasm_is_cool").expect("Wasm is cool export");
     let new_string_length = add_wasm_is_cool.call(original_string.len() as u32).unwrap();
 
-    println!("suppp");
-
-    // Get our pointer again, since memory may have shifted around
+     // Get our pointer again, since memory may have shifted around
     let new_pointer_response = get_wasm_memory_buffer_pointer.call().unwrap() as u32;
     let new_wasm_buffer_pointer: WasmPtr<u8, Array> = WasmPtr::new(new_pointer_response);
 
