@@ -1,0 +1,15 @@
+{
+  "name": "strings-wasm-is-cool",
+  "collaborators": [
+    "Aaron Turner <aaron@aaronthedev.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "strings_wasm_is_cool_bg.wasm",
+    "strings_wasm_is_cool.js",
+    "strings_wasm_is_cool.d.ts"
+  ],
+  "module": "strings_wasm_is_cool.js",
+  "types": "strings_wasm_is_cool.d.ts",
+  "sideEffects": "false"
+}
