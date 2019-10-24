@@ -21,7 +21,7 @@ fn main() -> error::Result<()> {
 
     // Let's open the file.
     // The file path may be different depending where you run `cargo run`, and where you place the file.
-    let mut file = File::open("../example_rust_wasm_crates/strings-wasm-is-cool/pkg/strings_wasm_is_cool_bg.wasm").expect("Incorrect file path to wasm module.");
+    let mut file = File::open("./example_rust_wasm_crate/strings-wasm-is-cool/pkg/strings_wasm_is_cool_bg.wasm").expect("Incorrect file path to wasm module.");
 
     // Let's read the file into a Vec
     let mut wasm_vec = Vec::new();
