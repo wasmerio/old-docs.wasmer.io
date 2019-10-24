@@ -32,7 +32,7 @@ pub fn get_wasm_memory_buffer_pointer() -> *const u8 {
 
 // Function to get the string from the buffer and add the text to it
 #[wasm_bindgen]
-pub fn add_wasm_is_cool(passed_string_length: usize) {
+pub fn add_wasm_is_cool(passed_string_length: usize) -> usize {
     // Let's copy our our bytes from the slcie for the entire UTF8 String
     let mut string_bytes = Vec::with_capacity(passed_string_length);
     unsafe {
@@ -52,4 +52,6 @@ pub fn add_wasm_is_cool(passed_string_length: usize) {
             WASM_MEMORY_BUFFER[i] = new_string_bytes[i];
         }
     }
+
+    return new_string.len();
 }

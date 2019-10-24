@@ -8,8 +8,11 @@ use wasmer_runtime::{
     Value,
     imports,
     error,
+    Func
 };
-use wasmer_runtime_core::memory::ptr::WasmPtr;
+
+// Import some helpers for handling Pointers into Wasm Memory
+use wasmer_runtime_core::memory::ptr::{WasmPtr, Array};
 
 // Our entry point to our application
 fn main() -> error::Result<()> {
@@ -36,29 +39,42 @@ fn main() -> error::Result<()> {
     // Let's create an instance of wasm module running in the wasmer-runtime
     let instance = instantiate(wasm_bytes, &import_object)?;
 
-    // Let's create our string our string to wasm memory
-    let original_string = "Did you know";
-
-
     // Lets get the contextr and memory of our Wasm Instance
     let wasm_instance_context = instance.context();
     let wasm_instance_memory = wasm_instance_context.memory(0);
 
     // Let's get the pointer to to our buffer in the wasm memory
-    let values = instance
-        .dyn_func("get_wasm_memory_buffer_pointer")?
-        .call()?;
-    let wasm_buffer_pointer = values[0];
+    let get_wasm_memory_buffer_pointer: Func<(), i32> = 
+        instance
+        .func("get_wasm_memory_buffer_pointer")
+        .expect("get_wasm_memory_buffer_pointer");
+    let response = get_wasm_memory_buffer_pointer.call().unwrap() as u32;
+    let wasm_buffer_pointer: WasmPtr<u8, Array> = WasmPtr::new(response);
 
-    // TODO: Turn our pointer into a WasmPtr here? Help me mark :')
+    println!("hiiii");
 
-    // TODO: Write the string to memory
+    // Let's write a string to the wasm memory
+    let original_string = "Did you know";
+    let memory_writer = wasm_buffer_pointer.deref(wasm_instance_memory, 0, original_string.len() as u32).unwrap();
+    for (i, b) in original_string.bytes().enumerate() {
+        memory_writer[i].set(b);
+    }
 
-    // TODO: Call the add_wasm_is_cool function
+    println!("fjsdkfljsdjf");
 
-    // TODO: Get our pointer Again
+    let add_wasm_is_cool: Func<u32, i32> = instance.func("add_wasm_is_cool").expect("Wasm is cool export");
+    let new_string_length = add_wasm_is_cool.call(original_string.len() as u32).unwrap();
 
-    // TODO: Read the string from that pointer.
+    println!("suppp");
+
+    // Get our pointer again, since memory may have shifted around
+    let new_pointer_response = get_wasm_memory_buffer_pointer.call().unwrap() as u32;
+    let new_wasm_buffer_pointer: WasmPtr<u8, Array> = WasmPtr::new(new_pointer_response);
+
+    // Read the string from that pointer.
+    if let Some(my_str) = new_wasm_buffer_pointer.get_utf8_string(wasm_instance_memory, new_string_length as u32) {
+        println!("yooo {}", my_str);
+    }
     
     // Asserting that the returned value from the function is our expected value.
     // assert_eq!(values[0], Value::I32(43));
