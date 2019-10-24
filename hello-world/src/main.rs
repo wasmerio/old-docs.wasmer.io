@@ -30,21 +30,28 @@ fn main() -> error::Result<()> {
 
     // Our import object, that allows exposing functions to our wasm module.
     // We're not importing anything, so make an empty import object.
-    let import_object = imports! {};
+    let import_object = imports!{};
 
     // Let's create an instance of wasm module running in the wasmer-runtime
     let instance = instantiate(wasm_bytes, &import_object)?;
 
+    // Let's get a number we want to add one to
+    let value_to_add = 42;
+    println!("Original Value: {}", value_to_add);
+
     // Let's call the exported "add_one" function ont the wasm module.
     let values = instance
         .dyn_func("add_one")?
-        .call(&[Value::I32(42)])?;
+        .call(&[Value::I32(value_to_add)])?;
 
     // Asserting that the returned value from the function is our expected value.
     assert_eq!(values[0], Value::I32(43));
 
+    // Log the new value
+    println!("New Value: {}", 43);
+
     // Log a success message.
-    println!("add_one executed successfully!");
+    println!("Success!");
     
     // Return OK since everything executed successfully!
     Ok(())
