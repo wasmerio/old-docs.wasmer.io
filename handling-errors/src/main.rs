@@ -37,10 +37,21 @@ fn main() -> error::Result<()> {
 
     // Let's call the exported "throw_error" function ont the wasm module.
     let throw_error_func: Func<(), ()> = instance
-        .func("throw_error")
-        .expect("throw_error");
+        .func("throw_wasm_error")
+        .expect("throw_wasm_error function was not found");
 
-    throw_error_func.call().unwrap();
+    let response = throw_error_func.call();
+
+    match response {
+       Ok(_) => {
+            // This should have thrown an error, return an error
+            panic!("throw_wasm_error did not error");
+       },
+       Err(e) => {
+           // Log the error
+           println!("Error from throw_wasm_error: {}", e);
+       },
+    }
 
     // Log a success message.
     println!("Success!");

@@ -9,6 +9,6 @@ use wasm_bindgen::prelude::*;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-pub fn throw_error() {
+pub fn throw_wasm_error() {
     panic!("Throwing an error from throw_error");
 }
