@@ -40,7 +40,12 @@ fn main() -> error::Result<()> {
         .func("throw_wasm_error")
         .expect("throw_wasm_error function was not found");
 
-    let response = throw_error_func.call();
+    // Unwrapping here, so that the error is thrown here
+    let response = throw_error_func.call().unwrap();
+
+    /*
+
+    Commenting the pattern matching, to show the unwrapped error above. 
 
     match response {
        Ok(_) => {
@@ -52,6 +57,8 @@ fn main() -> error::Result<()> {
            println!("Error from throw_wasm_error: {}", e);
        },
     }
+
+    */
 
     // Log a success message.
     println!("Success!");
