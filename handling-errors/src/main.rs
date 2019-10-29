@@ -41,7 +41,7 @@ fn main() -> error::Result<()> {
         .expect("throw_wasm_error function was not found");
 
     // Unwrapping here, so that the error is thrown here
-    let response = throw_error_func.call().unwrap();
+    let _response = throw_error_func.call().unwrap();
 
     /*
 
