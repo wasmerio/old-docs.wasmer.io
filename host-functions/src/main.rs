@@ -13,7 +13,7 @@ use wasmer_runtime::{
     Ctx
 };
 
-let mut COUNTER: i32 = 0;
+static mut COUNTER: i32 = 0;
 
 // Our entry point to our application
 fn main() -> error::Result<()> {
@@ -22,7 +22,7 @@ fn main() -> error::Result<()> {
 
     // Let's open the file. 
     // The file path may be different depending where you run `cargo run`, and where you place the file.
-    let mut file = File::open("./example-rust-wasm-crate/host-counter/pkg/host-counter.wasm").expect("Incorrect file path to wasm module.");
+    let mut file = File::open("./example-rust-wasm-crate/host-counter/pkg/host_counter_bg.wasm").expect("Incorrect file path to wasm module.");
 
     // Let's read the file into a Vec
     let mut wasm_vec = Vec::new();
@@ -59,14 +59,16 @@ fn main() -> error::Result<()> {
         .dyn_func("increment_counter_loop")?
         .call(&[Value::I32(number_of_times_to_loop)])?;
 
-    // Assert our counter is the expected value
-    assert_eq!(number_of_times_to_loop, COUNTER);
+    unsafe {
+        // Assert our counter is the expected value
+        assert_eq!(number_of_times_to_loop, COUNTER);
 
-    // Asserting that the returned value from the function is our expected value.
-    assert_eq!(values[0], Value::I32(COUNTER));
+        // Asserting that the returned value from the function is our expected value.
+        assert_eq!(values[0], Value::I32(COUNTER));
 
-    // Log the new value
-    println!("New Counter Value: {}", COUNTER);
+        // Log the new value
+        println!("New Counter Value: {}", COUNTER);
+    }
 
     // Log a success message.
     println!("Success!");
@@ -76,10 +78,14 @@ fn main() -> error::Result<()> {
 }
 
 fn get_counter(_ctx: &mut Ctx) -> i32 {
-    COUNTER
+    unsafe {
+        COUNTER
+    }
 }
 
 fn add_to_counter(_ctx: &mut Ctx, value_to_add: i32) -> i32 {
-    COUNTER += value_to_add;
-    COUNTER
+    unsafe {
+        COUNTER += value_to_add;
+        COUNTER
+    }
 }

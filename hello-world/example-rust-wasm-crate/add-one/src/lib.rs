@@ -1,5 +1,4 @@
-mod utils;
-
+// Import wasm_bindgen
 use wasm_bindgen::prelude::*;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
