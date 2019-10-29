@@ -9,6 +9,9 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 // Define a function that is imported into the module.
 // By default, the "env" namespace is used.
+//
+// We aren't using wasm-bindgen here, as we want to
+// handle the imports ourselves with our host Wasmer app.
 extern "C" {
     fn get_counter() -> i32;
     fn add_to_counter(value_to_add: i32) -> i32;

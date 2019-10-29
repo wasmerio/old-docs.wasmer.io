@@ -8,8 +8,9 @@ use wasmer_runtime::{
     Value,
     imports,
     error,
-    // Incllude the function macro, and context for wasm
+    // Include the function macro
     func,
+    // Include the Context for our Wasm Instance for passing imported host functions
     Ctx
 };
 
@@ -54,7 +55,7 @@ fn main() -> error::Result<()> {
     // Define the number of times we want to loop our increment
     let number_of_times_to_loop: i32 = 5;
 
-    // Let's call the exported "add_one" function ont the wasm module.
+    // Let's call the exported "increment_counter_loop" function ont the wasm module.
     let values = instance
         .dyn_func("increment_counter_loop")?
         .call(&[Value::I32(number_of_times_to_loop)])?;
@@ -77,12 +78,22 @@ fn main() -> error::Result<()> {
     Ok(())
 }
 
+// Define a Host function that will be imported to the wasm module
+// Note, the first parameter must be the Wasm Instance Wasmer Context
+// Following parameter types, and return types would be as usual.
+//
+// This function returns our global counter.
 fn get_counter(_ctx: &mut Ctx) -> i32 {
     unsafe {
         COUNTER
     }
 }
 
+// Define a Host function that will be imported to the wasm module
+// Note, the first parameter must be the Wasm Instance Wasmer Context
+// Following parameter types, and return types would be as usual.
+//
+// This function adds the value to our global counter, and then returns the counter
 fn add_to_counter(_ctx: &mut Ctx, value_to_add: i32) -> i32 {
     unsafe {
         COUNTER += value_to_add;
