@@ -49,7 +49,7 @@ fn main() -> error::Result<()> {
     // Let's create an instance of wasm module running in the wasmer-runtime
     let instance = instantiate(wasm_bytes, &import_object)?;
 
-    // Let's call the exported "exit_early" function ont the wasm module.
+    // Let's call the exported "exit_early" function on the wasm module.
     let exit_early_func: Func<(), i32>  = instance
         .func("exit_early")
         .expect("exit_early functioon not found");
