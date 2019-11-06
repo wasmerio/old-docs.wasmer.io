@@ -41,6 +41,10 @@ const startWasiTask = async () => {
   const responseArrayBuffer = await response.arrayBuffer();
   const wasmBytes = new Uint8Array(responseArrayBuffer).buffer;
 
+  // NOTE: For some wasi modules, they have wasi imports that are not supported in
+  // all JavaScript environments. Meaning we will have to use `@wasmer/wasm-transformer`,
+  // which we will cover in later examples
+
   // Instantiate the WebAssembly file
   let { instance } = await WebAssembly.instantiate(wasmBytes, {
     wasi_unstable: wasi.wasiImport

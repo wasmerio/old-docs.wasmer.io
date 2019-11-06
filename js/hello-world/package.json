@@ -21,6 +21,7 @@
   "homepage": "https://github.com/torch2424/wasmer-examples#readme",
   "dependencies": {
     "@wasmer/wasi": "^0.4.7",
+    "@wasmer/wasm-transformer": "^0.4.7",
     "@wasmer/wasmfs": "^0.4.7"
   },
   "devDependencies": {
