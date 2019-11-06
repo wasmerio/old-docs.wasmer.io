@@ -5,7 +5,7 @@ import { WasmFs } from '@wasmer/wasmfs';
 // The file path to the wasi module we want to run
 const wasmFilePath = './as-echo.wasm';
 
-// A quick wrapper for console.log, to also output to the body
+// A quick wrapper for console.log, to also output logs to the body
 const consoleLog = console.log;
 console.log = function() {
   const args = Array.prototype.slice.call(arguments);
