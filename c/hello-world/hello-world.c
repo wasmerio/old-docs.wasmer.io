@@ -43,7 +43,7 @@ int main() {
                                     .import_name = import_memory_name_bytes,
                                     .tag = WASM_MEMORY };
 
-  // Create 
+  // Set some initial restrictions of the memory 
   wasmer_memory_t *memory = NULL;
   wasmer_limit_option_t max = { .has_some = true,
                                 .some = 256 };
