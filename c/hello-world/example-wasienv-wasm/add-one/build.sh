@@ -1,3 +1,3 @@
 #/bin/bash
 
-wasicc add-one.c --no-wasi -o add-one
+wasmcc add-one.c -o add-one
