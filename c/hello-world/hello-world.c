@@ -14,21 +14,36 @@ void print_wasmer_error()
 }
 
 int main() {
+
+  // Print the beginning of the example message.
   printf("Running the Wasmer C API example...\n");
 
   // Create module name for our imports
-  // represented in bytes for UTF-8 compatability
+
+  // Create a UTF-8 string as bytes for our module name. 
+  // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
   const char *module_name = "env";
   wasmer_byte_array module_name_bytes = { .bytes = (const uint8_t *) module_name,
                                           .bytes_len = strlen(module_name) };
 
   // Define a memory import
+
+  // Create a UTF-8 string as bytes for our module name. 
+  // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
   const char *import_memory_name = "memory";
   wasmer_byte_array import_memory_name_bytes = { .bytes = (const uint8_t *) import_memory_name,
                                                  .bytes_len = strlen(import_memory_name) };
+
+  // Create our memory import object that will be used as shared wasm memory between the host (this application),
+  // and the guest wasm module.
+  // The .module_name is the key of the importObject that this memory is associated with.
+  // The .import_name is the key of the module that is within the importObject
+  // The .tag is the type of import being added to the import object
   wasmer_import_t memory_import = { .module_name = module_name_bytes,
                                     .import_name = import_memory_name_bytes,
                                     .tag = WASM_MEMORY };
+
+  // Create 
   wasmer_memory_t *memory = NULL;
   wasmer_limit_option_t max = { .has_some = true,
                                 .some = 256 };
