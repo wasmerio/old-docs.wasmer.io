@@ -19,82 +19,14 @@ int main() {
   printf("Running the Wasmer C API example...\n");
 
   // Create module name for our imports
-
   // Create a UTF-8 string as bytes for our module name. 
   // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
   const char *module_name = "env";
   wasmer_byte_array module_name_bytes = { .bytes = (const uint8_t *) module_name,
                                           .bytes_len = strlen(module_name) };
 
-  // Define a memory import
-
-  // Create a UTF-8 string as bytes for our module name. 
-  // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
-  const char *import_memory_name = "memory";
-  wasmer_byte_array import_memory_name_bytes = { .bytes = (const uint8_t *) import_memory_name,
-                                                 .bytes_len = strlen(import_memory_name) };
-
-  // Create our memory import object that will be used as shared wasm memory between the host (this application),
-  // and the guest wasm module.
-  // The .module_name is the key of the importObject that this memory is associated with.
-  // The .import_name is the key of the module that is within the importObject
-  // The .tag is the type of import being added to the import object
-  wasmer_import_t memory_import = { .module_name = module_name_bytes,
-                                    .import_name = import_memory_name_bytes,
-                                    .tag = WASM_MEMORY };
-
-  // Create our initial size of the memory 
-  wasmer_memory_t *memory = NULL;
-  // Create our maximum memory size.
-  // .has_some represents wether or not the memory has a maximum size
-  // .some is the value of the maxiumum size
-  wasmer_limit_option_t max = { .has_some = true,
-                                .some = 256 };
-  // Create our memory descriptor, to set our minimum and maximum memory size
-  // .min is the minimum size of the memory
-  // .max is the maximuum size of the memory
-  wasmer_limits_t descriptor = { .min = 256,
-                                 .max = max };
-
-  // Create our memory instance, using our memory and descriptor,
-  wasmer_result_t memory_result = wasmer_memory_new(&memory, descriptor);
-  // Ensure the memory was instantiated successfully.
-  if (memory_result != WASMER_OK)
-  {
-      print_wasmer_error();
-  }
-  // Set the memory to our import object
-  memory_import.value.memory = memory;
-
-  // Define a global import
-
-  // Create a UTF-8 string as bytes for our import global name. 
-  // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
-  const char *import_global_name = "__memory_base";
-  wasmer_byte_array import_global_name_bytes = { .bytes = (const uint8_t *) import_global_name,
-    .bytes_len = strlen(import_global_name) };
-
-  // Create our global import object that will be used as shared wasm memory between the host (this application),
-  // and the guest wasm module.
-  // The .module_name is the key of the importObject that this global is associated with.
-  // The .import_name is the key of the module that is within the importObject
-  // The .tag is the type of import being added to the import object
-  wasmer_import_t global_import = { .module_name = module_name_bytes,
-    .import_name = import_global_name_bytes,
-    .tag = WASM_GLOBAL };
-
-  // Create a value for the global that is being exported.
-  // .tag is the WebAssembly Type of the global
-  // .value.I32 is the value of the global
-  wasmer_value_t val = { .tag = WASM_I32,
-    .value.I32 = 1024 };
-  // Get our global instance using our wasmer_value above
-  wasmer_global_t *global = wasmer_global_new(val, false);
-  // Set the global import's value, to the global instance we just created.
-  global_import.value.global = global;
-
   // Define an array containing our imports
-  wasmer_import_t imports[] = {global_import, memory_import};
+  wasmer_import_t imports[] = {};
 
   // Read the wasm file bytes
   FILE *file = fopen("example-wasienv-wasm/add-one/add-one.wasm", "r");
@@ -112,7 +44,7 @@ int main() {
       bytes, // The bytes of the WebAssembly modules
       len, // The length of the bytes of the WebAssembly module
       imports, // The Imports array the will be used as our importObject
-      2 // The number of imports in the imports array
+      0 // The number of imports in the imports array
   );
 
   // Print our the result of our compilation,
@@ -167,8 +99,6 @@ int main() {
   assert(response_value == 25);
 
   // Use *_destroy methods to cleanup as specified in the header documentation
-  wasmer_global_destroy(global);
-  wasmer_memory_destroy(memory);
   wasmer_instance_destroy(instance);
   return 0;
 }
