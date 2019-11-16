@@ -66,35 +66,8 @@ int main() {
   // Set the memory to our import object
   memory_import.value.memory = memory;
 
-  // Define a global import
-
-  // Create a UTF-8 string as bytes for our import global name. 
-  // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
-  const char *import_global_name = "__memory_base";
-  wasmer_byte_array import_global_name_bytes = { .bytes = (const uint8_t *) import_global_name,
-    .bytes_len = strlen(import_global_name) };
-
-  // Create our global import object that will be used as shared wasm memory between the host (this application),
-  // and the guest wasm module.
-  // The .module_name is the key of the importObject that this global is associated with.
-  // The .import_name is the key of the module that is within the importObject
-  // The .tag is the type of import being added to the import object
-  wasmer_import_t global_import = { .module_name = module_name_bytes,
-    .import_name = import_global_name_bytes,
-    .tag = WASM_GLOBAL };
-
-  // Create a value for the global that is being exported.
-  // .tag is the WebAssembly Type of the global
-  // .value.I32 is the value of the global
-  wasmer_value_t val = { .tag = WASM_I32,
-    .value.I32 = 1024 };
-  // Get our global instance using our wasmer_value above
-  wasmer_global_t *global = wasmer_global_new(val, false);
-  // Set the global import's value, to the global instance we just created.
-  global_import.value.global = global;
-
   // Define an array containing our imports
-  wasmer_import_t imports[] = {global_import, memory_import};
+  wasmer_import_t imports[] = {memory_import};
 
   // Read the wasm file bytes
   FILE *file = fopen("example-wasienv-wasm/add-one/add-one.wasm", "r");
@@ -167,7 +140,6 @@ int main() {
   assert(response_value == 25);
 
   // Use *_destroy methods to cleanup as specified in the header documentation
-  wasmer_global_destroy(global);
   wasmer_memory_destroy(memory);
   wasmer_instance_destroy(instance);
   return 0;
