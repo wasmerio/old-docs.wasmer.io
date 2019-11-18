@@ -1,0 +1,2 @@
+#!/bin/bash
+wasirun /Users/torch2424/Source/wasmer-examples/c/passing-data/example-wasienv-wasm/strings-wasm-is-cool/strings-wasm-is-cool.wasm "$@"
