@@ -4,7 +4,7 @@ cmake_minimum_required (VERSION 2.6)
 project (WasmerCPassingData)
 
 # Output executable, and Entrypoint into our project
-add_executable(hello-world hello-world.c)
+add_executable(passing-data passing-data.c)
 
 # Added the Wasmer Runtime C API As a dependency
 # Will be downloaded and compiled with rust
@@ -22,8 +22,8 @@ ExternalProject_Add(
         INSTALL_COMMAND ""
         LOG_BUILD ON)
 
-# Add the dependency to our hello-world executable we are ourputing
-add_dependencies(hello-world wasmer-runtime-c-api)
+# Add the dependency to our passing-data executable we are ourputing
+add_dependencies(passing-data wasmer-runtime-c-api)
 
 # Handled some windows specific building
 if(WIN32)
@@ -37,6 +37,6 @@ if(NOT WASMER_LIB)
     message(FATAL_ERROR "wasmer library not found")
 endif()
 
-# Link our hello world executable to the Wasmer runtime.
-target_link_libraries(hello-world general ${WASMER_LIB})
+# Link our passing-data executable to the Wasmer runtime.
+target_link_libraries(passing-data general ${WASMER_LIB})
 
