@@ -9,7 +9,7 @@ add_executable(passing-data passing-data.c)
 # Added the Wasmer Runtime C API As a dependency
 # Will be downloaded and compiled with rust
 include(ExternalProject)
-# set_directory_properties(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/wasmer-build)
+set_directory_properties(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/wasmer-build)
 ExternalProject_Add(
         wasmer-runtime-c-api
         DOWNLOAD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake-build
