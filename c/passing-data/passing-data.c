@@ -109,16 +109,10 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
 
 int main() {
 
-  printf("Yooo");
-
   // Initialize our Wasmer Memory and Instance
   wasmer_memory_t *memory = create_wasmer_memory();
   uint8_t memoryData = *wasmer_memory_data(memory);
   wasmer_instance_t *instance = create_wasmer_instance(memory);
-
-  printf("Hello!");
-
-  /*
 
   // Let's get the pointer to the buffer exposed by our Guest Wasm Module
 
@@ -145,8 +139,7 @@ int main() {
   int response_tag = results[0].tag;
   int response_value = results[0].value.I32; 
 
-  */
-
+  printf("Wasm buffer pointer: %d\n", response_value);
 
   // TODO: Call the exported "addWasmIsCool" function of our instance
   
