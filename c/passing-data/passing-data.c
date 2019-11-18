@@ -107,18 +107,7 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
   return instance;
 }
 
-int main() {
-
-  // Initialize our Wasmer Memory and Instance
-  wasmer_memory_t *memory = create_wasmer_memory();
-  uint8_t memoryData = *wasmer_memory_data(memory);
-  wasmer_instance_t *instance = create_wasmer_instance(memory);
-
-  // Let's get the pointer to the buffer exposed by our Guest Wasm Module
-
-  // Create our array of our params
-  wasmer_value_t params[] = { 0 };
-
+int call_wasm_function_and_return_i32(wasmer_instance_t *instance, char* functionName, wasmer_value_t params[]) {
   // Define our results. Results are created with { 0 } to avoid null issues,
   // And will be filled with the proper result after calling the guest wasm function.
   wasmer_value_t result_one = { 0 };
@@ -139,9 +128,29 @@ int main() {
   int response_tag = results[0].tag;
   int response_value = results[0].value.I32; 
 
-  printf("Wasm buffer pointer: %d\n", response_value);
+  return response_value;
+}
+
+int main() {
+
+  // Initialize our Wasmer Memory and Instance
+  wasmer_memory_t *memory = create_wasmer_memory();
+  uint8_t memoryData = *wasmer_memory_data(memory);
+  wasmer_instance_t *instance = create_wasmer_instance(memory);
+
+  // Let's get the pointer to the buffer exposed by our Guest Wasm Module
+  wasmer_value_t getBufferPointerParams[] = { 0 };
+  int bufferPointer = call_wasm_function_and_return_i32(instance, "getBufferPointer", getBufferPointerParams);
+
+  printf("Wasm buffer pointer: %d\n", bufferPointer);
+
+  // TODO: Write our initial string into the buffer
 
   // TODO: Call the exported "addWasmIsCool" function of our instance
+
+  // TODO: Fetch out the new string
+
+  // TODO: Print and assert the new string
   
   return 0;
 }
