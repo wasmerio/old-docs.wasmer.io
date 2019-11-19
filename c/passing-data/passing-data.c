@@ -184,6 +184,13 @@ int main() {
     printf("Surrounding Wasm value at buffer pointer, i: %d, memoryData[bufferPointer]: %d\n", i, memoryData[bufferPointer + i]);
   }
 
+  printf("Looking for non-zero values in the entire wasm memory data...\n");
+  for(int i = 0; i < memoryLength; i++) {
+    if (memoryData[i] > 0) {
+      printf("Found nonzero in wasm memory! Index: %d, value: %d\n", i, memoryData[i]);
+    }
+  }
+
   // Write the string bytes to memory
   char originalString[13] = "Hello there,";
   int originalStringLength = sizeof(originalString) / sizeof(originalString[0]);
