@@ -184,7 +184,7 @@ int main() {
   int bufferPointer = call_wasm_function_and_return_i32(instance, "getBufferPointer", getBufferPointerParams, 0);
 
   // Write the string bytes to memory
-  char originalString[13] = "Hello there,";
+  char originalString[13] = "Hello there, ";
   printf("originalString: \"%s\"\n", originalString);
   int originalStringLength = sizeof(originalString) / sizeof(originalString[0]);
   for (int i = 0; i < originalStringLength; i++) {
@@ -193,9 +193,8 @@ int main() {
 
   // Call the exported "addWasmIsCool" function of our instance
   // -1 to overwrite the null terminating character of the string
-  wasmer_value_t param_original_string_length = { .tag = WASM_I32, .value.I32 = originalStringLength - 1};
-  wasmer_value_t addWasmIsCoolParams[] = { param_original_string_length };
-  int newStringLength = call_wasm_function_and_return_i32(instance, "addWasmIsCool", addWasmIsCoolParams, 1);
+  wasmer_value_t addWasmIsCoolParams[] = { 0 };
+  int newStringLength = call_wasm_function_and_return_i32(instance, "addWasmIsCool", addWasmIsCoolParams, 0);
 
   // Fetch out the new string
   char newString[100];
