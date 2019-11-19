@@ -75,6 +75,7 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
   wasmer_import_t imports[] = {memory_import};
 
   // Read the wasm file bytes
+  // TODO: Check if file is NULL
   FILE *file = fopen("example-wasienv-wasm/strings-wasm-is-cool/strings-wasm-is-cool.wasm", "r");
   fseek(file, 0, SEEK_END);
   long len = ftell(file);
@@ -147,7 +148,7 @@ int main() {
 
   // Write our initial string into the buffer
   // Get a pointer to the memory Data
-  char* memoryBytes = (char*) memoryData;
+  char *memoryBytes = memoryData;
   if (!memoryBytes) {
     // TODO: Handle the Null pointer
   }
@@ -155,6 +156,10 @@ int main() {
   printf("memoryLength: %d\n", memoryLength);
   printf("memoryBytes: %p\n", memoryBytes);
   printf("Wasm value at buffer pointer, *(memoryBytes + bufferPointer): %d\n", *(memoryBytes + bufferPointer));
+
+  for(int i = -10; i < 10; i++) {
+    printf("Surrounding Wasm value at buffer pointer, i: %d, *(memoryBytes + bufferPointer): %d\n", i, *(memoryBytes + bufferPointer + i));
+  }
 
   // Write the string bytes to memory
   char originalString[13] = "Hello there,";

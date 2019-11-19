@@ -2,6 +2,7 @@
 char byteBuffer[1000];
 
 char* getBufferPointer() {
+  byteBuffer[0] = 24;
   return byteBuffer;
 }
 
