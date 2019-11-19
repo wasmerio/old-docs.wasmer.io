@@ -148,11 +148,12 @@ int main() {
 
   // Write our initial string into the buffer
   // Get a pointer to the memory Data
-  char *memoryBytes = memoryData;
+  unsigned char *memoryBytes = (unsigned char *) memoryData;
   if (!memoryBytes) {
     // TODO: Handle the Null pointer
   }
   // Offset set it to where the buffer is in the guest wasm
+  printf("memoryData: %.*s", memoryData);
   printf("memoryLength: %d\n", memoryLength);
   printf("memoryBytes: %p\n", memoryBytes);
   printf("Wasm value at buffer pointer, *(memoryBytes + bufferPointer): %d\n", *(memoryBytes + bufferPointer));
@@ -168,6 +169,11 @@ int main() {
   for (int i = 0; i < originalStringLength; i++) {
     *(memoryBytes + bufferPointer + i) = originalString[i];
   }
+
+  // Check that the guest got our expected memory
+  wasmer_value_t getBufferIndexZeroParams[] = { 0 };
+  int bufferIndexZero = call_wasm_function_and_return_i32(instance, "getBufferIndexZero", getBufferIndexZeroParams, 0);
+  printf("bufferIndexZero: %d\n", bufferIndexZero);
 
   // Call the exported "addWasmIsCool" function of our instance
   wasmer_value_t param_original_string_length = { .tag = WASM_I32, .value.I32 = originalStringLength };
