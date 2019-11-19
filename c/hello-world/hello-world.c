@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <string.h>
 
-// Use the last_error API to retrieve error messages
+// Function to print the most recent error string from Wasmer if we have them
 void print_wasmer_error()
 {
     int error_len = wasmer_last_error_length();
@@ -35,6 +35,7 @@ int main() {
   // Read the wasm file bytes from "example-wasienv-wasm/add-one/add-one.wasm"
   // NOTE: You should replace this file path for where your guest wasm module is.
   FILE *file = fopen("example-wasienv-wasm/add-one/add-one.wasm", "r");
+  assert(file != NULL);
   fseek(file, 0, SEEK_END);
   long len = ftell(file);
   uint8_t *bytes = malloc(len);
@@ -82,7 +83,7 @@ int main() {
   // Call the wasm function
   wasmer_result_t call_result = wasmer_instance_call(
       instance, // Our Wasm Instance
-      "addOne", // the name of the exported function we want to call on the guest wasm module
+      "add_one", // the name of the exported function we want to call on the guest wasm module
       params, // Our array of parameters
       1, // The number of parameters
       results, // Our array of results
