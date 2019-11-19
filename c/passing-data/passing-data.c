@@ -135,7 +135,9 @@ int main() {
 
   // Initialize our Wasmer Memory and Instance
   wasmer_memory_t *memory = create_wasmer_memory();
+  printf("memory: %p\n", memory);
   uint8_t memoryData = *wasmer_memory_data(memory);
+  uint32_t memoryLength = wasmer_memory_data_length(memory);
   wasmer_instance_t *instance = create_wasmer_instance(memory);
 
   // Let's get the pointer to the buffer exposed by our Guest Wasm Module
@@ -144,7 +146,16 @@ int main() {
 
   printf("Wasm buffer pointer: %d\n", bufferPointer);
 
-  // TODO: Write our initial string into the buffer
+  // Write our initial string into the buffer
+  // Get a pointer to the memory Data
+  char* memoryBytes = (char*) memoryData;
+  if (!memoryBytes) {
+    // TODO: Handle the Null pointer
+  }
+  // Offset set it to where the buffer is in the guest wasm
+  printf("memoryLength: %d\n", memoryLength);
+  printf("memoryBytes: %p\n", memoryBytes);
+  printf("Wasm value at buffer pointer, *(memoryBytes + bufferPointer): %d\n", *(memoryBytes + bufferPointer));
 
   // TODO: Call the exported "addWasmIsCool" function of our instance
 
