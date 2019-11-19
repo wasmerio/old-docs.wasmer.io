@@ -180,16 +180,19 @@ int main() {
   printf("memoryData[bufferPointer]: %d\n", memoryData[bufferPointer]);
   printf("memoryLength: %d\n", memoryLength);
 
-  for(int i = -10; i < 10; i++) {
-    printf("Surrounding Wasm value at buffer pointer, i: %d, memoryData[bufferPointer]: %d\n", i, memoryData[bufferPointer + i]);
-  }
-
   printf("Looking for non-zero values in the entire wasm memory data...\n");
   for(int i = 0; i < memoryLength; i++) {
     if (memoryData[i] > 0) {
       printf("Found nonzero in wasm memory! Index: %d, value: %d\n", i, memoryData[i]);
     }
   }
+
+  // Check that the guest has our expected memory
+  wasmer_value_t getBufferIndexZeroParams[] = { 0 };
+  int bufferIndexZero = call_wasm_function_and_return_i32(instance, "getBufferIndexZero", getBufferIndexZeroParams, 0);
+  printf("bufferIndexZero: %d\n", bufferIndexZero);
+
+  printf("\n---Done Debugging---\n\n");
 
   // Write the string bytes to memory
   char originalString[13] = "Hello there,";
@@ -198,11 +201,6 @@ int main() {
   for (int i = 0; i < originalStringLength; i++) {
     memoryData[bufferPointer + i] = originalString[i];
   }
-
-  // Check that the guest got our expected memory
-  wasmer_value_t getBufferIndexZeroParams[] = { 0 };
-  int bufferIndexZero = call_wasm_function_and_return_i32(instance, "getBufferIndexZero", getBufferIndexZeroParams, 0);
-  printf("bufferIndexZero: %d\n", bufferIndexZero);
 
   // Call the exported "addWasmIsCool" function of our instance
   wasmer_value_t param_original_string_length = { .tag = WASM_I32, .value.I32 = originalStringLength };

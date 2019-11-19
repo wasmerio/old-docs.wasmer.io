@@ -1,5 +1,5 @@
 // Define a fixed size bbyte array
-unsigned char byteBuffer[1000];
+unsigned char byteBuffer[1000] = {55, 55, 55, 55};
 
 unsigned char*  getBufferPointer() {
   byteBuffer[0] = 24;
