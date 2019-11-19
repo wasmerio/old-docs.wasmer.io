@@ -13,35 +13,10 @@ void print_wasmer_error()
   printf("Error str: `%s`\n", error_str);
 }
 
-wasmer_memory_t *create_wasmer_memory() {
-  // Create our initial size of the memory 
-  wasmer_memory_t *memory = NULL;
-  // Create our maximum memory size.
-  // .has_some represents wether or not the memory has a maximum size
-  // .some is the value of the maxiumum size
-  wasmer_limit_option_t max = { .has_some = true,
-    .some = 256 };
-  // Create our memory descriptor, to set our minimum and maximum memory size
-  // .min is the minimum size of the memory
-  // .max is the maximuum size of the memory
-  wasmer_limits_t descriptor = { .min = 256,
-    .max = max };
-
-  // Create our memory instance, using our memory and descriptor,
-  wasmer_result_t memory_result = wasmer_memory_new(&memory, descriptor);
-  // Ensure the memory was instantiated successfully.
-  if (memory_result != WASMER_OK)
-  {
-    print_wasmer_error();
-  }
-
-  return memory;
-}
-
 // Function to create our Wasmer Instance
 // And return it's memory
 // TODO: NOTE: When making a memory import you also need the global for the memory
-wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
+wasmer_instance_t *create_wasmer_instance() {
 
   // Create module name for our imports
 
@@ -68,6 +43,27 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
   wasmer_import_t memory_import = { .module_name = module_name_bytes,
     .import_name = import_memory_name_bytes,
     .tag = WASM_MEMORY };
+
+  // Create our initial size of the memory 
+  wasmer_memory_t *memory = NULL;
+  // Create our maximum memory size.
+  // .has_some represents wether or not the memory has a maximum size
+  // .some is the value of the maxiumum size
+  wasmer_limit_option_t max = { .has_some = true,
+    .some = 256 };
+  // Create our memory descriptor, to set our minimum and maximum memory size
+  // .min is the minimum size of the memory
+  // .max is the maximuum size of the memory
+  wasmer_limits_t descriptor = { .min = 256,
+    .max = max };
+
+  // Create our memory instance, using our memory and descriptor,
+  wasmer_result_t memory_result = wasmer_memory_new(&memory, descriptor);
+  // Ensure the memory was instantiated successfully.
+  if (memory_result != WASMER_OK)
+  {
+    print_wasmer_error();
+  }
 
   // Set the memory to our import object
   memory_import.value.memory = memory;
@@ -136,6 +132,19 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
   return instance;
 }
 
+uint8_t *get_pointer_to_memory(wasmer_instance_t *instance) {
+  const wasmer_instance_context_t *ctx = wasmer_instance_context_get(instance);
+  const wasmer_memory_t *memory = wasmer_instance_context_memory(ctx, 0);
+  return wasmer_memory_data(memory);
+}
+
+uint32_t get_length_of_memory(wasmer_instance_t *instance) {
+  const wasmer_instance_context_t *ctx = wasmer_instance_context_get(instance);
+  const wasmer_memory_t *memory = wasmer_instance_context_memory(ctx, 0);
+  return wasmer_memory_data_length(memory);
+}
+
+
 int call_wasm_function_and_return_i32(wasmer_instance_t *instance, char* functionName, wasmer_value_t params[], int num_params) {
   // Define our results. Results are created with { 0 } to avoid null issues,
   // And will be filled with the proper result after calling the guest wasm function.
@@ -163,61 +172,38 @@ int call_wasm_function_and_return_i32(wasmer_instance_t *instance, char* functio
 int main() {
 
   // Initialize our Wasmer Memory and Instance
-  wasmer_memory_t *memory = create_wasmer_memory();
-  wasmer_instance_t *instance = create_wasmer_instance(memory);
+  wasmer_instance_t *instance = create_wasmer_instance();
+
+  // Get the Wasm Memory and it's length from the wasmer instance
+  uint8_t *memoryData = get_pointer_to_memory(instance);
+  uint32_t memoryLength = get_length_of_memory(instance);
+
 
   // Let's get the pointer to the buffer exposed by our Guest Wasm Module
   wasmer_value_t getBufferPointerParams[] = { 0 };
   int bufferPointer = call_wasm_function_and_return_i32(instance, "getBufferPointer", getBufferPointerParams, 0);
 
-  printf("Wasm buffer pointer: %d\n", bufferPointer);
-
-  uint8_t *memoryData = wasmer_memory_data(memory);
-  uint32_t memoryLength = wasmer_memory_data_length(memory);
-
-  // Offset set it to where the buffer is in the guest wasm
-  printf("memoryData[0]: %d\n", memoryData[0]);
-  printf("memoryData[bufferPointer]: %d\n", memoryData[bufferPointer]);
-  printf("memoryLength: %d\n", memoryLength);
-
-  printf("Looking for non-zero values in the entire wasm memory data...\n");
-  for(int i = 0; i < memoryLength; i++) {
-    if (memoryData[i] > 0) {
-      printf("Found nonzero in wasm memory! Index: %d, value: %d\n", i, memoryData[i]);
-    }
-  }
-
-  // Check that the guest has our expected memory
-  wasmer_value_t getBufferIndexZeroParams[] = { 0 };
-  int bufferIndexZero = call_wasm_function_and_return_i32(instance, "getBufferIndexZero", getBufferIndexZeroParams, 0);
-  printf("bufferIndexZero: %d\n", bufferIndexZero);
-
-  printf("\n---Done Debugging---\n\n");
-
   // Write the string bytes to memory
   char originalString[13] = "Hello there,";
+  printf("originalString: \"%s\"\n", originalString);
   int originalStringLength = sizeof(originalString) / sizeof(originalString[0]);
-  printf("originalStringLength: %d\n", originalStringLength);
   for (int i = 0; i < originalStringLength; i++) {
     memoryData[bufferPointer + i] = originalString[i];
   }
 
   // Call the exported "addWasmIsCool" function of our instance
-  wasmer_value_t param_original_string_length = { .tag = WASM_I32, .value.I32 = originalStringLength };
+  // -1 to overwrite the null terminating character of the string
+  wasmer_value_t param_original_string_length = { .tag = WASM_I32, .value.I32 = originalStringLength - 1};
   wasmer_value_t addWasmIsCoolParams[] = { param_original_string_length };
   int newStringLength = call_wasm_function_and_return_i32(instance, "addWasmIsCool", addWasmIsCoolParams, 1);
-  printf("newStringLength: %d\n", newStringLength);
 
   // Fetch out the new string
   char newString[100];
-
   for (int i = 0; i < newStringLength; i++) {
     char charInBuffer = memoryData[bufferPointer + i];
-    printf("Char: %c\n", charInBuffer);
     newString[i] = charInBuffer;
   }
-
-  printf("new string %s\n", newString);
+  printf("newString: \"%s\"\n", newString);
 
   // TODO: Print and assert the new string
   
