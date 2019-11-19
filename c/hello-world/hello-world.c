@@ -26,6 +26,10 @@ int main() {
                                           .bytes_len = strlen(module_name) };
 
   // Define an array containing our imports
+  // Our guest module does not use any import functions, or memory,
+  // Thus for the sake of keeping this example simple we will omit them.
+  // but, for other applications you will most likely need this.
+  // See future examples on importing memory and host functions.
   wasmer_import_t imports[] = {};
 
   // Read the wasm file bytes from "example-wasienv-wasm/add-one/add-one.wasm"

@@ -40,6 +40,7 @@ wasmer_memory_t *create_wasmer_memory() {
 
 // Function to create our Wasmer Instance
 // And return it's memory
+// TODO: NOTE: When making a memory import you also need the global for the memory
 wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
 
   // Create module name for our imports
@@ -71,8 +72,35 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
   // Set the memory to our import object
   memory_import.value.memory = memory;
 
+  // Define a global import
+
+  // Create a UTF-8 string as bytes for our import global name. 
+  // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
+  const char *import_global_name = "__memory_base";
+  wasmer_byte_array import_global_name_bytes = { .bytes = (const uint8_t *) import_global_name,
+    .bytes_len = strlen(import_global_name) };
+
+  // Create our global import object that will be used as shared wasm memory between the host (this application),
+  // and the guest wasm module.
+  // The .module_name is the key of the importObject that this global is associated with.
+  // The .import_name is the key of the module that is within the importObject
+  // The .tag is the type of import being added to the import object
+  wasmer_import_t global_import = { .module_name = module_name_bytes,
+    .import_name = import_global_name_bytes,
+    .tag = WASM_GLOBAL };
+
+  // Create a value for the global that is being exported.
+  // .tag is the WebAssembly Type of the global
+  // .value.I32 is the value of the global
+  wasmer_value_t val = { .tag = WASM_I32,
+    .value.I32 = 1024 };
+  // Get our global instance using our wasmer_value above
+  wasmer_global_t *global = wasmer_global_new(val, false);
+  // Set the global import's value, to the global instance we just created.
+  global_import.value.global = global;
+
   // Define an array containing our imports
-  wasmer_import_t imports[] = {memory_import};
+  wasmer_import_t imports[] = {memory_import, global_import};
 
   // Read the wasm file bytes
   // TODO: Check if file is NULL
@@ -91,7 +119,7 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
       bytes, // The bytes of the WebAssembly modules
       len, // The length of the bytes of the WebAssembly module
       imports, // The Imports array the will be used as our importObject
-      1 // The number of imports in the imports array
+      2 // The number of imports in the imports array
       );
 
   // Print our the result of our compilation,
@@ -136,8 +164,6 @@ int main() {
 
   // Initialize our Wasmer Memory and Instance
   wasmer_memory_t *memory = create_wasmer_memory();
-  uint8_t *memoryData = wasmer_memory_data(memory);
-  uint32_t memoryLength = wasmer_memory_data_length(memory);
   wasmer_instance_t *instance = create_wasmer_instance(memory);
 
   // Let's get the pointer to the buffer exposed by our Guest Wasm Module
@@ -146,20 +172,16 @@ int main() {
 
   printf("Wasm buffer pointer: %d\n", bufferPointer);
 
-  // Write our initial string into the buffer
-  // Get a pointer to the memory Data
-  unsigned char *memoryBytes = (unsigned char *) memoryData;
-  if (!memoryBytes) {
-    // TODO: Handle the Null pointer
-  }
+  uint8_t *memoryData = wasmer_memory_data(memory);
+  uint32_t memoryLength = wasmer_memory_data_length(memory);
+
   // Offset set it to where the buffer is in the guest wasm
-  printf("memoryData: %.*s", memoryData);
+  printf("memoryData[0]: %d\n", memoryData[0]);
+  printf("memoryData[bufferPointer]: %d\n", memoryData[bufferPointer]);
   printf("memoryLength: %d\n", memoryLength);
-  printf("memoryBytes: %p\n", memoryBytes);
-  printf("Wasm value at buffer pointer, *(memoryBytes + bufferPointer): %d\n", *(memoryBytes + bufferPointer));
 
   for(int i = -10; i < 10; i++) {
-    printf("Surrounding Wasm value at buffer pointer, i: %d, *(memoryBytes + bufferPointer): %d\n", i, *(memoryBytes + bufferPointer + i));
+    printf("Surrounding Wasm value at buffer pointer, i: %d, memoryData[bufferPointer]: %d\n", i, memoryData[bufferPointer + i]);
   }
 
   // Write the string bytes to memory
@@ -167,7 +189,7 @@ int main() {
   int originalStringLength = sizeof(originalString) / sizeof(originalString[0]);
   printf("originalStringLength: %d\n", originalStringLength);
   for (int i = 0; i < originalStringLength; i++) {
-    *(memoryBytes + bufferPointer + i) = originalString[i];
+    memoryData[bufferPointer + i] = originalString[i];
   }
 
   // Check that the guest got our expected memory
@@ -185,7 +207,7 @@ int main() {
   char newString[100];
 
   for (int i = 0; i < newStringLength; i++) {
-    char charInBuffer = *(memoryBytes + bufferPointer + i);
+    char charInBuffer = memoryData[bufferPointer + i];
     printf("Char: %c\n", charInBuffer);
     newString[i] = charInBuffer;
   }

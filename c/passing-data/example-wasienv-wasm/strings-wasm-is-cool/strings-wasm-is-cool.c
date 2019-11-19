@@ -2,6 +2,7 @@
 unsigned char byteBuffer[1000];
 
 unsigned char*  getBufferPointer() {
+  byteBuffer[0] = 24;
   return byteBuffer;
 }
 
