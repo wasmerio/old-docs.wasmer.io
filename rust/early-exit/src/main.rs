@@ -1,34 +1,35 @@
 // Import the Filesystem so we can read our .wasm file
-use std::io::prelude::*;
 use std::fs::File;
+use std::io::prelude::*;
 
 // Import the wasmer runtime so we can use it
 use wasmer_runtime::{
-    instantiate,
-    imports,
-    Func,
     error,
     // Include the function macro
     func,
+    imports,
+    instantiate,
     // Include the Context for our Wasm Instance for passing imported host functions
-    Ctx
+    Ctx,
+    Func,
 };
+
+const WASM_FILE_PATH: &str = concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/example-rust-wasm-crate/early-exit-import/pkg/early_exit_import_bg.wasm"
+);
 
 // Our entry point to our application
 fn main() -> error::Result<()> {
-
     // Let's read in our .wasm file as bytes
 
-    // Let's open the file. 
-    // The file path may be different depending where you run `cargo run`, and where you place the file.
-    let mut file = File::open("./example-rust-wasm-crate/early-exit-import/pkg/early_exit_import_bg.wasm").expect("Incorrect file path to wasm module.");
+    // Let's open the file.
+    let mut file = File::open(WASM_FILE_PATH).expect(&format!("wasm file at {}", WASM_FILE_PATH));
 
     // Let's read the file into a Vec
     let mut wasm_vec = Vec::new();
-    file.read_to_end(&mut wasm_vec).expect("Error reading the wasm file");
-
-    // Let's get our byte slice ( [u8] ) from ouw wasm_vec.
-    let wasm_bytes = wasm_vec.as_slice();
+    file.read_to_end(&mut wasm_vec)
+        .expect("Error reading the wasm file");
 
     // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
 
@@ -47,23 +48,23 @@ fn main() -> error::Result<()> {
     };
 
     // Let's create an instance of wasm module running in the wasmer-runtime
-    let instance = instantiate(wasm_bytes, &import_object)?;
+    let instance = instantiate(&wasm_vec, &import_object)?;
 
     // Let's call the exported "exit_early" function on the wasm module.
-    let exit_early_func: Func<(), i32>  = instance
+    let exit_early_func: Func<(), i32> = instance
         .func("exit_early")
-        .expect("exit_early functioon not found");
+        .expect("exit_early function not found");
     let response = exit_early_func.call();
 
     match response {
         Ok(value) => {
             // This should have thrown an error, return an error
             panic!("exit_early did not error. Returned the value: {}", value);
-        },
+        }
         Err(e) => {
             // Log the error
             println!("Error from exit_early: {}", e);
-        },
+        }
     }
 
     // Log a success message.
@@ -81,5 +82,3 @@ fn interrupt_execution(_ctx: &mut Ctx) -> Result<(), ()> {
     // Return an error, which will immediately stop execution of the wasm module
     Err(())
 }
-
-

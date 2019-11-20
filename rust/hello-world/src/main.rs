@@ -1,58 +1,53 @@
 // Import the Filesystem so we can read our .wasm file
-use std::io::prelude::*;
 use std::fs::File;
+use std::io::prelude::*;
 
 // Import the wasmer runtime so we can use it
-use wasmer_runtime::{
-    instantiate,
-    Value,
-    imports,
-    error,
-};
+use wasmer_runtime::{error, imports, instantiate, Func};
+
+const WASM_FILE_PATH: &str = concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/example-rust-wasm-crate/add-one/pkg/add_one_bg.wasm"
+);
 
 // Our entry point to our application
 fn main() -> error::Result<()> {
-
     // Let's read in our .wasm file as bytes
 
-    // Let's open the file. 
-    // The file path may be different depending where you run `cargo run`, and where you place the file.
-    let mut file = File::open("./example-rust-wasm-crate/add-one/pkg/add_one_bg.wasm").expect("Incorrect file path to wasm module.");
+    // Let's open the file.
+    let mut file = File::open(WASM_FILE_PATH).expect(&format!("wasm file at {}", WASM_FILE_PATH));
 
     // Let's read the file into a Vec
     let mut wasm_vec = Vec::new();
-    file.read_to_end(&mut wasm_vec).expect("Error reading the wasm file");
-
-    // Let's get our byte slice ( [u8] ) from ouw wasm_vec.
-    let wasm_bytes = wasm_vec.as_slice();
+    file.read_to_end(&mut wasm_vec)
+        .expect("Error reading the wasm file");
 
     // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
 
     // Our import object, that allows exposing functions to our wasm module.
     // We're not importing anything, so make an empty import object.
-    let import_object = imports!{};
+    let import_object = imports! {};
 
     // Let's create an instance of wasm module running in the wasmer-runtime
-    let instance = instantiate(wasm_bytes, &import_object)?;
+    let instance = instantiate(&wasm_vec, &import_object)?;
 
     // Let's get a number we want to add one to
     let value_to_add = 42;
     println!("Original Value: {}", value_to_add);
 
-    // Let's call the exported "add_one" function ont the wasm module.
-    let values = instance
-        .dyn_func("add_one")?
-        .call(&[Value::I32(value_to_add)])?;
-
-    // Asserting that the returned value from the function is our expected value.
-    assert_eq!(values[0], Value::I32(43));
+    // Let's get `add_one` as a function which takes one `u32` and returns one `u32`
+    let add_one: Func<u32, u32> = instance.func("add_one")?;
+    let result = add_one.call(value_to_add)?;
 
     // Log the new value
     println!("New Value: {}", 43);
 
+    // Asserting that the returned value from the function is our expected value.
+    assert_eq!(result, 43);
+
     // Log a success message.
     println!("Success!");
-    
+
     // Return OK since everything executed successfully!
     Ok(())
 }
