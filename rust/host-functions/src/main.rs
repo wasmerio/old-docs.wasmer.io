@@ -1,36 +1,37 @@
 // Import the Filesystem so we can read our .wasm file
-use std::io::prelude::*;
 use std::fs::File;
+use std::io::prelude::*;
 
 // Import the wasmer runtime so we can use it
 use wasmer_runtime::{
-    instantiate,
-    Value,
-    imports,
     error,
     // Include the function macro
     func,
+    imports,
+    instantiate,
     // Include the Context for our Wasm Instance for passing imported host functions
-    Ctx
+    Ctx,
+    Func,
 };
+
+const WASM_FILE_PATH: &str = concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/example-rust-wasm-crate/host-counter/pkg/host_counter_bg.wasm"
+);
 
 static mut COUNTER: i32 = 0;
 
 // Our entry point to our application
 fn main() -> error::Result<()> {
-
     // Let's read in our .wasm file as bytes
 
-    // Let's open the file. 
-    // The file path may be different depending where you run `cargo run`, and where you place the file.
-    let mut file = File::open("./example-rust-wasm-crate/host-counter/pkg/host_counter_bg.wasm").expect("Incorrect file path to wasm module.");
+    // Let's open the file.
+    let mut file = File::open(WASM_FILE_PATH).expect(&format!("wasm file at {}", WASM_FILE_PATH));
 
     // Let's read the file into a Vec
     let mut wasm_vec = Vec::new();
-    file.read_to_end(&mut wasm_vec).expect("Error reading the wasm file");
-
-    // Let's get our byte slice ( [u8] ) from ouw wasm_vec.
-    let wasm_bytes = wasm_vec.as_slice();
+    file.read_to_end(&mut wasm_vec)
+        .expect("Error reading the wasm file");
 
     // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
 
@@ -50,26 +51,26 @@ fn main() -> error::Result<()> {
     };
 
     // Let's create an instance of wasm module running in the wasmer-runtime
-    let instance = instantiate(wasm_bytes, &import_object)?;
+    let instance = instantiate(&wasm_vec, &import_object)?;
 
     // Define the number of times we want to loop our increment
     let number_of_times_to_loop: i32 = 5;
 
-    // Let's call the exported "increment_counter_loop" function ont the wasm module.
-    let values = instance
-        .dyn_func("increment_counter_loop")?
-        .call(&[Value::I32(number_of_times_to_loop)])?;
+    // Let's get `increment_counter_loop` as a function which takes one `i32` and returns one `i32`
+    let increment_counter_loop: Func<i32, i32> = instance.func("increment_counter_loop")?;
+    let result = increment_counter_loop.call(number_of_times_to_loop)?;
 
-    unsafe {
-        // Assert our counter is the expected value
-        assert_eq!(number_of_times_to_loop, COUNTER);
+    // Let's get a copy of the value in `COUNTER`
+    let counter_value = unsafe { COUNTER };
 
-        // Asserting that the returned value from the function is our expected value.
-        assert_eq!(values[0], Value::I32(COUNTER));
+    // Assert our counter is the expected value
+    assert_eq!(number_of_times_to_loop, counter_value);
 
-        // Log the new value
-        println!("New Counter Value: {}", COUNTER);
-    }
+    // Asserting that the returned value from the function is our expected value.
+    assert_eq!(result, counter_value);
+
+    // Log the new value
+    println!("New Counter Value: {}", counter_value);
 
     // Log a success message.
     println!("Success!");
@@ -84,9 +85,7 @@ fn main() -> error::Result<()> {
 //
 // This function returns our global counter.
 fn get_counter(_ctx: &mut Ctx) -> i32 {
-    unsafe {
-        COUNTER
-    }
+    unsafe { COUNTER }
 }
 
 // Define a Host function that will be imported to the wasm module

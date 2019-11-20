@@ -8,6 +8,4 @@ edition = "2018"
 
 [dependencies]
 # Add the wasmer-runtime as a dependency
-wasmer-runtime = "0.9.0"
-# Add the runtime core as a dependency for WasmPtr
-wasmer-runtime-core = "0.9.0"
+wasmer-runtime = "0.10.2"

@@ -1,51 +1,47 @@
 // Import the Filesystem so we can read our .wasm file
-use std::io::prelude::*;
 use std::fs::File;
+use std::io::prelude::*;
 
 // Import the wasmer runtime so we can use it
-use wasmer_runtime::{
-    instantiate,
-    Func,
-    imports,
-    error,
-};
+use wasmer_runtime::{error, imports, instantiate, Func};
+
+const WASM_FILE_PATH: &str = concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/example-rust-wasm-crate/throw-wasm-error/pkg/throw_wasm_error_bg.wasm"
+);
 
 // Our entry point to our application
 fn main() -> error::Result<()> {
-
     // Let's read in our .wasm file as bytes
 
-    // Let's open the file. 
-    // The file path may be different depending where you run `cargo run`, and where you place the file.
-    let mut file = File::open("./example-rust-wasm-crate/throw-wasm-error/pkg/throw_wasm_error_bg.wasm").expect("Incorrect file path to wasm module.");
+    // Let's open the file.
+    let mut file = File::open(WASM_FILE_PATH).expect(&format!("wasm file at {}", WASM_FILE_PATH));
 
     // Let's read the file into a Vec
     let mut wasm_vec = Vec::new();
-    file.read_to_end(&mut wasm_vec).expect("Error reading the wasm file");
-
-    // Let's get our byte slice ( [u8] ) from ouw wasm_vec.
-    let wasm_bytes = wasm_vec.as_slice();
+    file.read_to_end(&mut wasm_vec)
+        .expect("Error reading the wasm file");
 
     // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
 
     // Our import object, that allows exposing functions to our wasm module.
     // We're not importing anything, so make an empty import object.
-    let import_object = imports!{};
+    let import_object = imports! {};
 
     // Let's create an instance of wasm module running in the wasmer-runtime
-    let instance = instantiate(wasm_bytes, &import_object)?;
+    let instance = instantiate(&wasm_vec, &import_object)?;
 
     // Let's call the exported "throw_error" function ont the wasm module.
     let throw_error_func: Func<(), ()> = instance
         .func("throw_wasm_error")
         .expect("throw_wasm_error function was not found");
 
-    // Unwrapping here, so that the error is thrown here
-    let _response = throw_error_func.call().unwrap();
+    // We return the error with `?`
+    let _response = throw_error_func.call()?;
 
     /*
 
-    Commenting the pattern matching, to show the unwrapped error above. 
+    Commenting the pattern matching, to show the unwrapped error above.
 
     match response {
        Ok(_) => {
