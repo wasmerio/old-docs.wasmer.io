@@ -1,6 +1,10 @@
 # wasmer_rust_playground
 Playground for the Wasmer Rust Integration
 
+# Notes
+
+* Maybe make a quick start for C? Since there are soooo many large amounts of code with moving parts. It may be good to have a "Hey, copy paste this code, and it'll work like 99% of the time if yoou fill in the gaps correctly".
+
 ## Passing Memory
 
 Awesome tip to do in the guest for better allocation. Thanks Mark!
