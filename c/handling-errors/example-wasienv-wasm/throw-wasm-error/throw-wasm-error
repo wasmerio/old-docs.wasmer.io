@@ -1,0 +1,2 @@
+#!/bin/bash
+wasirun /Users/torch2424/Source/wasmer-examples/c/handling-errors/example-wasienv-wasm/throw-wasm-error/throw-wasm-error.wasm "$@"
