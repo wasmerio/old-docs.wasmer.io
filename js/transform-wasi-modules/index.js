@@ -1,9 +1,10 @@
 // Imports
 import { WASI } from '@wasmer/wasi';
 import { WasmFs } from '@wasmer/wasmfs';
+import { lowerI64Imports } from "@wasmer/wasm-transformer";
 
 // The file path to the wasi module we want to run
-const wasmFilePath = './as-echo.wasm';
+const wasmFilePath = './clock_time_get.wasm';
 
 // A quick wrapper for console.log, to also output logs to the body
 const consoleLog = console.log;
@@ -39,14 +40,15 @@ const startWasiTask = async () => {
   // Fetch our Wasm File
   const response = await fetch(wasmFilePath);
   const responseArrayBuffer = await response.arrayBuffer();
-  const wasmBytes = new Uint8Array(responseArrayBuffer).buffer;
+  const wasmBytes = new Uint8Array(responseArrayBuffer);
+  const loweredWasmBytes = await lowerI64Imports(wasmBytes);
 
   // NOTE: For some wasi modules, they have wasi imports that are not supported in
   // all JavaScript environments. Meaning we will have to use `@wasmer/wasm-transformer`,
   // which we will cover in later examples
 
   // Instantiate the WebAssembly file
-  let { instance } = await WebAssembly.instantiate(wasmBytes, {
+  let { instance } = await WebAssembly.instantiate(loweredWasmBytes, {
     wasi_unstable: wasi.wasiImport
   });
 

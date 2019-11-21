@@ -39,7 +39,7 @@ const startWasiTask = async () => {
   // Fetch our Wasm File
   const response = await fetch(wasmFilePath);
   const responseArrayBuffer = await response.arrayBuffer();
-  const wasmBytes = new Uint8Array(responseArrayBuffer).buffer;
+  const wasmBytes = new Uint8Array(responseArrayBuffer);
 
   // NOTE: For some wasi modules, they have wasi imports that are not supported in
   // all JavaScript environments. Meaning we will have to use `@wasmer/wasm-transformer`,
