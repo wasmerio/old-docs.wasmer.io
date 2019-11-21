@@ -148,6 +148,9 @@ int call_wasm_function_and_return_i32(wasmer_instance_t *instance, char* functio
       1 // The number of results
       );
 
+  // Assert the call succeded
+  assert(call_result == WASMER_OK);
+
   // Get our response, we know the function is an i32, thus we assign the value to an int
   int response_tag = results[0].tag;
   int response_value = results[0].value.I32; 
@@ -195,7 +198,6 @@ int main() {
   counter = 24;
   printf("Initial counter value: %d\n", counter);
 
-  // Let's get the pointer to the buffer exposed by our Guest Wasm Module
   // Define our parameters we are passing into the guest wasm function call.
   // Params are created with the following properties
   // .tag is the tag of the type of the param being passed to the guest wasm function

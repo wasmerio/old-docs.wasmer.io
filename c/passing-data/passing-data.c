@@ -151,6 +151,9 @@ int call_wasm_function_and_return_i32(wasmer_instance_t *instance, char* functio
       1 // The number of results
       );
 
+  // Assert the call succeded
+  assert(call_result == WASMER_OK);
+
   // Get our response, we know the function is an i32, thus we assign the value to an int
   int response_tag = results[0].tag;
   int response_value = results[0].value.I32; 
