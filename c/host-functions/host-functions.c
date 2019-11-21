@@ -16,10 +16,20 @@ void print_wasmer_error()
 // Global counter our wasm module will be updating
 int counter = 0;
 
+// The function to return the current global counter.
+// Will be passed as in import function in the importObject
+// For our Guest Wasm Module.
+// NOTE: The first parameter of an import function for the Wasmer C API
+// must always be a pointer to the context, followed by other function parameters.
 int get_counter(wasmer_instance_context_t *ctx) {
   return counter;
 }
 
+// The function to add a value to the current global counter.
+// Will be passed as in import function in the importObject
+// For our Guest Wasm Module.
+// NOTE: The first parameter of an import function for the Wasmer C API
+// must always be a pointer to the context, followed by other function parameters.
 int add_to_counter(wasmer_instance_context_t *ctx, int value_to_add) {
   counter += value_to_add;
   return counter;
@@ -27,11 +37,11 @@ int add_to_counter(wasmer_instance_context_t *ctx, int value_to_add) {
 
 // Function to create a function import to pass to our wasmer instance
 wasmer_import_func_t *create_wasmer_import_function(
-    void (*function_pointer)(void *),
-    wasmer_value_tag params_signature[], 
-    int num_params, 
-    wasmer_value_tag returns_signature[], 
-    int num_returns
+    void (*function_pointer)(void *), // A Pointer to the host functiono
+    wasmer_value_tag params_signature[],  // Function signature for the function params
+    int num_params,  // Number of params
+    wasmer_value_tag returns_signature[], // Function signature for the function returns 
+    int num_returns // Number of Returns
     ) {
 
   // Create a new func to hold the parameter and signature
@@ -64,6 +74,8 @@ wasmer_instance_t *create_wasmer_instance(
     .bytes_len = strlen(module_name) };
 
   // Define our get_counter import
+  // See the "Hello World" example for more context
+  // On the Key/Value Pairs of the declarations below:
   wasmer_byte_array get_counter_import_function_name_bytes = { .bytes = (const uint8_t *) get_counter_import_function_name,
     .bytes_len = strlen(get_counter_import_function_name) };
   wasmer_import_t get_counter_import = { .module_name = module_name_bytes,
@@ -72,6 +84,8 @@ wasmer_instance_t *create_wasmer_instance(
     .value.func = get_counter_import_function };
 
   // Define our add_to_counter import
+  // See the "Hello World" example for more context
+  // On the Key/Value Pairs of the declarations below:
   wasmer_byte_array add_to_counter_import_function_name_bytes = { .bytes = (const uint8_t *) add_to_counter_import_function_name,
     .bytes_len = strlen(add_to_counter_import_function_name) };
   wasmer_import_t add_to_counter_import = { .module_name = module_name_bytes,
@@ -190,8 +204,9 @@ int main() {
   wasmer_value_t increment_counter_loop_params[] = { increment_counter_loop_param_one };
   int buffer_pointer = call_wasm_function_and_return_i32(instance, "increment_counter_loop", increment_counter_loop_params, 1);
 
+  // Print the resulting counter value in this host application
+  // And assert it is our expected result
   printf("Final counter value: %d\n", counter);
-
   assert(counter == 34);
 
   // Destroy the instances we created for our wasmer
