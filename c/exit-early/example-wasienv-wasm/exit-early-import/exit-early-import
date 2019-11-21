@@ -1,0 +1,2 @@
+#!/bin/bash
+wasirun /Users/torch2424/Source/wasmer-examples/c/exit-early/example-wasienv-wasm/exit-early-import/exit-early-import.wasm "$@"

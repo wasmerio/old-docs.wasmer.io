@@ -75,7 +75,6 @@ int main() {
   // Define our parameters (none) we are passing into the guest wasm function call.
   wasmer_value_t params[] = {0};
 
-
   // Call the wasm function
   wasmer_result_t call_result = wasmer_instance_call(
       instance, // Our Wasm Instance
