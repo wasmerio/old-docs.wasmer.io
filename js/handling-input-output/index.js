@@ -35,6 +35,48 @@ let wasi = new WASI({
   }
 });
 
+// Assign all reads to fd 0 (in this case, /dev/stdin) to our custom function
+// Handle read of stdin, similar to C read
+// https://linux.die.net/man/2/read
+// Implemented here within the WasmFs Dependancy, Memfs:
+// https://github.com/streamich/memfs/blob/master/src/volume.ts#L1020
+const stdinRead = (
+  stdinBuffer,
+  offset,
+  length,
+  position
+) => {
+
+  // Per the C API, first read should be the string
+  // Second read would be the end of the string
+  if (this.readStdinCounter % 2 !== 0) {
+    this.readStdinCounter++;
+    return 0;
+  }
+
+  responseStdin = prompt(
+    `Please enter text for stdin:\n${this.stdinPrompt}`
+  );
+  if (responseStdin === null) {
+    const userError = new Error("Process killed by Prompt Cancellation");
+    userError.user = true;
+    throw userError;
+    return -1;
+  }
+  responseStdin += "\n";
+
+  const buffer = new TextEncoder().encode(responseStdin);
+  for (let x = 0; x < buffer.length; ++x) {
+    stdinBuffer[x] = buffer[x];
+  }
+
+  // Return the current stdin
+  return buffer.length;
+}
+
+// Assign all reads to fd 0 (in this case, /dev/stdin) to our custom function
+wasmFs.volume.fds[0].node.read = stdinRead;
+
 // Async Function to run our wasi module/instance
 const startWasiTask = async () => {
   // Fetch our Wasm File
@@ -49,7 +91,14 @@ const startWasiTask = async () => {
   });
 
   // Start the WebAssembly WASI instance!
-  wasi.start(instance);
+  try {
+    wasi.start(instance);
+  } catch(e) {
+    if (!e.user) {
+      console.error(e);
+      return;
+    } 
+  }
 
   // Output what's inside of /dev/stdout!
   const stdout = await wasmFs.getStdOut();

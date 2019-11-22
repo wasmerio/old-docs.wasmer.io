@@ -1,0 +1,31 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/torch2424/wasmer-examples.git"
+  },
+  "author": "Aaron Turner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/torch2424/wasmer-examples/issues"
+  },
+  "homepage": "https://github.com/torch2424/wasmer-examples#readme",
+  "dependencies": {
+    "@wasmer/wasi": "^0.5.0",
+    "@wasmer/wasm-transformer": "^0.5.0",
+    "@wasmer/wasmfs": "^0.5.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.2.1"
+  }
+}
