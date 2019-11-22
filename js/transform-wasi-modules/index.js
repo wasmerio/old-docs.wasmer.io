@@ -41,6 +41,12 @@ const startWasiTask = async () => {
   const response = await fetch(wasmFilePath);
   const responseArrayBuffer = await response.arrayBuffer();
   const wasmBytes = new Uint8Array(responseArrayBuffer);
+
+  // Lower the WebAssembly Module bytes
+  // This will create trampoline functions for i64 parameters
+  // in function calls like: 
+  // https://github.com/bytecodealliance/wasmtime/blob/master/docs/WASI-api.md#__wasi_clock_time_get
+  // Allowing the Wasi module to work in the browser / node!
   const loweredWasmBytes = await lowerI64Imports(wasmBytes);
 
   // Instantiate the WebAssembly file

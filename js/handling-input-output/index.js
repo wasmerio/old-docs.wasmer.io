@@ -40,12 +40,14 @@ let wasi = new WASI({
 // https://linux.die.net/man/2/read
 // Implemented here within the WasmFs Dependancy, Memfs:
 // https://github.com/streamich/memfs/blob/master/src/volume.ts#L1020
+// NOTE: This function MUST BE SYNCHRONOUS, 
+// per the C api. Otherwise, the Wasi module will error.
 let readStdinCounter = 0
 const stdinRead = (
-  stdinBuffer,
-  offset,
-  length,
-  position
+  stdinBuffer, // Uint8Array of the buffer that is sent to the guest wasm module's standard input
+  offset, // offset for the standard input
+  length, // length of the standard input
+  position // Position in the input
 ) => {
 
   // Per the C API, first read should be the string
@@ -55,9 +57,18 @@ const stdinRead = (
     return 0;
   }
 
+  // Use window.prompt to synchronously get input from the user
+  // This will block the entire main thread until this finishes.
+  // To do this more clean-ly, it would be best to use a Web Worker
+  // and Shared Array Buffer. And use prompt as a fallback
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
+  // https://github.com/wasmerio/wasmer-js/blob/master/packages/wasm-terminal/src/process/process.ts#L174
   let responseStdin = prompt(
     `Please enter standard input to the duktape prompt\n`
   );
+
+  // When the user cancels, throw an error to get out of the standard input read loop
+  // From the guest wasm modules (duktape)
   if (responseStdin === null) {
     const userError = new Error("Process killed by Prompt Cancellation");
     userError.user = true;
@@ -66,12 +77,13 @@ const stdinRead = (
   }
   responseStdin += "\n";
 
+  // Encode the string into bytes to be placed into the buffer for standard input
   const buffer = new TextEncoder().encode(responseStdin);
   for (let x = 0; x < buffer.length; ++x) {
     stdinBuffer[x] = buffer[x];
   }
 
-  // Return the current stdin
+  // Return the current stdin, per the C API
   return buffer.length;
 }
 
@@ -84,6 +96,12 @@ const startWasiTask = async () => {
   const response = await fetch(wasmFilePath);
   const responseArrayBuffer = await response.arrayBuffer();
   const wasmBytes = new Uint8Array(responseArrayBuffer);
+
+  // Lower the WebAssembly Module bytes
+  // This will create trampoline functions for i64 parameters
+  // in function calls like: 
+  // https://github.com/bytecodealliance/wasmtime/blob/master/docs/WASI-api.md#__wasi_clock_time_get
+  // Allowing the Wasi module to work in the browser / node!
   const loweredWasmBytes = await lowerI64Imports(wasmBytes);
 
   // Instantiate the WebAssembly file
@@ -95,11 +113,15 @@ const startWasiTask = async () => {
   try {
     wasi.start(instance);
   } catch(e) {
+    // Catch errors, and if it is not a forced user error (User cancelled the prompt)
+    // Log the error and end the process
     if (!e.user) {
       console.error(e);
       return;
     } 
   }
+
+  // User cancelled the prompt!
 
   // Output what's inside of /dev/stdout!
   const stdout = await wasmFs.getStdOut();
