@@ -3,7 +3,7 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "A website for testing",
+    "tagline": "Documentation for the Wasmer Projects",
     "docs": {
       "doc1": {
         "title": "Latin-ish",
@@ -22,12 +22,7 @@
         "title": "Fifth Document"
       }
     },
-    "links": {
-      "Docs": "Docs",
-      "API": "API",
-      "Help": "Help",
-      "Blog": "Blog"
-    },
+    "links": {},
     "categories": {
       "Docusaurus": "Docusaurus",
       "First Category": "First Category",
