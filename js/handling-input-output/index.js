@@ -4,7 +4,7 @@ import { WasmFs } from '@wasmer/wasmfs';
 import { lowerI64Imports } from "@wasmer/wasm-transformer";
 
 // The file path to the wasi module we want to run
-const wasmFilePath = './qjs.wasm';
+const wasmFilePath = './duktape.wasm';
 
 // A quick wrapper for console.log, to also output logs to the body
 const consoleLog = console.log;
@@ -40,6 +40,7 @@ let wasi = new WASI({
 // https://linux.die.net/man/2/read
 // Implemented here within the WasmFs Dependancy, Memfs:
 // https://github.com/streamich/memfs/blob/master/src/volume.ts#L1020
+let readStdinCounter = 0
 const stdinRead = (
   stdinBuffer,
   offset,
@@ -49,13 +50,13 @@ const stdinRead = (
 
   // Per the C API, first read should be the string
   // Second read would be the end of the string
-  if (this.readStdinCounter % 2 !== 0) {
-    this.readStdinCounter++;
+  if (readStdinCounter % 2 !== 0) {
+    readStdinCounter++;
     return 0;
   }
 
-  responseStdin = prompt(
-    `Please enter text for stdin:\n${this.stdinPrompt}`
+  let responseStdin = prompt(
+    `Please enter standard input to the duktape prompt\n`
   );
   if (responseStdin === null) {
     const userError = new Error("Process killed by Prompt Cancellation");
