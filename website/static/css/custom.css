@@ -5,6 +5,13 @@
   display: none;
 }
 
+.nav-footer .encouragement {
+  color: #FFFFFF;
+  margin: 0 auto 3em;
+  padding: 10px;
+  max-width: 1080px;
+}
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 

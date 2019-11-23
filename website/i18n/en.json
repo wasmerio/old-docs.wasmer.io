@@ -589,7 +589,7 @@
       },
       "wapm/wapm": {
         "title": "WAPM Introduction",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "WAPM Introduction"
       },
       "wasmer-js/cli/wasmer-js-cli-installation": {
         "title": "Wasmer-JS Command Line Interface Installation",
@@ -11206,7 +11206,7 @@
       },
       "wasmer-js/wasmer-js": {
         "title": "Wasmer-JS Introduction",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Wasmer-JS Introduction"
       }
     },
     "links": {

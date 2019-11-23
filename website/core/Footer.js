@@ -24,6 +24,7 @@ class Footer extends React.Component {
   render() {
     return (
       <footer className="nav-footer" id="footer">
+        <section className="encouragement">Having trouble getting things to work? Please keep in mind, it may not always be you! The docs could be incorrect or outdated, or maybe they aren't in a language you natively speak. Please feel free to reach out to us by contacting us on one of our communitty platforms, opening an issue on the documentation, or contributing a fix yourself! Most of all, don't give up, you can do it! Again, we are more than happy to help!</section>
         <section className="sitemap">
           <a href={this.props.config.baseUrl} className="nav-home">
             {this.props.config.footerIcon && (
