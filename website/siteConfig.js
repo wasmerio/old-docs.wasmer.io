@@ -21,7 +21,7 @@ const users = [
 ];
 
 const siteConfig = {
-  title: 'Wasmer Docs', // Title for your website.
+  title: 'Wasmer Documentation', // Title for your website.
   tagline: 'Documentation for the Wasmer Projects',
   url: 'https://docs.wasmer.io', // Your website URL
   baseUrl: '/', // Base URL for your project */
@@ -39,20 +39,30 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
+    // Links to docs home page doc
+    { doc: "introduction", label: "Home" },
+    // Links to Wasmer Homepage
+    { href: "https://wasmer.io/", label: "Wasmer" },
+    // Links to Wasmer Github
+    { href: "https://github.com/wasmerio/", label: "GitHub" },
+    // Determines language drop down position among links
+    // { languages: true },
+    // Determines search bar position among links
+    // { search: true }
   ],
 
   // If you have users set above, you add it here:
   users,
 
   /* path to images for header/footer */
-  headerIcon: 'img/favicon.ico',
-  footerIcon: 'img/favicon.ico',
+  headerIcon: 'img/icons/wasmer-white.svg',
+  footerIcon: 'img/icons/wasmer-colored.svg',
   favicon: 'img/favicon.ico',
 
   /* Colors for website */
   colors: {
-    primaryColor: '#405615',
-    secondaryColor: '#2c3c0e',
+    primaryColor: '#4946dd',
+    secondaryColor: '#4946dd',
   },
 
   /* Custom fonts for website */
@@ -91,17 +101,18 @@ const siteConfig = {
 
   // For sites with a sizable amount of content, set collapsible to true.
   // Expand/collapse the links and subcategories under categories.
-  // docsSideNavCollapsible: true,
+  docsSideNavCollapsible: true,
 
   // Show documentation's last contributor's name.
-  // enableUpdateBy: true,
+  enableUpdateBy: true,
 
   // Show documentation's last update time.
-  // enableUpdateTime: true,
+  enableUpdateTime: true,
 
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...
-  //   repoUrl: 'https://github.com/facebook/test-site',
+  repoUrl: 'https://github.com/wasmerio/wasmer',
+  twitterUsername: 'wasmerio'
 };
 
 module.exports = siteConfig;

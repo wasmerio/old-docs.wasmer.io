@@ -1,10 +1,53 @@
 {
   "docs": {
-    "Docusaurus": ["doc1"],
-    "First Category": ["doc2"],
-    "Second Category": ["doc3"]
-  },
-  "docs-other": {
-    "First Category": ["doc4", "doc5"]
+    "Introduction": [
+      "introduction"
+    ],
+    "Wasmer Runtime": [
+      "doc1",
+      {
+        "type": "subcategory",
+        "label": "Command Line Interface",
+        "ids": [
+          "doc2"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Rust Integration",
+        "ids": [
+          "doc3"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "C/C++ Integration",
+        "ids": [
+          "exampledoc4"
+        ]
+      }
+    ],
+    "Wasmer-JS": [
+      "introduction",
+      {
+        "type": "subcategory",
+        "label": "Command Line Interface",
+        "ids": [
+          "doc2"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Node Modules",
+        "ids": [
+          "doc3"
+        ]
+      }
+    ],
+    "WAPM": [
+      "introduction",
+      "doc2",
+      "doc3"
+    ]
   }
 }

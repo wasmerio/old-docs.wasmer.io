@@ -3,6 +3,14 @@
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 
+@media only screen and (max-width: 1024px) {
+  .fixedHeaderContainer header {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+
 @media only screen and (min-width: 1024px) {
 }
 

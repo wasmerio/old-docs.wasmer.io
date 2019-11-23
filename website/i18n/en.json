@@ -20,13 +20,22 @@
       },
       "doc5": {
         "title": "Fifth Document"
+      },
+      "introduction": {
+        "title": "Introduction",
+        "sidebar_label": "Introduction"
       }
     },
-    "links": {},
+    "links": {
+      "Home": "Home",
+      "Wasmer": "Wasmer",
+      "GitHub": "GitHub"
+    },
     "categories": {
-      "Docusaurus": "Docusaurus",
-      "First Category": "First Category",
-      "Second Category": "Second Category"
+      "Introduction": "Introduction",
+      "Wasmer Runtime": "Wasmer Runtime",
+      "Wasmer-JS": "Wasmer-JS",
+      "WAPM": "WAPM"
     }
   },
   "pages-strings": {
