@@ -1,9 +1,15 @@
 /* your custom css */
 
+/*Disable Next and Previous docs since there isn't really a sequential order*/
+.docs-prevnext {
+  display: none;
+}
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 
 @media only screen and (max-width: 1024px) {
+  /*Header without text looks weird/offset on mobile, so let's center it*/
   .fixedHeaderContainer header {
     text-align: center;
     justify-content: center;

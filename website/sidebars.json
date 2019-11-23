@@ -4,50 +4,49 @@
       "introduction"
     ],
     "Wasmer Runtime": [
-      "doc1",
+      "runtime/runtime",
       {
         "type": "subcategory",
         "label": "Command Line Interface",
         "ids": [
-          "doc2"
+          "runtime/cli/runtime-cli-installation"
         ]
       },
       {
         "type": "subcategory",
         "label": "Rust Integration",
         "ids": [
-          "doc3"
+          "runtime/rust-integration/runtime-rust-integration-installation"
         ]
       },
       {
         "type": "subcategory",
         "label": "C/C++ Integration",
         "ids": [
-          "exampledoc4"
+          "runtime/c-integration/runtime-c-integration-installation"
         ]
       }
     ],
     "Wasmer-JS": [
-      "introduction",
+      "wasmer-js/wasmer-js",
       {
         "type": "subcategory",
         "label": "Command Line Interface",
         "ids": [
-          "doc2"
+          "wasmer-js/cli/wasmer-js-cli-installation"
         ]
       },
       {
         "type": "subcategory",
         "label": "Node Modules",
         "ids": [
-          "doc3"
+          "wasmer-js/node-modules/wasmer-js-node-modules-installation"
         ]
       }
     ],
     "WAPM": [
-      "introduction",
-      "doc2",
-      "doc3"
+      "wapm/wapm",
+      "wapm/wapm-installation"
     ]
   }
 }
