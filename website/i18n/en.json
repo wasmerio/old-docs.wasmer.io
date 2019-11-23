@@ -132,8 +132,9 @@
       "runtime/c-integration/examples/exit-early/example-wasienv-wasm/exit-early-import/README": {
         "title": "runtime/c-integration/examples/exit-early/example-wasienv-wasm/exit-early-import/README"
       },
-      "runtime/c-integration/examples/exit-early/exit-early": {
-        "title": "runtime/c-integration/examples/exit-early/exit-early"
+      "runtime/c-integration/examples/exit-early/runtime-c-integration-examples-exit-early": {
+        "title": "Runtime C/C++ Integration: Interrupting Execution",
+        "sidebar_label": "Interrupting Execution"
       },
       "runtime/c-integration/examples/handling-errors/dist/wasmer-build/src/wasmer-runtime-c-api/ATTRIBUTIONS": {
         "title": "runtime/c-integration/examples/handling-errors/dist/wasmer-build/src/wasmer-runtime-c-api/ATTRIBUTIONS"
@@ -258,14 +259,16 @@
       "runtime/c-integration/examples/handling-errors/example-wasienv-wasm/throw-wasm-error/README": {
         "title": "runtime/c-integration/examples/handling-errors/example-wasienv-wasm/throw-wasm-error/README"
       },
-      "runtime/c-integration/examples/handling-errors/handling-errors": {
-        "title": "runtime/c-integration/examples/handling-errors/handling-errors"
+      "runtime/c-integration/examples/handling-errors/runtime-c-integration-examples-handling-errors": {
+        "title": "Runtime C/C++ Integration: Handling Errors",
+        "sidebar_label": "Handling Errors"
       },
       "runtime/c-integration/examples/hello-world/example-wasienv-wasm/add-one/README": {
         "title": "runtime/c-integration/examples/hello-world/example-wasienv-wasm/add-one/README"
       },
-      "runtime/c-integration/examples/hello-world/hello-world": {
-        "title": "runtime/c-integration/examples/hello-world/hello-world"
+      "runtime/c-integration/examples/hello-world/runtime-c-integration-examples-hello-world": {
+        "title": "Runtime C/C++ Integration: Hello World",
+        "sidebar_label": "Hello World"
       },
       "runtime/c-integration/examples/host-functions/dist/wasmer-build/src/wasmer-runtime-c-api/ATTRIBUTIONS": {
         "title": "runtime/c-integration/examples/host-functions/dist/wasmer-build/src/wasmer-runtime-c-api/ATTRIBUTIONS"
@@ -390,8 +393,9 @@
       "runtime/c-integration/examples/host-functions/example-wasienv-wasm/host-counter/README": {
         "title": "runtime/c-integration/examples/host-functions/example-wasienv-wasm/host-counter/README"
       },
-      "runtime/c-integration/examples/host-functions/host-functions": {
-        "title": "runtime/c-integration/examples/host-functions/host-functions"
+      "runtime/c-integration/examples/host-functions/runtime-c-integration-examples-host-functions": {
+        "title": "Runtime C/C++ Integration: Exposing Host Functions to WebAssembly",
+        "sidebar_label": "Exposing Host Functions to WebAssembly"
       },
       "runtime/c-integration/examples/passing-data/dist/wasmer-build/src/wasmer-runtime-c-api/ATTRIBUTIONS": {
         "title": "runtime/c-integration/examples/passing-data/dist/wasmer-build/src/wasmer-runtime-c-api/ATTRIBUTIONS"
@@ -516,15 +520,17 @@
       "runtime/c-integration/examples/passing-data/example-wasienv-wasm/strings-wasm-is-cool/README": {
         "title": "runtime/c-integration/examples/passing-data/example-wasienv-wasm/strings-wasm-is-cool/README"
       },
-      "runtime/c-integration/examples/passing-data/passing-data": {
-        "title": "runtime/c-integration/examples/passing-data/passing-data"
+      "runtime/c-integration/examples/passing-data/runtime-c-integration-examples-passing-data": {
+        "title": "Runtime C/C++ Integration: Passing Data",
+        "sidebar_label": "Passing Data"
       },
       "runtime/c-integration/runtime-c-integration-installation": {
-        "title": "Runtime C/C++ Integration Installation",
+        "title": "Runtime C/C++ Integration: Installation",
         "sidebar_label": "Installation"
       },
-      "runtime/c-integration/reference-api": {
-        "title": "runtime/c-integration/reference-api"
+      "runtime/c-integration/runtime-c-integration-reference-api": {
+        "title": "Runtime C/C++ Integration: Reference API",
+        "sidebar_label": "Reference API"
       },
       "runtime/cli/getting-started": {
         "title": "runtime/cli/getting-started"

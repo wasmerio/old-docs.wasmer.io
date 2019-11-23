@@ -23,7 +23,13 @@
         "type": "subcategory",
         "label": "C/C++ Integration",
         "ids": [
-          "runtime/c-integration/runtime-c-integration-installation"
+          "runtime/c-integration/runtime-c-integration-installation",
+          "runtime/c-integration/runtime-c-integration-reference-api",
+          "runtime/c-integration/examples/hello-world/runtime-c-integration-examples-hello-world",
+          "runtime/c-integration/examples/passing-data/runtime-c-integration-examples-passing-data",
+          "runtime/c-integration/examples/host-functions/runtime-c-integration-examples-host-functions",
+          "runtime/c-integration/examples/handling-errors/runtime-c-integration-examples-handling-errors",
+          "runtime/c-integration/examples/exit-early/runtime-c-integration-examples-exit-early"
         ]
       }
     ],

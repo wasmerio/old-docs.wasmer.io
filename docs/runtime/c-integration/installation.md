@@ -1,6 +1,6 @@
 ---
 id: runtime-c-integration-installation
-title: Runtime C/C++ Integration Installation
+title: Runtime C/C++ Integration: Installation
 sidebar_label: Installation
 ---
 
