@@ -16,7 +16,7 @@ To do this, you want to find a Wasm Module compiled down to an ABI that the Wasm
 
 In this example, we will be using the [WASI Compiled QuickJS](https://wapm.io/package/quickjs). To do this we would download the module, and then run:
 
-`wasmer run quickjs.wasm`
+`wasmer quickjs.wasm`
 
 Which should bring up the QuickJS prompt which you can then interact with.
 
