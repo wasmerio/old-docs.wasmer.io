@@ -21,19 +21,22 @@ The name wapm is an abbreviation for WebAssembly Package Manager, but then name 
 
 With the tools installed, one can easily start using universal wasm binaries by using the `install` command of *wapm-cli*:
 
-    $ wapm install cowsay
+`wapm install cowsay`
 
 Installing a package creates a local package directory called `wapm_packages` where all packages are installed. While in a directory with wapm packages, one may execute them with the `run` command:
 
-    $ wapm run cowsay hello wapm! 
-     _____________
-    < hello wapm! >
-     -------------
-            \   ^__^
-             \  (oo)\_______
-                (__)\       )\/\
-                   ||----w |
-                    ||     ||
+`wapm run cowsay hello wapm!`
+
+```
+ _____________
+< hello wapm! >
+ -------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+               ||----w |
+                ||     ||
+```
 
 ## **Package with `wapm.toml`**
 
@@ -43,24 +46,28 @@ Login is required for publishing. Signup for an account at [wapm.io](https://wa
 
 The reference shows all the required fields for the manifest, but it's easy to get started with `init` command.
 
-    $ wapm init my_package
+`wapm init my_package`
 
 This command generates a wapm manifest file:
 
-    [package]
-    name = "username/my_package"
-    version = "0.1.0"
-    description = ""
+```
+[package]
+name = "username/my_package"
+version = "0.1.0"
+description = ""
+```
 
 All packages on [wapm.io](https://wapm.io/) are namespaced by username. This is the minimum required data for a manifest file. A module is required for publishing. Add a module section:
 
-    [[module]]
-    name = "my_app"
-    source = "path/to/app.wasm"
+```
+[[module]]
+name = "my_app"
+source = "path/to/app.wasm"
+```
 
 Publish the project to [wapm.io](https://wapm.io/)!
 
-    $ wapm publish
+`wapm publish`
 
 ## **Commands**
 
@@ -70,8 +77,10 @@ Commands are what allows one to call the `run` subcommand, like above when run
 
 A command requires a name and module to reference:
 
-    [[command]]
-    name = "my_cmd"
-    module = "my_app"
+```
+[[command]]
+name = "my_cmd"
+module = "my_app"
+```
 
 Now called `wapm run my_cmd` will execute the module defined with the name `my_app`. Under the hood, *wapm-cli* calls *wasmer*, the WebAssembly server runtime.

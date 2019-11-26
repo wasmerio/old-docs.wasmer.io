@@ -31,14 +31,14 @@ let myWASIInstance = new WASI({
   // useful for using WASI in diferent environments
   // such as Node.js, Browsers, ...
   bindings: {
-    // hrtime: WASI.defaultConfig.bindings.hrtime,
-    // exit: WASI.defaultConfig.bindings.exit,
-    // kill: WASI.defaultConfig.bindings.kill,
-    // randomFillSync: WASI.defaultConfig.bindings.randomFillSync,
-    // isTTY: WASI.defaultConfig.bindings.isTTY,
-    // fs: WASI.defaultConfig.bindings.fs,
-    // path: WASI.defaultConfig.bindings.path,
-    ...WASI.defaultConfig.bindings
+    // hrtime: WASI.defaultBindings.hrtime,
+    // exit: WASI.defaultBindings.exit,
+    // kill: WASI.defaultBindings.kill,
+    // randomFillSync: WASI.defaultBindings.randomFillSync,
+    // isTTY: WASI.defaultBindings.isTTY,
+    // fs: WASI.defaultBindings.fs,
+    // path: WASI.defaultBindings.path,
+    ...WASI.defaultBindings
   }
 });
 ```
