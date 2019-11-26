@@ -6,7 +6,9 @@ sidebar_label: Getting Started
 
 If you haven't already, Install the Wasmer CLI.
 
-    curl https://get.wasmer.io -sSfL | sh
+```
+curl https://get.wasmer.io -sSfL | sh
+```
 
 Once you have the Wasmer CLI installed, you can run wasm modules from the command line!
 
