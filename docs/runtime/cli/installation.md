@@ -66,6 +66,13 @@ Set Rust Nightly:
 
 Otherwise an up to date (see badge above) version of stable Rust will work.
 
+If you want support for the Wasmer LLVM backend, then you will also need to ensure: 
+
+* Ensure that LLVM 8.0.x > is installed on your system
+    * You can also [download and use a prebuilt LLVM binary](https://releases.llvm.org/download.html)
+* Set the correct environment variable for LLVM to access
+    * For example, the environtment variable for LLVM 8.0.x would be: `LLVM_SYS_80_PREFIX=/path/to/unpacked/llvm-8.0` 
+
 And install Wasmer
 
 ```bash

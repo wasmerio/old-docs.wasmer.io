@@ -52,22 +52,25 @@
         "title": "Runtime C/C++ Integration: Reference API",
         "sidebar_label": "Reference API"
       },
-      "runtime/cli/getting-started": {
-        "title": "runtime/cli/getting-started"
+      "runtime/cli/runtime-cli-getting-started": {
+        "title": "Runtime Command Line Interface Getting Started",
+        "sidebar_label": "Getting Started"
       },
       "runtime/cli/runtime-cli-installation": {
         "title": "Runtime Command Line Interface Installation",
         "sidebar_label": "Installation"
       },
-      "runtime/cli/usage": {
-        "title": "runtime/cli/usage"
+      "runtime/cli/runtime-cli-usage": {
+        "title": "Runtime Command Line Interface Usage",
+        "sidebar_label": "Usage"
       },
       "runtime/runtime": {
         "title": "Runtime Introduction",
         "sidebar_label": "Runtime Introduction"
       },
-      "runtime/rust-integration/examples/early-exit/early-exit": {
-        "title": "runtime/rust-integration/examples/early-exit/early-exit"
+      "runtime/rust-integration/examples/early-exit/runtime-rust-integration-examples-exit-early": {
+        "title": "Runtime Rust Integration: Interrupting Execution",
+        "sidebar_label": "Interrupting Execution"
       },
       "runtime/rust-integration/examples/early-exit/example-rust-wasm-crate/early-exit-import/README": {
         "title": "runtime/rust-integration/examples/early-exit/example-rust-wasm-crate/early-exit-import/README"
@@ -75,43 +78,50 @@
       "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README": {
         "title": "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README"
       },
-      "runtime/rust-integration/examples/handling-errors/handling-errors": {
-        "title": "runtime/rust-integration/examples/handling-errors/handling-errors"
+      "runtime/rust-integration/examples/handling-errors/runtime-rust-integration-examples-handling-errors": {
+        "title": "Runtime Rust Integration: Handling Errors",
+        "sidebar_label": "Handling Errors"
       },
       "runtime/rust-integration/examples/hello-world/example-rust-wasm-crate/add-one/README": {
         "title": "runtime/rust-integration/examples/hello-world/example-rust-wasm-crate/add-one/README"
       },
-      "runtime/rust-integration/examples/hello-world/hello-world": {
-        "title": "runtime/rust-integration/examples/hello-world/hello-world"
+      "runtime/rust-integration/examples/hello-world/runtime-rust-integration-examples-hello-world": {
+        "title": "Runtime Rust Integration: Hello World",
+        "sidebar_label": "Hello World"
       },
       "runtime/rust-integration/examples/host-functions/example-rust-wasm-crate/host-counter/README": {
         "title": "runtime/rust-integration/examples/host-functions/example-rust-wasm-crate/host-counter/README"
       },
-      "runtime/rust-integration/examples/host-functions/host-functions": {
-        "title": "runtime/rust-integration/examples/host-functions/host-functions"
+      "runtime/rust-integration/examples/host-functions/runtime-rust-integration-examples-host-functions": {
+        "title": "Runtime Rust Integration: Exposing Host Functions to WebAssembly",
+        "sidebar_label": "Exposing Host Functions to WebAssembly"
       },
       "runtime/rust-integration/examples/passing-data/example-rust-wasm-crate/strings-wasm-is-cool/README": {
         "title": "runtime/rust-integration/examples/passing-data/example-rust-wasm-crate/strings-wasm-is-cool/README"
       },
-      "runtime/rust-integration/examples/passing-data/passing-data": {
-        "title": "runtime/rust-integration/examples/passing-data/passing-data"
+      "runtime/rust-integration/examples/passing-data/runtime-rust-integration-examples-passing-data": {
+        "title": "Runtime Rust Integration: Passing Data Between Rust and Wasm",
+        "sidebar_label": "Passing Data Between Rust and Wasm"
       },
       "runtime/rust-integration/runtime-rust-integration-installation": {
         "title": "Runtime Rust Integration Installation",
         "sidebar_label": "Installation"
       },
-      "runtime/rust-integration/reference-api": {
-        "title": "runtime/rust-integration/reference-api"
+      "runtime/rust-integration/runtime-rust-integration-reference-api": {
+        "title": "Runtime Rust Integration Reference API",
+        "sidebar_label": "Reference API"
       },
-      "wapm/getting-started": {
-        "title": "wapm/getting-started"
+      "wapm/wapm-getting-started": {
+        "title": "WAPM Getting Started",
+        "sidebar_label": "Getting Started"
       },
       "wapm/wapm-installation": {
         "title": "WAPM Installation",
         "sidebar_label": "Installation"
       },
-      "wapm/reference-api": {
-        "title": "wapm/reference-api"
+      "wapm/wapm-reference-api": {
+        "title": "WAPM Reference API",
+        "sidebar_label": "Reference API"
       },
       "wapm/wapm": {
         "title": "WAPM Introduction",
@@ -121,33 +131,41 @@
         "title": "Wasmer-JS Command Line Interface Installation",
         "sidebar_label": "Installation"
       },
-      "wasmer-js/cli/user-guide": {
-        "title": "wasmer-js/cli/user-guide"
+      "wasmer-js/cli/wasmer-js-cli-user-guide": {
+        "title": "Wasmer-JS Command Line Interface User Guide",
+        "sidebar_label": "User Guide"
       },
-      "wasmer-js/node-modules/examples/handling-input-output/handling-input-output": {
-        "title": "wasmer-js/node-modules/examples/handling-input-output/handling-input-output"
+      "wasmer-js/node-modules/examples/handling-input-output/wasmer-js-node-modules-handling-input-output": {
+        "title": "Wasmer-JS Node Modules Handling Input and Output",
+        "sidebar_label": "Handling Input and Output"
       },
-      "wasmer-js/node-modules/examples/hello-world/hello-world": {
-        "title": "wasmer-js/node-modules/examples/hello-world/hello-world"
+      "wasmer-js/node-modules/examples/hello-world/wasmer-js-node-modules-hello-world": {
+        "title": "Wasmer-JS Node Modules Hello World",
+        "sidebar_label": "Hello World"
       },
-      "wasmer-js/node-modules/examples/transforming-wasi-modules/transforming-wasi-modules": {
-        "title": "wasmer-js/node-modules/examples/transforming-wasi-modules/transforming-wasi-modules"
+      "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-node-modules-transforming-wasi-modules": {
+        "title": "Wasmer-JS Node Modules Transforming WASI Modules",
+        "sidebar_label": "Transforming WASI Modules"
       },
       "wasmer-js/node-modules/wasmer-js-node-modules-installation": {
         "title": "Wasmer-JS Node Modules Installation",
         "sidebar_label": "Installation"
       },
-      "wasmer-js/node-modules/reference-api/wasi": {
-        "title": "wasmer-js/node-modules/reference-api/wasi"
+      "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasi": {
+        "title": "Wasmer-JS Node Modules @wasmer/wasi Reference API",
+        "sidebar_label": "@wasmer/wasi Reference API"
       },
-      "wasmer-js/node-modules/reference-api/wasm-terminal": {
-        "title": "wasmer-js/node-modules/reference-api/wasm-terminal"
+      "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasm-terminal": {
+        "title": "Wasmer-JS Node Modules @wasmer/wasm-terminal Reference API",
+        "sidebar_label": "@wasmer/wasm-terminal Reference API"
       },
-      "wasmer-js/node-modules/reference-api/wasm-transformer": {
-        "title": "wasmer-js/node-modules/reference-api/wasm-transformer"
+      "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasm-transformer": {
+        "title": "Wasmer-JS Node Modules @wasmer/wasm-transformer Reference API",
+        "sidebar_label": "@wasmer/wasm-transformer Reference API"
       },
-      "wasmer-js/node-modules/reference-api/wasmfs": {
-        "title": "wasmer-js/node-modules/reference-api/wasmfs"
+      "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasmfs": {
+        "title": "Wasmer-JS Node Modules @wasmer/wasmfs Reference API",
+        "sidebar_label": "@wasmer/wasmfs Reference API"
       },
       "wasmer-js/node-modules/tutorials/sandboxing-javascript-execution/sandboxing-javascript-execution": {
         "title": "wasmer-js/node-modules/tutorials/sandboxing-javascript-execution/sandboxing-javascript-execution"
