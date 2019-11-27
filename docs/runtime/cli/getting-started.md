@@ -4,6 +4,8 @@ title: Runtime Command Line Interface Getting Started
 sidebar_label: Getting Started
 ---
 
+If you would like to quickly test a WASI module, this can be done in your web browser, at [WebAssembly.sh](https://webassembly.sh/). Otherwise, you can install the Wasmer CLI by following the instructions below:
+
 If you haven't already, Install the Wasmer CLI.
 
 ```
@@ -18,6 +20,8 @@ In this example, we will be using the [WASI Compiled QuickJS](https://wapm.io/pa
 
 `wasmer quickjs.wasm`
 
-Which should bring up the QuickJS prompt which you can then interact with.
+Which should bring up the QuickJS prompt which you can then interact with. See an example below:
+
+![Wasmer Run Quick J S gif](/img/WasmerRunQjs.gif)
 
 Next, we can take a look at the command line flags and arguments for the CLI, for more advanced usage.

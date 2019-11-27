@@ -9,14 +9,22 @@
         "type": "subcategory",
         "label": "Command Line Interface",
         "ids": [
-          "runtime/cli/runtime-cli-installation"
+          "runtime/cli/runtime-cli-installation",
+          "runtime/cli/runtime-cli-getting-started",
+          "runtime/cli/runtime-cli-usage"
         ]
       },
       {
         "type": "subcategory",
         "label": "Rust Integration",
         "ids": [
-          "runtime/rust-integration/runtime-rust-integration-installation"
+          "runtime/rust-integration/runtime-rust-integration-installation",
+          "runtime/rust-integration/runtime-rust-integration-reference-api",
+          "runtime/rust-integration/examples/hello-world/runtime-rust-integration-examples-hello-world",
+          "runtime/rust-integration/examples/passing-data/runtime-rust-integration-examples-passing-data",
+          "runtime/rust-integration/examples/host-functions/runtime-rust-integration-examples-host-functions",
+          "runtime/rust-integration/examples/handling-errors/runtime-rust-integration-examples-handling-errors",
+          "runtime/rust-integration/examples/exit-early/runtime-rust-integration-examples-exit-early"
         ]
       },
       {
@@ -39,20 +47,30 @@
         "type": "subcategory",
         "label": "Command Line Interface",
         "ids": [
-          "wasmer-js/cli/wasmer-js-cli-installation"
+          "wasmer-js/cli/wasmer-js-cli-installation",
+          "wasmer-js/cli/wasmer-js-cli-user-guide"
         ]
       },
       {
         "type": "subcategory",
         "label": "Node Modules",
         "ids": [
-          "wasmer-js/node-modules/wasmer-js-node-modules-installation"
+          "wasmer-js/node-modules/wasmer-js-node-modules-installation",
+          "wasmer-js/node-modules/examples/hello-world/wasmer-js-node-modules-hello-world",
+          "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-node-modules-transforming-wasi-modules",
+          "wasmer-js/node-modules/examples/handling-input-output/wasmer-js-node-modules-handling-input-output",
+          "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasi",
+          "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasmfs",
+          "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasm-transformer",
+          "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasm-terminal"
         ]
       }
     ],
     "WAPM": [
       "wapm/wapm",
-      "wapm/wapm-installation"
+      "wapm/wapm-installation",
+      "wapm/wapm-getting-started",
+      "wapm/wapm-reference-api"
     ]
   }
 }
