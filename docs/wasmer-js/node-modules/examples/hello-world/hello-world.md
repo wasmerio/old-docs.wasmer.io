@@ -45,7 +45,7 @@ Now that we got our Javascript project set up, let's go ahead and add the follow
 
 To install these packages as dependencies to the project, run the following:
 
-    npm install --save @wasmer/wasi @wasmer/wasmfs
+`npm install --save @wasmer/wasi @wasmer/wasmfs`
 
 Now that these packages are installed, let's change our index.js to the following:
 

@@ -173,7 +173,7 @@ int main() {
 }
 ```
 
-Please take a look at the comments of the `hello-world.c` file to see how everything is working. In particular, notice that the guest wasm module is loading a file from "example-wasienv-wasm/add-one/add-one.wasm". This file path should be replaced by wherever your add-one.wasm is located. T[o get the add-one.wasm, please take a look at the example guest module in our host application example source code](https://github.com/torch2424/wasmer-examples/tree/master/c/hello-world/example-wasienv-wasm/add-one).
+Please take a look at the comments of the `hello-world.c` file to see how everything is working. In particular, notice that the guest wasm module is loading a file from "example-wasienv-wasm/add-one/add-one.wasm". This file path should be replaced by wherever your add-one.wasm is located. [To get the add-one.wasm, please take a look at the example guest module in our host application example source code](https://github.com/torch2424/wasmer-examples/tree/master/c/hello-world/example-wasienv-wasm/add-one).
 
 Now, we can build our host application! Building and application tends to generate a lot of files, so let's create an output directory and navigate to it:
 

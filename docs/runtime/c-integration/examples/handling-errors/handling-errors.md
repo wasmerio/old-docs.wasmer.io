@@ -121,13 +121,15 @@ int main() {
 
 The expected output of this program would be:
 
-    The Guest Wasm Function "throw_wasm_error" threw and error like we expected!
-    Printing the error ...
-    
-    Error len: `83`
-    Error str: `Call error: WebAssembly trap occurred during runtime: illegal arithmetic operation`
-    
-    Test ran sucessfully, ending execution ...
+```
+The Guest Wasm Function "throw_wasm_error" threw and error like we expected!
+Printing the error ...
+
+Error len: `83`
+Error str: `Call error: WebAssembly trap occurred during runtime: illegal arithmetic operation`
+
+Test ran sucessfully, ending execution ...
+```
 
 Meaning we were able to cause an error in our guest wasm module, and then get a hint on what caused the error!
 

@@ -22,6 +22,6 @@ In this example, we will be using the [WASI Compiled QuickJS](https://wapm.io/pa
 
 Which should bring up the QuickJS prompt which you can then interact with. See an example below:
 
-![Wasmer Run Quick J S gif](/img/WasmerRunQjs.gif)
+![Wasmer Run Quick J S gif](/img/docs/WasmerRunQjs.gif)
 
 Next, we can take a look at the command line flags and arguments for the CLI, for more advanced usage.

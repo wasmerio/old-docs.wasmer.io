@@ -8,7 +8,7 @@ sidebar_label: Installation
 
 For Mac and Linux, Wasmer can be installed from an Automatic Install Script:
 
-`curl [https://get.wasmer.io](https://get.wasmer.io/) -sSfL | sh`
+`curl https://get.wasmer.io -sSfL | sh`
 
 For Windows, executable can be found on out [Github Releases Page](https://github.com/wasmerio/wasmer/releases).
 
@@ -18,11 +18,11 @@ For Windows, executable can be found on out [Github Releases Page](https://githu
 
 Building Wasmer requires [rustup](https://rustup.rs/).
 
-To build install Rustup on Windows, download and run `[rustup-init.exe](https://win.rustup.rs/)` then follow the onscreen instructions.
+To build install Rustup on Windows, download and run [rustup-init.exe](https://win.rustup.rs/), then follow the onscreen instructions.
 
 To get rustup on other systems, run:
 
-`curl [https://sh.rustup.rs](https://sh.rustup.rs/) -sSf | sh`
+`curl https://sh.rustup.rs -sSf | sh`
 
 ### Installing Additional Dependencies
 
