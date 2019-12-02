@@ -8,6 +8,11 @@
   display: none;
 }
 
+.headerTitleWithLogo:after {
+  font-weight: normal;
+  content: " Documentation";
+}
+
 .nav-footer .encouragement {
   color: #FFFFFF;
   margin: 0 auto 3em;

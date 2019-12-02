@@ -22,7 +22,7 @@ const users = [
 
 const siteConfig = {
   customDocsPath: 'website-docs',
-  title: 'Wasmer Documentation', // Title for your website.
+  title: 'Wasmer', // Title for your website.
   tagline: 'Documentation for the Wasmer Projects',
   url: 'https://docs.wasmer.io', // Your website URL
   baseUrl: '/', // Base URL for your project */
