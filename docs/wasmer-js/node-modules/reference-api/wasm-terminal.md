@@ -32,7 +32,9 @@ The [WasmTerminalConfig](https://github.com/wasmerio/wasmer-js/blob/master/pack
 }
 ```
 
-CallbackCommands are functions that can be returned in the fetchCommand config property. They are simply Javascript callback that take in the command name, command arguments, enviroment variables, and returns a Promise that resolves stdout. Since these callback commands handle stdin and stdout, that can be used as normal commands that can be piped!
+CallbackCommands are functions that can be returned in the fetchCommand config property. They are simply Javascript callback that take in the command name, command arguments, enviroment variables, and returns a Promise that resolves stdout. 
+
+Since these callback commands handle stdin and stdout, that can be used as normal commands that can be piped!
 
 ```typescript
 export type CallbackCommand = (

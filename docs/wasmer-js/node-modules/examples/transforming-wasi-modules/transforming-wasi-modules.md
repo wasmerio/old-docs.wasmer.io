@@ -4,7 +4,13 @@ title: Wasmer-JS Node Modules Transforming WASI Modules
 sidebar_label: Transforming WASI Modules
 ---
 
-In the Hello World example, we covered how to run a basic "echo" wasm module. However, some WASI modules may be compiled in a way that can't easily be run by the browser. For example, modules that call the [clock_time_get](https://github.com/WebAssembly/WASI/blob/master/phases/old/snapshot_0/docs/wasi_unstable.md#clock_time_get) WASI API, require passing a BigInt from Javascript as a I64 into WebAssembly, which is currently still in a [proposal for the browser](https://github.com/WebAssembly/JS-BigInt-integration/issues/15). Thus, in order to run these modules, you would have to transform the module with `@wasmer/wasm-transformer`.
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/node-modules/examples/transforming-wasi-modules)
+
+In the Hello World example, we covered how to run a basic "echo" wasm module. 
+
+However, some WASI modules may be compiled in a way that can't easily be run by the browser. For example, modules that call the [clock_time_get](https://github.com/WebAssembly/WASI/blob/master/phases/old/snapshot_0/docs/wasi_unstable.md#clock_time_get) WASI API, require passing a BigInt from Javascript as a I64 into WebAssembly, which is currently still in a [proposal for the browser](https://github.com/WebAssembly/JS-BigInt-integration/issues/15). 
+
+Thus, in order to run these modules, you would have to transform the module with `@wasmer/wasm-transformer`.
 
 In this example, we will fetch a WASI module, transform it with `lowerI64Imports` from `@wasmer/wasm-transformer`, and then run it in the browser!
 

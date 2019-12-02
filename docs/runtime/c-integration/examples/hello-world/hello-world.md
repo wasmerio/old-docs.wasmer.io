@@ -4,6 +4,8 @@ title: Runtime C/C++ Integration: Hello World
 sidebar_label: Hello World
 ---
 
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/hello-world)
+
 Please take a look at the installation steps for the C/C++ integration.
 
 In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats in the current MVP, thus we will be writing a host application that calls the "addOne" function of a guest wasm module, which adds 1 to the value passed as a parameter, and returns the result.

@@ -4,7 +4,11 @@ title: Runtime Rust Integration: Interrupting Execution
 sidebar_label: Interrupting Execution
 ---
 
-WebAssembly in its current state is currently run synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host (your rust application). However, there are cases where you may want to interrupt this synchronous execution while the guest WebAssembly module is calling a host function. This can be useful for saving resources, and not returning back to the guest WebAssembly for execution, when you already know the Wasm execution will fail, or no longer be needed.
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/blob/master/docs/runtime/rust-integration/examples/early-exit/early-exit.md)
+
+WebAssembly in its current state is currently run synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host (your rust application). 
+
+However, there are cases where you may want to interrupt this synchronous execution while the guest WebAssembly module is calling a host function. This can be useful for saving resources, and not returning back to the guest WebAssembly for execution, when you already know the Wasm execution will fail, or no longer be needed.
 
 In this example, we will run a Wasm module that calls  the imported host function, "interrupt_execution". This host function will immediately stop executing the WebAssembly module:
 
