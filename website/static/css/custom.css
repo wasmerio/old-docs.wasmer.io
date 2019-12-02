@@ -1,7 +1,10 @@
 /* your custom css */
 
-/*Disable Next and Previous docs since there isn't really a sequential order*/
-.docs-prevnext {
+/*
+* Disable Previous Doc button since there isn't really a sequential order.
+* But some people like to read the docs page by page, so keep the next button.
+*/
+.docs-prevnext .docs-prev {
   display: none;
 }
 
