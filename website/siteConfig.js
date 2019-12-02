@@ -43,8 +43,6 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    // Links to docs home page doc
-    { doc: "introduction", label: "Home" },
     // Links to Wasmer Homepage
     { href: "https://wasmer.io/", label: "Wasmer" },
     // Links to Wasmer Github
