@@ -4,6 +4,8 @@ title: Introduction
 sidebar_label: Introduction
 ---
 
+![Wasmer Logo](/img/wasmer-logo.svg)
+
 Hello! Welcome to the Wasmer Documentation!
 
 [Wasmer](https://wasmer.io/) is an open-source runtime for executing WebAssembly on the Server. Our mission is make all software universally available. We support running Wasm modules standalone in our runtime, but also can be embedded in multiple languages using our language integrations. We also have many other project such as: [WAPM (WebAssembly Package Manager)](https://wapm.io/), [Wasmer-js](https://github.com/wasmerio/wasmer-js), [WebAssembly.sh](https://webassembly.sh/), and many more!
