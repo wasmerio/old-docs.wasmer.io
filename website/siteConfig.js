@@ -31,6 +31,9 @@ const siteConfig = {
   //   baseUrl: '/test-site/',
   docsUrl: '',
 
+  // URL for the "Edit this Doc" button, will not be shown if omitted
+  editUrl: 'https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/',
+
   // Used for publishing and more
   projectName: 'Wasmer',
   organizationName: 'wasmer',
