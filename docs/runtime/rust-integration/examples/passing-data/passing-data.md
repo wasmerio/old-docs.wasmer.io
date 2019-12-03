@@ -4,9 +4,15 @@ title: Runtime Rust Integration: Passing Data Between Rust and Wasm
 sidebar_label: Passing Data Between Rust and Wasm
 ---
 
-Linear memory is one of the major concepts in WebAssembly. Because WebAssembly is sandboxed and WebAssembly is still young, memory must be copied between the host (your rust application) the Wasm module. Upcoming proposals like the WebAssembly Interface types will make this process much easier, but it is still a work in progress.
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/passing-data)
 
-The way that this memory is allocated, freed, passed, organized, etc... can vary depending on the API exposed by the Wasm module. For example, some ABIs will provide explicit function for allocation and freeing of memory from the host. And some Wasm modules may want to control their memory themself, and the host may only need to modify that memory in place. You will want to take a look at the documentation of your wasm module, to see how it wants to interact with its memory from a Host.
+Linear memory is one of the major concepts in WebAssembly. 
+
+Because WebAssembly is sandboxed and WebAssembly is still young, memory must be copied between the host (your rust application) the Wasm module. Upcoming proposals like the WebAssembly Interface types will make this process much easier, but it is still a work in progress.
+
+The way that this memory is allocated, freed, passed, organized, etc... can vary depending on the API exposed by the Wasm module. 
+
+For example, some ABIs will provide explicit function for allocation and freeing of memory from the host. And some Wasm modules may want to control their memory themself, and the host may only need to modify that memory in place. You will want to take a look at the documentation of your wasm module, to see how it wants to interact with its memory from a Host.
 
 In this example, let's say we have a wasm module than can perform transformations on a string passed into the module's memory. This module exports a function that returns a pointer to a fixed size static buffer, which allows one transformation at a time. This Wasm module will take in a string, and concatenate the string " Wasm is cool!". This example shows how we can read and write memory from the host (your rust application), and the Wasm module can also read and write to the same memory.
 

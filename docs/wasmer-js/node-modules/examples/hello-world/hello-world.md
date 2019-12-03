@@ -4,7 +4,15 @@ title: Wasmer-JS Node Modules Hello World
 sidebar_label: Hello World
 ---
 
-In this example, we will run the wasi module [as-echo](https://github.com/torch2424/as-echohttps://github.com/torch2424/as-echo), using `@wasmer/wasi`. The wasi module will echo "Hello World", and we will get the standard output from `/dev/stdout` using the `@wasmer/wasmfs` module. This example will be run in the browser, bundled and served by Parcel. However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in Node, and the code examples from this guide can be used as a loose example, as long as the ES6 syntax is replaced with what would be the node equivalent.
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/node-modules/examples/hello-world)
+
+In this example, we will run the wasi module [as-echo](https://github.com/torch2424/as-echohttps://github.com/torch2424/as-echo), using `@wasmer/wasi`. 
+
+The wasi module will echo "Hello World", and we will get the standard output from `/dev/stdout` using the `@wasmer/wasmfs` module. 
+
+This example will be run in the browser, bundled and served by [Parcel](https://parceljs.org/). 
+
+However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in Node, and the code examples from this guide can be used as a loose example, as long as the ES6 syntax is replaced with what would be the node equivalent.
 
 First, let's set up a small JavaScript project using Parcel. To do this, we will create a new directory, and initialize it as an node project with npm:
 
@@ -45,7 +53,7 @@ Now that we got our Javascript project set up, let's go ahead and add the follow
 
 To install these packages as dependencies to the project, run the following:
 
-    npm install --save @wasmer/wasi @wasmer/wasmfs
+`npm install --save @wasmer/wasi @wasmer/wasmfs`
 
 Now that these packages are installed, let's change our index.js to the following:
 

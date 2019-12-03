@@ -8,7 +8,7 @@ sidebar_label: Installation
 
 The easiest way to get wapm is to get the current stable release of [Wasmer](https://wasmer.io/) by using the install script:
 
-    curl https://get.wasmer.io -sSfL | sh
+`curl https://get.wasmer.io -sSfL | sh`
 
 This will get you the current stable release of [Wasmer](https://wasmer.io/) for your platform along with the latest wapm.
 

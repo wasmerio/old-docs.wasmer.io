@@ -22,7 +22,7 @@ const users = [
 
 const siteConfig = {
   customDocsPath: 'website-docs',
-  title: 'Wasmer Documentation', // Title for your website.
+  title: 'Wasmer', // Title for your website.
   tagline: 'Documentation for the Wasmer Projects',
   url: 'https://docs.wasmer.io', // Your website URL
   baseUrl: '/', // Base URL for your project */
@@ -30,6 +30,9 @@ const siteConfig = {
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
   docsUrl: '',
+
+  // URL for the "Edit this Doc" button, will not be shown if omitted
+  editUrl: 'https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/',
 
   // Used for publishing and more
   projectName: 'Wasmer',
@@ -40,8 +43,6 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    // Links to docs home page doc
-    { doc: "introduction", label: "Home" },
     // Links to Wasmer Homepage
     { href: "https://wasmer.io/", label: "Wasmer" },
     // Links to Wasmer Github

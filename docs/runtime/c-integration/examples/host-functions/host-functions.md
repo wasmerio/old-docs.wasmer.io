@@ -4,6 +4,8 @@ title: Runtime C/C++ Integration: Exposing Host Functions to WebAssembly
 sidebar_label: Exposing Host Functions to WebAssembly
 ---
 
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/host-functions)
+
 Importing function into a WebAssembly object is another great feature about WebAssembly. Using the `importObject` we can expose functions in the host (our rust application) for the WebAssembly module to call, and interact with host from within the WebAssembly modules.
 
 In this example, let's assume we have a WebAssemblly module, that expects some "counter" functions from the host. The idea of the functions being: 
@@ -219,7 +221,9 @@ int main() {
 }
 ```
 
-The main idea here, is that we want to assign our "get_counter" function to the "get_counter" key in our importObject. And since we are using the default "env" namespace, these functions should be nested under the "env" object in our `importObject`. Depending on the wasm module, the function may need to be nested differently. You will want to take a look at the module's documentation, or the module's source language documentation to see how the import object should be nested to expose the function to the module.
+The main idea here, is that we want to assign our "get_counter" function to the "get_counter" key in our importObject. And since we are using the default "env" namespace, these functions should be nested under the "env" object in our `importObject`. 
+
+Depending on the wasm module, the function may need to be nested differently. You will want to take a look at the module's documentation, or the module's source language documentation to see how the import object should be nested to expose the function to the module.
 
 Next, we will take a look at handling errors from a WebAssembly module!
 

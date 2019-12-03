@@ -4,7 +4,7 @@ title: Runtime C/C++ Integration: Installation
 sidebar_label: Installation
 ---
 
-To build C applications that use the Wasmer runtime as a host for guest wasm modules, you will need Rust installed. We suggest Cmake, and make for building your host application. Rust is needed to build the wasmer runtime, Cmake and make will be used to build the host application itself.
+To build C applications that use the Wasmer runtime as a host for guest wasm modules, you will need Rust installed. We suggest [Cmake](https://cmake.org/), and make for building your host application. Rust is needed to build the wasmer runtime, Cmake and make will be used to build the host application itself.
 
 # Installing Rust
 
@@ -14,7 +14,7 @@ To build install Rustup on Windows, download and run `[rustup-init.exe](https:/
 
 To get rustup on other systems, run:
 
-`curl [https://sh.rustup.rs](https://sh.rustup.rs/) -sSf | sh`
+`curl https://sh.rustup.rs -sSf | sh`
 
 To ensure this is installed, let's run the following:
 

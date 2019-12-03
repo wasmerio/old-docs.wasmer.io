@@ -4,6 +4,8 @@ title: Wasmer-JS Node Modules Handling Input and Output
 sidebar_label: Handling Input and Output
 ---
 
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/node-modules/examples/handling-input-output)
+
 In the Hello World example, we covered how to run a basic "echo" wasm module, and then read it's output. However, there may be times we want to interact with WASI modules that accept input as well!
 
 In this example, we will be using the [duktape WASI module](https://wapm.io/package/duktape), to execute Javascript in the duktape runtime. To handle input, we will create our own `stdinRead` fucntion, that is bound to the zero-index file descriptor in WasmFS (`/dev/stdin`). This will allow us to intercept read requests, and send whatever input we would like to the wasi application. See the code below:

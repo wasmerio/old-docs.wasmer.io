@@ -4,6 +4,8 @@ title: Runtime C/C++ Integration: Hello World
 sidebar_label: Hello World
 ---
 
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/hello-world)
+
 Please take a look at the installation steps for the C/C++ integration.
 
 In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats in the current MVP, thus we will be writing a host application that calls the "addOne" function of a guest wasm module, which adds 1 to the value passed as a parameter, and returns the result.
@@ -173,7 +175,7 @@ int main() {
 }
 ```
 
-Please take a look at the comments of the `hello-world.c` file to see how everything is working. In particular, notice that the guest wasm module is loading a file from "example-wasienv-wasm/add-one/add-one.wasm". This file path should be replaced by wherever your add-one.wasm is located. T[o get the add-one.wasm, please take a look at the example guest module in our host application example source code](https://github.com/torch2424/wasmer-examples/tree/master/c/hello-world/example-wasienv-wasm/add-one).
+Please take a look at the comments of the `hello-world.c` file to see how everything is working. In particular, notice that the guest wasm module is loading a file from "example-wasienv-wasm/add-one/add-one.wasm". This file path should be replaced by wherever your add-one.wasm is located. [To get the add-one.wasm, please take a look at the example guest module in our host application example source code](https://github.com/torch2424/wasmer-examples/tree/master/c/hello-world/example-wasienv-wasm/add-one).
 
 Now, we can build our host application! Building and application tends to generate a lot of files, so let's create an output directory and navigate to it:
 
