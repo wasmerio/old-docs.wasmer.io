@@ -14,11 +14,11 @@ To get rustup on other systems, run:
 
 To ensure this is installed, let's run the following:
 
-`rustc -v`
+`rustc -V`
 
 and
 
-`cargo -v`
+`cargo -V`
 
 If these commands work, rust is successfully installed!
 
