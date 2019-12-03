@@ -4,7 +4,7 @@ title: Runtime Rust Integration: Handling Errors
 sidebar_label: Handling Errors
 ---
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/handling-errors)
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/rust-integration/examples/handling-errors)
 
 There will come a time where running a WebAssembly module will not work, and trying to figure out why it does not work can be a difficult task! In the current MVP of WebAssembly, debugging is quite vauge, in runtimes for both the browser and the server. But errors can still be handled and debugged gracefully.
 

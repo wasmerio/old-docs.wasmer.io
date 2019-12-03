@@ -52,6 +52,10 @@
         "title": "Runtime C/C++ Integration: Reference API",
         "sidebar_label": "Reference API"
       },
+      "runtime/cli/runtime-cli-building-from-source": {
+        "title": "Runtime Command Line Building from Source",
+        "sidebar_label": "Building from Source"
+      },
       "runtime/cli/runtime-cli-getting-started": {
         "title": "Runtime Command Line Interface Getting Started",
         "sidebar_label": "Getting Started"
@@ -74,6 +78,13 @@
       },
       "runtime/rust-integration/examples/early-exit/example-rust-wasm-crate/early-exit-import/README": {
         "title": "runtime/rust-integration/examples/early-exit/example-rust-wasm-crate/early-exit-import/README"
+      },
+      "runtime/rust-integration/examples/exit-early/runtime-rust-integration-examples-exit-early": {
+        "title": "Runtime Rust Integration: Interrupting Execution",
+        "sidebar_label": "Interrupting Execution"
+      },
+      "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README": {
+        "title": "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README"
       },
       "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README": {
         "title": "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README"

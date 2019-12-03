@@ -4,7 +4,7 @@ title: Runtime Rust Integration: Interrupting Execution
 sidebar_label: Interrupting Execution
 ---
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/blob/master/docs/runtime/rust-integration/examples/early-exit/early-exit.md)
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/rust-integration/examples/early-exit)
 
 WebAssembly in its current state is currently run synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host (your rust application). 
 
