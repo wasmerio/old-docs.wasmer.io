@@ -8,22 +8,18 @@ sidebar_label: Hello World
 
 Please take a look at the installation steps for the Rust integration.
 
-In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats in the current MVP, thus we will be writing a host application that calls the "add_one" function of a guest wasm module, which adds 1 to the value passed as a parameter, and returns the result.
+In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats directly right now, thus to keep it simple we will be writing a host application that calls the "add_one" function of a guest wasm module, which adds 1 to the value passed as a parameter, and returns the result.
 
-First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. In this example, we will create a new project named `hello-world`. Thus, lets create the directory for it, and navigate to it:
+First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. In this example, we will create a new project named `hello-world`. Thus, lets create it with cargo and navigate to it:
 
 ```bash
-mkdir hello-world
+cargo new hello-world
 cd hello-world
 ```
 
-Then, we will initialize the project as a new rust project, by running:
+This should generate two important files for us, `Cargo.toml` and `src/main.rs`. The `Cargo.toml` is a file that describes your project and its dependencies. The `src/main.rs` is the entry point for your project, and contains the `fn main() { .. }` that is run when the project is executed.
 
-`cargo init`
-
-This should generate two files, `Cargo.toml` and `src/main.rs`. The `Cargo.toml` is a file that describes your project and its dependencies. The `src/main.rs` is the entry point for your project, and contains the `fn main() { .. }` that is run when the project is executed.
-
-Let's modify our `Cargo.toml` to add the [`wasmer-runtime` crate](https://crates.io/crates/wasmer-runtime/0.1.4) to our project. At the time of this writing, the crate is at version `0.9.0`. So we change the `Cargo.toml` to the following:
+Let's modify our `Cargo.toml` to add the [`wasmer-runtime` crate](https://crates.io/crates/wasmer-runtime/0.11.0) to our project. At the time of this writing, the crate is at version `0.11.0`. So we change the `Cargo.toml` to the following:
 
 ```toml
 [package]
