@@ -35,7 +35,7 @@ const siteConfig = {
   editUrl: 'https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/',
 
   // Google Analytics
-  gaTrackingId: '',
+  gaTrackingId: 'UA-129663180-1',
 
   // Used for publishing and more
   projectName: 'Wasmer',
