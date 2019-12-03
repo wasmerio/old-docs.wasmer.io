@@ -4,7 +4,7 @@ title: Runtime Rust Integration: Hello World
 sidebar_label: Hello World
 ---
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/hello-world)
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/rust-integration/examples/hello-world)
 
 Please take a look at the installation steps for the Rust integration.
 

@@ -10,7 +10,7 @@ To build C applications that use the Wasmer runtime as a host for guest wasm mod
 
 First, let's install Rust. The easiest way to install rust, is through [rustup](https://rustup.rs/).
 
-To build install Rustup on Windows, download and run `[rustup-init.exe](https://win.rustup.rs/)` then follow the onscreen instructions.
+To build install Rustup on Windows, download and run [rustup-init.exe](https://win.rustup.rs/) then follow the onscreen instructions.
 
 To get rustup on other systems, run:
 

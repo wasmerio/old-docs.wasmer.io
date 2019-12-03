@@ -4,7 +4,7 @@ title: Runtime Rust Integration: Passing Data Between Rust and Wasm
 sidebar_label: Passing Data Between Rust and Wasm
 ---
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/passing-data)
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/rust-integration/examples/passing-data)
 
 Linear memory is one of the major concepts in WebAssembly. 
 

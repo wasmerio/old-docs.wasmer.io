@@ -10,6 +10,7 @@
         "label": "Command Line Interface",
         "ids": [
           "runtime/cli/runtime-cli-installation",
+          "runtime/cli/runtime-cli-building-from-source",
           "runtime/cli/runtime-cli-getting-started",
           "runtime/cli/runtime-cli-usage"
         ]
@@ -19,12 +20,12 @@
         "label": "Rust Integration",
         "ids": [
           "runtime/rust-integration/runtime-rust-integration-installation",
-          "runtime/rust-integration/runtime-rust-integration-reference-api",
           "runtime/rust-integration/examples/hello-world/runtime-rust-integration-examples-hello-world",
           "runtime/rust-integration/examples/passing-data/runtime-rust-integration-examples-passing-data",
           "runtime/rust-integration/examples/host-functions/runtime-rust-integration-examples-host-functions",
           "runtime/rust-integration/examples/handling-errors/runtime-rust-integration-examples-handling-errors",
-          "runtime/rust-integration/examples/exit-early/runtime-rust-integration-examples-exit-early"
+          "runtime/rust-integration/examples/exit-early/runtime-rust-integration-examples-exit-early",
+          "runtime/rust-integration/runtime-rust-integration-reference-api"
         ]
       },
       {
@@ -32,12 +33,12 @@
         "label": "C/C++ Integration",
         "ids": [
           "runtime/c-integration/runtime-c-integration-installation",
-          "runtime/c-integration/runtime-c-integration-reference-api",
           "runtime/c-integration/examples/hello-world/runtime-c-integration-examples-hello-world",
           "runtime/c-integration/examples/passing-data/runtime-c-integration-examples-passing-data",
           "runtime/c-integration/examples/host-functions/runtime-c-integration-examples-host-functions",
           "runtime/c-integration/examples/handling-errors/runtime-c-integration-examples-handling-errors",
-          "runtime/c-integration/examples/exit-early/runtime-c-integration-examples-exit-early"
+          "runtime/c-integration/examples/exit-early/runtime-c-integration-examples-exit-early",
+          "runtime/c-integration/runtime-c-integration-reference-api"
         ]
       }
     ],

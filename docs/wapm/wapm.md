@@ -6,7 +6,10 @@ sidebar_label: WAPM Introduction
 
 ![Wapm icon](/img/wapm/icon.png)
 
-WAPM (WebAssembly Package Manager) is a package manager for host webassembly modules to be used standalone by a WebAssembly Runtime (such as the Wasmer Runtime), or bundled into your projects.
+[WAPM (WebAssembly Package Manager)](https://wapm.io/) is a package manager for host webassembly modules to be used standalone by a WebAssembly Runtime (such as the Wasmer Runtime), or bundled into your projects.
+
+* [Website](https://wapm.io/)
+* [wapm-cli Github Repo](https://github.com/wasmerio/wapm-cli)
 
 The wapm ecosystem makes WebAssembly more accessible to developers. The system is enabled by a couple tools:
 
