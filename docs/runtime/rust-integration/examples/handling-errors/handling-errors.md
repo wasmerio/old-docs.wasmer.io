@@ -158,7 +158,7 @@ If we run the code with `cargo run`, we would see a result like:
 
 As you can tell, this error doesn't give us much insight into why this had an error. Such as the line number in the host application. This can be extremely fustrating, especially if you are making multiple calls to a wasm module in a complex rust application. 
 
-What we can do to get some more insight is use what the error itself suggests, which is the `RUST_BACKTRACE=1` environment variable.  **It is HIGHLY RECCOMENDED that you use the `RUST_BACKTRACE=1` environment variable for debugging you rust application that embeds the Wasmer runtime.**
+What we can do to get some more insight is use what the error itself suggests, which is the `RUST_BACKTRACE=1` environment variable.  **It is HIGHLY RECOMMENDED that you use the `RUST_BACKTRACE=1` environment variable for debugging your rust application that embeds the Wasmer runtime.**
 
 So let's run the code with **`RUST_BACKTRACE=1 cargo run`** instead, we would see a result like:
 
