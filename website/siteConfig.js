@@ -53,8 +53,15 @@ const siteConfig = {
     // Determines language drop down position among links
     // { languages: true },
     // Determines search bar position among links
-    // { search: true }
+    { search: true }
   ],
+  
+  // Searching
+  algolia: {
+    apiKey: '411fb29ff4ca872781f80d13c904b903',
+    indexName: 'wasmer',
+    algoliaOptions: {} // Optional, if provided by Algolia
+  },
 
   // If you have users set above, you add it here:
   users,
