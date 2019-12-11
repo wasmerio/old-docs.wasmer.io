@@ -8,4 +8,4 @@ sidebar_label: Wasmer-JS Introduction
 
 [Wasmer-JS](https://github.com/wasmerio/wasmer-js) enables the use of server-side compiled WebAssembly Modules in [Node.js](https://nodejs.org/en/) and the Browser. The project is set up as mono-repo of multiple JavaScript packages.
 
-* [Gituhb Repo](https://github.com/wasmerio/wasmer-js)
+* [Github Repo](https://github.com/wasmerio/wasmer-js)
