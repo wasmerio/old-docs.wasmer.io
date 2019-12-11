@@ -6,9 +6,9 @@ sidebar_label: Hello World
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/node-modules/examples/hello-world)
 
-In this example, we will run the wasi module [as-echo](https://github.com/torch2424/as-echohttps://github.com/torch2424/as-echo), using `@wasmer/wasi`. 
+In this example, we will run the WASI module [as-echo](https://github.com/torch2424/as-echo), using `@wasmer/wasi`. 
 
-The wasi module will echo "Hello World", and we will get the standard output from `/dev/stdout` using the `@wasmer/wasmfs` module. 
+The WASI module will echo "Hello World", and we will get the standard output from `/dev/stdout` using the `@wasmer/wasmfs` module. 
 
 This example will be run in the browser, bundled and served by [Parcel](https://parceljs.org/). 
 
@@ -64,16 +64,6 @@ import { WasmFs } from '@wasmer/wasmfs';
 
 // The file path to the wasi module we want to run
 const wasmFilePath = './as-echo.wasm';
-
-// A quick wrapper for console.log, to also output logs to the body
-const consoleLog = console.log;
-console.log = function() {
-  const args = Array.prototype.slice.call(arguments);
-  consoleLog(args);
-  const log = args.join(' ');
-  consoleLog(log);
-  document.body.appendChild(document.createTextNode('JavaScript Console: ' + log));
-}
 
 // Instantiate a new WASI and WasmFs Instance
 // NOTE: For node WasmFs is not needed, and the native Fs module is assigned by default
