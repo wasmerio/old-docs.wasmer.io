@@ -6,6 +6,7 @@ sidebar_label: Wasmer-JS Introduction
 
 ![Wasmer JS Announcement Image](/img/wasmer-js/wasmer-js-announcement.png)
 
-[Wasmer-JS](https://github.com/wasmerio/wasmer-js) enables the use of server-side compiled WebAssembly Modules in [Node.js](https://nodejs.org/en/) and the Browser. The project is set up as mono-repo of multiple JavaScript packages.
+IO Devices is an experimental feature of Wasmer and Wasmer-JS. This feature allows WASI modules to read/write to special files in the Wasmer Filesystem, which then allow for functionality such as: handling user input, displaying grapics, etc... 
 
-* [Github Repo](https://github.com/wasmerio/wasmer-js)
+To learn more about how IO Devices works, take a look at the explainer. Or how to build Wasm Modules that interface with the IO Devices feature, take a look at the io-devices-lib documentation.
+

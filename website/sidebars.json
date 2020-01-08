@@ -72,6 +72,18 @@
       "wapm/wapm-installation",
       "wapm/wapm-getting-started",
       "wapm/wapm-reference-api"
+    ],
+    "IO-Devices": [
+      "io-devices/io-devices",
+      {
+        "type": "subcategory",
+        "label": "Building IO Devices Wasm Modules",
+        "ids": [
+          "io-devices/io-devices-lib/io-devices-lib",
+          "io-devices/io-devices-lib/io-devices-lib-assemblyscript",
+          "io-devices/io-devices-lib/io-devices-lib-rust"
+        ]
+      }
     ]
   }
 }
