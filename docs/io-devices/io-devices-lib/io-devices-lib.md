@@ -1,5 +1,5 @@
 ---
-id: io-devices/io-devices-lib
+id: io-devices-lib
 title: IO Devices Library Introduction
 sidebar_label: IO Devices Library Introduction
 ---

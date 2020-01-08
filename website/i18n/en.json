@@ -9,6 +9,22 @@
         "title": "Introduction",
         "sidebar_label": "Introduction"
       },
+      "io-devices/io-devices-lib/io-devices-lib-assemblyscript": {
+        "title": "AssemblyScript",
+        "sidebar_label": "AssemblyScript"
+      },
+      "io-devices/io-devices-lib/io-devices-lib-rust": {
+        "title": "Rust",
+        "sidebar_label": "Rust"
+      },
+      "io-devices/io-devices-lib/io-devices-lib": {
+        "title": "IO Devices Library Introduction",
+        "sidebar_label": "IO Devices Library Introduction"
+      },
+      "io-devices/io-devices": {
+        "title": "IO Devices Introduction",
+        "sidebar_label": "IO Devices Introduction"
+      },
       "runtime/c-integration/examples/exit-early/example-wasienv-wasm/exit-early-import/README": {
         "title": "runtime/c-integration/examples/exit-early/example-wasienv-wasm/exit-early-import/README"
       },
@@ -72,19 +88,12 @@
         "title": "Runtime Introduction",
         "sidebar_label": "Runtime Introduction"
       },
-      "runtime/rust-integration/examples/early-exit/runtime-rust-integration-examples-exit-early": {
-        "title": "Runtime Rust Integration: Interrupting Execution",
-        "sidebar_label": "Interrupting Execution"
-      },
-      "runtime/rust-integration/examples/early-exit/example-rust-wasm-crate/early-exit-import/README": {
-        "title": "runtime/rust-integration/examples/early-exit/example-rust-wasm-crate/early-exit-import/README"
+      "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README": {
+        "title": "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README"
       },
       "runtime/rust-integration/examples/exit-early/runtime-rust-integration-examples-exit-early": {
         "title": "Runtime Rust Integration: Interrupting Execution",
         "sidebar_label": "Interrupting Execution"
-      },
-      "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README": {
-        "title": "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README"
       },
       "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README": {
         "title": "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README"
@@ -194,7 +203,8 @@
       "Introduction": "Introduction",
       "Wasmer Runtime": "Wasmer Runtime",
       "Wasmer-JS": "Wasmer-JS",
-      "WAPM": "WAPM"
+      "WAPM": "WAPM",
+      "IO-Devices": "IO-Devices"
     }
   },
   "pages-strings": {
