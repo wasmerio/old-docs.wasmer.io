@@ -10,5 +10,5 @@ The `io-devices-lib` is a library for building Wasm modules that interface with 
 
 ## Supported Languages
 
-* [AssemblyScript](io-devices/io-devices-lib/io-devices-lib-assemblyscript) 🚀
-* [Rust](io-devices/io-devices-lib/io-devices-lib-rust) 🦀
+* [AssemblyScript Documentation](io-devices/io-devices-lib/io-devices-lib-assemblyscript) 🚀
+* [Rust Documentation](io-devices/io-devices-lib/io-devices-lib-rust) 🦀

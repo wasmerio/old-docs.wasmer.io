@@ -17,3 +17,4 @@ If you would like to see tutorials, examples, or reference API documentation abo
 * [Wasmer Runtime Documentation](/runtime/runtime)
 * [Wasmer JS Documentation](/wasmer-js/wasmer-js)
 * [WAPM Documentation](/wapm/wapm)
+* [I/O Devices Documentation](/io-devices/io-devices)
