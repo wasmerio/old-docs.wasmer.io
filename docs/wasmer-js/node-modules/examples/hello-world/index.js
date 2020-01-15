@@ -13,7 +13,7 @@ const echoStr      = 'Hello World!'    // Text string to echo
 // module is assigned by default.
 // Here however, we want to show off how to use WasmFs within the browser.
 // This also means that all our file system operations are sand-boxed.
-// In other words, the wasi module running in the browser does not have any
+// In other words, the WASI module running in the browser does not have any
 // access to the file system of the machine running the browser
 const wasmFs = new WasmFs()
 
@@ -26,7 +26,7 @@ let wasi = new WASI({
   // Environment variables that are accesible to the Wasi module
   env: {},
 
-  // Bindings that are used by the Wasi Instance (fs, path, etc...)
+  // Bindings that are used by the WASI Instance (fs, path, etc...)
   bindings: {
     ...WASI.defaultBindings,
     fs: wasmFs.fs
@@ -51,16 +51,16 @@ console.log = (...args) =>
 // Async function to run our wasi module/instance
 const startWasiTask =
   async pathToWasmFile => {
-    // Fetch our Wasm File
+    // Fetch our WASM File
     let response  = await fetch(pathToWasmFile)
     let wasmBytes = new Uint8Array(await response.arrayBuffer())
 
     // IMPORTANT:
-    // Some wasi module interfaces use datatypes that cannot yet be supplied by
-    // all JavaScript environments (for example, you can't yet import a
-    // JavaScript BigInt into WebAssembly).  Therefore, the interface to such
-    // modules has to be transformed using `@wasmer/wasm-transformer`, which we
-    // will cover in later examples
+    // Some WASI module interfaces use datatypes that cannot yet be transferred
+    // between environments (for example, you can't yet import a 64-bit from
+    // WebAssembly).  Therefore, the interface to such modules has to be
+    // transformed using `@wasmer/wasm-transformer`, which we will cover in
+    // later examples
 
     // Instantiate the WebAssembly file
     let { instance } = await WebAssembly.instantiate(wasmBytes, {
