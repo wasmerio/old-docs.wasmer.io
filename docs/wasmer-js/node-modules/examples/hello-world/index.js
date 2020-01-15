@@ -1,61 +1,77 @@
+// *****************************************************************************
 // Imports
-import { WASI } from '@wasmer/wasi';
-import { WasmFs } from '@wasmer/wasmfs';
+import { WASI }   from '@wasmer/wasi'
+import { WasmFs } from '@wasmer/wasmfs'
 
-// The file path to the wasi module we want to run
-const wasmFilePath = './as-echo.wasm';
+const wasmFilePath = './as-echo.wasm'  // Path to our wasi module
+const echoStr      = 'Hello World!'    // Text string to echo
 
-// A quick wrapper for console.log, to also output logs to the body
-const consoleLog = console.log;
-console.log = function() {
-  const args = Array.prototype.slice.call(arguments);
-  consoleLog(args);
-  const log = args.join(' ');
-  consoleLog(log);
-  document.body.appendChild(document.createTextNode('JavaScript Console: ' + log));
-}
+// *****************************************************************************
+// Instantiate new WASI and WasmFs Instances
+// NOTE:
+// If running in NodeJS, WasmFs is not needed.  In this case, Node's native FS
+// module is assigned by default.
+// Here however, we want to show off how to use WasmFs within the browser.
+// This also means that all our file system operations are sand-boxed.
+// In other words, the wasi module running in the browser does not have any
+// access to the file system of the machine running the browser
+const wasmFs = new WasmFs()
 
-// Instantiate a new WASI and WasmFs Instance
-// NOTE: For node WasmFs is not needed, and the native Fs module is assigned by default
-// In this case, we want to show off WasmFs for the browser use case, and we want to
-// "Sandbox" our file system operations
-const wasmFs = new WasmFs();
 let wasi = new WASI({
-  // Arguments to pass to the Wasm Module
-  // The first argument usually should be the filepath to the "executable wasi module"
-  // That we want to run.
-  args: [wasmFilePath, 'Hello World!'],
+  // Arguments passed to the Wasm Module
+  // The first argument is usually the filepath to the "executable wasi module"
+  // we want to run.
+  args: [wasmFilePath, echoStr],
+
   // Environment variables that are accesible to the Wasi module
   env: {},
+
   // Bindings that are used by the Wasi Instance (fs, path, etc...)
   bindings: {
     ...WASI.defaultBindings,
     fs: wasmFs.fs
   }
-});
+})
 
-// Async Function to run our wasi module/instance
-const startWasiTask = async () => {
-  // Fetch our Wasm File
-  const response = await fetch(wasmFilePath);
-  const responseArrayBuffer = await response.arrayBuffer();
-  const wasmBytes = new Uint8Array(responseArrayBuffer);
+// *****************************************************************************
+// Preserve the original console.log functionality
+const consoleLog = console.log
 
-  // NOTE: For some wasi modules, they have wasi imports that are not supported in
-  // all JavaScript environments. Meaning we will have to use `@wasmer/wasm-transformer`,
-  // which we will cover in later examples
+// Implement our own console.log functionality
+console.log = (...args) =>
+  (logTxt => {
+    consoleLog(logTxt)
+    document.body.appendChild(
+      document.createTextNode(`JavaScript Console: ${logTxt}`)
+    )
+  })
+  (args.join(' '))
 
-  // Instantiate the WebAssembly file
-  let { instance } = await WebAssembly.instantiate(wasmBytes, {
-    wasi_unstable: wasi.wasiImport
-  });
+// *****************************************************************************
+// Async function to run our wasi module/instance
+const startWasiTask =
+  async pathToWasmFile => {
+    // Fetch our Wasm File
+    let response  = await fetch(pathToWasmFile)
+    let wasmBytes = new Uint8Array(await response.arrayBuffer())
 
-  // Start the WebAssembly WASI instance!
-  wasi.start(instance);
+    // IMPORTANT:
+    // Some wasi modules import datatypes that cannot yet be supplied by all
+    // JavaScript environments (for example, you can't yet import a JavaScript
+    // BigInt into WebAssembly).  Therefore, the interface to such modules has
+    // to be transformed using `@wasmer/wasm-transformer`, which we will cover
+    // in later examples
 
-  // Output what's inside of /dev/stdout!
-  const stdout = await wasmFs.getStdOut();
-  // Add the Standard output to the dom
-  console.log('Standard Output: ' + stdout);
-};
-startWasiTask();
+    // Instantiate the WebAssembly file
+    let { instance } = await WebAssembly.instantiate(wasmBytes, {
+      wasi_unstable: wasi.wasiImport
+    })
+
+    wasi.start(instance)                      // Start the WASI instance
+    let stdout = await wasmFs.getStdOut()     // Get the contents of /dev/stdout
+    console.log(`Standard Output: ${stdout}`) // Write wasi's stdout to the DOM
+  }
+
+// *****************************************************************************
+// Everything starts here
+startWasiTask(wasmFilePath)
