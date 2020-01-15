@@ -8,11 +8,11 @@ sidebar_label: Hello World
 
 In this example, we will run the WASI module [as-echo](https://github.com/torch2424/as-echo), using `@wasmer/wasi`. 
 
-The WASI module will echo "Hello World", and we will get the standard output from `/dev/stdout` using the `@wasmer/wasmfs` module. 
+The WASI module receive the text string `"Hello World"` and echo it back via standard output `/dev/stdout` using the `@wasmer/wasmfs` module.
 
 This example will be run in the browser, bundled and served by [Parcel](https://parceljs.org/). 
 
-However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in Node, and the code examples from this guide can be used as a loose example, as long as the ES6 syntax is replaced with what would be the node equivalent.
+However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in Node, and the code examples from this guide can be used as a loose example, as long as the ES6 syntax is replaced with the node equivalent coding.
 
 ## Initial Setup
 
@@ -53,10 +53,10 @@ However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in Node, and the code exa
     </html>
     ```
 
-1. Since we have references a JavaScript file called `index.js`, we need to create it.  At the moment, this file only needs to contain a single line of code to demonstrate that our file structure is set up correctly:
+1. Next, our HTML file references a JavaScript file called `index.js`, so we need to create this file.  At the moment, this JavaScript file only needs to contain a single line of code to demonstrate that our overall file structure is set up correctly:
 
     ```javascript
-    console.log('I am working')
+    console.log('Yup, it works!')
     ```
 
 1. Finally, let's serve our minimal project using the `parcel` CLI:
@@ -70,15 +70,13 @@ However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in Node, and the code exa
     ✨  Built in 982ms.
     ```
 
-    Point your browser to the URL shown above [`http://localhost:1234`](`http://localhost:1234`), and you should see a blank page.
+    Point your browser to the URL shown above [`http://localhost:1234`](`http://localhost:1234`), and you should see an empty page.
     
-    Excellent, its working!  &nbsp;&nbsp;&nbsp;&nbsp;Uh, wait a minute...
-    
-    Just to be sure, open the Developer Tools and you should see `"I am working"` written to the JavaScript console, meaning everything really is working!
+    Open your browser's Developer Tools and you should see `"Yup, it works!"` written to the JavaScript console.
 
 ## Using `wasmer-js`
 
-1. Now that our Javascript project has been set up, let's add the following `wasmer-js` packages: 
+1. Now that the Javascript side of things has been set up, let's add the following `wasmer-js` packages: 
 
     - `@wasmer/wasi` - A polyfill to implement any `wasi` bindings your browser might not support
     - `@wasmer/wasm` - A sandboxed filesystem with which our `wasi` module can interact
@@ -87,11 +85,11 @@ However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in Node, and the code exa
 
     `npm install --save @wasmer/wasi @wasmer/wasmfs`
     
-    As we've seen before, this command updates the `dependencies` section of your `package.json` file
+    In addition to installing the required packages, this command updates the `dependencies` section of your `package.json` file
 
-1. We now need to include a `wasm` file to be run from the browser.
+1. We now need to include a WebAssembly file to be run from the browser.
 
-    In your project directory `wasmer-hello-world`, create a new subdirectory called `static`
+    In your project directory (called `wasmer-hello-world`), create a new subdirectory called `static`
 
     ```bash
     $ mkdir static
@@ -99,7 +97,12 @@ However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in Node, and the code exa
 
 1. Download [`as-echo.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/node-modules/examples/hello-world/static/as-echo.wasm) and store this file in the `static` directory
 
-1. Now that these packages are installed, let's replace `index.js` with the following:
+1. Now that these packages are installed, let's replace `index.js` with the following code.
+
+    Seeing as this id demo code, it uses meaningful variable names and contains lots of explanatory comments (features that are often sadly missing from production coding).  Please take some time to read and understand thesr comments as they will help you understand how the functionality has been constructed.
+    
+    Also, make a note of the comment explaining `@wasmer/wasm-transformer`; we will cover this very important detail in a later example.
+
 
     ```javascript
     // *****************************************************************************
@@ -181,10 +184,6 @@ However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in Node, and the code exa
     startWasiTask(wasmFilePath)
     ```
 
-    Please take some time to read and understand the comments in the example above as this will help you understand how the functionality has been constructed.
-    
-    Also, make a note of the comment explaining `@wasmer/wasm-transformer`; we will cover this very important detail in a later example.
-
-    Save `index.js`  and reload your browser window.  You should see the `Hello World` message in both the Javascript console and in the webpage itself!
+1. Save `index.js`  and reload your browser window.  You should see the `Hello World!` message in both the Javascript console and in the webpage itself!
 
 Next, let's take a look at transforming Wasi modules that require transformations.
