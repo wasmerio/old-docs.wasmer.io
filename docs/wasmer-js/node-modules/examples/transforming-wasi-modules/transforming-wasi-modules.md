@@ -109,6 +109,6 @@ Here, we will fetch a WASI module that we know returns an `I64` (or JavaScript `
 
     `parcel index.html`
 
-1. In the browser you will see `Done!` in both the DOM and teh JavaScript console.  This is the hardcoded response from the `clock_time_get` WASM module.
+1. In the browser you will see `Done!` in both the DOM and the JavaScript console.  This is the hardcoded response from the `clock_time_get` WASM module.
 
 
