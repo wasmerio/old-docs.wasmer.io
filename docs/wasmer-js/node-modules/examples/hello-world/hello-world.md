@@ -162,8 +162,8 @@ This example will be run in the browser, bundled and served by [Parcel](https://
 
         // IMPORTANT:
         // Some WASI module interfaces use datatypes that cannot yet be transferred
-        // between environments (for example, you can't yet import a 64-bit from
-        // WebAssembly).  Therefore, the interface to such modules has to be
+        // between environments (for example, you can't yet import a 64-bit integer
+        // integer WebAssembly).  Therefore, the interface to such modules has to be
         // transformed using `@wasmer/wasm-transformer`, which we will cover in
         // later examples
 
