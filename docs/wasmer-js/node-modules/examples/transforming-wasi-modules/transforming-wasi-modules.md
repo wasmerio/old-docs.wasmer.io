@@ -8,94 +8,107 @@ sidebar_label: Transforming WASI Modules
 
 ## Why Is Transformation Necessary?
 
-In the previous Hello World example, we showed you how to run the very basic `as-echo` wasm module that received a text string as an argument and simply echoed it back via standard out.  However, some WASI modules may be compiled in a way that means they can't immediately be run from a JavaScript environment such as a browser.
+In the previous Hello World example, we showed you how to run the very basic `as-echo` WASM module that received a text string as an argument and simply echoed it back via standard out.  However, some WASI modules may be compiled in a way that means they can't immediately be run from a JavaScript environment such as a browser.
 
 For example, modules that call the [clock\_time\_get](https://github.com/WebAssembly/WASI/blob/master/phases/old/snapshot_0/docs/wasi_unstable.md#clock_time_get) WASI API, must be able to receive a 64-bit integer (WebAssembly type `I64`, JavaScript `BigInt`) &mdash; which is not yet fully supported as it is still at the [proposal stage](https://github.com/WebAssembly/JS-BigInt-integration/issues/15). 
 
 However, it is not impossible to run such a module; but before we can, we must first ***transform*** it using `@wasmer/wasm-transformer`.
 
-## Example
+## Setup Steps
 
 Here, we will fetch a WASI module that we know returns an `I64` (or JavaScript `BigInt`) value.  Therefore, before attempting to call this module, we must first transform it using `lowerI64Imports` from `@wasmer/wasm-transformer`.  Once we have done this, we can then run it in the browser!
 
+1. Create a new project directory having the same contents as was used in the previous `Hello World` example.  That is, you will need am `index.html` file and an `index.js` file
 
-```javascript
-// *****************************************************************************
-// Imports
-import { WASI }            from '@wasmer/wasi'
-import { WasmFs }          from '@wasmer/wasmfs'
-import { lowerI64Imports } from "@wasmer/wasm-transformer"
+1. As before, also create a subdirectory called `static` and store within it the file [`clock_time_get.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/node-modules/examples/transforming-wasi-modules/static/clock_time_get.wasm)
 
-const wasmFilePath = './clock_time_get.wasm'  // Path to our wasi module
+1. Add the following code into `index.js`
 
-// *****************************************************************************
-// Instantiate new WASI and WasmFs Instances
-// NOTE:
-// If running in NodeJS, WasmFs is not needed.  In this case, Node's native FS
-// module is assigned by default.
-// Here however, we want to show off how to use WasmFs within the browser.
-// This also means that all our file system operations are sand-boxed.
-// In other words, the wasi module running in the browser does not have any
-// access to the file system of the machine running the browser
-const wasmFs = new WasmFs()
 
-let wasi = new WASI({
-  // Arguments passed to the Wasm Module
-  // The first argument is usually the filepath to the "executable wasi module"
-  // we want to run.
-  args: [wasmFilePath],
+    ```javascript
+    // *****************************************************************************
+    // Imports
+    import { WASI }            from '@wasmer/wasi'
+    import { WasmFs }          from '@wasmer/wasmfs'
+    import { lowerI64Imports } from "@wasmer/wasm-transformer"
 
-  // Environment variables that are accesible to the Wasi module
-  env: {},
+    const wasmFilePath = './clock_time_get.wasm'  // Path to our wasi module
 
-  // Bindings that are used by the Wasi Instance (fs, path, etc...)
-  bindings: {
-    ...WASI.defaultBindings,
-    fs: wasmFs.fs
-  }
-})
+    // *****************************************************************************
+    // Instantiate new WASI and WasmFs Instances
+    // NOTE:
+    // If running in NodeJS, WasmFs is not needed.  In this case, Node's native FS
+    // module is assigned by default.
+    // Here however, we want to show off how to use WasmFs within the browser.
+    // This also means that all our file system operations are sand-boxed.
+    // In other words, the wasi module running in the browser does not have any
+    // access to the file system of the machine running the browser
+    const wasmFs = new WasmFs()
 
-// *****************************************************************************
-// Preserve the original console.log functionality
-const consoleLog = console.log
+    let wasi = new WASI({
+      // Arguments passed to the Wasm Module
+      // The first argument is usually the filepath to the "executable wasi module"
+      // we want to run.
+      args: [wasmFilePath],
 
-// Implement our own console.log functionality
-console.log = (...args) =>
-  (logTxt => {
-    consoleLog(logTxt)
-    document.body.appendChild(
-      document.createTextNode(`JavaScript Console: ${logTxt}`)
-    )
-  })
-  (args.join(' '))
+      // Environment variables that are accesible to the Wasi module
+      env: {},
 
-// *****************************************************************************
-// Async Function to run our wasi module/instance
-const startWasiTask =
-  async () => {
-    // Fetch our Wasm File
-    const response  = await fetch(wasmFilePath)
-    const wasmBytes = new Uint8Array(await response.arrayBuffer())
-
-    // Lower the WebAssembly Module bytes
-    // This will create trampoline functions for i64 parameters in function
-    // calls such as: 
-    // https://github.com/WebAssembly/WASI/blob/master/phases/old/snapshot_0/docs/wasi_unstable.md#clock_time_get
-    // Allowing the Wasi module to work in the browser / node!
-    const loweredWasmBytes = await lowerI64Imports(wasmBytes)
-
-    // Instantiate the WebAssembly file
-    let { instance } = await WebAssembly.instantiate(loweredWasmBytes, {
-      wasi_unstable: wasi.wasiImport
+      // Bindings that are used by the Wasi Instance (fs, path, etc...)
+      bindings: {
+        ...WASI.defaultBindings,
+        fs: wasmFs.fs
+      }
     })
 
-    wasi.start(instance)                      // Start the transformed WASI instance
-    let stdout = await wasmFs.getStdOut()     // Get the contents of /dev/stdout
-    console.log(`Standard Output: ${stdout}`) // Write wasi's stdout to the DOM
-  }
+    // *****************************************************************************
+    // Preserve the original console.log functionality
+    const consoleLog = console.log
 
-// *****************************************************************************
-// Everything starts here
-startWasiTask()
-```
+    // Implement our own console.log functionality
+    console.log = (...args) =>
+      (logTxt => {
+        consoleLog(logTxt)
+        document.body.appendChild(
+          document.createTextNode(`JavaScript Console: ${logTxt}`)
+        )
+      })
+      (args.join(' '))
+
+    // *****************************************************************************
+    // Async Function to run our wasi module/instance
+    const startWasiTask =
+      async () => {
+        // Fetch our Wasm File
+        const response  = await fetch(wasmFilePath)
+        const wasmBytes = new Uint8Array(await response.arrayBuffer())
+
+        // Lower the WebAssembly Module bytes
+        // This will create trampoline functions for i64 parameters in function
+        // calls such as: 
+        // https://github.com/WebAssembly/WASI/blob/master/phases/old/snapshot_0/docs/wasi_unstable.md#clock_time_get
+        // Allowing the Wasi module to work in the browser / node!
+        const loweredWasmBytes = await lowerI64Imports(wasmBytes)
+
+        // Instantiate the WebAssembly file
+        let { instance } = await WebAssembly.instantiate(loweredWasmBytes, {
+          wasi_unstable: wasi.wasiImport
+        })
+
+        wasi.start(instance)                      // Start the transformed WASI instance
+        let stdout = await wasmFs.getStdOut()     // Get the contents of /dev/stdout
+        console.log(`Standard Output: ${stdout}`) // Write wasi's stdout to the DOM
+      }
+
+    // *****************************************************************************
+    // Everything starts here
+    startWasiTask()
+    ```
+
+1. Use parcel to run the project
+
+    `parcel index.html`
+
+1. In the browser you will see `Done!` in both the DOM and teh JavaScript console.  This is the hardcoded response from the `clock_time_get` WASM module.
+
 
