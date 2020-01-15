@@ -56,11 +56,11 @@ const startWasiTask =
     let wasmBytes = new Uint8Array(await response.arrayBuffer())
 
     // IMPORTANT:
-    // Some wasi modules import datatypes that cannot yet be supplied by all
-    // JavaScript environments (for example, you can't yet import a JavaScript
-    // BigInt into WebAssembly).  Therefore, the interface to such modules has
-    // to be transformed using `@wasmer/wasm-transformer`, which we will cover
-    // in later examples
+    // Some wasi module interfaces use datatypes that cannot yet be supplied by
+    // all JavaScript environments (for example, you can't yet import a
+    // JavaScript BigInt into WebAssembly).  Therefore, the interface to such
+    // modules has to be transformed using `@wasmer/wasm-transformer`, which we
+    // will cover in later examples
 
     // Instantiate the WebAssembly file
     let { instance } = await WebAssembly.instantiate(wasmBytes, {
