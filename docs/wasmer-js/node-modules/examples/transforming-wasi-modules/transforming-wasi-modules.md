@@ -10,7 +10,7 @@ sidebar_label: Transforming WASI Modules
 
 In the previous Hello World example, we showed you how to run the very basic `as-echo` WASM module that received a text string as an argument and simply echoed it back via standard out.  However, some WASI modules may be compiled in a way that means they can't immediately be run from a JavaScript environment such as a browser.
 
-For example, modules that call the [clock\_time\_get](https://github.com/WebAssembly/WASI/blob/master/phases/old/snapshot_0/docs/wasi_unstable.md#clock_time_get) WASI API, must be able to receive a 64-bit integer (WebAssembly type `I64`, JavaScript `BigInt`) &mdash; which is not yet fully supported as it is still at the [proposal stage](https://github.com/WebAssembly/JS-BigInt-integration/issues/15). 
+For example, any module that calls the [clock\_time\_get](https://github.com/NuxiNL/cloudabi/blob/master/cloudabi.txt#L1230) WASI API, must be able to transfer a signed 64-bit integer.  However, passing a JavaScript `BigInt` to a WebAssembly `I64` is not yet supported &mdash; this detail is still at the [proposal stage](https://github.com/WebAssembly/JS-BigInt-integration/issues/15). 
 
 However, it is not impossible to run such a module; but before we can, we must first ***transform*** it using `@wasmer/wasm-transformer`.
 
