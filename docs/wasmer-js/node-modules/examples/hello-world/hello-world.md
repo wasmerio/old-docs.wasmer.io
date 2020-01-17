@@ -28,7 +28,9 @@ In this case, we want to run the simple WASM module [as-echo](https://github.com
 
 The `as-echo` module simply receives a text string (in our case `"Hello World!"`) and echoes it back via standard output `/dev/stdout`.
 
-This example will be bundled and served by [Parcel](https://parceljs.org/) and run in the browser.  However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in NodeJS, and the code examples from this guide can be used as a loose example &mdash; as long as the ES6 syntax is replaced with the equivalent NodeJS coding.
+This example will be bundled and served by [Parcel](https://parceljs.org/) and run in the browser.
+
+The `@wasmer/wasi` and `@wasmer/wasmfs` also work in NodeJS, and the code examples from this guide can be used as a loose example &mdash; as long as the ES6 syntax is replaced with the equivalent NodeJS coding.
 
 ## Prerequisites
 
