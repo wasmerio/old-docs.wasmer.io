@@ -19,7 +19,7 @@ In this example, we want to use the following call chain:
 > However, from a WebAssembly point of view, we don't need to care about this detail. All we need to know is that this function exists, and we can call it (as long as we're careful)!
 
 
-In this case, we want to run the simple WASM module [as-echo](https://github.com/torch2424/as-echo); however, we know this module writes its output to standard out, which in turn, requires access to the functionality found in the underlying "OS".  This means we must two `WASI` packages:
+In this case, we want to run the simple WASM module [as-echo](https://github.com/torch2424/as-echo); however, we know this module writes its output to standard out, which in turn, requires access to the functionality found in the underlying "OS".  This means that unless we provide the following two `WASI` packages, this module cannot run:
 
 | Package Name | Description
 |---|---|
