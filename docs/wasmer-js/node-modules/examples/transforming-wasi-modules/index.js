@@ -42,7 +42,7 @@ console.log = (...args) =>
   (logTxt => {
     consoleLog(logTxt)
     document.body.appendChild(
-      document.createTextNode(`JavaScript Console: ${logTxt}`)
+      document.createTextNode(logTxt)
     )
   })
   (args.join(' '))
