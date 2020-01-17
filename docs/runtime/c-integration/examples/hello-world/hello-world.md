@@ -27,7 +27,7 @@ project (WasmerCHelloWorld)
 
 # Output executable, and Entrypoint into our project
 add_executable(hello-world hello-world.c)
-    
+
 # Added the Wasmer Runtime C API As a dependency
 # Will be downloaded and compiled with rust
 include(ExternalProject)
@@ -89,7 +89,7 @@ int main() {
   printf("Running the Wasmer C API example...\n");
 
   // Create module name for our imports
-  // Create a UTF-8 string as bytes for our module name. 
+  // Create a UTF-8 string as bytes for our module name.
   // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
   const char *module_name = "env";
   wasmer_byte_array module_name_bytes = { .bytes = (const uint8_t *) module_name,
@@ -111,7 +111,7 @@ int main() {
   // Instantiate a WebAssembly Instance from wasm bytes and imports
   wasmer_instance_t *instance = NULL;
   wasmer_result_t compile_result = wasmer_instantiate(
-      &instance, // Our reference to our wasm instance 
+      &instance, // Our reference to our wasm instance
       bytes, // The bytes of the WebAssembly modules
       len, // The length of the bytes of the WebAssembly module
       imports, // The Imports array the will be used as our importObject
@@ -130,7 +130,7 @@ int main() {
   assert(compile_result == WASMER_OK);
 
    // Call the exported "hello_wasm" function of our instance
-  
+
   // Define our parameters we are passing into the guest wasm function call.
   // Params are created with the following properties
   // .tag is the tag of the type of the param being passed to the guest wasm function
@@ -175,7 +175,7 @@ int main() {
 }
 ```
 
-Please take a look at the comments of the `hello-world.c` file to see how everything is working. In particular, notice that the guest wasm module is loading a file from "example-wasienv-wasm/add-one/add-one.wasm". This file path should be replaced by wherever your add-one.wasm is located. [To get the add-one.wasm, please take a look at the example guest module in our host application example source code](https://github.com/torch2424/wasmer-examples/tree/master/c/hello-world/example-wasienv-wasm/add-one).
+Please take a look at the comments of the `hello-world.c` file to see how everything is working. In particular, notice that the guest wasm module is loading a file from "example-wasienv-wasm/add-one/add-one.wasm". This file path should be replaced by wherever your add-one.wasm is located. [To get the add-one.wasm, please take a look at the example guest module in our host application example source code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/hello-world/example-wasienv-wasm/add-one).
 
 Now, we can build our host application! Building and application tends to generate a lot of files, so let's create an output directory and navigate to it:
 
