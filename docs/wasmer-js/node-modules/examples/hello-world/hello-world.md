@@ -15,8 +15,8 @@ In this example, we want to use the following call chain:
 
 > ### As an Aside...  
 > The term "OS" is in double quotes to indicate that the native function being called might not actually belong to the underlying operating system.  
-> In reality, this function belongs to the host environment within which this WebAssembly module is running, and in this particular case, this is the environment provided by the browser, not the underlying operating system.  Nonetheless, from a WebAssembly point of view, we don't need to care about this detail.  
-> All we need to know is that this function exists, and we can call it (if we're careful)!
+> In reality, this function belongs to the host environment within which this WebAssembly module is running, and in this particular case, this is the environment provided by the browser, not the underlying operating system.  
+> However, from a WebAssembly point of view, we don't need to care about this detail. All we need to know is that this function exists, and we can call it (as long as we're careful)!
 
 
 In this case, we want to run the simple WASM module [as-echo](https://github.com/torch2424/as-echo); however, we know this module writes its output to standard out, which in turn, requires access to the functionality found in the underlying "OS".  This means we must two `WASI` packages:
