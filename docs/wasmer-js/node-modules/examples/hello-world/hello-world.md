@@ -19,10 +19,12 @@ In this example, we want to use the following call chain:
 > All we need to know is that this function exists, and we can call it (if we're careful)!
 
 
-In this case, we want to run the simple WASM module [as-echo](https://github.com/torch2424/as-echo); however, we know this module writes its output to standard out, which in turn, requires access to the functionality found in the underlying "OS".  This means we must two `WASI` modules:
+In this case, we want to run the simple WASM module [as-echo](https://github.com/torch2424/as-echo); however, we know this module writes its output to standard out, which in turn, requires access to the functionality found in the underlying "OS".  This means we must two `WASI` packages:
 
-* `@wasmer/wasi`: To  bridge the gap between the native "OS" and the black-box world of WebAssembly
-* `@wasmer/wasmfs`: To provide specific access to a completely sandboxed filesystem
+| Package Name | Description
+|---|---|
+| `@wasmer/wasi` | Bridges the gap between the black-box world of a WebAssembly module and functionality available from the host environment
+| `@wasmer/wasmfs` | A sandboxed filesystem with which `@wasmer/wasi` can interact
 
 The `as-echo` module simply receives a text string (in our case `"Hello World!"`) and echoes it back via standard output `/dev/stdout`.
 
