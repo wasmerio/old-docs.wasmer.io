@@ -90,15 +90,19 @@ In this case, the native "OS" function we want to call is `clock_time_get`.  To 
 
 On line 2, we can see the declaration of a type definition called `$t0`.  This type definition represents the interface to some `func`tion that takes three, signed integers as parameters and returns an integer.
 
-<code>(type $t0 (func (param i32 <span style="color:red">i64</span> i32) (result i32)))</code>
+```WebAssemblyText
+(type $t0 (func (param i32 i64 i32) (result i32)))
+```
 
-Notice the data type of the second parameter; its a 64-bit signed integer. (Uh oh!)
+Notice the data type of the second parameter; Uh oh! Its a 64-bit signed integer!
 
 At the moment, we have no way to directly pass a JavaScript `BigInt` into WebAssembly; therefore, before calling this WebAssembly module, the interface to this function must be transformed
 
 Then on line 5, we can see the declaration of the call to `clock_time_get`:
 
-<code>(<span style="color:red">import</span> "wasi\_unstable" "clock\_time\_get" (func $wasi\_unstable.clock\_time\_get (type <span style="color:red">$t0</span>)))</code>
+```WebAssemblyText
+(import "wasi\_unstable" "clock\_time\_get" (func $wasi\_unstable.clock\_time\_get (type $t0)))
+```
 
 Two things are important to notice here:
 
