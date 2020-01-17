@@ -25,7 +25,7 @@ $ npm install -g parcel
 
 ## Run Example from Git Clone
 
-The simplest way to run this exercise is to clone the entire `docs.wasmer.io` repo:
+The simplest way to run this exercise is to clone the entire [`docs.wasmer.io`](https://github.com/wasmerio/docs.wasmer.io) repo:
 
 1. Change into some development directory
 
