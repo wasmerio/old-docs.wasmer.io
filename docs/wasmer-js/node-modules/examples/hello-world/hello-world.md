@@ -10,178 +10,158 @@ In this example, we will run the WASI module [as-echo](https://github.com/torch2
 
 This WASI module simply receives a text string (in our case `"Hello World!"`) and echoes it back via standard output `/dev/stdout` using the `@wasmer/wasmfs` module.
 
-This example will be run in the browser, bundled and served by [Parcel](https://parceljs.org/).   However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in Node, and the code examples from this guide can be used as a loose example &mdash; as long as the ES6 syntax is replaced with the Node equivalent coding.
+This example will be bundled and served by [Parcel](https://parceljs.org/) and run in the browser.  However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in NodeJS, and the code examples from this guide can be used as a loose example &mdash; as long as the ES6 syntax is replaced with the equivalent NodeJS coding.
 
-## Initial Setup
+## Prerequisites
 
-1. Make sure [Parcel](https://parceljs.org/) has been installed and is available from the command line
+Make sure [Parcel](https://parceljs.org/) has been installed and is available from the command line
+
+```bash
+$ npm install -g parcel
+```
+
+> ### Mac users
+> Before the installation of Parcel will work on a Mac, you must first install the [Xcode Command Line Tools](https://developer.apple.com/download/more/?=for%20Xcode)
+
+## Run Example from Git Clone
+
+The simplest way to run this exercise is to clone the entire `docs.wasmer.io` repo:
+
+1. Change into some development directory
 
     ```bash
-    $ npm install -g parcel
+    $ cd <some_development directory>
     ```
 
-    > ### Information for Mac users
-    > Before the installation of Parcel will work on a Mac, you must first install the [Xcode Command Line Tools](https://developer.apple.com/download/more/?=for%20Xcode)
-
-1. Create a small JavaScript project.
-    1. Change into your development directory
-    2. Create a new subdirectory
-    3. Initialize the new subdirectory as a Node project using `npm`:
+1. Clone this entire repo
 
     ```bash
-    $ cd <some_development_directory>
-    $ mkdir wasmer-hello-world
-    $ cd wasmer-hello-world
-    $ npm init
+    $ git clone https://github.com/wasmerio/docs.wasmer.io.git
     ```
 
-    After you answer the questions from `npm init`, a new `package.json` file will be created.
+1. Change into the `hello-world` directory
 
-1. Install both the `parcel-bundler` and `parcel-plugin-static-files-copy` packages.  These allow `parcel` to serve our wasm files as static assets.  The following command both installs the required packages and updates the `devDependencies` section of your `package.json` file:
-
-    `npm install --save-dev parcel-bundler parcel-plugin-static-files-copy`
-
-1. Create an `index.html` file that contains only the following request to load the JavaScript file `index.js`:
-
-    ```html
-    <html>
-    <body>
-      <script src="./index.js"></script>
-    </body>
-    </html>
-    ```
-
-1. Next, create `index.js` and put this single line of code in it:
-
-    ```javascript
-    console.log('Yup, it works!')
-    ```
-    
-    The purpose of this one-line program is simply to demonstrate that our overall file structure is set up correctly:
-
-1. Finally, let's serve our minimal project using the `parcel` CLI:
-
-    `parcel index.html`
-    
-    You should see a response that tells you the server's URL and the build time.  Something like this:
-    
     ```bash
-    Server running at http://localhost:1234 
-    ✨  Built in 982ms.
+    $ cd docs.wasmer.io/docs/wasmer-js/node-modules/examples/hello-world
     ```
 
-    Point your browser to the URL shown above ([`http://localhost:1234`](`http://localhost:1234`)), and you should see an empty page.
-    
-    Open your browser's Developer Tools and you should see `"Yup, it works!"` written to the JavaScript console.
+1. Install the required `npm` dependencies
+
+    ```bash
+    $ npm install
+    ```
+
+1. Start `parcel` 
+
+   ```bash
+   $ parcel index.html
+   ```
+
+1. Point your browser to [`http://localhost:1234`](http://localhost:1234) and you should see `Standard Output: Hello World!` appear both on the browser screen and in the JavaScript console
+
+
 
 ## Using `wasmer-js`
 
-1. Now that the Javascript side of things has been set up, let's add the following `wasmer-js` packages: 
+This little demo uses the following two `wasmer-js` packages: 
 
-    - `@wasmer/wasi` - A polyfill to implement any `wasi` bindings your browser might not support
-    - `@wasmer/wasm` - A sandboxed filesystem with which our `wasi` module can interact
+| Package Name | Description
+|---|---|
+| `@wasmer/wasi` | A polyfill to implement any WebAssembly System Interface (`WASI`) bindings your browser might not support
+| `@wasmer/wasmfs` | A sandboxed filesystem with which the `@wasmer/wasi` module can interact
 
-    To install these packages as dependencies to your project, run the following command:
+These packages have already been listed in the `dependencies` section of `package.json`, but when needed in your own projects, can be added using the following command:
 
-    `npm install --save @wasmer/wasi @wasmer/wasmfs`
+```bash
+$ npm install --save @wasmer/wasi @wasmer/wasmfs
+```
+
+## JavaScript Coding
+
+Seeing as this is demo code, it uses meaningful variable names and contains lots of explanatory comments (features that are often sadly missing from production code).  Please take some time to read and understand these comments as they explain how the functionality has been constructed.
     
-    In addition to installing the required packages, this command updates the `dependencies` section of your `package.json` file
-
-1. We now need to include a WebAssembly file to be run from the browser.  In your project directory create a new subdirectory called `static`
-
-    ```bash
-    $ mkdir static
-    ```
-
-1. Download [`as-echo.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/node-modules/examples/hello-world/static/as-echo.wasm) and store this file in the `static` directory
-
-1. Now that these packages are installed, let's replace the contents of `index.js` with the code shown below.
-
-    Seeing as this is demo code, it uses meaningful variable names and contains lots of explanatory comments (features that are often sadly missing from production code).  Please take some time to read and understand these comments as they explain how the functionality has been constructed.
-    
-    Also, make a note of the comment explaining `@wasmer/wasm-transformer`; we will cover this very important detail in a later example.
+Also, make a note of the comment explaining `@wasmer/wasm-transformer`; we will cover this very important detail in a later example.
 
 
-    ```javascript
-    // *****************************************************************************
-    // Imports
-    import { WASI }   from '@wasmer/wasi'
-    import { WasmFs } from '@wasmer/wasmfs'
+```javascript
+// *****************************************************************************
+// Imports
+import { WASI }   from '@wasmer/wasi'
+import { WasmFs } from '@wasmer/wasmfs'
 
-    const wasmFilePath = './as-echo.wasm'  // Path to our wasi module
-    const echoStr      = 'Hello World!'    // Text string to echo
+const wasmFilePath = './as-echo.wasm'  // Path to our wasi module
+const echoStr      = 'Hello World!'    // Text string to echo
 
-    // *****************************************************************************
-    // Instantiate new WASI and WasmFs Instances
-    // NOTE:
-    // If running in NodeJS, WasmFs is not needed.  In this case, Node's native FS
-    // module is assigned by default.
-    // Here however, we want to show off how to use WasmFs within the browser.
-    // This also means that all our file system operations are sand-boxed.
-    // In other words, the WASI module running in the browser does not have any
-    // access to the file system of the machine running the browser
-    const wasmFs = new WasmFs()
+// *****************************************************************************
+// Instantiate new WASI and WasmFs Instances
+// NOTE:
+// If running in NodeJS, WasmFs is not needed.  In this case, Node's native FS
+// module is assigned by default.
+// Here however, we want to show off how to use WasmFs within the browser.
+// This also means that all our file system operations are sand-boxed.
+// In other words, the WASI module running in the browser does not have any
+// access to the file system of the machine running the browser
+const wasmFs = new WasmFs()
 
-    let wasi = new WASI({
-      // Arguments passed to the Wasm Module
-      // The first argument is usually the filepath to the "executable wasi module"
-      // we want to run.
-      args: [wasmFilePath, echoStr],
+let wasi = new WASI({
+  // Arguments passed to the Wasm Module
+  // The first argument is usually the filepath to the "executable wasi module"
+  // we want to run.
+  args: [wasmFilePath, echoStr],
 
-      // Environment variables that are accesible to the Wasi module
-      env: {},
+  // Environment variables that are accesible to the Wasi module
+  env: {},
 
-      // Bindings that are used by the WASI Instance (fs, path, etc...)
-      bindings: {
-        ...WASI.defaultBindings,
-        fs: wasmFs.fs
-      }
+  // Bindings that are used by the WASI Instance (fs, path, etc...)
+  bindings: {
+    ...WASI.defaultBindings,
+    fs: wasmFs.fs
+  }
+})
+
+// *****************************************************************************
+// Preserve the original console.log functionality
+const consoleLog = console.log
+
+// Implement our own console.log functionality
+console.log = (...args) =>
+  (logTxt => {
+    consoleLog(logTxt)
+    document.body.appendChild(
+      document.createTextNode(logTxt)
+    )
+  })
+  (args.join(' '))
+
+// *****************************************************************************
+// Async function to run our wasi module/instance
+const startWasiTask =
+  async pathToWasmFile => {
+    // Fetch our WASM File
+    let response  = await fetch(pathToWasmFile)
+    let wasmBytes = new Uint8Array(await response.arrayBuffer())
+
+    // IMPORTANT:
+    // Some WASI module interfaces use datatypes that cannot yet be transferred
+    // between environments (for example, you can't yet send a JavaScript BigInt
+    // to a WebAssembly i64).  Therefore, the interface to such modules has to
+    // be transformed using `@wasmer/wasm-transformer`, which we will cover in
+    // a later example
+
+    // Instantiate the WebAssembly file
+    let { instance } = await WebAssembly.instantiate(wasmBytes, {
+      wasi_unstable: wasi.wasiImport
     })
 
-    // *****************************************************************************
-    // Preserve the original console.log functionality
-    const consoleLog = console.log
+    wasi.start(instance)                      // Start the WASI instance
+    let stdout = await wasmFs.getStdOut()     // Get the contents of /dev/stdout
+    console.log(`Standard Output: ${stdout}`) // Write WASI's stdout to the DOM
+  }
 
-    // Implement our own console.log functionality
-    console.log = (...args) =>
-      (logTxt => {
-        consoleLog(logTxt)
-        document.body.appendChild(
-          document.createTextNode(`JavaScript Console: ${logTxt}`)
-        )
-      })
-      (args.join(' '))
+// *****************************************************************************
+// Everything starts here
+startWasiTask(wasmFilePath)
+```
 
-    // *****************************************************************************
-    // Async function to run our wasi module/instance
-    const startWasiTask =
-      async pathToWasmFile => {
-        // Fetch our WASM File
-        let response  = await fetch(pathToWasmFile)
-        let wasmBytes = new Uint8Array(await response.arrayBuffer())
-
-        // IMPORTANT:
-        // Some WASI module interfaces use datatypes that cannot yet be transferred
-        // between environments (for example, you can't yet import a 64-bit integer
-        // from WebAssembly).  Therefore, the interface to such modules has to be
-        // transformed using `@wasmer/wasm-transformer`, which we will cover in
-        // later examples
-
-        // Instantiate the WebAssembly file
-        let { instance } = await WebAssembly.instantiate(wasmBytes, {
-          wasi_unstable: wasi.wasiImport
-        })
-
-        wasi.start(instance)                      // Start the WASI instance
-        let stdout = await wasmFs.getStdOut()     // Get the contents of /dev/stdout
-        console.log(`Standard Output: ${stdout}`) // Write wasi's stdout to the DOM
-      }
-
-    // *****************************************************************************
-    // Everything starts here
-    startWasiTask(wasmFilePath)
-    ```
-
-1. Save `index.js`  and reload your browser window.  You should see the `Hello World!` message in both the Javascript console and in the webpage itself!
 
 Next, let's take a look at transforming WASI modules that require transformations.

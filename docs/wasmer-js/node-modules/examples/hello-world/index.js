@@ -42,7 +42,7 @@ console.log = (...args) =>
   (logTxt => {
     consoleLog(logTxt)
     document.body.appendChild(
-      document.createTextNode(`JavaScript Console: ${logTxt}`)
+      document.createTextNode(logTxt)
     )
   })
   (args.join(' '))
@@ -57,10 +57,10 @@ const startWasiTask =
 
     // IMPORTANT:
     // Some WASI module interfaces use datatypes that cannot yet be transferred
-    // between environments (for example, you can't yet import a 64-bit integer
-    // from WebAssembly).  Therefore, the interface to such modules has to be
-    // transformed using `@wasmer/wasm-transformer`, which we will cover in
-    // later examples
+    // between environments (for example, you can't yet send a JavaScript BigInt
+    // to a WebAssembly i64).  Therefore, the interface to such modules has to
+    // be transformed using `@wasmer/wasm-transformer`, which we will cover in
+    // a later example
 
     // Instantiate the WebAssembly file
     let { instance } = await WebAssembly.instantiate(wasmBytes, {
@@ -69,7 +69,7 @@ const startWasiTask =
 
     wasi.start(instance)                      // Start the WASI instance
     let stdout = await wasmFs.getStdOut()     // Get the contents of /dev/stdout
-    console.log(`Standard Output: ${stdout}`) // Write wasi's stdout to the DOM
+    console.log(`Standard Output: ${stdout}`) // Write WASI's stdout to the DOM
   }
 
 // *****************************************************************************
