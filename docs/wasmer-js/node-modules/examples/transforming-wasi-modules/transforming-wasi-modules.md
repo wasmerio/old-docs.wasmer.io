@@ -10,7 +10,7 @@ sidebar_label: Transforming WASI Modules
 
 In the previous Hello World example, we showed you how to run the very basic `as-echo` WASM module that received a text string as an argument and simply echoed it back via standard out.  However, some WASI modules may be compiled in a way that means they can't immediately be run from a JavaScript environment such as a browser.
 
-For example, any module that calls the [clock\_time\_get](https://github.com/NuxiNL/cloudabi/blob/master/cloudabi.txt#L1230) WASI API, must be able to transfer a signed 64-bit integer.  However, passing a JavaScript `BigInt` to a WebAssembly `I64` is not yet supported &mdash; this detail is still at the proposal stage.  (See [here](https://github.com/WebAssembly/JS-BigInt-integration/issues/15) and [here](https://github.com/WebAssembly/proposals/issues/7) for details).
+For example, any module that calls the [clock\_time\_get](https://github.com/NuxiNL/cloudabi/blob/master/cloudabi.txt#L1230) WASI API, must be able to supply a 64-bit, signed integer.  However, passing a JavaScript `BigInt` to a WebAssembly `i64` is not yet supported &mdash; this detail is still at the proposal stage.  (See [here](https://github.com/WebAssembly/JS-BigInt-integration/issues/15) and [here](https://github.com/WebAssembly/proposals/issues/7) for details).
 
 However, it is not impossible to run such a module; but before we can, we must first ***transform*** it using `@wasmer/wasm-transformer`.
 
@@ -62,7 +62,7 @@ If you have not already done the previous `hello-world` example, the simplest wa
    $ parcel index.html
    ```
 
-1. Point your browser to [`http://localhost:1234`](http://localhost:1234) and you should see `Standard Output: Hello World!` appear both on the browser screen and in the JavaScript console
+1. Point your browser to [`http://localhost:1234`](http://localhost:1234) and you should see `Standard Output: Done!` appear both on the browser screen and in the JavaScript console
 
 # The `clock_time_get` WebAssembly Module
 
@@ -71,7 +71,7 @@ In this example, we want to use the following call chain:
 `JavaScript` --> `WebAssembly`  --> `Native "OS" function`
 
 > ### As an Aside...  
-> The term "OS" in in quotes to indicate that the native function we call might not actually belong to the native operating system.  
+> The term "OS" is in double quotes to indicate that the native function being called might not actually belong to the underlying operating system.  
 > In reality, this function belongs to the host environment within which this WebAssembly module is running, and in this particular case, this is the environment provided by the browser, not the underlying operating system.  Nonetheless, from a WebAssembly point of view, we don't need to care about this detail.  
 > All we need to know is that this function exists, and we can call it (if we're careful)!
 
@@ -88,7 +88,7 @@ In this case, the native "OS" function we want to call is `clock_time_get`.  To 
   ;; snip...
 ```
 
-On line 2, we can see the declaration of a type definition called `$t0`.  This type definition represents the interface to some `func`tion that takes three integer parameters and returns an integer.
+On line 2, we can see the declaration of a type definition called `$t0`.  This type definition represents the interface to some `func`tion that takes three, signed integers as parameters and returns an integer.
 
 <code>(type $t0 (func (param i32 <span style="color:red">i64</span> i32) (result i32)))</code>
 
@@ -104,11 +104,13 @@ Two things are important to notice here:
 
 1. The `import` keyword indicates that function `clock_time_get` lives in an external module called `wasi_unstable`
 
-1. The interface to this function is described by the type definition `$t0`.  In other words, `clock_time_get` must be passed an `i64` as its second parameter.
+1. The interface to this function is described by the previously declared type definition `$t0`.  In other words, we know for certain that function `clock_time_get` must be passed an `i64` as its second parameter.
+
+Having established exactly what the interface is to `clock_time_get`, we now know that we cannot call this WASM module without first transforming it.
 
 ### Important
 
-This example is somewhat contrived becase the WebAssembly module has been hard-coded to return the text string `Done!` rather than the value returned from `clock_time_get`.  This is because `clock_time_get` writes its output to standard out, which in turn, expects to receive printable strings followed by a carriage return character, not a raw `i32` value.
+This example is somewhat contrived because the WebAssembly module has been hard-coded to return the text string `Done!` rather than the value returned from `clock_time_get`.  This is because this module writes its output to standard out, which in turn, expects to receive printable strings followed by a carriage return character, not the raw `i32` value returned from `clock_time_get`.
 
 
 ## JavaScript Coding
@@ -121,11 +123,11 @@ Inside function `startWasiTask`, we fetch the WASM file contents and convert it 
 const loweredWasmBytes = await lowerI64Imports(wasmBytes)
 ```
 
-Here, the `lowerI64Imports` function transforms the interface such that JavaScript `BigInt` values are transferred to WebAssembly `i64` value via an array of 8, unsigned, 8-bit integers.
+Here, the `lowerI64Imports` function transforms the interface such that a JavaScript `BigInt` value can be transferred to a WebAssembly `i64` value as an array of 8, unsigned, 8-bit integers.
 
-It is not until after this transformation has occurred that we can instantiate the WebAssembly module and invoke it.
+It is not until after this transformation has occurred that we can instantiate the WebAssembly module and invoke it as before.
 
-    ```javascript
+    ```JavaScript
     // *****************************************************************************
     // Imports
     import { WASI }            from '@wasmer/wasi'
@@ -205,10 +207,5 @@ It is not until after this transformation has occurred that we can instantiate t
     startWasiTask()
     ```
 
-1. Use parcel to run the project
-
-    `parcel index.html`
-
-1. In the browser you will see `Done!` in both the DOM and the JavaScript console.  This is the hardcoded response from the `clock_time_get` WASM module.
-
+Next, let's look at handling input and output via WASI.
 

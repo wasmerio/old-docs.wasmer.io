@@ -30,7 +30,7 @@ The simplest way to run this exercise is to clone the entire [`docs.wasmer.io`](
 1. Change into some development directory
 
     ```bash
-    $ cd <some_development directory>
+    $ cd <some_development_directory>
     ```
 
 1. Clone this entire repo
@@ -39,7 +39,7 @@ The simplest way to run this exercise is to clone the entire [`docs.wasmer.io`](
     $ git clone https://github.com/wasmerio/docs.wasmer.io.git
     ```
 
-1. Change into the `hello-world` directory
+1. Change into the `hello-world` example directory
 
     ```bash
     $ cd docs.wasmer.io/docs/wasmer-js/node-modules/examples/hello-world
@@ -83,13 +83,13 @@ Seeing as this is demo code, it uses meaningful variable names and contains lots
 Also, make a note of the comment explaining `@wasmer/wasm-transformer`; we will cover this very important detail in a later example.
 
 
-```javascript
+```JavaScript
 // *****************************************************************************
 // Imports
 import { WASI }   from '@wasmer/wasi'
 import { WasmFs } from '@wasmer/wasmfs'
 
-const wasmFilePath = './as-echo.wasm'  // Path to our wasi module
+const wasmFilePath = './as-echo.wasm'  // Path to our WASI module
 const echoStr      = 'Hello World!'    // Text string to echo
 
 // *****************************************************************************
@@ -105,7 +105,7 @@ const wasmFs = new WasmFs()
 
 let wasi = new WASI({
   // Arguments passed to the Wasm Module
-  // The first argument is usually the filepath to the "executable wasi module"
+  // The first argument is usually the filepath to the executable wasi module
   // we want to run.
   args: [wasmFilePath, echoStr],
 
