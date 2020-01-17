@@ -94,7 +94,7 @@ On line 2, we can see the declaration of a type definition called `$t0`.  This t
 (type $t0 (func (param i32 i64 i32) (result i32)))
 ```
 
-Notice the data type of the second parameter; Uh oh! Its a 64-bit signed integer!
+Notice the data type of the second parameter; uh oh! Its a 64-bit signed integer!
 
 At the moment, we have no way to directly pass a JavaScript `BigInt` into WebAssembly; therefore, before calling this WebAssembly module, the interface to this function must be transformed
 
