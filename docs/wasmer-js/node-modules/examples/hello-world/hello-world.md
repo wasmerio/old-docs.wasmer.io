@@ -80,22 +80,6 @@ The simplest way to run this exercise is to clone the entire [`docs.wasmer.io`](
 1. Point your browser to [`http://localhost:1234`](http://localhost:1234) and you should see `Standard Output: Hello World!` appear both on the browser screen and in the JavaScript console
 
 
-
-## Using `wasmer-js`
-
-This little demo uses the following two `wasmer-js` packages: 
-
-| Package Name | Description
-|---|---|
-| `@wasmer/wasi` | A polyfill to implement any WebAssembly System Interface (`WASI`) bindings your browser might not support
-| `@wasmer/wasmfs` | A sandboxed filesystem with which the `@wasmer/wasi` module can interact
-
-These packages have already been listed in the `dependencies` section of `package.json`, but when needed in your own projects, can be added using the following command:
-
-```bash
-$ npm install --save @wasmer/wasi @wasmer/wasmfs
-```
-
 ## JavaScript Coding
 
 Seeing as this is demo code, it uses meaningful variable names and contains lots of explanatory comments (features that are often sadly missing from production code).  Please take some time to read and understand these comments as they explain how the functionality has been constructed.
