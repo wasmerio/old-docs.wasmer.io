@@ -6,9 +6,25 @@ sidebar_label: Hello World
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/node-modules/examples/hello-world)
 
-In this example, we will run the WASI module [as-echo](https://github.com/torch2424/as-echo), using `@wasmer/wasi`. 
 
-This WASI module simply receives a text string (in our case `"Hello World!"`) and echoes it back via standard output `/dev/stdout` using the `@wasmer/wasmfs` module.
+In this example, we want to use the following call chain:
+
+`JavaScript` --> `WebAssembly` --> `Some native "OS" function`
+
+`WASI` is the bridge that allows a WebAssembly module to invoke a native "OS" function.
+
+> ### As an Aside...  
+> The term "OS" is in double quotes to indicate that the native function being called might not actually belong to the underlying operating system.  
+> In reality, this function belongs to the host environment within which this WebAssembly module is running, and in this particular case, this is the environment provided by the browser, not the underlying operating system.  Nonetheless, from a WebAssembly point of view, we don't need to care about this detail.  
+> All we need to know is that this function exists, and we can call it (if we're careful)!
+
+
+In this case, we want to run the simple WASM module [as-echo](https://github.com/torch2424/as-echo); however, we know this module writes its output to standard out, which in turn, requires access to the functionality found in the underlying "OS".  This means we must two `WASI` modules:
+
+* `@wasmer/wasi`: To  bridge the gap between the native "OS" and the black-box world of WebAssembly
+* `@wasmer/wasmfs`: To provide specific access to a completely sandboxed filesystem
+
+The `as-echo` module simply receives a text string (in our case `"Hello World!"`) and echoes it back via standard output `/dev/stdout`.
 
 This example will be bundled and served by [Parcel](https://parceljs.org/) and run in the browser.  However, `@wasmer/wasi` and `@wasmer/wasmfs` also work in NodeJS, and the code examples from this guide can be used as a loose example &mdash; as long as the ES6 syntax is replaced with the equivalent NodeJS coding.
 

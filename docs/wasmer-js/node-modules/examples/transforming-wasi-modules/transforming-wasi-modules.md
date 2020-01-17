@@ -66,15 +66,6 @@ If you have not already done the previous `hello-world` example, the simplest wa
 
 # The `clock_time_get` WebAssembly Module
 
-In this example, we want to use the following call chain:
-
-`JavaScript` --> `WebAssembly`  --> `Native "OS" function`
-
-> ### As an Aside...  
-> The term "OS" is in double quotes to indicate that the native function being called might not actually belong to the underlying operating system.  
-> In reality, this function belongs to the host environment within which this WebAssembly module is running, and in this particular case, this is the environment provided by the browser, not the underlying operating system.  Nonetheless, from a WebAssembly point of view, we don't need to care about this detail.  
-> All we need to know is that this function exists, and we can call it (if we're careful)!
-
 In this case, the native "OS" function we want to call is `clock_time_get`.  To understand how we should call this function, we need look inside the WebAssembly module `clock_time_get.wasm`.  When converted to [WebAssembly Text](https://webassembly.github.io/spec/core/text/index.html) format, the first few lines of this module looks like this:
 
 ```WebAssemblyText
@@ -101,7 +92,7 @@ At the moment, we have no way to directly pass a JavaScript `BigInt` into WebAss
 Then on line 5, we can see the declaration of the call to `clock_time_get`:
 
 ```WebAssemblyText
-(import "wasi\_unstable" "clock\_time\_get" (func $wasi\_unstable.clock\_time\_get (type $t0)))
+(import "wasi_unstable" "clock_time_get" (func $wasi_unstable.clock_time_get (type $t0)))
 ```
 
 Two things are important to notice here:
