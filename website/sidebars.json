@@ -57,8 +57,9 @@
         "label": "Node Modules",
         "ids": [
           "wasmer-js/node-modules/wasmer-js-node-modules-installation",
-          "wasmer-js/node-modules/examples/hello-world/wasmer-js-node-modules-hello-world",
-          "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-node-modules-transforming-wasi-modules",
+          "wasmer-js/node-modules/examples/hello-world/wasmer-js-modules-hello-world",
+          "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-modules-transforming-wasi-modules",
+          "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-modules-how-do-i-know-if-a-module-needs-transformation",
           "wasmer-js/node-modules/examples/handling-input-output/wasmer-js-node-modules-handling-input-output",
           "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasi",
           "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasmfs",

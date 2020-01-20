@@ -1,6 +1,6 @@
 ---
-id: wasmer-js-node-modules-transforming-wasi-modules
-title: Wasmer-JS Node Modules Transforming WASI Modules
+id: wasmer-js-modules-transforming-wasi-modules
+title: Wasmer-JS in the Browser
 sidebar_label: Transforming WASI Modules
 ---
 
@@ -10,102 +10,21 @@ sidebar_label: Transforming WASI Modules
 
 In the previous Hello World example, we showed you how to run the very basic `as-echo` WASM module that received a text string as an argument and simply echoed it back via standard out.  However, some WASI modules may be compiled in a way that means they can't immediately be run from a JavaScript environment such as a browser.
 
-For example, any module that calls the [clock\_time\_get](https://github.com/NuxiNL/cloudabi/blob/master/cloudabi.txt#L1230) WASI API, must be able to supply a 64-bit, signed integer.  However, passing a JavaScript `BigInt` to a WebAssembly `i64` is not yet supported &mdash; this detail is still at the proposal stage.  (See [here](https://github.com/WebAssembly/JS-BigInt-integration/issues/15) and [here](https://github.com/WebAssembly/proposals/issues/7) for details).
+For example, any module that calls the [clock\_time\_get](https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#-clock_time_getid-clockid-precision-timestamp---errno-timestamp) WASI API, must be able to supply a 64-bit, signed integer.  However, passing a JavaScript `BigInt` to a WebAssembly `i64` is not yet supported &mdash; this detail is still at the proposal stage.  (See [here](https://github.com/WebAssembly/JS-BigInt-integration/issues/15) and [here](https://github.com/WebAssembly/proposals/issues/7) for details).
 
 However, it is not impossible to run such a module; but before we can, we must first ***transform*** it using `@wasmer/wasm-transformer`.
 
 > ### Under The Hood  
-> Technically, this transformation adapts the interface so that JavaScript `BigInt`s (64-bit, signed integers) in can be transferred to and from WebAssembly in the form of arrays of 8, unsigned 8-bit integers (a JavaScript `Uint8Array`)
+> Technically, this transformation adapts the interface so that a JavaScript `BigInt` (a 64-bit, signed integer) in can be transferred to and from WebAssembly in the form of a JavaScript `Uint8Array` containing 8, unsigned, 8-bit integers.
 
-## Prerequisites
 
-Make sure [Parcel](https://parceljs.org/) has been installed and is available from the command line
+# Setup Instructions
 
-```bash
-$ npm install -g parcel
-```
+Please following the step-by-step instructions given in the [Hello World](../hello-world/wasmer-js-modules-hello-world) example, but with the following changes:
 
-> ### Mac users
-> Before the installation of Parcel will work on a Mac, you must first install the [Xcode Command Line Tools](https://developer.apple.com/download/more/?=for%20Xcode)
+1. Call you project `wasmer-js-transforming-wasi`
+1. Download the WASM module [`clock_time_get.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/node-modules/examples/transforming-wasi-modules/static/clock_time_get.wasm) and store it in the `static` directory
 
-## Run Example from Git Clone
-
-If you have not already done the previous `hello-world` example, the simplest way to run this exercise is to clone the entire [`docs.wasmer.io`](https://github.com/wasmerio/docs.wasmer.io) repo:
-
-1. Change into some development directory
-
-    ```bash
-    $ cd <some_development directory>
-    ```
-
-1. Clone this entire repo
-
-    ```bash
-    $ git clone https://github.com/wasmerio/docs.wasmer.io.git
-    ```
-
-1. Change into the `transforming-wasi-modules` directory
-
-    ```bash
-    $ cd docs.wasmer.io/docs/wasmer-js/node-modules/examples/transforming-wasi-modules
-    ```
-
-1. Install the required `npm` dependencies
-
-    ```bash
-    $ npm install
-    ```
-
-1. Start `parcel` 
-
-   ```bash
-   $ parcel index.html
-   ```
-
-1. Point your browser to [`http://localhost:1234`](http://localhost:1234) and you should see `Standard Output: Done!` appear both on the browser screen and in the JavaScript console
-
-# The `clock_time_get` WebAssembly Module
-
-In this case, the native "OS" function we want to call is `clock_time_get`.  To understand how we should call this function, we need look inside the WebAssembly module `clock_time_get.wasm`.  When converted to [WebAssembly Text](https://webassembly.github.io/spec/core/text/index.html) format, the first few lines of this module looks like this:
-
-```WebAssemblyText
-(module
-  (type $t0 (func (param i32 i64 i32) (result i32)))
-  (type $t1 (func (param i32 i32 i32 i32) (result i32)))
-  (type $t2 (func))
-  (import "wasi_unstable" "clock_time_get" (func $wasi_unstable.clock_time_get (type $t0)))
-  (import "wasi_unstable" "fd_write" (func $wasi_unstable.fd_write (type $t1)))
-
-  ;; snip...
-```
-
-On line 2, we can see the declaration of a type definition called `$t0`.  This type definition represents the interface to some `func`tion that takes three, signed integers as parameters and returns an integer.
-
-```WebAssemblyText
-(type $t0 (func (param i32 i64 i32) (result i32)))
-```
-
-Notice the data type of the second parameter; uh oh! Its a 64-bit signed integer!
-
-At the moment, we have no way to directly pass a JavaScript `BigInt` into WebAssembly; therefore, before calling this WebAssembly module, the interface to this function must be transformed
-
-Then on line 5, we can see the declaration of the call to `clock_time_get`:
-
-```WebAssemblyText
-(import "wasi_unstable" "clock_time_get" (func $wasi_unstable.clock_time_get (type $t0)))
-```
-
-Two things are important to notice here:
-
-1. The `import` keyword indicates that function `clock_time_get` lives in an external module called `wasi_unstable`
-
-1. The interface to this function is described by the previously declared type definition `$t0`.  In other words, we know for certain that function `clock_time_get` must be passed an `i64` as its second parameter.
-
-Having established exactly what the interface is to `clock_time_get`, we now know that we cannot call this WASM module without first transforming it.
-
-### Important
-
-This example is somewhat contrived because the WebAssembly module has been hard-coded to return the text string `Done!` rather than the value returned from `clock_time_get`.  This is because this module writes its output to standard out, which in turn, expects to receive printable strings followed by a carriage return character, not the raw `i32` value returned from `clock_time_get`.
 
 
 ## JavaScript Coding
@@ -123,7 +42,7 @@ Here, the `lowerI64Imports` function transforms the interface such that a JavaSc
 It is not until after this transformation has occurred that we can instantiate the WebAssembly module and invoke it as before.
 
 ```JavaScript
-// *****************************************************************************
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Imports
 import { WASI }            from '@wasmer/wasi'
 import { WasmFs }          from '@wasmer/wasmfs'
@@ -131,20 +50,16 @@ import { lowerI64Imports } from "@wasmer/wasm-transformer"
 
 const wasmFilePath = './clock_time_get.wasm'  // Path to our wasi module
 
-// *****************************************************************************
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Instantiate new WASI and WasmFs Instances
-// NOTE:
-// If running in NodeJS, WasmFs is not needed.  In this case, Node's native FS
-// module is assigned by default.
-// Here however, we want to show off how to use WasmFs within the browser.
-// This also means that all our file system operations are sand-boxed.
-// In other words, the wasi module running in the browser does not have any
-// access to the file system of the machine running the browser
+// IMPORTANT:
+// Instantiating WasmFs is only needed when running in a browser.
+// When running on the server, NodeJS's native FS module is assigned by default
 const wasmFs = new WasmFs()
 
 let wasi = new WASI({
   // Arguments passed to the Wasm Module
-  // The first argument is usually the filepath to the "executable wasi module"
+  // The first argument is usually the filepath to the executable WASI module
   // we want to run.
   args: [wasmFilePath],
 
@@ -158,7 +73,7 @@ let wasi = new WASI({
   }
 })
 
-// *****************************************************************************
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Preserve the original console.log functionality
 const consoleLog = console.log
 
@@ -172,7 +87,7 @@ console.log = (...args) =>
   })
   (args.join(' '))
 
-// *****************************************************************************
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Async Function to run our wasi module/instance
 const startWasiTask =
   async () => {
@@ -197,7 +112,7 @@ const startWasiTask =
     console.log(`Standard Output: ${stdout}`) // Write wasi's stdout to the DOM
   }
 
-// *****************************************************************************
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Everything starts here
 startWasiTask()
 ```

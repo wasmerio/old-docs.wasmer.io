@@ -1,4 +1,4 @@
-// *****************************************************************************
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Imports
 import { WASI }   from '@wasmer/wasi'
 import { WasmFs } from '@wasmer/wasmfs'
@@ -6,15 +6,11 @@ import { WasmFs } from '@wasmer/wasmfs'
 const wasmFilePath = './as-echo.wasm'  // Path to our WASI module
 const echoStr      = 'Hello World!'    // Text string to echo
 
-// *****************************************************************************
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Instantiate new WASI and WasmFs Instances
-// NOTE:
-// If running in NodeJS, WasmFs is not needed.  In this case, Node's native FS
-// module is assigned by default.
-// Here however, we want to show off how to use WasmFs within the browser.
-// This also means that all our file system operations are sand-boxed.
-// In other words, the WASI module running in the browser does not have any
-// access to the file system of the machine running the browser
+// IMPORTANT:
+// Instantiating WasmFs is only needed when running in a browser.
+// When running on the server, NodeJS's native FS module is assigned by default
 const wasmFs = new WasmFs()
 
 let wasi = new WASI({
@@ -33,7 +29,7 @@ let wasi = new WASI({
   }
 })
 
-// *****************************************************************************
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Preserve the original console.log functionality
 const consoleLog = console.log
 
@@ -47,7 +43,7 @@ console.log = (...args) =>
   })
   (args.join(' '))
 
-// *****************************************************************************
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Async function to run our wasi module/instance
 const startWasiTask =
   async pathToWasmFile => {
@@ -72,6 +68,6 @@ const startWasiTask =
     console.log(`Standard Output: ${stdout}`) // Write WASI's stdout to the DOM
   }
 
-// *****************************************************************************
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Everything starts here
 startWasiTask(wasmFilePath)

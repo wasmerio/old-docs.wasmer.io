@@ -6,6 +6,16 @@ sidebar_label: Wasmer-JS Introduction
 
 ![Wasmer JS Announcement Image](/img/wasmer-js/wasmer-js-announcement.png)
 
-[Wasmer-JS](https://github.com/wasmerio/wasmer-js) enables the use of server-side compiled WebAssembly Modules in [Node.js](https://nodejs.org/en/) and the Browser. The project is set up as mono-repo of multiple JavaScript packages.
+## Purpose
+
+[Wasmer-JS](https://github.com/wasmerio/wasmer-js) is the bridge that allows a JavaScript program to invoke a WebAssembly module, and that WebAssembly module further invokes native "OS" functionailty.
+
+Thus the following call chain exists:
+
+![Wasmer JS Schematic Image](/img/wasmer-js/wasmer-js-schematic.png)
+
+The JavaScript environment shown here could either be on the client (within a browser), or on the server (provided by [Node.js](https://nodejs.org/en/)); either way, the native functions invoked from WebAssembly via Wasmer-js and `WASI` belong to the ***JavaScript*** runtime environment, ***not*** the underlying operating system.
+
+This project has been set up as mono-repo of multiple JavaScript packages.
 
 * [Github Repo](https://github.com/wasmerio/wasmer-js)
