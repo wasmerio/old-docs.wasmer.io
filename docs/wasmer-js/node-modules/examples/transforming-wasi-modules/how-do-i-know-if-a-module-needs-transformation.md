@@ -6,11 +6,13 @@ sidebar_label: How Do I Know if a Module Needs Transformation?
 
 # How Do I Know if a WASM Module Needs Transformation?
 
+Good question!
+
+Normally, you would look at the well-written interface documentation for the WebAssembly module to see which native "OS" functions it calls and to discover what data types are used for the interface parameters.
+
+Ok, back in reality...
+
 ## The `clock_time_get` WebAssembly Module
-
-In this case, the native "OS" function we want to call is `clock_time_get` and hopefully, the interfaces it uses have been well documented.
-
-Meanwhile, back in reality...
 
 In order to understand whether or not this module needs transformation, we need to take a look inside the WebAssembly module.
 
@@ -27,28 +29,26 @@ When converted to [WebAssembly Text](https://webassembly.github.io/spec/core/tex
   ;; snip...
 ```
 
-On line 2, we can see the declaration of a type definition called `$t0`.  This type definition represents the interface to some `func`tion that takes three, signed integers as parameters and returns an integer.
+On line 2, we can see the declaration of a type definition called `$t0`.  This type definition represents the interface to some `func`tion that takes three, signed integers as parameters and returns a signed integer.
 
 ```WebAssemblyText
 (type $t0 (func (param i32 i64 i32) (result i32)))
 ```
 
-Notice the data type of the second parameter.  Uh oh! Its a 64-bit signed integer!
+Notice the data type of the second parameter.  Uh oh! Its an `i64`; that is, a 64-bit, signed integer!
 
-Then on line 5, we can see the declaration of the call to `clock_time_get`:
+So now we know that somewhere in this WebAssembly module, there is a call to function that uses this interface declaration.
+
+Next, look a little further down to line 5.  Here we can see an `import` statement.
 
 ```WebAssemblyText
 (import "wasi_unstable" "clock_time_get" (func $wasi_unstable.clock_time_get (type $t0)))
 ```
 
-Two things are important to notice here:
+This statement tells us three things:
 
-1. The `import` keyword indicates that the native function `clock_time_get` lives in an external module called `wasi_unstable`
+1. Within the native "OS" library `wasi_unstable`, there is a function called `clock_time_get`
+1. Within our WebAssembly module, this function will be know by the alias `$wasi_unstable.clock_time_get`
+1. The interface to this function is described by the type declaration `$t0`
 
-1. The interface to this function is described by the previously declared type definition `$t0`.  In other words, we know for certain that function `clock_time_get` must be passed an `i64` as its second parameter; therefore, the interface to this function must be transformed
-
-Having established exactly what the interface is to `clock_time_get`, we now know that we cannot call this WASM module without first transforming it.
-
-### Important
-
-This example is somewhat contrived because the WebAssembly module has been hard-coded to return the text string `Done!` rather than the value returned from `clock_time_get`.  This is because this module writes its output to standard out, which in turn, expects to receive printable strings followed by a carriage return character, not the raw `i32` value returned from `clock_time_get`.
+We know from the definition of `$t0` (on line 2) that this function must be passed an `i64` as its second parameter; therefore, we can be certain that before function `clock_time_get` can be called from JavaScript, the interface to this module must be transformed.

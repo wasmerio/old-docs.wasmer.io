@@ -19,14 +19,14 @@ By design, the environment within which a WebAssembly module runs is completely 
 However, there are many legitimate cases in which a WebAssembly module needs to interact with native "OS" functionality.  Wasmer therefore acts as the bridge allowing WASM modules to be run either:
 
 1. Standalone via our runtime, or
-1. By means of our langauge integration tools, embedded within language runtimes such as C/C++, Python and Rust
+1. By means of our language integration tools, embedded within language runtimes such as C/C++, Python and Rust
 
 > ## IMPORTANT  
-> The term "OS" used above is in double quotes to indicate that the native function being called might not actually belong to the underlying operating system.  In reality, native functions always belong to the host environment within which the WebAssembly module is being run, and that could be either the host langauge's runtime environment (for example, JavaScript, Python or Ruby), or it might be the actual operating system.
+> The term "OS" used above is in double quotes to indicate that the native function being called might not actually belong to the underlying operating system.  In reality, native functions always belong to the host environment within which the WebAssembly module is being run, and that could be either the host language's runtime environment (for example, JavaScript, Python or Ruby), or it might be the actual operating system.
 >
 > Either way though, from a WebAssembly point of view, we don't need to care too much about this detail. All we need to know is that:
 > 
-> * Via Wasmer (and [`WASI`](https://wasi.dev)), WebAssembly can have access to a set of operating-system-like functions, and
+> * Via Wasmer (and [`WASI`](https://wasi.dev)), a WebAssembly module has access to a set of operating-system-like functions, and
 > * as long as we're careful, we can call these functions
 
 
@@ -35,10 +35,12 @@ However, there are many legitimate cases in which a WebAssembly module needs to 
 We also have other projects such as:
 
 1. The [WAPM (WebAssembly Package Manager)](https://wapm.io/)
-1. [Wasmer-js](https://github.com/wasmerio/wasmer-js)
+1. [Wasmer-JS](https://github.com/wasmerio/wasmer-js)
 1. The [WebAssembly Shell](https://webassembly.sh/)
 
 to name but a few...
+
+Also, for the latest blogs on Wasmer features and developments, check out our [Medium site](https://medium.com/wasmer).
 
 ## Tutorials
 

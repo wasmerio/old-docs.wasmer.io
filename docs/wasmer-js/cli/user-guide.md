@@ -4,12 +4,12 @@ title: Wasmer-JS Command Line Interface User Guide
 sidebar_label: User Guide
 ---
 
-```
+```bash
 $ wasmer-js help
 The CLI for executing Wasmer-JS
 
 VERSION
-  @wasmer/cli/0.4.5 darwin-x64 node-v12.7.0
+  @wasmer/cli/0.6.0 darwin-x64 node-v10.16.2
 
 USAGE
   $ wasmer-js [COMMAND]

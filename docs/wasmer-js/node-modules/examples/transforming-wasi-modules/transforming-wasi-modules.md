@@ -15,12 +15,14 @@ For example, any module that calls the [clock\_time\_get](https://github.com/Web
 However, it is not impossible to run such a module; but before we can, we must first ***transform*** it using `@wasmer/wasm-transformer`.
 
 > ### Under The Hood  
-> Technically, this transformation adapts the interface so that a JavaScript `BigInt` (a 64-bit, signed integer) in can be transferred to and from WebAssembly in the form of a JavaScript `Uint8Array` containing 8, unsigned, 8-bit integers.
+> Technically, this the purpose of this transformation process is to adapt the WebAssembly interface so that it can send and receive JavaScript `BigInt`s (64-bit, signed integers).
+>
+> No data loss occurs here because a JavaScript `BigInt` is transformed into a `Uint8Array` containing 8, unsigned, 8-bit integers.
 
 
 # Setup Instructions
 
-Please following the step-by-step instructions given in the [Hello World](../hello-world/wasmer-js-modules-hello-world) example, but with the following changes:
+Please repeat the step-by-step instructions given in the [Hello World](../hello-world/wasmer-js-modules-hello-world) example, but with the following changes:
 
 1. Call you project `wasmer-js-transforming-wasi`
 1. Download the WASM module [`clock_time_get.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/node-modules/examples/transforming-wasi-modules/static/clock_time_get.wasm) and store it in the `static` directory
@@ -29,7 +31,7 @@ Please following the step-by-step instructions given in the [Hello World](../hel
 
 ## JavaScript Coding
 
-The coding seen below is very similar to the coding used for the previous `hello-world` example with the following important difference.
+The coding seen below is very similar to the coding used for the previous Hello World example with the following important difference.
 
 Inside function `startWasiTask`, we fetch the WASM file contents and convert it to a `Uint8Array` as before, but then there is the additional line
 
@@ -37,7 +39,7 @@ Inside function `startWasiTask`, we fetch the WASM file contents and convert it 
 const loweredWasmBytes = await lowerI64Imports(wasmBytes)
 ```
 
-Here, the `lowerI64Imports` function transforms the interface such that a JavaScript `BigInt` value can be transferred to a WebAssembly `i64` value as an array of 8, unsigned, 8-bit integers.
+The call to function `lowerI64Imports` performs the all-important transformation that allows JavaScript `BigInt` values to be transferred to WebAssembly `i64` values.
 
 It is not until after this transformation has occurred that we can instantiate the WebAssembly module and invoke it as before.
 
@@ -95,11 +97,8 @@ const startWasiTask =
     const response  = await fetch(wasmFilePath)
     const wasmBytes = new Uint8Array(await response.arrayBuffer())
 
-    // Lower the WebAssembly Module bytes
-    // This will create trampoline functions for i64 parameters in function
-    // calls such as: 
-    // https://github.com/WebAssembly/WASI/blob/master/phases/old/snapshot_0/docs/wasi_unstable.md#clock_time_get
-    // Allowing the Wasi module to work in the browser / node!
+    // IMPORTANT EXTRA STEP!
+    // We must transform the WebAssembly Module interface
     const loweredWasmBytes = await lowerI64Imports(wasmBytes)
 
     // Instantiate the WebAssembly file
@@ -116,6 +115,11 @@ const startWasiTask =
 // Everything starts here
 startWasiTask()
 ```
+
+### Important
+
+This example is somewhat contrived because the WebAssembly module has been hard-coded to return the text string `Done!` rather than the value returned from `clock_time_get`.  This is because this module writes its output to standard out, which in turn, expects to receive printable strings followed by a carriage return character, not the raw `i32` value returned from `clock_time_get`.
+
 
 Next, let's look at handling input and output via WASI.
 

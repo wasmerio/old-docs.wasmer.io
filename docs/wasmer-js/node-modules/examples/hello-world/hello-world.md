@@ -101,7 +101,7 @@ $ npm install -g parcel
 1. Create a new directory called `static`
 
     ```bash
-    $ md static
+    $ mkdir static
     ```
     
 1. Download the WebAssembly module [`as-echo.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/node-modules/examples/hello-world/static/as-echo.wasm) and store it in this directory
@@ -191,7 +191,7 @@ $ npm install -g parcel
     startWasiTask(wasmFilePath)
     ```
 
-1. After saving `index.js`, your browser should automatically refresh and you should see `Standard Output: Hello World!` appear both on the browser screen and in the JavaScript console.
+1. After saving `index.js` and as long as `parcel` is still running, your browser should automatically refresh and you should see `Standard Output: Hello World!` appear both on the browser screen and in the JavaScript console.
 
 
 
