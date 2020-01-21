@@ -1,7 +1,7 @@
 ---
-id: wasmer-js-node-modules-reference-api-wasm-terminal
-title: Wasmer-JS Node Modules @wasmer/wasm-terminal Reference API
-sidebar_label: @wasmer/wasm-terminal Reference API
+id: wasmer-js-reference-api-wasm-terminal
+title: Wasmer-JS Reference API @wasmer/wasm-terminal
+sidebar_label: @wasmer/wasm-terminal
 ---
 
 # WasmTerminal

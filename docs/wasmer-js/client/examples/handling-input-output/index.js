@@ -4,7 +4,7 @@ import { WasmFs } from '@wasmer/wasmfs';
 import { lowerI64Imports } from "@wasmer/wasm-transformer";
 
 // The file path to the wasi module we want to run
-const wasmFilePath = './duktape.wasm';
+const wasmFilePath = './static/duktape.wasm';
 
 // A quick wrapper for console.log, to also output logs to the body
 const consoleLog = console.log;

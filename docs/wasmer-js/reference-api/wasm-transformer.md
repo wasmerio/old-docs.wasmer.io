@@ -1,7 +1,7 @@
 ---
-id: wasmer-js-node-modules-reference-api-wasm-transformer
-title: Wasmer-JS Node Modules @wasmer/wasm-transformer Reference API
-sidebar_label: @wasmer/wasm-transformer Reference API
+id: wasmer-js-reference-api-wasm-transformer
+title: Wasmer-JS Reference API @wasmer/wasm-transformer
+sidebar_label: @wasmer/wasm-transformer
 ---
 
 # version

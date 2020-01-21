@@ -1,10 +1,12 @@
 ---
-id: wasmer-js-node-modules-handling-input-output
-title: Wasmer-JS Node Modules Handling Input and Output
+id: wasmer-js-client-handling-input-output
+title: Wasmer-JS in the Browser
 sidebar_label: Handling Input and Output
 ---
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/node-modules/examples/handling-input-output)
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/handling-input-output)
+
+# Handling Input and Output in the Browser
 
 In the Hello World example, we covered how to run a basic "echo" wasm module, and then read it's output. However, there may be times we want to interact with WASI modules that accept input as well!
 
@@ -17,7 +19,7 @@ import { WasmFs } from '@wasmer/wasmfs';
 import { lowerI64Imports } from "@wasmer/wasm-transformer";
 
 // The file path to the wasi module we want to run
-const wasmFilePath = './duktape.wasm';
+const wasmFilePath = './static/duktape.wasm';
 
 // A quick wrapper for console.log, to also output logs to the body
 const consoleLog = console.log;

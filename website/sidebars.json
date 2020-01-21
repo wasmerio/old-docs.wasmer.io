@@ -44,6 +44,7 @@
     ],
     "Wasmer-JS": [
       "wasmer-js/wasmer-js",
+      "wasmer-js/wasmer-js-module-transformation",
       {
         "type": "subcategory",
         "label": "Command Line Interface",
@@ -54,17 +55,30 @@
       },
       {
         "type": "subcategory",
-        "label": "Node Modules",
+        "label": "Client-side",
         "ids": [
-          "wasmer-js/node-modules/wasmer-js-node-modules-installation",
-          "wasmer-js/node-modules/examples/hello-world/wasmer-js-modules-hello-world",
-          "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-modules-transforming-wasi-modules",
-          "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-modules-how-do-i-know-if-a-module-needs-transformation",
-          "wasmer-js/node-modules/examples/handling-input-output/wasmer-js-node-modules-handling-input-output",
-          "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasi",
-          "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasmfs",
-          "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasm-transformer",
-          "wasmer-js/node-modules/reference-api/wasmer-js-node-modules-reference-api-wasm-terminal"
+          "wasmer-js/client/examples/hello-world/wasmer-js-client-hello-world",
+          "wasmer-js/client/examples/transforming-wasi-modules/wasmer-js-client-transforming-wasi-modules",
+          "wasmer-js/client/examples/handling-input-output/wasmer-js-client-handling-input-output"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Server-side",
+        "ids": [
+          "wasmer-js/server/wasmer-js-server-installation",
+          "wasmer-js/server/examples/hello-world/wasmer-js-server-hello-world",
+          "wasmer-js/server/examples/transforming-wasi-modules/wasmer-js-server-transforming-wasi-modules"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Reference APIs",
+        "ids": [
+          "wasmer-js/reference-api/wasmer-js-reference-api-wasi",
+          "wasmer-js/reference-api/wasmer-js-reference-api-wasmfs",
+          "wasmer-js/reference-api/wasmer-js-reference-api-wasm-terminal",
+          "wasmer-js/reference-api/wasmer-js-reference-api-wasm-transformer"
         ]
       }
     ],

@@ -1,7 +1,7 @@
 ---
-id: wasmer-js-node-modules-reference-api-wasmfs
-title: Wasmer-JS Node Modules @wasmer/wasmfs Reference API
-sidebar_label: @wasmer/wasmfs Reference API
+id: wasmer-js-reference-api-wasmfs
+title: Wasmer-JS Reference API @wasmer/wasmfs
+sidebar_label: @wasmer/wasmfs
 ---
 
 # WasmFS
