@@ -6,20 +6,13 @@ sidebar_label: Installation
 
 The Wasmer-JS Stack uses a modern Javascript Workflow, which depends on Node.Js.
 
-First, we will start with installing the latest LTS version of [Node.js](https://nodejs.org/en/) (which includes npm). An easy way to do so is with nvm. (Mac and Linux: [here](https://github.com/creationix/nvm), Windows: [here](https://github.com/coreybutler/nvm-windows)).
+## Prerequisites
 
-`nvm install --lts`
+It is assumed that you already have Node.js installed.  If this is not the case, please follow the installation instructions on the [Wasmer-JS CLI installation page](../cli/wasmer-js-cli-installation) before returning to this page to continue with the instructions below.
 
-Once we have the latest node installed, we can verify that it is working, by running the following:
+## Create a New Project
 
-```bash
-$ node -v
-# Your node version would appear here.
-$ npm -v
-# Your npm (Node Package Manager) version would appear here.
-```
-
-Next, let's go ahead and create a small node project, you can skip this setup if you are installing wasmer-js to an existing project.
+Now that Node.js is up and running, let's go ahead and create a small node project, you can skip this setup if you are installing Wasmer-JS to an existing project.
 
 ```bash
 $ mkdir my-project
@@ -27,11 +20,18 @@ $ cd my-project
 $ npm init # Fill our the prompts here
 ```
 
-Now that we have a node project, we can install Node modules to it! To do this, we can install the appropriate Wasmer-JS package with the following command:
+Now that we have a new project, we can install the required Node modules to it!
+
+To do this, we can install the appropriate Wasmer-JS package with the following command:
 
 ```bash
-npm install --save @wasmer/wasmer-js-package-here
-# For Example: npm install --save @wasmer/wasi
+$ npm install --save @wasmer/<wasmer-js-package-name>
 ```
 
-You should now be able to use the wasmer-js package! Please take a look at the examples, or one of the tutorials to get started.
+For example, all your Node.js projects will require the Wasmer-JS base package
+
+```bash
+$ npm install --save @wasmer/wasi
+```
+
+You should now be able to use the Wasmer-JS package! Please take a look at the examples, or one of the tutorials to get started.

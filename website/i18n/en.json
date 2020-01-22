@@ -72,19 +72,12 @@
         "title": "Runtime Introduction",
         "sidebar_label": "Runtime Introduction"
       },
-      "runtime/rust-integration/examples/early-exit/runtime-rust-integration-examples-exit-early": {
-        "title": "Runtime Rust Integration: Interrupting Execution",
-        "sidebar_label": "Interrupting Execution"
-      },
-      "runtime/rust-integration/examples/early-exit/example-rust-wasm-crate/early-exit-import/README": {
-        "title": "runtime/rust-integration/examples/early-exit/example-rust-wasm-crate/early-exit-import/README"
+      "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README": {
+        "title": "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README"
       },
       "runtime/rust-integration/examples/exit-early/runtime-rust-integration-examples-exit-early": {
         "title": "Runtime Rust Integration: Interrupting Execution",
         "sidebar_label": "Interrupting Execution"
-      },
-      "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README": {
-        "title": "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README"
       },
       "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README": {
         "title": "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README"
@@ -150,12 +143,16 @@
         "title": "Wasmer-JS Node Modules Handling Input and Output",
         "sidebar_label": "Handling Input and Output"
       },
-      "wasmer-js/node-modules/examples/hello-world/wasmer-js-node-modules-hello-world": {
-        "title": "Wasmer-JS Node Modules Hello World",
+      "wasmer-js/node-modules/examples/hello-world/wasmer-js-modules-hello-world": {
+        "title": "Wasmer-JS Modules in the Browser",
         "sidebar_label": "Hello World"
       },
-      "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-node-modules-transforming-wasi-modules": {
-        "title": "Wasmer-JS Node Modules Transforming WASI Modules",
+      "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-modules-how-do-i-know-if-a-module-needs-transformation": {
+        "title": "Wasmer-JS in the Browser",
+        "sidebar_label": "How Do I Know if a Module Needs Transformation?"
+      },
+      "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-modules-transforming-wasi-modules": {
+        "title": "Wasmer-JS in the Browser",
         "sidebar_label": "Transforming WASI Modules"
       },
       "wasmer-js/node-modules/wasmer-js-node-modules-installation": {
