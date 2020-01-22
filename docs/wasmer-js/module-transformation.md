@@ -12,13 +12,13 @@ In this case, the values passed from WebAssembly to the native "OS" function tha
 
 ## 64-bit Integers
 
-The real issue here centres on transferring 64-bit integers between the two runtime environments (whether signed or unsigned is not important here).
+The real issue here centres on transferring 64-bit integers between the two runtime environments.
 
-Both JavaScript and WebAssembly use this data type (known as `i64` or `u64` in WebAssembly and `BigInt` in JavaScript); but for a variety of reasons, the transfer of this data type has not yet been implemented and is still at the proposal stage.  (See [here](https://github.com/WebAssembly/JS-BigInt-integration/issues/15) and [here](https://github.com/WebAssembly/proposals/issues/7) for details).
+Both JavaScript and WebAssembly use this data type (known as `i64` in WebAssembly and `BigInt` in JavaScript); but for a variety of reasons, the transfer of this data type has not yet been implemented and is still at the proposal stage.  (See [here](https://github.com/WebAssembly/JS-BigInt-integration/issues/15) and [here](https://github.com/WebAssembly/proposals/issues/7) for details).
 
 > ### IMPORTANT
 >
-> Irrespective of whether your JavaScript app runs on the client or the server, the interface to any WASI module call that has been declared to use either an `i64` or a `u64` must first be ***transformed*** before it can be called.
+> Irrespective of whether your JavaScript app runs on the client or the server, the interface to any WASI module call that has been declared to use an `i64` must first be ***transformed*** before it can be called.
 
 For example, you will experience this problem if you try to pass a parameter value from JavaScript, through WebAssembly and then on to the native "OS" function [clock\_time\_get](https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#-clock_time_getid-clockid-precision-timestamp---errno-timestamp).
 

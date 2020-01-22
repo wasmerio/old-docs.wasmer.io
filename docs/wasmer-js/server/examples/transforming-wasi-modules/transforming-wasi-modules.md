@@ -27,7 +27,7 @@ Inside function `startWasiTask`, we fetch the WASM file contents and convert it 
 const loweredWasmBytes = await lowerI64Imports(wasmBytes)
 ```
 
-The call to function `lowerI64Imports` performs the all-important transformation that allows JavaScript `BigInt` values to be transferred to WebAssembly `i64` or `u64` values.
+The call to function `lowerI64Imports` performs the all-important transformation that allows a JavaScript `BigInt` to be transferred to WebAssembly `i64`.
 
 Now that the interface has been transformed, we can instantiate the WebAssembly module and invoke it as before.
 
