@@ -20,11 +20,11 @@
         "label": "Rust Integration",
         "ids": [
           "runtime/rust-integration/runtime-rust-integration-installation",
-          "runtime/rust-integration/examples/hello-world/runtime-rust-integration-examples-hello-world",
-          "runtime/rust-integration/examples/passing-data/runtime-rust-integration-examples-passing-data",
-          "runtime/rust-integration/examples/host-functions/runtime-rust-integration-examples-host-functions",
-          "runtime/rust-integration/examples/handling-errors/runtime-rust-integration-examples-handling-errors",
-          "runtime/rust-integration/examples/exit-early/runtime-rust-integration-examples-exit-early",
+          "runtime/rust-integration/docs/runtime-rust-integration-examples-hello-world",
+          "runtime/rust-integration/docs/runtime-rust-integration-examples-passing-data",
+          "runtime/rust-integration/docs/runtime-rust-integration-examples-host-functions",
+          "runtime/rust-integration/docs/runtime-rust-integration-examples-handling-errors",
+          "runtime/rust-integration/docs/runtime-rust-integration-examples-exit-early",
           "runtime/rust-integration/runtime-rust-integration-reference-api"
         ]
       },

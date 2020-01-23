@@ -72,38 +72,23 @@
         "title": "Runtime Introduction",
         "sidebar_label": "Runtime Introduction"
       },
-      "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README": {
-        "title": "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README"
-      },
-      "runtime/rust-integration/examples/exit-early/runtime-rust-integration-examples-exit-early": {
+      "runtime/rust-integration/docs/runtime-rust-integration-examples-exit-early": {
         "title": "Runtime Rust Integration: Interrupting Execution",
         "sidebar_label": "Interrupting Execution"
       },
-      "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README": {
-        "title": "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README"
-      },
-      "runtime/rust-integration/examples/handling-errors/runtime-rust-integration-examples-handling-errors": {
+      "runtime/rust-integration/docs/runtime-rust-integration-examples-handling-errors": {
         "title": "Runtime Rust Integration: Handling Errors",
         "sidebar_label": "Handling Errors"
       },
-      "runtime/rust-integration/examples/hello-world/example-rust-wasm-crate/add-one/README": {
-        "title": "runtime/rust-integration/examples/hello-world/example-rust-wasm-crate/add-one/README"
-      },
-      "runtime/rust-integration/examples/hello-world/runtime-rust-integration-examples-hello-world": {
+      "runtime/rust-integration/docs/runtime-rust-integration-examples-hello-world": {
         "title": "Runtime Rust Integration: Hello World",
         "sidebar_label": "Hello World"
       },
-      "runtime/rust-integration/examples/host-functions/example-rust-wasm-crate/host-counter/README": {
-        "title": "runtime/rust-integration/examples/host-functions/example-rust-wasm-crate/host-counter/README"
-      },
-      "runtime/rust-integration/examples/host-functions/runtime-rust-integration-examples-host-functions": {
+      "runtime/rust-integration/docs/runtime-rust-integration-examples-host-functions": {
         "title": "Runtime Rust Integration: Exposing Host Functions to WebAssembly",
         "sidebar_label": "Exposing Host Functions to WebAssembly"
       },
-      "runtime/rust-integration/examples/passing-data/example-rust-wasm-crate/strings-wasm-is-cool/README": {
-        "title": "runtime/rust-integration/examples/passing-data/example-rust-wasm-crate/strings-wasm-is-cool/README"
-      },
-      "runtime/rust-integration/examples/passing-data/runtime-rust-integration-examples-passing-data": {
+      "runtime/rust-integration/docs/runtime-rust-integration-examples-passing-data": {
         "title": "Runtime Rust Integration: Passing Data Between Rust and Wasm",
         "sidebar_label": "Passing Data Between Rust and Wasm"
       },
