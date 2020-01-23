@@ -92,13 +92,50 @@
         "title": "Runtime Rust Integration: Passing Data Between Rust and Wasm",
         "sidebar_label": "Passing Data Between Rust and Wasm"
       },
+      "runtime/rust-integration/examples/early-exit/early-exit": {
+        "title": "runtime/rust-integration/examples/early-exit/early-exit"
+      },
+      "runtime/rust-integration/examples/early-exit/example-rust-wasm-crate/early-exit-import/README": {
+        "title": "runtime/rust-integration/examples/early-exit/example-rust-wasm-crate/early-exit-import/README"
+      },
+      "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README": {
+        "title": "runtime/rust-integration/examples/handling-errors/example-rust-wasm-crate/throw-wasm-error/README"
+      },
+      "runtime/rust-integration/examples/handling-errors/handling-errors": {
+        "title": "runtime/rust-integration/examples/handling-errors/handling-errors"
+      },
+      "runtime/rust-integration/examples/hello-world/example-rust-wasm-crate/add-one/README": {
+        "title": "runtime/rust-integration/examples/hello-world/example-rust-wasm-crate/add-one/README"
+      },
+      "runtime/rust-integration/examples/hello-world/hello-world": {
+        "title": "runtime/rust-integration/examples/hello-world/hello-world"
+      },
+      "runtime/rust-integration/examples/host-functions/example-rust-wasm-crate/host-counter/README": {
+        "title": "runtime/rust-integration/examples/host-functions/example-rust-wasm-crate/host-counter/README"
+      },
+      "runtime/rust-integration/examples/host-functions/host-functions": {
+        "title": "runtime/rust-integration/examples/host-functions/host-functions"
+      },
+      "runtime/rust-integration/examples/passing-data/example-rust-wasm-crate/strings-wasm-is-cool/README": {
+        "title": "runtime/rust-integration/examples/passing-data/example-rust-wasm-crate/strings-wasm-is-cool/README"
+      },
+      "runtime/rust-integration/examples/passing-data/passing-data": {
+        "title": "runtime/rust-integration/examples/passing-data/passing-data"
+      },
       "runtime/rust-integration/runtime-rust-integration-installation": {
         "title": "Runtime Rust Integration Installation",
         "sidebar_label": "Installation"
       },
+      "runtime/rust-integration/README": {
+        "title": "runtime/rust-integration/README"
+      },
       "runtime/rust-integration/runtime-rust-integration-reference-api": {
         "title": "Runtime Rust Integration Reference API",
         "sidebar_label": "Reference API"
+      },
+      "wapm/wapm-cli": {
+        "title": "WAPM CLI",
+        "sidebar_label": "CLI"
       },
       "wapm/wapm-getting-started": {
         "title": "WAPM Getting Started",
@@ -108,9 +145,12 @@
         "title": "WAPM Installation",
         "sidebar_label": "Installation"
       },
-      "wapm/wapm-reference-api": {
-        "title": "WAPM Reference API",
-        "sidebar_label": "Reference API"
+      "wapm/wapm-manifest": {
+        "title": "WAPM Manifefst",
+        "sidebar_label": "Manifest - wapm.toml"
+      },
+      "wapm/reference-api": {
+        "title": "wapm/reference-api"
       },
       "wapm/wapm": {
         "title": "WAPM Introduction",

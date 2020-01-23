@@ -1,10 +1,10 @@
 ---
-id: wapm-reference-api
-title: WAPM Reference API
-sidebar_label: Reference API
+id: wapm-cli
+title: WAPM CLI
+sidebar_label: CLI
 ---
 
-# CLI Commands
+The `wapm` Command Line tool has the following subcommands:
 
 `wapm login` - Logs the user in to the registry with the given credentials.
 
@@ -48,61 +48,7 @@ sidebar_label: Reference API
 
 `wapm keys delete <public-key-id>` - delete the keypair matching `<public-key-id>`
 
-# Manifest
+## Telemetry
 
-The manifest is optional for using the wapm CLI tool; it manages package dependencies, metadata, and commands.
-
-However, a manifest is required to publish to the wapm registry.
-
-The manifest contains 4 sections:
-
-## [package]
-
-Valid keys are:
-
-### **Required:**
-
-- `name`
-- `version`
-- `description`
-
-### **Optional:**
-
-- `license` (name)
-- `license-file` (path, An override for the license file path used in publishing. Left undefined, the `LICENSE` file will be implicitly included in the package.)
-- `readme` (path)
-- `repository` (url)
-- `homepage` (url)
-- `wasmer-extra-flags` (extra arguments to pass via `wapm run`, for example: `"--backend=singlepass"`)
-
-## [dependencies]
-
-- `<namespace>/<name>" = "<version>`
-
-## [[module]]
-
-- `name` (the name of the module)
-- `source` (path to Wasm file)
-- `abi` (one of: `wasi`, `emscripten`, or `none`)
-
-## [[command]]
-
-### **Required:**
-
-- `name` (the name of the command, invoked via `wapm run <command-name>`)
-- `module` (the name of the module this command is running)
-- `package` (the package name that the module is in)
-
-### **Optional:**
-
-- `main_args`
-- `package`
-
-## [fs]
-
-- `"location/on/guest"="location/on/host"` # a mapping between paths
-
-# Telemetry
-
-During the alpha, telemetry (specifically error logging to Sentry) is enabled by default. We send and record information such as IP address, operating system name and version, and the error/panic message. To disable it, run wapm config set telemetry.enabled false or compile from source (the telemetry feature is disabled in the build by default).
-
+During the alpha, telemetry (specifically error logging to Sentry) is enabled by default in the WAPM CLI.
+We send and record information such as IP address, operating system name and version, and the error/panic message. To disable it, run `wapm config set telemetry.enabled false` or compile from source (the telemetry feature is disabled in the build by default).

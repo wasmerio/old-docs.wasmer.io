@@ -71,8 +71,9 @@
     "WAPM": [
       "wapm/wapm",
       "wapm/wapm-installation",
+      "wapm/wapm-cli",
       "wapm/wapm-getting-started",
-      "wapm/wapm-reference-api"
+      "wapm/wapm-manifest"
     ]
   }
 }
