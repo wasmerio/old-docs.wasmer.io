@@ -1,6 +1,6 @@
 # Rust API examples
 
-Explanations exist in [`docs`](docs).
+Explanations of each example are the in [`docs`](docs) folder.
 
 Run `make wasm` to compile the wasm examples.
 

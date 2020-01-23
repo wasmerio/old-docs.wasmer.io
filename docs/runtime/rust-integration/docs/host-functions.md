@@ -4,7 +4,7 @@ title: Runtime Rust Integration: Exposing Host Functions to WebAssembly
 sidebar_label: Exposing Host Functions to WebAssembly
 ---
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/rust-integration/examples/host-functions)
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/rust-integration/examples/host_functions.rs)
 
 Up until now, our WebAssembly program has only been able to do pure
 computation, that is, take arguments and return values.  Most

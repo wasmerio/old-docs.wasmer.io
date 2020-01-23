@@ -4,13 +4,20 @@ title: Runtime Rust Integration: Interrupting Execution
 sidebar_label: Interrupting Execution
 ---
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/rust-integration/examples/early-exit)
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/rust-integration/examples/early_exit.rs)
 
-WebAssembly in its current state is currently run synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host (your rust application). 
+WebAssembly is currently always run synchronously. Thus, once WebAssembly starts
+executing, you have to wait for the execution to complete to continue running
+code on the host (your Rust application). 
 
-However, there are cases where you may want to interrupt this synchronous execution while the guest WebAssembly module is calling a host function. This can be useful for saving resources, and not returning back to the guest WebAssembly for execution, when you already know the Wasm execution will fail, or no longer be needed.
+However, there are cases where you may want to interrupt this synchronous execution
+while the guest WebAssembly module is calling a host function. This can be useful
+for saving resources, and not returning back to the guest WebAssembly for execution,
+when you already know the Wasm execution will fail, or no longer be needed.
 
-In this example, we will run a Wasm module that calls  the imported host function, "interrupt_execution". This host function will immediately stop executing the WebAssembly module:
+In this example, we will run a Wasm module that calls the imported host function
+`interrupt_execution`. This host function will immediately stop executing
+the WebAssembly module:
 
 ```rust
 // Import the Filesystem so we can read our .wasm file
@@ -31,7 +38,7 @@ use wasmer_runtime::{
 
 const WASM_FILE_PATH: &str = concat!(
     env!("CARGO_MANIFEST_DIR"),
-    "/example-rust-wasm-crate/early-exit-import/pkg/early_exit_import_bg.wasm"
+    "/target/wasm32-unknown-unknown/release/early_exit_guest.wasm"
 );
 
 // Our entry point to our application
@@ -98,3 +105,7 @@ fn interrupt_execution(_ctx: &mut Ctx) -> Result<(), ()> {
     Err(())
 }
 ```
+
+In addition to exiting in host calls, Wasmer also offers a metering API for
+allowing a pre-defined amount of execution before interrupting. The docs for metering
+are not yet written -- stay tuned for more!
