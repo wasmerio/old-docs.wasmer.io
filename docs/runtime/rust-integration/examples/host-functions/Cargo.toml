@@ -1,11 +1,12 @@
 [package]
 name = "host-functions"
 version = "0.1.0"
-authors = ["Aaron Turner <aaron@aaronthedev.com>"]
+authors = ["The Wasmer Engineering Team <engineering@wasmer.io>"]
 edition = "2018"
+publish = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 # Add the wasmer-runtime as a dependency
-wasmer-runtime = "0.9.0"
+wasmer-runtime = "0.13.1"

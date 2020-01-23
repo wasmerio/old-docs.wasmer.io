@@ -1,6 +1,8 @@
 // Import the Filesystem so we can read our .wasm file
+use std::cell::RefCell;
 use std::fs::File;
 use std::io::prelude::*;
+use std::sync::Arc;
 
 // Import the wasmer runtime so we can use it
 use wasmer_runtime::{
@@ -9,17 +11,13 @@ use wasmer_runtime::{
     func,
     imports,
     instantiate,
-    // Include the Context for our Wasm Instance for passing imported host functions
-    Ctx,
     Func,
 };
 
 const WASM_FILE_PATH: &str = concat!(
     env!("CARGO_MANIFEST_DIR"),
-    "/example-rust-wasm-crate/host-counter/pkg/host_counter_bg.wasm"
+    "/example-rust-wasm-crate/host-counter/target/wasm32-unknown-unknown/release/host_counter.wasm"
 );
-
-static mut COUNTER: i32 = 0;
 
 // Our entry point to our application
 fn main() -> error::Result<()> {
@@ -32,6 +30,25 @@ fn main() -> error::Result<()> {
     let mut wasm_vec = Vec::new();
     file.read_to_end(&mut wasm_vec)
         .expect("Error reading the wasm file");
+
+    // We create some shared data here, [`Arc`] is required because we may
+    // move our WebAssembly instance to another thread to run it.  RefCell
+    // lets us get shared mutabilty which is fine because we know we won't
+    // run hostcalls concurrently.  If concurrency is a possibilty, we'd have to
+    // use a `Mutex`.
+    let shared_counter: Arc<RefCell<i32>> = Arc::new(RefCell::new(0));
+
+    // Clone the [`Arc`] for our closure and pass it into the host function
+    let counter = Arc::clone(&shared_counter);
+    let get_counter = move || -> i32 { *counter.borrow() };
+
+    // Clone the [`Arc`] for our closure and pass it into the host function
+    let counter = Arc::clone(&shared_counter);
+    let add_to_counter = move |value_to_add: i32| -> i32 {
+        let mut counter_ref = counter.borrow_mut();
+        *counter_ref += value_to_add;
+        *counter_ref
+    };
 
     // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
 
@@ -60,8 +77,7 @@ fn main() -> error::Result<()> {
     let increment_counter_loop: Func<i32, i32> = instance.func("increment_counter_loop")?;
     let result = increment_counter_loop.call(number_of_times_to_loop)?;
 
-    // Let's get a copy of the value in `COUNTER`
-    let counter_value = unsafe { COUNTER };
+    let counter_value: i32 = *shared_counter.borrow();
 
     // Assert our counter is the expected value
     assert_eq!(number_of_times_to_loop, counter_value);
@@ -77,25 +93,4 @@ fn main() -> error::Result<()> {
 
     // Return OK since everything executed successfully!
     Ok(())
-}
-
-// Define a Host function that will be imported to the wasm module
-// Note, the first parameter must be the Wasm Instance Wasmer Context
-// Following parameter types, and return types would be as usual.
-//
-// This function returns our global counter.
-fn get_counter(_ctx: &mut Ctx) -> i32 {
-    unsafe { COUNTER }
-}
-
-// Define a Host function that will be imported to the wasm module
-// Note, the first parameter must be the Wasm Instance Wasmer Context
-// Following parameter types, and return types would be as usual.
-//
-// This function adds the value to our global counter, and then returns the counter
-fn add_to_counter(_ctx: &mut Ctx, value_to_add: i32) -> i32 {
-    unsafe {
-        COUNTER += value_to_add;
-        COUNTER
-    }
 }

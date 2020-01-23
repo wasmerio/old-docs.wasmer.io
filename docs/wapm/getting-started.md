@@ -46,9 +46,9 @@ Login is required for publishing. Signup for an account at [wapm.io](https://wa
 
 The reference shows all the required fields for the manifest, but it's easy to get started with `init` command.
 
-`wapm init my_package`
+`wapm init`
 
-This command generates a wapm manifest file:
+This command generates a wapm manifest like the following:
 
 ```
 [package]
@@ -61,8 +61,8 @@ All packages on [wapm.io](https://wapm.io/) are namespaced by username. This i
 
 ```
 [[module]]
-name = "my_app"
-source = "path/to/app.wasm"
+name = "my_module"
+source = "path/to/my_module.wasm"
 ```
 
 Publish the project to [wapm.io](https://wapm.io/)!
@@ -80,7 +80,7 @@ A command requires a name and module to reference:
 ```
 [[command]]
 name = "my_cmd"
-module = "my_app"
+module = "my_module"
 ```
 
-Now called `wapm run my_cmd` will execute the module defined with the name `my_app`. Under the hood, *wapm-cli* calls *wasmer*, the WebAssembly server runtime.
+Now called `wapm run my_cmd` will execute the module defined with the name `my_module`. Under the hood, *wapm-cli* calls *wasmer*, the WebAssembly server runtime.

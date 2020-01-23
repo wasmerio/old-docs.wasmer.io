@@ -1,6 +1,3 @@
-// Import wasm bindgen
-use wasm_bindgen::prelude::*;
-
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
 #[cfg(feature = "wee_alloc")]
@@ -17,9 +14,8 @@ extern "C" {
     fn add_to_counter(value_to_add: i32) -> i32;
 }
 
-#[wasm_bindgen]
+#[no_mangle]
 pub fn increment_counter_loop(number_of_times: i32) -> i32 {
-    
     let mut current_counter;
     unsafe {
         current_counter = get_counter();
