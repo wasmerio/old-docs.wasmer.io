@@ -1,5 +1,5 @@
 ---
-id: wasmer-js-node-modules-installation
+id: wasmer-js-server-installation
 title: Wasmer-JS Node Modules Installation
 sidebar_label: Installation
 ---
@@ -8,11 +8,15 @@ The Wasmer-JS Stack uses a modern Javascript Workflow, which depends on Node.Js.
 
 ## Prerequisites
 
-It is assumed that you already have Node.js installed.  If this is not the case, please follow the installation instructions on the [Wasmer-JS CLI installation page](../cli/wasmer-js-cli-installation) before returning to this page to continue with the instructions below.
+It is assumed that you already have Node.js installed.
+
+If this is not the case, please follow the instructions for installing Node.js on the [Wasmer-JS CLI installation page](../cli/wasmer-js-cli-installation) before returning to this page to continue with the instructions below.
 
 ## Create a New Project
 
-Now that Node.js is up and running, let's go ahead and create a small node project, you can skip this setup if you are installing Wasmer-JS to an existing project.
+Now that Node.js is up and running, let's go ahead and create a small node project.
+
+You can skip this setup if you are installing Wasmer-JS to an existing project.
 
 ```bash
 $ mkdir my-project

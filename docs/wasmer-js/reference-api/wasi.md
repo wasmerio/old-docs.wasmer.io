@@ -1,7 +1,7 @@
 ---
-id: wasmer-js-node-modules-reference-api-wasi
-title: Wasmer-JS Node Modules @wasmer/wasi Reference API
-sidebar_label: @wasmer/wasi Reference API
+id: wasmer-js-reference-api-wasi
+title: Wasmer-JS Reference API @wasmer/wasi 
+sidebar_label: @wasmer/wasi
 ---
 
 # WASI

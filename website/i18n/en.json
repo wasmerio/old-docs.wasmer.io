@@ -164,6 +164,22 @@
         "title": "Wasmer-JS Command Line Interface User Guide",
         "sidebar_label": "User Guide"
       },
+      "wasmer-js/client/examples/handling-input-output/wasmer-js-client-handling-input-output": {
+        "title": "Wasmer-JS in the Browser",
+        "sidebar_label": "Handling Input and Output"
+      },
+      "wasmer-js/client/examples/hello-world/wasmer-js-client-hello-world": {
+        "title": "Wasmer-JS in the Browser",
+        "sidebar_label": "Hello World"
+      },
+      "wasmer-js/client/examples/transforming-wasi-modules/wasmer-js-client-transforming-wasi-modules": {
+        "title": "Wasmer-JS in the Browser",
+        "sidebar_label": "Transforming WASI Modules"
+      },
+      "wasmer-js/wasmer-js-module-transformation": {
+        "title": "Transforming WASI Modules",
+        "sidebar_label": "Data Transfer Between JavaScript & WASM"
+      },
       "wasmer-js/node-modules/examples/handling-input-output/wasmer-js-node-modules-handling-input-output": {
         "title": "Wasmer-JS Node Modules Handling Input and Output",
         "sidebar_label": "Handling Input and Output"
@@ -202,6 +218,37 @@
       },
       "wasmer-js/node-modules/tutorials/sandboxing-javascript-execution/sandboxing-javascript-execution": {
         "title": "wasmer-js/node-modules/tutorials/sandboxing-javascript-execution/sandboxing-javascript-execution"
+      },
+      "wasmer-js/reference-api/wasmer-js-reference-api-wasi": {
+        "title": "Wasmer-JS Reference API @wasmer/wasi",
+        "sidebar_label": "@wasmer/wasi"
+      },
+      "wasmer-js/reference-api/wasmer-js-reference-api-wasm-terminal": {
+        "title": "Wasmer-JS Reference API @wasmer/wasm-terminal",
+        "sidebar_label": "@wasmer/wasm-terminal"
+      },
+      "wasmer-js/reference-api/wasmer-js-reference-api-wasm-transformer": {
+        "title": "Wasmer-JS Reference API @wasmer/wasm-transformer",
+        "sidebar_label": "@wasmer/wasm-transformer"
+      },
+      "wasmer-js/reference-api/wasmer-js-reference-api-wasmfs": {
+        "title": "Wasmer-JS Reference API @wasmer/wasmfs",
+        "sidebar_label": "@wasmer/wasmfs"
+      },
+      "wasmer-js/server/examples/hello-world/wasmer-js-server-hello-world": {
+        "title": "Wasmer-JS on the Server (NodeJS)",
+        "sidebar_label": "Hello World"
+      },
+      "wasmer-js/server/examples/transforming-wasi-modules/wasmer-js-server-transforming-wasi-modules": {
+        "title": "Wasmer-JS on the Server",
+        "sidebar_label": "Transforming WASI Modules"
+      },
+      "wasmer-js/server/wasmer-js-server-installation": {
+        "title": "Wasmer-JS Node Modules Installation",
+        "sidebar_label": "Installation"
+      },
+      "wasmer-js/server/tutorials/sandboxing-javascript-execution/sandboxing-javascript-execution": {
+        "title": "wasmer-js/server/tutorials/sandboxing-javascript-execution/sandboxing-javascript-execution"
       },
       "wasmer-js/wasmer-js": {
         "title": "Wasmer-JS Introduction",

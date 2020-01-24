@@ -1,12 +1,12 @@
 ---
-id: wasmer-js-modules-hello-world
-title: Wasmer-JS Modules in the Browser
+id: wasmer-js-client-hello-world
+title: Wasmer-JS in the Browser
 sidebar_label: Hello World
 ---
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/node-modules/examples/hello-world)
+[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/hello-world)
 
-# Hello World!
+# Hello World! in the Browser
 
 In this very simple example, we want to develop a Browser-based application that calls a WebAssembly module that in turn calls a native "OS" function.
 
@@ -104,7 +104,7 @@ $ npm install -g parcel
     $ mkdir static
     ```
     
-1. Download the WebAssembly module [`as-echo.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/node-modules/examples/hello-world/static/as-echo.wasm) and store it in this directory
+1. Download the WebAssembly module [`as-echo.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/wasm_lib/as-echo.wasm) and store it in this directory
 
 1. Now we need to change our `index.js` to implement the required functionality.
 
