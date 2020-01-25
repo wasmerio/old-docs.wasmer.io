@@ -10,7 +10,7 @@ sidebar_label: Handling Input and Output
 
 In the Hello World example, we covered how to run a basic "echo" wasm module, and then read it's output. However, there may be times we want to interact with WASI modules that accept input as well!
 
-In this example, we will be using the [duktape WASI module](https://wapm.io/package/duktape), to execute Javascript in the duktape runtime. To handle input, we will create our own `stdinRead` fucntion, that is bound to the zero-index file descriptor in WasmFS (`/dev/stdin`). This will allow us to intercept read requests, and send whatever input we would like to the wasi application. See the code below:
+In this example, we will be using the [QuickJS WASI module](https://wapm.io/package/quickjs), to execute Javascript in the QuickJS runtime. To handle input, we will create our own `stdinRead` fucntion, that is bound to the zero-index file descriptor in WasmFS (`/dev/stdin`). This will allow us to intercept read requests, and send whatever input we would like to the wasi application. See the code below:
 
 ```javascript
 // Imports
@@ -19,7 +19,7 @@ import { WasmFs } from '@wasmer/wasmfs';
 import { lowerI64Imports } from "@wasmer/wasm-transformer";
 
 // The file path to the wasi module we want to run
-const wasmFilePath = './static/duktape.wasm';
+const wasmFilePath = './quickjs.wasm';
 
 // A quick wrapper for console.log, to also output logs to the body
 const consoleLog = console.log;
@@ -30,6 +30,22 @@ console.log = function() {
   consoleLog(log);
   document.body.appendChild(document.createTextNode('JavaScript Console: ' + log));
 }
+
+/**
+  This function removes the ansi escape characters
+  (normally used for printing colors and so)
+  Inspired by: https://github.com/chalk/ansi-regex/blob/master/index.js
+  MIT License Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+ */
+const cleanStdout = (stdout) => {
+  const pattern = [
+    "[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:[a-zA-Z\\d]*(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?\\u0007)",
+    "(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-ntqry=><~]))"
+  ].join("|");
+
+  const regexPattern = new RegExp(pattern, "g");
+  return stdout.replace(regexPattern, "");
+};
 
 // Instantiate a new WASI and WasmFs Instance
 // NOTE: For node WasmFs is not needed, and the native Fs module is assigned by default
@@ -79,11 +95,11 @@ const stdinRead = (
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
   // https://github.com/wasmerio/wasmer-js/blob/master/packages/wasm-terminal/src/process/process.ts#L174
   let responseStdin = prompt(
-      `Please enter standard input to the duktape prompt\n`
+      `Please enter standard input to the quickjs prompt\n`
       );
 
   // When the user cancels, throw an error to get out of the standard input read loop
-  // From the guest wasm modules (duktape)
+  // From the guest wasm modules (quickjs)
   if (responseStdin === null) {
     const userError = new Error("Process killed by Prompt Cancellation");
     userError.user = true;
@@ -136,11 +152,18 @@ const startWasiTask = async () => {
     } 
   }
 
-
   // User cancelled the prompt!
 
   // Output what's inside of /dev/stdout!
-  const stdout = await wasmFs.getStdOut();
+  let stdout = await wasmFs.getStdOut();
+
+  // Clean up some of the ANSI Codes from QuickJS:
+  // 1. Split by the Clear ANSI Code ([J), and only get the input (-2), and the output (-1)
+  // 2. Cleanup the remaining ANSI Code Output
+  const splitClearStdout = stdout.split('[J');
+  stdout = splitClearStdout[splitClearStdout.length - 2] + splitClearStdout[splitClearStdout.length - 1];
+  stdout = `\n${cleanStdout(stdout)}\n`;
+
   // Add the Standard output to the dom
   console.log('Standard Output: ' + stdout);
 };
