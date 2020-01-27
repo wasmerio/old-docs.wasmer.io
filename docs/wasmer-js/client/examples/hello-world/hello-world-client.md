@@ -8,18 +8,24 @@ sidebar_label: Hello World
 
 # Hello World! in the Browser
 
-In this very simple example, we want to develop a Browser-based application that calls a WebAssembly module that in turn calls a native "OS" function.
+In this introductory example, we will develop a Browser-based application that uses the following call chain.
 
 `JavaScript` --> `WebAssembly` --> `Native "OS" function`
 
-In this case, we will invoke the simple WASM module [`as-echo`](https://github.com/torch2424/as-echo) that receives a text string and echoes it back by writing it to standard out.
+In this case, we will invoke the WASM module [`as-echo`](https://github.com/torch2424/as-echo) that receives a text string and does nothing more than echo it back by writing it to standard out.
 
-However, files descriptors such as "standard in" and "standard out" are not normally available to a WebAssembly module since they belong to the underlying "OS".  Therefore, we must make use of the following two packages:
+> ### Under the Hood
+> The WASM function `as-echo` calls the native "OS" function `fd_write` that writes data to a particular file descriptor (hence `fd` in the function name)
+
+However, interaction with file descriptors such as "standard in" and "standard out" is not normally possible for a WebAssembly module, since this type of functionality belongs to the underlying "OS".  Therefore, we must make use of the following two packages:
 
 | Package Name | Description
 |---|---|
-| `@wasmer/wasi` | Bridges the gap between the black-box world of a WebAssembly module and functionality available from the host environment
-| `@wasmer/wasmfs` | A sandboxed filesystem with which `@wasmer/wasi` can interact
+| `@wasmer/wasi` | A set of JavaScript polyfills to bridge the gap between the black-box world of a WebAssembly module and functionality available in the host environment
+| `@wasmer/wasmfs` | Provide access to a sand-boxed filesystem with which `@wasmer/wasi` can interact
+
+> ### REMINDER!
+> The term "OS" used above is in quotes because in this particular case, the native function called by `as-echo` that writes to standard out, belongs to the JavaScript runtime, and not the actual underlying operating system.
 
 This example will be bundled and served by [Parcel](https://parceljs.org/) and run in the browser.
 
@@ -54,7 +60,9 @@ $ npm install -g parcel
 
     After answering all the questions from `npm init`, you will have a configured `package.json` file.
  
-1. For the purposes of testing, we need to install both the `parcel-bundler` and `parcel-plugin-static-files-copy` packages.  These packages allows us to serve our wasm files as static assets:
+1. For the purposes of testing, we need to install both the `parcel-bundler` and `parcel-plugin-static-files-copy` packages.
+
+    These packages allow `parcel` to serve our WASM files as static assets:
 
     ```bash
     npm install --save-dev parcel-bundler parcel-plugin-static-files-copy
@@ -92,7 +100,7 @@ $ npm install -g parcel
 
 1.  Now that the basic file structure of our project has been set up correctly, we must next declare the use of packages `@wasmer/wasi` and `@wasmer/wasmfs`.
 
-    To install these packages as runtime dependencies to our project, run the following:
+    To install these packages as runtime dependencies to our project, run the following command:
 
     ```bash
     $ npm install --save @wasmer/wasi @wasmer/wasmfs
@@ -106,14 +114,14 @@ $ npm install -g parcel
     
 1. Download the WebAssembly module [`as-echo.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/wasm_lib/as-echo.wasm) and store it in this directory
 
-1. Now we need to change our `index.js` to implement the required functionality.
+1. Now we need to change the contents of `index.js` to implement the required functionality.
 
     > ### Code Sample
     > Seeing as this is demo code, it uses meaningful variable names and contains additional explanatory comments &mdash; features that are often sadly missing from production code...
     > 
     > Please take some time to read and understand these comments as they explain how the functionality has been constructed.
     >
-    > Also, make a note of the comment explaining the use of `@wasmer/wasm-transformer`; we will cover this very important detail in a later example.
+    > Also, please read the comment explaining the use of `@wasmer/wasm-transformer`; we will cover this very important detail in a later example.
 
     ```JavaScript
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -132,12 +140,12 @@ $ npm install -g parcel
     const wasmFs = new WasmFs()
 
     let wasi = new WASI({
-      // Arguments passed to the Wasm Module
-      // The first argument is usually the filepath to the executable wasi module
+      // Arguments passed to the WASM Module
+      // The first argument is usually the filepath to the executable WASI module
       // we want to run.
       args: [wasmFilePath, echoStr],
 
-      // Environment variables that are accesible to the Wasi module
+      // Environment variables that are accesible to the WASI module
       env: {},
 
       // Bindings that are used by the WASI Instance (fs, path, etc...)
@@ -151,7 +159,7 @@ $ npm install -g parcel
     // Preserve the original console.log functionality
     const consoleLog = console.log
 
-    // Implement our own console.log functionality
+    // Implement our own console.log functionality that also writes to the DOM
     console.log = (...args) =>
       (logTxt => {
         consoleLog(logTxt)
@@ -162,7 +170,7 @@ $ npm install -g parcel
       (args.join(' '))
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    // Async function to run our wasi module/instance
+    // Async function to run our WASI module/instance
     const startWasiTask =
       async pathToWasmFile => {
         // Fetch our WASM File
@@ -182,8 +190,8 @@ $ npm install -g parcel
         })
 
         wasi.start(instance)                      // Start the WASI instance
-        let stdout = await wasmFs.getStdOut()     // Get the contents of /dev/stdout
-        console.log(`Standard Output: ${stdout}`) // Write WASI's stdout to the DOM
+        let stdout = await wasmFs.getStdOut()     // Get the contents of stdout
+        console.log(`Standard Output: ${stdout}`) // Write stdout data to the DOM
       }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -191,7 +199,7 @@ $ npm install -g parcel
     startWasiTask(wasmFilePath)
     ```
 
-1. After saving `index.js` and as long as `parcel` is still running, your browser should automatically refresh and you should see `Standard Output: Hello World!` appear both on the browser screen and in the JavaScript console.
+1. As long as `parcel` is still running, after saving `index.js`, your browser should automatically refresh and you should see `Standard Output: Hello World!` appear both on the browser screen and in the JavaScript console.
 
 
 

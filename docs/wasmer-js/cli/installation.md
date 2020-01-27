@@ -8,9 +8,9 @@ The Wasmer-JS command line interface (CLI) uses a modern Javascript Workflow, wh
 
 ## Install Node.js
 
-First, we will start with installing the latest Long Term Support (LTS) version of Node.js which includes Node's Package manager `npm`.
+First, we will start by installing the latest Long Term Support (LTS) version of Node.js which includes Node's Package Manager `npm`.
 
-There are different ways of installing Node.js.  You can either:
+There several are different ways to install Node.js.  You could:
 
 * Download a binary installer from the [Node.js download site](https://nodejs.org/en/download/), or
 * You can use a tool such as `nvm`. (Mac and Linux: [here](https://github.com/creationix/nvm), Windows: [here](https://github.com/coreybutler/nvm-windows)).

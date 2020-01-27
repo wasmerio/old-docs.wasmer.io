@@ -14,15 +14,15 @@ const wasmFilePath = './clock_time_get.wasm'  // Path to our WASI module
 const wasmFs = new WasmFs()
 
 let wasi = new WASI({
-  // Arguments passed to the Wasm Module
+  // Arguments passed to the WASM Module
   // The first argument is usually the filepath to the executable WASI module
   // we want to run.
   args: [wasmFilePath],
 
-  // Environment variables that are accesible to the Wasi module
+  // Environment variables that are accesible to the WASI module
   env: {},
 
-  // Bindings that are used by the Wasi Instance (fs, path, etc...)
+  // Bindings used by the WASI instance (fs, path, etc...)
   bindings: {
     ...WASI.defaultBindings,
     fs: wasmFs.fs
@@ -33,7 +33,7 @@ let wasi = new WASI({
 // Preserve the original console.log functionality
 const consoleLog = console.log
 
-// Implement our own console.log functionality
+// Implement our own console.log functionality that also writes to the DOM
 console.log = (...args) =>
   (logTxt => {
     consoleLog(logTxt)
@@ -47,7 +47,7 @@ console.log = (...args) =>
 // Async Function to run our WASI module/instance
 const startWasiTask =
   async () => {
-    // Fetch our Wasm File
+    // Fetch our WASM File
     const response  = await fetch(wasmFilePath)
     const wasmBytes = new Uint8Array(await response.arrayBuffer())
 
@@ -61,8 +61,8 @@ const startWasiTask =
     })
 
     wasi.start(instance)                      // Start the transformed WASI instance
-    let stdout = await wasmFs.getStdOut()     // Get the contents of /dev/stdout
-    console.log(`Standard Output: ${stdout}`) // Write WASI stdout to the DOM
+    let stdout = await wasmFs.getStdOut()     // Get the contents of stdout
+    console.log(`Standard Output: ${stdout}`) // Write stdout to the DOM
   }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

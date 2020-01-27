@@ -8,9 +8,9 @@ sidebar_label: Transforming WASI Modules
 
 # Transforming WASI Modules in the Browser
 
-Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below will be needed to transform a WASI module.
+Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](../../../wasmer-js-module-transformation) will always be needed.
 
-# Setup Instructions
+## Setup Instructions
 
 Please repeat the step-by-step instructions given in the [Hello World](../hello-world/wasmer-js-modules-hello-world) example, but with the following changes:
 
@@ -27,7 +27,7 @@ Inside function `startWasiTask`, we fetch the WASM file contents and convert it 
 const loweredWasmBytes = await lowerI64Imports(wasmBytes)
 ```
 
-The call to function `lowerI64Imports` performs the all-important transformation that allows a JavaScript `BigInt` to be transferred to WebAssembly `i64`.
+The call to function `lowerI64Imports` performs the all-important transformation that allows a JavaScript `BigInt` to be transferred to a WebAssembly `i64`.
 
 Now that the interface has been transformed, we can instantiate the WebAssembly module and invoke it as before.
 
@@ -48,15 +48,15 @@ const wasmFilePath = './clock_time_get.wasm'  // Path to our WASI module
 const wasmFs = new WasmFs()
 
 let wasi = new WASI({
-  // Arguments passed to the Wasm Module
+  // Arguments passed to the WASM Module
   // The first argument is usually the filepath to the executable WASI module
   // we want to run.
   args: [wasmFilePath],
 
-  // Environment variables that are accesible to the Wasi module
+  // Environment variables that are accesible to the WASI module
   env: {},
 
-  // Bindings that are used by the Wasi Instance (fs, path, etc...)
+  // Bindings used by the WASI instance (fs, path, etc...)
   bindings: {
     ...WASI.defaultBindings,
     fs: wasmFs.fs
@@ -67,7 +67,7 @@ let wasi = new WASI({
 // Preserve the original console.log functionality
 const consoleLog = console.log
 
-// Implement our own console.log functionality
+// Implement our own console.log functionality that also writes to the DOM
 console.log = (...args) =>
   (logTxt => {
     consoleLog(logTxt)
@@ -81,7 +81,7 @@ console.log = (...args) =>
 // Async Function to run our WASI module/instance
 const startWasiTask =
   async () => {
-    // Fetch our Wasm File
+    // Fetch our WASM File
     const response  = await fetch(wasmFilePath)
     const wasmBytes = new Uint8Array(await response.arrayBuffer())
 
@@ -95,8 +95,8 @@ const startWasiTask =
     })
 
     wasi.start(instance)                      // Start the transformed WASI instance
-    let stdout = await wasmFs.getStdOut()     // Get the contents of /dev/stdout
-    console.log(`Standard Output: ${stdout}`) // Write WASI stdout to the DOM
+    let stdout = await wasmFs.getStdOut()     // Get the contents of stdout
+    console.log(`Standard Output: ${stdout}`) // Write stdout to the DOM
   }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -104,9 +104,11 @@ const startWasiTask =
 startWasiTask()
 ```
 
+On the both the browser screen and the JavaScript console, you should see the text `Done!`.
+
 > ### Known Limitation
 >
-> This example is somewhat contrived because the WebAssembly module has been hard-coded to return the text string `Done!` rather than the value returned from `clock_time_get`.
+> This example is somewhat contrived because the WebAssembly module has been hard-coded to return the text string `Done!` rather than the time value from `clock_time_get`.
 >
 > Anything written to standard out should be a printable string followed by a carriage return character, not the raw `i32` value returned from `clock_time_get`.  Therefore, before being able to return the actual clock time, this WebAssembly module would additionally need to convert the raw `i32` value to a printable string before then writing it to standard out.
 

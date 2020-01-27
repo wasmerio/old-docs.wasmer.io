@@ -1,10 +1,10 @@
 ---
 id: wasmer-js-server-installation
 title: Wasmer-JS Node Modules Installation
-sidebar_label: Installation
+sidebar_label: Server-side Installation
 ---
 
-The Wasmer-JS Stack uses a modern Javascript Workflow, which depends on Node.Js.
+The Wasmer-JS stack uses a modern Javascript workflow, which depends on Node.Js.
 
 ## Prerequisites
 
@@ -14,15 +14,16 @@ If this is not the case, please follow the instructions for installing Node.js o
 
 ## Create a New Project
 
-Now that Node.js is up and running, let's go ahead and create a small node project.
+Now that Node.js is up and running, let's go ahead and create a small project.
 
 You can skip this setup if you are installing Wasmer-JS to an existing project.
 
 ```bash
 $ mkdir my-project
 $ cd my-project
-$ npm init # Fill our the prompts here
+$ npm init
 ```
+After answering all the questions from `npm init`, you will have a configured `package.json` file.
 
 Now that we have a new project, we can install the required Node modules to it!
 
@@ -38,4 +39,6 @@ For example, all your Node.js projects will require the Wasmer-JS base package
 $ npm install --save @wasmer/wasi
 ```
 
-You should now be able to use the Wasmer-JS package! Please take a look at the examples, or one of the tutorials to get started.
+You should now be able to use the Wasmer-JS package.
+
+Please take a look at the examples, or one of the tutorials to get started.

@@ -6,7 +6,7 @@ sidebar_label: Data Transfer Between JavaScript & WASM
 
 # What is Module Transformation and Why is it Necessary?
 
-In the Browser-based [Hello World](./client/examples/hello-world/wasmer-js-client-hello-world) example, we call a very basic WASM module called `as-echo` that receives a single text string as an argument, and simply echoes it back via standard out.
+In the Browser-based [Hello World](./client/examples/hello-world/wasmer-js-client-hello-world) example, we call a WASM module called `as-echo` that does nothing more than receive a text string as an argument, and echo it back via standard out.
 
 In this case, the values passed from WebAssembly to the native "OS" function that writes to standard out, are all compatible with JavaScript data types.  However, some WASI modules might contain function calls whose interfaces are not compatible, and therefore, such modules cannot immediately be called.
 
@@ -20,31 +20,33 @@ Both JavaScript and WebAssembly use this data type (known as `i64` in WebAssembl
 >
 > Irrespective of whether your JavaScript app runs on the client or the server, the interface to any WASI module call that has been declared to use an `i64` must first be ***transformed*** before it can be called.
 
-For example, you will experience this problem if you try to pass a parameter value from JavaScript, through WebAssembly and then on to the native "OS" function [clock\_time\_get](https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#-clock_time_getid-clockid-precision-timestamp---errno-timestamp).
+Remember, in the context of a JavaScript program, the WASI bridge between WebAssembly and native "OS" functions has been implemented using a set of JavaScript polyfills.  Consequently, you will experience this problem if you try for example to invoke a WebAssembly module that then invokes a native "OS" function such as [clock\_time\_get](https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#-clock_time_getid-clockid-precision-timestamp---errno-timestamp).
+
+
 
 As a temporary fix, this data transfer issue is solved by the `@wasmer/wasm-transformer` package.
 
 > ### Under The Hood  
-> Technically, this transformation adapts the WebAssembly interface so that it can send and receive JavaScript `BigInt`s (64-bit, signed integers).
+> Technically, this transformation adapts the WebAssembly interface so that it can send and receive JavaScript `BigInt`s (64-bit, signed integers) without data loss.
 >
-> No data loss occurs here because a JavaScript `BigInt` is transformed into a `Uint8Array` containing 8, unsigned, 8-bit integers.
+> This is acheived by transforming a JavaScript `BigInt` into a `Uint8Array` containing 8, unsigned, 8-bit integers.
 
 # How Do I Know if a WASM Module Needs Transformation?
 
 Good question!
 
-Normally, you would look at the well-written interface documentation for the WebAssembly module to see which native "OS" functions it calls, and then discover what data types are used for the interface parameters.
+Normally, you would discover what data types a native "OS" function interface uses by looking at the well-written interface documentation for the WebAssembly module.
 
 Ok, back in reality...
 
-## The `clock_time_get` WebAssembly Module
+## The [`clock_time_get`](https://raw.githubusercontent.com/wasmerio/docs.wasmer.io/master/docs/wasmer-js/wasm_lib/clock_time_get.wat) WebAssembly Module
 
 In order to understand whether or not this module needs transformation, we need to take a look inside the WebAssembly module.
 
 > ### ASIDE
 > We make no attempt to teach you WebAssembly here!
 >
-> If you want to know about the inner workings of WebAssembly, please visit the [WebAssembly.org](https://webassembly.org) website and read the documentation there.
+> If you want to know about the inner workings of a WebAssembly module, then please visit the [WebAssembly.org](https://webassembly.org) website and read the documentation there.
 >
 > We now continue with your scheduled program...
 
@@ -77,10 +79,12 @@ Next, look a little further down to line 5.  Here we can see an `import` stateme
 (import "wasi_unstable" "clock_time_get" (func $wasi_unstable.clock_time_get (type $t0)))
 ```
 
-This statement tells us three things:
+This `import` statement tells us several things:
 
-1. Within a native "OS" library called `wasi_unstable`, there is a function called `clock_time_get`
-1. Within our WebAssembly module, this function will be know by the alias `$wasi_unstable.clock_time_get`
+1. This WASM module needs to call an external function.  
+    In this particular case, this is a native "OS" function accessible through WASI
+1. The native "OS" function is called `clock_time_get` and lives in an external library called `wasi_unstable`
+1. Within our WebAssembly module, this external function will be referred to using the alias `$wasi_unstable.clock_time_get`
 1. The interface to this function is described by the type declaration `$t0`
 
-We know from the definition of `$t0` (on line 2) that this function must be passed an `i64` as its second parameter; therefore, we can be certain that before function `clock_time_get` can be called from JavaScript, the interface to this module must be transformed.
+We know from the definition of `$t0` (on line 2) that this function must be passed an `i64` as its second parameter; therefore, we can be certain that before this WASM module can call function `clock_time_get` (using the Wasmer-js polyfill), the interface must first be transformed.
