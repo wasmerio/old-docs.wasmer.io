@@ -9,6 +9,10 @@
   "browserslist": [
     "last 1 Chrome versions"
   ],
+  "staticFiles": {
+    "staticPath": "static",
+    "watcherGlob": "**"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/torch2424/wasmer-examples.git"
