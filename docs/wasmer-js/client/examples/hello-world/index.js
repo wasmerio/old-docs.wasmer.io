@@ -14,12 +14,12 @@ const echoStr      = 'Hello World!'    // Text string to echo
 const wasmFs = new WasmFs()
 
 let wasi = new WASI({
-  // Arguments passed to the Wasm Module
-  // The first argument is usually the filepath to the executable wasi module
+  // Arguments passed to the WASM Module
+  // The first argument is usually the filepath to the executable WASI module
   // we want to run.
   args: [wasmFilePath, echoStr],
 
-  // Environment variables that are accesible to the Wasi module
+  // Environment variables that are accesible to the WASI module
   env: {},
 
   // Bindings that are used by the WASI Instance (fs, path, etc...)
@@ -33,7 +33,7 @@ let wasi = new WASI({
 // Preserve the original console.log functionality
 const consoleLog = console.log
 
-// Implement our own console.log functionality
+// Implement our own console.log functionality that also writes to the DOM
 console.log = (...args) =>
   (logTxt => {
     consoleLog(logTxt)
@@ -44,7 +44,7 @@ console.log = (...args) =>
   (args.join(' '))
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Async function to run our wasi module/instance
+// Async function to run our WASI module/instance
 const startWasiTask =
   async pathToWasmFile => {
     // Fetch our WASM File
@@ -64,8 +64,8 @@ const startWasiTask =
     })
 
     wasi.start(instance)                      // Start the WASI instance
-    let stdout = await wasmFs.getStdOut()     // Get the contents of /dev/stdout
-    console.log(`Standard Output: ${stdout}`) // Write WASI's stdout to the DOM
+    let stdout = await wasmFs.getStdOut()     // Get the contents of stdout
+    console.log(`Standard Output: ${stdout}`) // Write stdout data to the DOM
   }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

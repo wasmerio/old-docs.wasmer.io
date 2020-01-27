@@ -8,17 +8,17 @@ sidebar_label: Hello World
 
 # Hello World! (Server)
 
-In this very simple example, we want to develop a NodeJS-based application that calls a WebAssembly module that in turn, calls a native "OS" function.  This is exactly the same call chain as was used in the client-side example:
+In this introductory example, we will develop a NodeJS-based application that calls a WebAssembly module that in turn, calls a native "OS" function.  This is exactly the same call chain as was used in the client-side example:
 
 `JavaScript` --> `WebAssembly` --> `Native "OS" function`
 
-In this case, we will invoke the simple WASM module [`as-echo`](https://github.com/torch2424/as-echo) that receives a text string and echoes it back by writing it to standard out.
+In this case, we will invoke the WASM module [`as-echo`](https://github.com/torch2424/as-echo) that receives a text string and echoes it back by writing it to standard out.
 
-However, files descriptors such as "standard in" and "standard out" are not normally available to a WebAssembly module since they belong to the underlying "OS".  Therefore, we must make use of the following package:
+However, as we saw with the [client-side `hello-world` example](../../../client/examples/hello-world/wasmer-js-client-hello-world), file descriptors such as "standard in" and "standard out" are not normally available to a WebAssembly module since they belong to the underlying "OS".  Therefore, we must again make use of the following package:
 
 | Package Name | Description
 |---|---|
-| `@wasmer/wasi` | Bridges the gap between the black-box world of a WebAssembly module and functionality available from the host environment
+| `@wasmer/wasi` | A set of JavaScript polyfills that bridge the gap between the black-box world of a WebAssembly module and functionality available from the host environment
 
 > ### IMPORTANT
 >
@@ -60,9 +60,11 @@ However, files descriptors such as "standard in" and "standard out" are not norm
 
 1. Create the file `server.js` and add the coding shown below.
 
-    Notice that in contrast to running this WASM module in the browser, here we do not need to write any code to obtain the contents of standard out after the `as-echo` WASM module has executed.
-    
-    When running on the server via Wasmer-js, anything written to standard out by a WASM module appears directly in the console.
+    > ### Important Difference
+    >
+    > In contrast to running in the browser, the server-side implementation of the same WASM module is noticeably smaller.
+    >
+    > When running server-side, we do not need to write any code to obtain the contents of standard out after the `as-echo` WASM module has executed, since when running server-side, anything written to standard out by a WASM module appears directly in the console.
 
     ```JavaScript
     const fs       = require("fs")
@@ -78,7 +80,7 @@ However, files descriptors such as "standard in" and "standard out" are not norm
     })
 
     // *****************************************************************************
-    // Async function to run our wasi module/instance
+    // Async function to run our WASM module/instance
     const startWasiTask =
       async pathToWasmFile => {
         // Fetch our WASM File
@@ -108,4 +110,4 @@ However, files descriptors such as "standard in" and "standard out" are not norm
 
 
 
-Next, let's take a look at running WASI modules whose interfaces require transformation.
+Next, let's take a look at running WASM modules whose interfaces require transformation.

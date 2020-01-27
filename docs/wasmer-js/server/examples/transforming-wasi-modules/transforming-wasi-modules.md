@@ -8,7 +8,7 @@ sidebar_label: Transforming WASI Modules
 
 # Transforming WASI Modules in the Server
 
-Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below will be needed to transform a WASI module.
+Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](../../../wasmer-js-module-transformation) will always be needed.
 
 ## Setup Instructions
 
@@ -27,7 +27,7 @@ Inside function `startWasiTask`, we fetch the WASM file contents and convert it 
 const loweredWasmBytes = await lowerI64Imports(wasmBytes)
 ```
 
-The call to function `lowerI64Imports` performs the all-important transformation that allows a JavaScript `BigInt` to be transferred to WebAssembly `i64`.
+The call to function `lowerI64Imports` performs the all-important transformation that allows a JavaScript `BigInt` to be transferred to a WebAssembly `i64`.
 
 Now that the interface has been transformed, we can instantiate the WebAssembly module and invoke it as before.
 
@@ -46,7 +46,7 @@ let wasi = new WASI({
 })
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Async function to run our WASI module/instance
+// Async function to run our WASM module/instance
 const startWasiTask =
   async pathToWasmFile => {
     // Fetch the WASM module and transform its interface
@@ -67,3 +67,9 @@ const startWasiTask =
 startWasiTask(wasmFilePath)
 ```
 
+Run the program:
+
+```bash
+$ node server.js
+Done!
+```
