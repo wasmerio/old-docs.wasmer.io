@@ -146,7 +146,7 @@ However it helpfully suggests setting the `RUST_BACKTRACE` environment variable
 and running it again.  When we again run, `RUST_BACKTRACE=1 cargo run`, we see
 output like:
 
-[Cargo Run Terminal Output. Shows rust back trace, which you can see where things started to break, as explained below](/img/docs/rust-handling-errors-3.png)
+![Cargo Run Terminal Output. Shows rust back trace, which you can see where things started to break, as explained below](/img/docs/rust-handling-errors-3.png)
 
 If we look our for our file name (`src/main.rs`), we will see at step 10, there was
 an error on line 44. Which is the line number for where we call and unwrap the

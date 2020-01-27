@@ -14,7 +14,7 @@ The default export of `@wasmer/wasm-terminal`, also available as `import { WasmT
 
 Constructor for the WasmTerminal, that returns an instance of the WasmTerminal.
 
-The [WasmTerminalConfig](https://github.com/wasmerio/wasmer-js/blob/master/packages/wasm-terminal/lib/wasm-terminal-config.ts) can be described as the following:
+The [WasmTerminalConfig](https://github.com/wasmerio/wasmer-js/blob/master/packages/wasm-terminal/src/wasm-terminal-config.ts) can be described as the following:
 
 ```typescript
 {

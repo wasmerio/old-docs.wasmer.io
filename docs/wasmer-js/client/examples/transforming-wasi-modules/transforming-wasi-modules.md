@@ -12,7 +12,7 @@ Irrespective of whether your JavaScript code runs on the client or the server, t
 
 ## Setup Instructions
 
-Please repeat the step-by-step instructions given in the [Hello World](../hello-world/wasmer-js-modules-hello-world) example, but with the following changes:
+Please repeat the step-by-step instructions given in the [Hello World](../hello-world/wasmer-js-client-hello-world) example, but with the following changes:
 
 1. Call your project `wasmer-js-transforming-wasi`
 1. Download the WASM module [`clock_time_get.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/wasm_lib/clock_time_get.wasm) and store it in the `static` directory
