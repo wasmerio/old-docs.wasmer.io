@@ -51,7 +51,7 @@ This returns a WASI instance. Please see the Instance properties section to lear
 
 `WASI.defaultBindings: WASIBindings`
 
-The [default bindings](./lib/bindings) for the environment that are set on the `bindings` property of the constructor config object. This is useful for use cases like, you want to plugin in your own file system. For example:
+The [default bindings](https://github.com/wasmerio/wasmer-js/tree/master/packages/wasi/src/bindings) for the environment that are set on the `bindings` property of the constructor config object. This is useful for use cases like, you want to plugin in your own file system. For example:
 
     const myFs = require("fs");
     

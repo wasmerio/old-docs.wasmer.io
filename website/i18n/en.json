@@ -9,6 +9,22 @@
         "title": "Introduction",
         "sidebar_label": "Introduction"
       },
+      "io-devices/io-devices-lib/io-devices-lib-assemblyscript": {
+        "title": "AssemblyScript",
+        "sidebar_label": "AssemblyScript"
+      },
+      "io-devices/io-devices-lib/io-devices-lib-rust": {
+        "title": "Rust",
+        "sidebar_label": "Rust"
+      },
+      "io-devices/io-devices-lib/io-devices-lib": {
+        "title": "IO Devices Library Introduction",
+        "sidebar_label": "IO Devices Library Introduction"
+      },
+      "io-devices/io-devices": {
+        "title": "IO Devices Introduction",
+        "sidebar_label": "IO Devices Introduction"
+      },
       "runtime/c-integration/examples/exit-early/example-wasienv-wasm/exit-early-import/README": {
         "title": "runtime/c-integration/examples/exit-early/example-wasienv-wasm/exit-early-import/README"
       },
@@ -190,16 +206,12 @@
         "title": "Wasmer-JS Node Modules Handling Input and Output",
         "sidebar_label": "Handling Input and Output"
       },
-      "wasmer-js/node-modules/examples/hello-world/wasmer-js-modules-hello-world": {
-        "title": "Wasmer-JS Modules in the Browser",
+      "wasmer-js/node-modules/examples/hello-world/wasmer-js-node-modules-hello-world": {
+        "title": "Wasmer-JS Node Modules Hello World",
         "sidebar_label": "Hello World"
       },
-      "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-modules-how-do-i-know-if-a-module-needs-transformation": {
-        "title": "Wasmer-JS in the Browser",
-        "sidebar_label": "How Do I Know if a Module Needs Transformation?"
-      },
-      "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-modules-transforming-wasi-modules": {
-        "title": "Wasmer-JS in the Browser",
+      "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-node-modules-transforming-wasi-modules": {
+        "title": "Wasmer-JS Node Modules Transforming WASI Modules",
         "sidebar_label": "Transforming WASI Modules"
       },
       "wasmer-js/node-modules/wasmer-js-node-modules-installation": {
