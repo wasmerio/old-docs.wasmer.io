@@ -20,7 +20,7 @@ However, there are many cases in which a WebAssembly module needs to do more tha
 
 Wasmer therefore provides two key services:
 
-1. It allows you to run WASM modules either standalone, or (by means of our language integration tools) embedded within other language runtimes such as C/C++, Python, and Rust
+1. It allows you to run WASM modules either standalone, or (by means of our language integration tools) embedded within other language runtimes such as C/C++, Python, and Rust. This enables extremely portable binaries that can run unmodified in any OS that is supported by Wasmer (Linux, macOS, Windows and FreeBSD).
 1. By means of an Application Binary Interface (ABI) such as [`WASI`](https://github.com/webassembly/wasi) and [`Emscripten`](https://github.com/emscripten-core/emscripten), it acts as a secure bridge for WASM modules to interact with native "OS" functionality
 
 > ## IMPORTANT  
