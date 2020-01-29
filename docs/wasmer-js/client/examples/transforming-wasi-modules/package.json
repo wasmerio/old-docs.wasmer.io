@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "asbuild": "asc assembly/index.ts -b static/clock_time_get.wasm -t static/clock_time_get.wat --validate --optimize --use abort=wasi_abort"
   },
   "browserslist": [
     "last 1 Chrome versions"
@@ -21,10 +22,11 @@
   "homepage": "https://github.com/torch2424/wasmer-examples#readme",
   "dependencies": {
     "@wasmer/wasi": "^0.6.0",
-    "@wasmer/wasmfs": "^0.6.0",
-    "@wasmer/wasm-transformer": "^0.6.0"
+    "@wasmer/wasm-transformer": "^0.6.0",
+    "@wasmer/wasmfs": "^0.6.0"
   },
   "devDependencies": {
+    "assemblyscript": "^0.9.0",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-static-files-copy": "^2.2.2"
   }
