@@ -104,12 +104,6 @@ const startWasiTask =
 startWasiTask()
 ```
 
-On the both the browser screen and the JavaScript console, you should see the text `Done!`.
-
-> ### Known Limitation
->
-> This example is somewhat contrived because the WebAssembly module has been hard-coded to return the text string `Done!` rather than the time value from `clock_time_get`.
->
-> Anything written to standard out should be a printable string followed by a carriage return character, not the raw `i32` value returned from `clock_time_get`.  Therefore, before being able to return the actual clock time, this WebAssembly module would additionally need to convert the raw `i32` value to a printable string before then writing it to standard out.
+On the both the browser screen and the JavaScript console, you should see the text: `Success running clock_time_get. Response: [clock_time_get response here]`.
 
 Next, let's look at handling input and output via WASI.

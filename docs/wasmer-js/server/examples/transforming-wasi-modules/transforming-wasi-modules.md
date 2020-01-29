@@ -71,5 +71,5 @@ Run the program:
 
 ```bash
 $ node server.js
-Done!
+Success running clock_time_get. Response: [clock_time_get response here]
 ```
