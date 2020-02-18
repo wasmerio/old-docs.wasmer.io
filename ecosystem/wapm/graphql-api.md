@@ -1,7 +1,7 @@
 ---
 description: >-
   The most powerful API for accessing your WebAssembly modules, now completely
-  open
+  open for all to use
 ---
 
 # GraphQL API
@@ -22,9 +22,7 @@ If you want to learn more about GraphQL, please visit the official Website: [Gra
 
 ### How I can use the WAPM API?
 
-The WAPM GraphQL API is completely open for anyone to use.
-
-GraphQL \(and the GraphiQL IDE\) is online here:
+The WAPM GraphQL API \(and the GraphiQL IDE\) is online here:
 
 {% embed url="https://registry.wapm.io/graphql" caption="https://registry.wapm.io/graphql" %}
 
