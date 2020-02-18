@@ -15,6 +15,7 @@
   * [Publishing your Package](ecosystem/wapm/publishing-your-package.md)
   * [Manifest](ecosystem/wapm/manifest.md)
   * [CLI Usage](ecosystem/wapm/cli.md)
+  * [GraphQL API](ecosystem/wapm/graphql-api.md)
 * [WebAssembly.sh](ecosystem/webassembly.sh.md)
 
 ## 🔧 Language Integrations <a id="integrations"></a>
