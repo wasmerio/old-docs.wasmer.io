@@ -18,7 +18,7 @@ Consequently, access to OS-level resources such as file descriptors, network soc
 
 However, there are many cases in which a WebAssembly module needs to do more than perform pure computation; they must interact with native "OS" functionality.
 
-Wasmer allows you to run Wasm modules either **standalone** or **embedded** within other language runtimes such as C/C++, Python, Go, PHP, Elixir, Rust...
+Wasmer allows you to run Wasm modules either **Standalone** or **Embedded** within other language runtimes such as C/C++, Python, Go, PHP, Elixir, Rust...
 
 This provide three key services:
 
@@ -61,6 +61,4 @@ Language Integrations \(to use WebAssembly there\):
 * [Wasmer in Rust](integrations/rust/)
 * [Wasmer in C](integrations/c/)
 * [Wasmer in Javascript](integrations/javascript/)
-
-
 
