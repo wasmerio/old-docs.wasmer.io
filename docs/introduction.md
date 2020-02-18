@@ -16,19 +16,21 @@ For an overview of WebAssembly, and what WebAssembly is, [take a look here](http
 
 By design, the environment within which a WebAssembly module runs is completely isolated (or "sand-boxed") from the native functionality of the underlying host system. This means that by default, WASM modules are designed to perform nothing more than pure computation. Consequently, access to OS-level resources such as file descriptors, network sockets, the system clock, and random numbers is not normally possible from WASM.
 
-However, there are many cases in which a WebAssembly module needs to do more than perform pure computation; they must interact with native "OS" functionality.
+However, there are many cases in which WebAssembly modules need to do more than perform pure computation; they must also interact with native "OS" functionality.
 
 Wasmer therefore provides two key services:
 
-1. It allows you to run WASM modules either standalone, or (by means of our language integration tools) embedded within other language runtimes such as C/C++, Python, and Rust. This enables extremely portable binaries that can run unmodified in any OS that is supported by Wasmer (Linux, macOS, Windows and FreeBSD).
-1. By means of an Application Binary Interface (ABI) such as [`WASI`](https://github.com/webassembly/wasi) and [`Emscripten`](https://github.com/emscripten-core/emscripten), it acts as a secure bridge for WASM modules to interact with native "OS" functionality
+1. It allows you to run WASM modules either standalone, or (by means of our language integration tools) embedded within other language runtimes such as C/C++, Python, and Rust. This enables extremely portable binaries that can run unmodified in any Wasmer-supported OS (Linux, macOS, Windows and FreeBSD).
+1. By means of an Application Binary Interface (ABI) such as [`WASI`](https://github.com/webassembly/wasi) or [`Emscripten`](https://github.com/emscripten-core/emscripten), it acts as a secure bridge for WASM modules to interact with native "OS" functionality
 
 > ## IMPORTANT  
-> The term "OS" used above is in quotes to indicate that the native function being called might not actually be provided by the host's operating system.  In reality, native functions always belong to the host environment within which the WebAssembly module is being run, and that could be either the host language's runtime environment (for example, JavaScript, Python or Ruby), or it might be the actual operating system.
+> The term "OS" used above is in quotes to indicate that the native function being called might not actually be provided by the host's operating system.
+>
+> In reality, native functions always belong to the host environment within which the WebAssembly module is being run, and this could be either a host language's runtime environment (for example, JavaScript, Python or Ruby), or it might be the actual operating system.
 >
 > Either way though, from a WebAssembly point of view, we don't need to care too much about this detail. All we need to know is that:
 > 
-> * The host can provide "imported" functions for the WebAssembly module
+> * The host environment provides "imported" functions for the WebAssembly module
 > * Via Wasmer's included ABIs, WebAssembly modules can have access to a set of operating-system-like functions with varying levels of sandboxing
 
 ## Projects

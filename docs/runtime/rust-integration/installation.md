@@ -1,25 +1,33 @@
 ---
 id: runtime-rust-integration-installation
-title: Runtime Rust Integration Installation
-sidebar_label: Installation
+title: Rust Integration: Installation
+sidebar_label: Rust Installation
 ---
 
-The easiest way to install rust, is through [rustup](https://rustup.rs/).
+# Prerequisites - Install Rust
 
-To build install Rustup on Windows, download and run [rustup-init.exe](https://win.rustup.rs/) then follow the onscreen instructions.
+If you have already installed the Wasmer CLI tool, then Rust will already be installed.  Otherwise, the easiest way to install Rust is using the [`rustup`](https://rustup.rs/) tool.
 
-To get rustup on other systems, run:
+## Windows
 
-`curl https://sh.rustup.rs -sSf | sh`
+To install `rustup` on Windows, download and run [rustup-init.exe](https://win.rustup.rs/) then follow the onscreen instructions.
 
-To ensure this is installed, let's run the following:
+## *NIX Operating Systems
 
-`rustc -V`
+To get rustup on *NIX operating systems, run:
 
-and
+```bash
+$ curl https://sh.rustup.rs -sSf | sh
+```
 
-`cargo -V`
+To check that both the Rust compiler and the Rust Package Manager ([Cargo](https://doc.rust-lang.org/cargo/)) have been installed, run the following commands.  You should see output similar to the following:
 
-If these commands work, rust is successfully installed!
+```bash
+$ rustc -V
+rustc 1.41.0 (5e1a79984 2020-01-27)
+$ cargo -V
+cargo 1.41.0 (626f0f40e 2019-12-03)
+```
+
 
 Next, let's take a look at building a simple hello world!

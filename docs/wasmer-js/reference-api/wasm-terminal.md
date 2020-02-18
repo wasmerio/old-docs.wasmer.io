@@ -19,7 +19,7 @@ The [WasmTerminalConfig](https://github.com/wasmerio/wasmer-js/blob/master/pack
 ```typescript
 {
   // Function that is called whenever a command is entered and returns a Promise,
-  // It takes in the name of the command being run, and expects a Uint8Array of a Wasm Binary, or a
+  // It takes in the name of the command being run, and expects a Uint8Array of a WASM Binary, or a
   // CallbackCommand (see the api below) to be returned.
   fetchCommand: (
     commandName: string,
@@ -79,7 +79,7 @@ Function to scroll the terminal cursor into view.
 
 `wasmTerminal.runCommand(commandString: string)`: void
 
-Function to run the passed string as if it was entered as a command, from the wasm terminal.
+Function to run the passed string as if it was entered as a command, from the WASM terminal.
 
 # fetchCommandFromWAPM
 
@@ -92,4 +92,4 @@ fetchCommandFromWAPM(
 ): Promise<Uint8Array>
 ```
 
-Exported function from the `@wasmer/wasm-terminal` package. This function is meant to be returned in the fetchCommand config property of the WasmTerminal Class. This takes in the name of command, the command arguments, and the envioronment variables, and returns a Promise that resolves a Uint8Array of the Wasm binary from WAPM.
+Exported function from the `@wasmer/wasm-terminal` package. This function is meant to be returned in the fetchCommand config property of the WasmTerminal Class. This takes in the name of command, the command arguments, and the envioronment variables, and returns a Promise that resolves a Uint8Array of the WASM binary from WAPM.

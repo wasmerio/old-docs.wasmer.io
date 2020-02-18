@@ -19,7 +19,7 @@ The name wapm is an abbreviation for WebAssembly Package Manager, but then name 
 
 ## **Basic Usage**
 
-With the tools installed, one can easily start using universal wasm binaries by using the `install` command of *wapm-cli*:
+With the tools installed, one can easily start using universal WASM binaries by using the `install` command of *wapm-cli*:
 
 `wapm install cowsay`
 
@@ -71,7 +71,7 @@ Publish the project to [wapm.io](https://wapm.io/)!
 
 ## **Commands**
 
-Commands (not to be confused with *wapm-cli* subcommands) are a feature that enables easily executing wasm code from a wapm package.
+Commands (not to be confused with *wapm-cli* subcommands) are a feature that enables easily executing WASM code from a wapm package.
 
 Commands are what allows one to call the `run` subcommand, like above when running `wapm run cowsay hello wapm!`.
 

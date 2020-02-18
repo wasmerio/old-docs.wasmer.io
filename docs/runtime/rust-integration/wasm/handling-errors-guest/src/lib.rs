@@ -6,5 +6,5 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[no_mangle]
 pub fn throw_wasm_error() {
-    panic!("Causing a Wasm trap in `throw_wasm_error`");
+    panic!("Causing a WASM trap in `throw_wasm_error`");
 }

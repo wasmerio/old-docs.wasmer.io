@@ -22,7 +22,7 @@ Constructor that returns a WasmFs instance. Please see the Instance properties t
 
 [memfs](https://github.com/streamich/memfs)' [node fs](https://nodejs.org/api/fs.html) implementation object. See the [node fs documentation](https://nodejs.org/api/fs.html) for API usage.
 
-**NOTE:** The functions on this `fs` implementation can easily be overriden to provide custom functionality when your wasm module (running with `[@wasmer/wasi](https://github.com/wasmerio/wasmer-js/tree/master/packages/wasi)`) tries to do file system operations. For example:
+**NOTE:** The functions on this `fs` implementation can easily be overriden to provide custom functionality when your WASM module (running with `[@wasmer/wasi](https://github.com/wasmerio/wasmer-js/tree/master/packages/wasi)`) tries to do file system operations. For example:
 
 ```javascript
 const wasmFs = new WasmFs();

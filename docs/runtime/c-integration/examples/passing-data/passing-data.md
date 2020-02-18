@@ -8,13 +8,13 @@ sidebar_label: Passing Data
 
 Linear memory is one of the major concepts in WebAssembly. 
 
-WebAssembly is sandboxed and WebAssembly is still young, memory must be copied between the host (your rust application) the Wasm module. Upcoming proposals like the WebAssembly Interface types will make this process much easier, but it is still a work in progress.
+WebAssembly is sandboxed and WebAssembly is still young, memory must be copied between the host (your rust application) the WASM module. Upcoming proposals like the WebAssembly Interface types will make this process much easier, but it is still a work in progress.
 
-The way that this memory is allocated, freed, passed, organized, etc... can vary depending on the API exposed by the Wasm module. 
+The way that this memory is allocated, freed, passed, organized, etc... can vary depending on the API exposed by the WASM module. 
 
-For example, some ABIs will provide explicit function for allocation and freeing of memory from the host. And some Wasm modules may want to control their memory themself, and the host may only need to modify that memory in place. You will want to take a look at the documentation of your wasm module, to see how it wants to interact with its memory from a Host.
+For example, some ABIs will provide explicit function for allocation and freeing of memory from the host. And some WASM modules may want to control their memory themself, and the host may only need to modify that memory in place. You will want to take a look at the documentation of your WASM module, to see how it wants to interact with its memory from a Host.
 
-In this example, let's say we have a wasm module than can perform transformations on a string passed into the module's memory. This module exports a function that returns a pointer to a fixed size static buffer, which allows one transformation at a time. This Wasm module will take in a string, and concatenate the string " Wasm is cool!". This example shows how we can read and write memory from the host (your rust application), and the Wasm module can also read and write to the same memory.
+In this example, let's say we have a WASM module than can perform transformations on a string passed into the module's memory. This module exports a function that returns a pointer to a fixed size static buffer, which allows one transformation at a time. This WASM module will take in a string, and concatenate the string " WASM is cool!". This example shows how we can read and write memory from the host (your rust application), and the WASM module can also read and write to the same memory.
 
 So if we create a new C project, following the same process as the **hello world example**, we can create a passing-data.c file with the following source code:
 
@@ -68,7 +68,7 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
   // Create module name for our imports
 
   // Create a UTF-8 string as bytes for our module name. 
-  // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
+  // And, place the string into the wasmer_byte_array type so it can be used by our guest WASM instance.
   const char *module_name = "env";
   wasmer_byte_array module_name_bytes = { .bytes = (const uint8_t *) module_name,
     .bytes_len = strlen(module_name) };
@@ -76,14 +76,14 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
   // Define a memory import
 
   // Create a UTF-8 string as bytes for our module name. 
-  // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
+  // And, place the string into the wasmer_byte_array type so it can be used by our guest WASM instance.
   const char *import_memory_name = "memory";
   wasmer_byte_array import_memory_name_bytes = { .bytes = (const uint8_t *) import_memory_name,
     .bytes_len = strlen(import_memory_name) };
 
   // Create our memory import object, from our passed memory,
-  // that will be used as shared wasm memory between the host (this application),
-  // and the guest wasm module.
+  // that will be used as shared WASM memory between the host (this application),
+  // and the guest WASM module.
   // The .module_name is the key of the importObject that this memory is associated with.
   // The .import_name is the key of the module that is within the importObject
   // The .tag is the type of import being added to the import object
@@ -97,7 +97,7 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
   // Define an array containing our imports
   wasmer_import_t imports[] = {memory_import};
 
-  // Read the wasm file bytes
+  // Read the WASM file bytes
   FILE *file = fopen("example-wasienv-wasm/strings-wasm-is-cool/strings-wasm-is-cool.wasm", "r");
   assert(file != NULL);
   fseek(file, 0, SEEK_END);
@@ -107,10 +107,10 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
   fread(bytes, 1, len, file);
   fclose(file);
 
-  // Instantiate a WebAssembly Instance from wasm bytes and imports
+  // Instantiate a WebAssembly Instance from WASM bytes and imports
   wasmer_instance_t *instance = NULL;
   wasmer_result_t compile_result = wasmer_instantiate(
-      &instance, // Our reference to our wasm instance 
+      &instance, // Our reference to our WASM instance 
       bytes, // The bytes of the WebAssembly modules
       len, // The length of the bytes of the WebAssembly module
       imports, // The Imports array the will be used as our importObject
@@ -123,14 +123,14 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
     print_wasmer_error();
   }
 
-  // Assert the wasm instantion completed
+  // Assert the WASM instantion completed
   assert(compile_result == WASMER_OK);
 
   // Return the Wasmer Instance
   return instance;
 }
 
-// Function to get a pointer to the guest wasm linear memory.
+// Function to get a pointer to the guest WASM linear memory.
 uint8_t *get_pointer_to_memory(wasmer_instance_t *instance) {
   // Get the Wasmer Context from the instance.
   // NOTE: To get the memory from the Wasmer Instance, it MUST be
@@ -138,11 +138,11 @@ uint8_t *get_pointer_to_memory(wasmer_instance_t *instance) {
   const wasmer_instance_context_t *ctx = wasmer_instance_context_get(instance);
   const wasmer_memory_t *memory = wasmer_instance_context_memory(ctx, 0);
 
-  // Return the uint8_t representation of the guest wasm linear memory.
+  // Return the uint8_t representation of the guest WASM linear memory.
   return wasmer_memory_data(memory);
 }
 
-// Function to get the length of the guest wasm linear memory.
+// Function to get the length of the guest WASM linear memory.
 uint32_t get_length_of_memory(wasmer_instance_t *instance) {
   // Get the Wasmer Context from the instance.
   // NOTE: To get the memory from the Wasmer Instance, it MUST be
@@ -150,22 +150,22 @@ uint32_t get_length_of_memory(wasmer_instance_t *instance) {
   const wasmer_instance_context_t *ctx = wasmer_instance_context_get(instance);
   const wasmer_memory_t *memory = wasmer_instance_context_memory(ctx, 0);
 
-  // Return the length (as in number of uint8 bytes) of the guest wasm linear memory
+  // Return the length (as in number of uint8 bytes) of the guest WASM linear memory
   return wasmer_memory_data_length(memory);
 }
 
-// Function to call a function on the guest wasm module, and return an i32 result
+// Function to call a function on the guest WASM module, and return an i32 result
 int call_wasm_function_and_return_i32(wasmer_instance_t *instance, char* functionName, wasmer_value_t params[], int num_params) {
   // Define our results. Results are created with { 0 } to avoid null issues,
-  // And will be filled with the proper result after calling the guest wasm function.
+  // And will be filled with the proper result after calling the guest WASM function.
   wasmer_value_t result_one = { 0 };
   wasmer_value_t results[] = {result_one};
 
 
-  // Call the wasm function
+  // Call the WASM function
   wasmer_result_t call_result = wasmer_instance_call(
-      instance, // Our Wasm Instance
-      functionName, // the name of the exported function we want to call on the guest wasm module
+      instance, // Our WASM Instance
+      functionName, // the name of the exported function we want to call on the guest WASM module
       params, // Our array of parameters
       num_params, // The number of parameters
       results, // Our array of results
@@ -186,11 +186,11 @@ int main() {
   wasmer_memory_t *memory = create_wasmer_memory();
   wasmer_instance_t *instance = create_wasmer_instance(memory);
 
-  // Get the Wasm Memory and it's length from the wasmer instance
+  // Get the WASM Memory and it's length from the wasmer instance
   uint8_t *memory_data = get_pointer_to_memory(instance);
   uint32_t memory_length = get_length_of_memory(instance);
 
-  // Let's get the pointer to the buffer exposed by our Guest Wasm Module
+  // Let's get the pointer to the buffer exposed by our Guest WASM Module
   wasmer_value_t get_buffer_pointer_params[] = { 0 };
   int buffer_pointer = call_wasm_function_and_return_i32(instance, "get_buffer_pointer", get_buffer_pointer_params, 0);
 
@@ -198,7 +198,7 @@ int main() {
   char original_string[13] = "Hello there, ";
   printf("original_string: \"%s\"\n", original_string);
 
-  // Get the length of the original string, and write it to the guest wasm's exposed buffer.
+  // Get the length of the original string, and write it to the guest WASM's exposed buffer.
   int original_string_length = sizeof(original_string) / sizeof(original_string[0]);
   for (int i = 0; i < original_string_length; i++) {
     memory_data[buffer_pointer + i] = original_string[i];
@@ -208,7 +208,7 @@ int main() {
   wasmer_value_t add_wasm_is_cool_params[] = { 0 };
   int new_string_length = call_wasm_function_and_return_i32(instance, "add_wasm_is_cool", add_wasm_is_cool_params, 0);
 
-  // Get the new string from the guest wasm's exposed buffer
+  // Get the new string from the guest WASM's exposed buffer
   char new_string[100];
   for (int i = 0; i < new_string_length; i++) {
     char char_in_buffer = memory_data[buffer_pointer + i];
@@ -217,7 +217,7 @@ int main() {
 
   // Print and assert the new string
   printf("new_string: \"%s\"\n", new_string);
-  assert(strcmp(new_string, "Hello there, Wasm is cool!") == 0);
+  assert(strcmp(new_string, "Hello there, WASM is cool!") == 0);
 
   // Destroy the instances we created for our wasmer
   wasmer_memory_destroy(memory);
@@ -231,11 +231,11 @@ Taking a look at the source code above, we see that we:
 
 1. Create an instance of wasmer memory
 2. Create an instance of wasmer, passing our memory so it may be imported by the wasmer instance.
-3. Get a byte (uint8_t) representation of the shared linear memory in the guest wasm module, using the wasmer instance context
+3. Get a byte (uint8_t) representation of the shared linear memory in the guest WASM module, using the wasmer instance context
     1. NOTE: You must get the memory from the wasmer instance context. The memory that is imported cannot be used.
-4. Call a function on the guest wasm module, to get the pointer to the unsigned char array that is in the shared linear memory from the guest wasm module.
-5. Write a string into the shared linear memory, at the index given by our guest wasm module buffer pointer.
+4. Call a function on the guest WASM module, to get the pointer to the unsigned char array that is in the shared linear memory from the guest WASM module.
+5. Write a string into the shared linear memory, at the index given by our guest WASM module buffer pointer.
 6. Call the exported `add_wasm_is_cool` transformation function.
-7. Retrieve the transformed string from the Wasm module
+7. Retrieve the transformed string from the WASM module
 
-Now that we have a general idea of how we can pass data back and forth between wasm module using it's linear memory, let's take a look on how we can expose our host functions to the wasm module.
+Now that we have a general idea of how we can pass data back and forth between WASM module using it's linear memory, let's take a look on how we can expose our host functions to the WASM module.

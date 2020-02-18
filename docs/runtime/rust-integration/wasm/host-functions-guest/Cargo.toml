@@ -9,4 +9,4 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-wee_alloc = { version = "0.4.2", optional = true }
+wee_alloc = "0.4.5"

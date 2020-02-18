@@ -71,13 +71,13 @@ The [default bindings](https://github.com/wasmerio/wasmer-js/tree/master/package
 
 `wasiInstance.memory: WebAssembly.Memory`
 
-[`WebAssembly.memory`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Memory) object, that is a view into the Wasm Module's linear memory.
+[`WebAssembly.memory`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Memory) object, that is a view into the WASM Module's linear memory.
 
 ### view
 
 `wasiInstance.view: DataView` 
 
-[DataView](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView) object, that is a view into the Wasm Module's linear memory.
+[DataView](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView) object, that is a view into the WASM Module's linear memory.
 
 ### FD_MAP
 

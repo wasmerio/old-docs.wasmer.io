@@ -9,22 +9,6 @@
         "title": "Introduction",
         "sidebar_label": "Introduction"
       },
-      "io-devices/io-devices-lib/io-devices-lib-assemblyscript": {
-        "title": "AssemblyScript",
-        "sidebar_label": "AssemblyScript"
-      },
-      "io-devices/io-devices-lib/io-devices-lib-rust": {
-        "title": "Rust",
-        "sidebar_label": "Rust"
-      },
-      "io-devices/io-devices-lib/io-devices-lib": {
-        "title": "IO Devices Library Introduction",
-        "sidebar_label": "IO Devices Library Introduction"
-      },
-      "io-devices/io-devices": {
-        "title": "IO Devices Introduction",
-        "sidebar_label": "IO Devices Introduction"
-      },
       "runtime/c-integration/examples/exit-early/example-wasienv-wasm/exit-early-import/README": {
         "title": "runtime/c-integration/examples/exit-early/example-wasienv-wasm/exit-early-import/README"
       },
@@ -78,35 +62,39 @@
       },
       "runtime/cli/runtime-cli-installation": {
         "title": "Runtime Command Line Interface Installation",
-        "sidebar_label": "Installation"
+        "sidebar_label": "CLI Installation"
       },
       "runtime/cli/runtime-cli-usage": {
         "title": "Runtime Command Line Interface Usage",
-        "sidebar_label": "Usage"
+        "sidebar_label": "CLI Usage"
       },
       "runtime/runtime": {
         "title": "Runtime Introduction",
         "sidebar_label": "Runtime Introduction"
       },
       "runtime/rust-integration/docs/runtime-rust-integration-examples-exit-early": {
-        "title": "Runtime Rust Integration: Interrupting Execution",
+        "title": "Rust Integration: Interrupting Execution",
         "sidebar_label": "Interrupting Execution"
       },
       "runtime/rust-integration/docs/runtime-rust-integration-examples-handling-errors": {
-        "title": "Runtime Rust Integration: Handling Errors",
+        "title": "Rust Integration: Handling Errors",
         "sidebar_label": "Handling Errors"
       },
       "runtime/rust-integration/docs/runtime-rust-integration-examples-hello-world": {
-        "title": "Runtime Rust Integration: Hello World",
+        "title": "Rust Integration: Hello World",
         "sidebar_label": "Hello World"
       },
       "runtime/rust-integration/docs/runtime-rust-integration-examples-host-functions": {
-        "title": "Runtime Rust Integration: Exposing Host Functions to WebAssembly",
+        "title": "Rust Integration: Exposing Host Functions to WebAssembly",
         "sidebar_label": "Exposing Host Functions to WebAssembly"
       },
       "runtime/rust-integration/docs/runtime-rust-integration-examples-passing-data": {
-        "title": "Runtime Rust Integration: Passing Data Between Rust and Wasm",
-        "sidebar_label": "Passing Data Between Rust and Wasm"
+        "title": "Rust Integration: Passing Data Between Rust and WASM",
+        "sidebar_label": "Passing Data Between Rust and WASM"
+      },
+      "runtime/rust-integration/docs/runtime-rust-integration-prepare-wasm-modules": {
+        "title": "Rust Integration: Prepare WASM Modules",
+        "sidebar_label": "Prepare WASM Modules"
       },
       "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README": {
         "title": "runtime/rust-integration/examples/exit-early/example-rust-wasm-crate/early-exit-import/README"
@@ -144,14 +132,14 @@
         "sidebar_label": "Passing Data Between Rust and Wasm"
       },
       "runtime/rust-integration/runtime-rust-integration-installation": {
-        "title": "Runtime Rust Integration Installation",
-        "sidebar_label": "Installation"
+        "title": "Rust Integration: Installation",
+        "sidebar_label": "Rust Installation"
       },
       "runtime/rust-integration/README": {
         "title": "runtime/rust-integration/README"
       },
       "runtime/rust-integration/runtime-rust-integration-reference-api": {
-        "title": "Runtime Rust Integration Reference API",
+        "title": "Rust Integration: Reference API",
         "sidebar_label": "Reference API"
       },
       "wapm/wapm-cli": {
@@ -206,12 +194,16 @@
         "title": "Wasmer-JS Node Modules Handling Input and Output",
         "sidebar_label": "Handling Input and Output"
       },
-      "wasmer-js/node-modules/examples/hello-world/wasmer-js-node-modules-hello-world": {
-        "title": "Wasmer-JS Node Modules Hello World",
+      "wasmer-js/node-modules/examples/hello-world/wasmer-js-modules-hello-world": {
+        "title": "Wasmer-JS Modules in the Browser",
         "sidebar_label": "Hello World"
       },
-      "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-node-modules-transforming-wasi-modules": {
-        "title": "Wasmer-JS Node Modules Transforming WASI Modules",
+      "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-modules-how-do-i-know-if-a-module-needs-transformation": {
+        "title": "Wasmer-JS in the Browser",
+        "sidebar_label": "How Do I Know if a Module Needs Transformation?"
+      },
+      "wasmer-js/node-modules/examples/transforming-wasi-modules/wasmer-js-modules-transforming-wasi-modules": {
+        "title": "Wasmer-JS in the Browser",
         "sidebar_label": "Transforming WASI Modules"
       },
       "wasmer-js/node-modules/wasmer-js-node-modules-installation": {

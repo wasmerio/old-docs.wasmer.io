@@ -25,7 +25,7 @@ console.log(version()) // x.x.x
 
 `wasmTransformerInit(wasmTransformerUrl: string): Promise`
 
-Exported function that takes in the url to the wasm file for that the wasm-transformer uses. This is usually within your `node_modules` with the path: `"node_modules/@wasmer/wasm-transformer/wasm-transformer.wasm"`. But this path will be different depending on where you host the wasm file.
+Exported function that takes in the url to the WASM file for that the wasm-transformer uses. This is usually within your `node_modules` with the path: `"node_modules/@wasmer/wasm-transformer/wasm-transformer.wasm"`. But this path will be different depending on where you host the WASM file.
 
 ```javascript
 import { wasmTransformerInit } from "wasm-transformer/optimized/wasm-transformer.esm";
@@ -47,7 +47,7 @@ wasmTransformerInit(
 
 `lowerI64Imports(wasmBinaryWithI64Imports: Uint8Array): Uint8Array`
 
-Exported Function to insert trampoline functions for imports that have i64 params or returns. This is useful for running Wasm modules in browsers that [do not support JavaScript BigInt -> Wasm i64 integration](https://github.com/WebAssembly/proposals/issues/7). Especially in the case for [i64 WASI Imports](https://github.com/CraneStation/wasmtime/blob/master/docs/WASI-api.md#clock_time_get). Returns or resolves the lowered wasm binary as a Uint8Array.
+Exported Function to insert trampoline functions for imports that have i64 params or returns. This is useful for running WASM modules in browsers that [do not support JavaScript BigInt -> WASM i64 integration](https://github.com/WebAssembly/proposals/issues/7). Especially in the case for [i64 WASI Imports](https://github.com/CraneStation/wasmtime/blob/master/docs/WASI-api.md#clock_time_get). Returns or resolves the lowered WASM binary as a Uint8Array.
 
 ```javascript
 import { lowerI64Imports } from "@wasmer/wasm-transformer";

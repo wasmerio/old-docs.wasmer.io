@@ -52,6 +52,6 @@ COMMANDS
   run   Run a WebAssembly file with Wasmer-JS
 ```
 
-Please take a look at the help output to start running Wasm modules.
+Please take a look at the help output to start running WASM modules.
 
 The same help output is also available in this documentation as the [User Guide](./wasmer-js-cli-user-guide) on the sidebar.

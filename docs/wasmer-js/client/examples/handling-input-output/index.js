@@ -38,7 +38,7 @@ const cleanStdout = (stdout) => {
 // "Sandbox" our file system operations
 const wasmFs = new WasmFs();
 let wasi = new WASI({
-  // Arguments to pass to the Wasm Module
+  // Arguments to pass to the WASM Module
   // The first argument usually should be the filepath to the "executable wasi module"
   // That we want to run.
   args: [wasmFilePath],
@@ -60,7 +60,7 @@ let wasi = new WASI({
 // per the C api. Otherwise, the Wasi module will error.
 let readStdinCounter = 0
 const stdinRead = (
-  stdinBuffer, // Uint8Array of the buffer that is sent to the guest wasm module's standard input
+  stdinBuffer, // Uint8Array of the buffer that is sent to the guest WASM module's standard input
   offset, // offset for the standard input
   length, // length of the standard input
   position // Position in the input
@@ -84,7 +84,7 @@ const stdinRead = (
   );
 
   // When the user cancels, throw an error to get out of the standard input read loop
-  // From the guest wasm modules (quickjs)
+  // From the guest WASM modules (quickjs)
   if (responseStdin === null) {
     const userError = new Error("Process killed by Prompt Cancellation");
     userError.user = true;
@@ -108,7 +108,7 @@ wasmFs.volume.fds[0].node.read = stdinRead;
 
 // Async Function to run our wasi module/instance
 const startWasiTask = async () => {
-  // Fetch our Wasm File
+  // Fetch our WASM File
   const response = await fetch(wasmFilePath);
   const responseArrayBuffer = await response.arrayBuffer();
   const wasmBytes = new Uint8Array(responseArrayBuffer);

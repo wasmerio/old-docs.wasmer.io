@@ -8,9 +8,9 @@ sidebar_label: Interrupting Execution
 
 WebAssembly in its current state is currently run synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host (your C application). 
 
-However, there are cases where you may want to interrupt this synchronous execution while the guest WebAssembly module is calling a host function. This can be useful for saving resources, and not returning back to the guest WebAssembly for execution, when you already know the Wasm execution will fail, or no longer be needed.
+However, there are cases where you may want to interrupt this synchronous execution while the guest WebAssembly module is calling a host function. This can be useful for saving resources, and not returning back to the guest WebAssembly for execution, when you already know the WASM execution will fail, or no longer be needed.
 
-In this example, we will run a Wasm module that calls  the imported host function, "interrupt_execution". This host function will immediately stop executing the WebAssembly module:
+In this example, we will run a WASM module that calls  the imported host function, "interrupt_execution". This host function will immediately stop executing the WebAssembly module:
 
 ```c
 #include <stdio.h>
@@ -28,13 +28,13 @@ void print_wasmer_error()
   printf("Error str: `%s`\n", error_str);
 }
 
-// The function to interrupt the execution of our guest wasm module.
+// The function to interrupt the execution of our guest WASM module.
 // Will be passed as in import function in the importObject
-// For our Guest Wasm Module.
+// For our Guest WASM Module.
 // NOTE: The first parameter of an import function for the Wasmer C API
 // must always be a pointer to the context, followed by other function parameters.
 void interrupt_execution(wasmer_instance_context_t *ctx) {
-  printf("Interrupting execution of the guest wasm module, from the imported host function ...\n");
+  printf("Interrupting execution of the guest WASM module, from the imported host function ...\n");
 
   // Divide by zero here to throw an error
   // Since Execptions are not in C, only in C++
@@ -83,7 +83,7 @@ wasmer_instance_t *create_wasmer_instance(
   // Create module name for our imports
 
   // Create a UTF-8 string as bytes for our module name. 
-  // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
+  // And, place the string into the wasmer_byte_array type so it can be used by our guest WASM instance.
   const char *module_name = "env";
   wasmer_byte_array module_name_bytes = { .bytes = (const uint8_t *) module_name,
     .bytes_len = strlen(module_name) };
@@ -111,7 +111,7 @@ wasmer_instance_t *create_wasmer_instance(
   // Define an array containing our imports
   wasmer_import_t imports[] = {interrupt_execution_import, should_not_be_called_import};
 
-  // Read the wasm file bytes
+  // Read the WASM file bytes
   FILE *file = fopen("example-wasienv-wasm/exit-early-import/exit-early-import.wasm", "r");
   assert(file != NULL);
   fseek(file, 0, SEEK_END);
@@ -121,10 +121,10 @@ wasmer_instance_t *create_wasmer_instance(
   fread(bytes, 1, len, file);
   fclose(file);
 
-  // Instantiate a WebAssembly Instance from wasm bytes and imports
+  // Instantiate a WebAssembly Instance from WASM bytes and imports
   wasmer_instance_t *instance = NULL;
   wasmer_result_t compile_result = wasmer_instantiate(
-      &instance, // Our reference to our wasm instance 
+      &instance, // Our reference to our WASM instance 
       bytes, // The bytes of the WebAssembly modules
       len, // The length of the bytes of the WebAssembly module
       imports, // The Imports array the will be used as our importObject
@@ -137,7 +137,7 @@ wasmer_instance_t *create_wasmer_instance(
     print_wasmer_error();
   }
 
-  // Assert the wasm instantion completed
+  // Assert the WASM instantion completed
   assert(compile_result == WASMER_OK);
 
   // Return the Wasmer Instance
@@ -180,17 +180,17 @@ int main() {
       );
 
   // Define our results. Results are created with { 0 } to avoid null issues,
-  // And will be filled with the proper result after calling the guest wasm function.
+  // And will be filled with the proper result after calling the guest WASM function.
   wasmer_value_t result_one = { 0 };
   wasmer_value_t results[] = {result_one};
 
-  // Define our parameters (none) we are passing into the guest wasm function call.
+  // Define our parameters (none) we are passing into the guest WASM function call.
   wasmer_value_t params[] = {0};
 
-  // Call the wasm function
+  // Call the WASM function
   wasmer_result_t call_result = wasmer_instance_call(
-      instance, // Our Wasm Instance
-      "exit_early", // the name of the exported function we want to call on the guest wasm module
+      instance, // Our WASM Instance
+      "exit_early", // the name of the exported function we want to call on the guest WASM module
       params, // Our array of parameters
       0, // The number of parameters
       results, // Our array of results

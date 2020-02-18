@@ -24,12 +24,12 @@ fn main() -> error::Result<()> {
     // Let's read in our .wasm file as bytes
 
     // Let's open the file.
-    let mut file = File::open(WASM_FILE_PATH).expect(&format!("wasm file at {}", WASM_FILE_PATH));
+    let mut file = File::open(WASM_FILE_PATH).expect(&format!("WASM file at {}", WASM_FILE_PATH));
 
     // Let's read the file into a Vec
     let mut wasm_vec = Vec::new();
     file.read_to_end(&mut wasm_vec)
-        .expect("Error reading the wasm file");
+        .expect("Error reading the WASM file");
 
     // We create some shared data here, [`Arc`] is required because we may
     // move our WebAssembly instance to another thread to run it.  RefCell
@@ -50,7 +50,7 @@ fn main() -> error::Result<()> {
         *counter_ref
     };
 
-    // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
+    // Now that we have the WASM file as bytes, let's run it with the wasmer runtime
 
     // Let's define the import object used to import our function
     // into our webassembly sample application.
@@ -58,7 +58,7 @@ fn main() -> error::Result<()> {
     // Make sure to check your function signature (parameter and return types) carefully!
     let import_object = imports! {
         // Define the "env" namespace that was implicitly used
-        // by our example rust wasm crate.
+        // by our example rust WASM crate.
         "env" => {
             // Key should be the name of the imported function
             // Value should be the func! macro, with the function passed in.
@@ -67,7 +67,7 @@ fn main() -> error::Result<()> {
         },
     };
 
-    // Let's create an instance of wasm module running in the wasmer-runtime
+    // Let's create an instance of WASM module running in the wasmer-runtime
     let instance = instantiate(&wasm_vec, &import_object)?;
 
     // Define the number of times we want to loop our increment

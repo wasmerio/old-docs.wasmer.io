@@ -9,7 +9,7 @@ use wasmer_runtime::{
     func,
     imports,
     instantiate,
-    // Include the Context for our Wasm Instance for passing imported host functions
+    // Include the Context for our WASM Instance for passing imported host functions
     Ctx,
     Func,
 };
@@ -24,14 +24,14 @@ fn main() -> error::Result<()> {
     // Let's read in our .wasm file as bytes
 
     // Let's open the file.
-    let mut file = File::open(WASM_FILE_PATH).expect(&format!("wasm file at {}", WASM_FILE_PATH));
+    let mut file = File::open(WASM_FILE_PATH).expect(&format!("WASM file at {}", WASM_FILE_PATH));
 
     // Let's read the file into a Vec
     let mut wasm_vec = Vec::new();
     file.read_to_end(&mut wasm_vec)
-        .expect("Error reading the wasm file");
+        .expect("Error reading the WASM file");
 
-    // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
+    // Now that we have the WASM file as bytes, let's run it with the wasmer runtime
 
     // Let's define the import object used to import our function
     // into our webassembly sample application.
@@ -39,7 +39,7 @@ fn main() -> error::Result<()> {
     // Make sure to check your function signature (parameter and return types) carefully!
     let import_object = imports! {
         // Define the "env" namespace that was implicitly used
-        // by our example rust wasm crate.
+        // by our example rust WASM crate.
         "env" => {
             // Key should be the name of the imported function
             // Value should be the func! macro, with the function passed in.
@@ -47,10 +47,10 @@ fn main() -> error::Result<()> {
         },
     };
 
-    // Let's create an instance of wasm module running in the wasmer-runtime
+    // Let's create an instance of WASM module running in the wasmer-runtime
     let instance = instantiate(&wasm_vec, &import_object)?;
 
-    // Let's call the exported "exit_early" function on the wasm module.
+    // Let's call the exported "exit_early" function on the WASM module.
     let exit_early_func: Func<(), i32> = instance
         .func("exit_early")
         .expect("exit_early function not found");
@@ -74,11 +74,11 @@ fn main() -> error::Result<()> {
     Ok(())
 }
 
-// Function that is imported into the guest wasm module, that will immediately stop execution
+// Function that is imported into the guest WASM module, that will immediately stop execution
 fn interrupt_execution(_ctx: &mut Ctx) -> Result<(), ()> {
     // Log that we were called
     println!("interrupt_execution called!");
 
-    // Return an error, which will immediately stop execution of the wasm module
+    // Return an error, which will immediately stop execution of the WASM module
     Err(())
 }

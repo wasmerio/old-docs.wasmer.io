@@ -1,6 +1,6 @@
 .PHONY: wasm examples run-all
 
-# generate wasm
+# generate WASM
 wasm:
 	cargo build --release --target=wasm32-unknown-unknown -p hello-world-guest
 	cargo build --release --target=wasm32-unknown-unknown -p passing-data-guest

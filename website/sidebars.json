@@ -20,6 +20,7 @@
         "label": "Rust Integration",
         "ids": [
           "runtime/rust-integration/runtime-rust-integration-installation",
+          "runtime/rust-integration/docs/runtime-rust-integration-prepare-wasm-modules",
           "runtime/rust-integration/docs/runtime-rust-integration-examples-hello-world",
           "runtime/rust-integration/docs/runtime-rust-integration-examples-passing-data",
           "runtime/rust-integration/docs/runtime-rust-integration-examples-host-functions",

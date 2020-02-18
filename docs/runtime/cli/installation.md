@@ -1,17 +1,20 @@
 ---
 id: runtime-cli-installation
 title: Runtime Command Line Interface Installation
-sidebar_label: Installation
+sidebar_label: CLI Installation
 ---
 
-## Recommended Installation
+## Windows
+
+The Windows executable can be found on our [Github Releases Page](https://github.com/wasmerio/wasmer/releases).
+
+## *NIX Operating Systems
 
 For Mac and Linux, Wasmer can be installed from an Automatic Install Script:
 
-`curl https://get.wasmer.io -sSfL | sh`
-
-For Windows, executable can be found on out [Github Releases Page](https://github.com/wasmerio/wasmer/releases).
-
+```bash
+$ curl https://get.wasmer.io -sSfL | sh
+```
 ---
 
-If you would like to build from source, that can also be done. And is [covered in this doc](/runtime/cli/runtime-cli-building-from-source).
+If you prefer, you can also build Wasmer from source by following the instructions in [this doc](/runtime/cli/runtime-cli-building-from-source).

@@ -15,20 +15,20 @@ fn main() -> error::Result<()> {
     // Let's read in our .wasm file as bytes
 
     // Let's open the file.
-    let mut file = File::open(WASM_FILE_PATH).expect(&format!("wasm file at {}", WASM_FILE_PATH));
+    let mut file = File::open(WASM_FILE_PATH).expect(&format!("WASM file at {}", WASM_FILE_PATH));
 
     // Let's read the file into a Vec
     let mut wasm_vec = Vec::new();
     file.read_to_end(&mut wasm_vec)
-        .expect("Error reading the wasm file");
+        .expect("Error reading the WASM file");
 
-    // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
+    // Now that we have the WASM file as bytes, let's run it with the wasmer runtime
 
-    // Our import object, that allows exposing functions to our wasm module.
+    // Our import object, that allows exposing functions to our WASM module.
     // We're not importing anything, so make an empty import object.
     let import_object = imports! {};
 
-    // Let's create an instance of wasm module running in the wasmer-runtime
+    // Let's create an instance of WASM module running in the wasmer-runtime
     let instance = instantiate(&wasm_vec, &import_object)?;
 
     // Let's get a number we want to add one to
