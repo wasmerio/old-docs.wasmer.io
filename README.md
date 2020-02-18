@@ -1,37 +1,62 @@
-# docs.wasmer.io
+# Introduction
 
-Documentation for Wasmer Projects. Powered by [Docusarus](https://docusaurus.io/)
 
-![Screenshot of Documentation](./website/static/img/docs-screenshot.png)
 
-# Contributing
+Welcome to the Wasmer Documentation! 👋
 
-Any and all PRs are welcome! Most pull requests should start by opning an issue so the feature or idea can be discussed before being implemented. 
+[Wasmer](https://wasmer.io/) is an open-source runtime for executing WebAssembly on the Server.
 
-Contributions most likely will come as:
+> ![](.gitbook/assets/image%20%282%29.png)
+>
+> Wasmer mission is make all software universally available
 
-* Documentation - Improvements to the content of the documentation
+For an overview of WebAssembly, and what WebAssembly is, [take a look here](https://webassembly.org/).
 
-* Website - Improvements to the "shell", which is powered by Docusarus.
+## Background
 
-## Documentation
+By design, the environment within which a WebAssembly module runs is completely isolated \(or _sandboxed_\) from the native functionality of the underlying host system. This means that _by default_, WASM modules are designed to perform nothing more than pure computation.
 
-Documentation updates are super appreciated! Whether it be a small type, the documentation is out of date, or the general document can be improved or shorten! These are all greatly appreciated!
+Consequently, access to OS-level resources such as file descriptors, network sockets, the system clock, and random numbers is not normally possible from WASM.
 
-General typo fixes probably don't need an issue to open a PR, but larger contributions like creating a new example can benefit from an issue being created first.
+However, there are many cases in which a WebAssembly module needs to do more than perform pure computation; they must interact with native "OS" functionality.
 
-The documentation is divided into three categories:
+Wasmer allows you to run Wasm modules either standalone or embedded within other language runtimes such as C/C++, Python, and Rust.
 
-* Reference API - Very specific API definitions, in which the properties and functions are expressed clearly.
-* Examples - Small, one-off copy-pastable snippets of code. That live within a larger, but relatively less complicated project.
-* Tutorials - End-to-end documents that explain how to go from nothing, to a testable project on a machine with Wasmer installed.
+This provide three key services:
 
-Reference API documentation may sometimes live out of this documentation, depending on the language. For instance, the Wasmer Rust integration live on [docs.rs](https://docs.rs/wasmer-runtime/0.11.0/wasmer_runtime/index.html). Those docs can be updated there. Examples live in the `docs/[WASMER_PROJECT_SUBDIRECTORY]/examples` directory. Examples should have an entire project in the directory, with a `.md` file for the  example explaining the small sub-project, only highlighting the relevant parts for the purpose. Tutorials live in the `docs/[WASMER_PROJECT_SUBDIRECTORY]/tutorials` directory. These should also have an entire project in them, but most of the content should also be in the `.md` file for the tutorial. In terms of all relevant code parts should be viewable, and explained.
+1. Enables extremely portable binaries that can run unmodified in any OS that is supported by Wasmer \(Linux, macOS, Windows and FreeBSD\).
+2. It acts as a secure bridge for WASM modules to interact with native "OS" functionality, via ABIs such as [`WASI`](https://github.com/webassembly/wasi) and [`Emscripten`](https://github.com/emscripten-core/emscripten)
 
-When creating new content, be sure to also add the path to the content in the [docusarus config](https://docusaurus.io/docs/en/site-config).
+{% hint style="warning" %}
+#### Important
 
-## Website
+The term "OS" used above is in quotes to indicate that the native function being called might not actually be provided by the host's operating system.
 
-Website updates are also super appreciated! Especially for small bugs and things! 
+In reality, native functions always belong to the host environment within which the WebAssembly module is being run, and that could be either the host language's runtime environment \(for example, JavaScript, Python or Ruby\), or it might be the actual operating system.
 
-Larger design, technnical, or [docusarus config](https://docusaurus.io/docs/en/site-config) changes to the website "shell", should have an issue associated with them.
+Either way though, from a WebAssembly point of view, we don't need to care too much about this detail. All we need to know is that:
+
+* The host can provide "imported" functions for the WebAssembly module
+* Via Wasmer's included ABIs, WebAssembly modules can have access to a set of operating-system-like functions with varying levels of sandboxing
+{% endhint %}
+
+## Projects
+
+We also have other projects such as:
+
+1. The [WAPM \(WebAssembly Package Manager\)](https://wapm.io/)
+2. [Wasmer-JS](https://github.com/wasmerio/wasmer-js)
+3. The [WebAssembly Shell](https://webassembly.sh/)
+
+to name but a few...
+
+Also, for the latest blogs on Wasmer features and developments, check out our [Medium site](https://medium.com/wasmer).
+
+## Tutorials
+
+If you would like to see tutorials, examples, or reference API documentation about a specific Wasmer project, please use the sidebar to the left, or the search bar at the top of this page in the header, or take a look at the list below:
+
+* [Wasmer Runtime Documentation](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/runtime/runtime/README.md)
+* [Wasmer JS Documentation](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/wasmer-js/wasmer-js/README.md)
+* [WAPM Documentation](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/wapm/wapm/README.md)
+
