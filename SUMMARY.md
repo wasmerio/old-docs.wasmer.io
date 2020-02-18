@@ -22,7 +22,7 @@
 * [Rust](runtime-1/rust-integration/README.md)
   * [Setup](runtime-1/rust-integration/installation.md)
   * [Examples](runtime-1/rust-integration/examples/README.md)
-    * [Hello World](runtime-1/rust-integration/examples/hello-world.md)
+    * [Hello World](integrations/rust/examples/hello-world.md)
     * [Passing Data Between Rust and Wasm](runtime-1/rust-integration/examples/passing-data.md)
     * [Exposing Host Functions to WebAssembly](runtime-1/rust-integration/examples/host-functions.md)
     * [Handling Errors](runtime-1/rust-integration/examples/handling-errors.md)

@@ -70,9 +70,7 @@ All packages on [wapm.io](https://wapm.io/) are namespaced by username.
 {% endhint %}
 
 {% hint style="success" %}
-#### Did you know?
-
-All `WASI` programs published to WAPM, will be automatically available to use them online in the [WebAssembly shell](../webassembly.sh.md).
+If your program is a WASI program, it will be automatically available in the [WebAssembly shell](../webassembly.sh.md)
 {% endhint %}
 
 ## **Commands**
