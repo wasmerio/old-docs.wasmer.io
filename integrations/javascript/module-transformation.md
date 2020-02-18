@@ -4,7 +4,7 @@ title: Transforming WASI Modules
 sidebar_label: Data Transfer Between JavaScript & WASM
 ---
 
-# module-transformation
+# Module Transformation
 
 ## What is Module Transformation and Why is it Necessary?
 
@@ -18,19 +18,23 @@ The real issue here centers on transferring 64-bit integers between the two runt
 
 Both JavaScript and WebAssembly use this data type \(known as `i64` in WebAssembly and `BigInt` in JavaScript\); but for a variety of reasons, the transfer of this data type has not yet been implemented and is still at the proposal stage. \(See [here](https://github.com/WebAssembly/JS-BigInt-integration/issues/15) and [here](https://github.com/WebAssembly/proposals/issues/7) for details\).
 
-> #### IMPORTANT
->
-> Irrespective of whether your JavaScript app runs on the client or the server, the interface to any WASI module call that has been declared to use an `i64` must first be _**transformed**_ before it can be called.
+{% hint style="warning" %}
+### Important
+
+Irrespective of whether your JavaScript app runs on the client or the server, the interface to any WASI module call that has been declared to use an `i64` must first be _**transformed**_ before it can be called.
+{% endhint %}
 
 Remember, in the context of a JavaScript program, the WASI bridge between WebAssembly and native "OS" functions has been implemented using a set of JavaScript polyfills. Consequently, you will experience this problem if you try for example to invoke a WebAssembly module that then invokes a native "OS" function such as [clock\_time\_get](https://github.com/WebAssembly/WASI/blob/master/phases/snapshot/docs.md#-clock_time_getid-clockid-precision-timestamp---errno-timestamp).
 
 As a temporary fix, this data transfer issue is solved by the `@wasmer/wasm-transformer` package.
 
-> #### Under The Hood
->
-> Technically, this transformation adapts the WebAssembly interface so that it can send and receive JavaScript `BigInt`s \(64-bit, signed integers\) without data loss.
->
-> This is acheived by transforming a JavaScript `BigInt` into a `Uint8Array` containing 8, unsigned, 8-bit integers.
+{% hint style="success" %}
+### Under the hood
+
+Technically, this transformation adapts the WebAssembly interface so that it can send and receive JavaScript `BigInt`s \(64-bit, signed integers\) without data loss.
+
+This is achieved by transforming a JavaScript `BigInt` into a `Uint8Array` containing 8, unsigned, 8-bit integers.
+{% endhint %}
 
 ## How Do I Know if a WASM Module Needs Transformation?
 
@@ -44,17 +48,19 @@ Ok, back in reality...
 
 In order to understand whether or not this module needs transformation, we need to take a look inside the WebAssembly module.
 
-> #### ASIDE
->
-> We make no attempt to teach you WebAssembly here!
->
-> If you want to know about the inner workings of a WebAssembly module, then please visit the [WebAssembly.org](https://webassembly.org) website and read the documentation there.
->
-> We now continue with your scheduled program...
+{% hint style="info" %}
+### Aside
+
+We make no attempt to teach you WebAssembly here!
+
+If you want to know about the inner workings of a WebAssembly module, then please visit the [WebAssembly.org](https://webassembly.org/) website and read the documentation there.
+
+We now continue with your scheduled program...
+{% endhint %}
 
 When converted to [WebAssembly Text](https://webassembly.github.io/spec/core/text/index.html) format, the first few lines look like this:
 
-```text
+```scheme
 (module
   (type $t0 (func (param i32 i64 i32) (result i32)))
   (type $t1 (func (param i32 i32 i32 i32) (result i32)))
@@ -63,11 +69,12 @@ When converted to [WebAssembly Text](https://webassembly.github.io/spec/core/tex
   (import "wasi_unstable" "fd_write" (func $wasi_unstable.fd_write (type $t1)))
 
   ;; snip...
+)
 ```
 
 On line 2, we can see the declaration of a type definition called `$t0`. This type definition represents the interface to some `func`tion that takes three, signed integers as parameters and returns a signed integer.
 
-```text
+```scheme
 (type $t0 (func (param i32 i64 i32) (result i32)))
 ```
 
@@ -77,7 +84,7 @@ So now we know that somewhere in this WebAssembly module, there is a call to fun
 
 Next, look a little further down to line 5. Here we can see an `import` statement.
 
-```text
+```scheme
 (import "wasi_unstable" "clock_time_get" (func $wasi_unstable.clock_time_get (type $t0)))
 ```
 

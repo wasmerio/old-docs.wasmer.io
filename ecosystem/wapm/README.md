@@ -1,20 +1,20 @@
 # WAPM
 
-[WAPM](https://wapm.io/) is a package manager for WebAssembly modules to be used standalone by any WebAssembly Runtime \(such as the Wasmer Runtime\):
+[WAPM](https://wapm.io/) is a Package Manager for WebAssembly modules to be used standalone by any WebAssembly Runtime \(such as the [Wasmer Runtime](../wasmer/)\):
 
-* [wapm.io](https://cheerpxdemos.leaningtech.com/prehisto.html)
-* [wapm-cli Github Repo](https://github.com/wasmerio/wapm-cli)
+* WAPM Package Registry for storing and serving packages
+
+  [wapm.io](https://cheerpxdemos.leaningtech.com/prehisto.html)
+
+* WAPM package client \(called `wapm` CLI\) for installing and managing packages [wapm-cli Github Repo](https://github.com/wasmerio/wapm-cli)
+
+The `wapm` tool comes bundled with [Wasmer](https://wasmer.io/), but it works great with the other [server-side runtimes](https://github.com/mbasso/awesome-wasm#non-web-embeddings) and the web!
 
 {% hint style="info" %}
-The name WAPM is an abbreviation for WebAssembly Package Manager
+#### Did you know?
+
+The name WAPM is an abbreviation for **W**eb**A**ssembly **P**ackage **M**anager
 {% endhint %}
 
-The WAPM ecosystem makes WebAssembly more accessible to developers. The system is enabled by a couple tools:
 
-* wapm package registry for storing and serving packages
-* wapm package client \(called _wapm-cli_\) for installing and managing packages
-
-The tool comes bundled with [Wasmer: the WebAssembly runtime](https://wasmer.io/), but it works great with the other [server-side runtimes](https://github.com/mbasso/awesome-wasm#non-web-embeddings) and the web!
-
-To get started with WAPM, we suggest starting with getting wapm installed, and following the getting started guide.
 

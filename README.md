@@ -1,7 +1,5 @@
 # Introduction
 
-
-
 Welcome to the Wasmer Documentation! 👋
 
 [Wasmer](https://wasmer.io/) is an open-source runtime for executing WebAssembly on the Server.
@@ -20,7 +18,7 @@ Consequently, access to OS-level resources such as file descriptors, network soc
 
 However, there are many cases in which a WebAssembly module needs to do more than perform pure computation; they must interact with native "OS" functionality.
 
-Wasmer allows you to run Wasm modules either standalone or embedded within other language runtimes such as C/C++, Python, and Rust.
+Wasmer allows you to run Wasm modules either **standalone** or **embedded** within other language runtimes such as C/C++, Python, Go, PHP, Elixir, Rust...
 
 This provide three key services:
 
@@ -44,9 +42,8 @@ Either way though, from a WebAssembly point of view, we don't need to care too m
 
 We also have other projects such as:
 
-1. The [WAPM \(WebAssembly Package Manager\)](https://wapm.io/)
-2. [Wasmer-JS](https://github.com/wasmerio/wasmer-js)
-3. The [WebAssembly Shell](https://webassembly.sh/)
+1. The [WAPM \(WebAssembly Package Manager\)](https://wapm.io/)\]
+2. The [WebAssembly Shell](https://webassembly.sh/)
 
 to name but a few...
 
@@ -56,7 +53,14 @@ Also, for the latest blogs on Wasmer features and developments, check out our [M
 
 If you would like to see tutorials, examples, or reference API documentation about a specific Wasmer project, please use the sidebar to the left, or the search bar at the top of this page in the header, or take a look at the list below:
 
-* [Wasmer Runtime Documentation](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/runtime/runtime/README.md)
-* [Wasmer JS Documentation](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/wasmer-js/wasmer-js/README.md)
-* [WAPM Documentation](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/wapm/wapm/README.md)
+* [Wasmer Runtime](ecosystem/wasmer/)
+* [WAPM](ecosystem/wapm/)
+
+Language Integrations \(to use WebAssembly there\):
+
+* [Wasmer in Rust](integrations/rust/)
+* [Wasmer in C](integrations/c/)
+* [Wasmer in Javascript](integrations/javascript/)
+
+
 
