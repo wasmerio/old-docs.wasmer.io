@@ -5,11 +5,14 @@ Thanks to [spec tests](https://github.com/wasmerio/wasmer/tree/master/lib/specte
 You can run all the tests with:
 
 ```text
-rustup default nightly
 make test
 ```
 
-#### Testing backends
+{% hint style="info" %}
+`make test` will require all the backends to be installed. Please follow the Building from Source guide to make sure you have [all the requirements fulfilled](./#all-backends-default).
+{% endhint %}
+
+### Testing backends
 
 Each backend can be tested separately:
 
@@ -17,7 +20,7 @@ Each backend can be tested separately:
 * Cranelift: `make cranelift`
 * LLVM: `make llvm`
 
-#### Testing integrations
+### Testing integrations
 
 Each integration can be tested separately:
 
