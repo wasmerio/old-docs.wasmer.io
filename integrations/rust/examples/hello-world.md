@@ -19,7 +19,6 @@ This should generate two important files for us, `Cargo.toml` and `src/main.rs`.
 
 Let's modify our `Cargo.toml` to add the [`wasmer-runtime` crate](https://crates.io/crates/wasmer-runtime/0.13.1) to our project. At the time of this writing, the crate is at version `0.13.1`. So we change the `Cargo.toml` to the following:
 
-{% code title="Cargo.toml" %}
 ```yaml
 [package]
 name = "hello-world"
@@ -31,7 +30,6 @@ edition = "2018"
 # Add the wasmer-runtime as a dependency
 wasmer-runtime = "0.13.1"
 ```
-{% endcode %}
 
 Now that we have the Wasmer runtime added as a dependency, let's go ahead and try it out! For our hello world, what we will do is use the Wasmer runtime to execute an exported function on a WebAssembly module, that adds one the the integer passed to the function.
 
