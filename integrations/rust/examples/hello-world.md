@@ -48,12 +48,12 @@ use std::io::prelude::*;
 use wasmer_runtime::{error, imports, instantiate, Func};
 ```
 
-Now that we have access to the `instantiate` and imports macro, we should be able to create our first WebAssembly Instance! 
+Now that we have access to the `instantiate` and imports macro, we should be able to create our first WebAssembly Instance!
 
 ```rust
 fn main() -> error::Result<()> {
     // Let's get the .wasm file as bytes
-    let wasm_bytes = include_bytes!("modules/add.wasm");
+    let wasm_bytes = include_bytes!("add.wasm");
 
     // Our import object, that allows exposing functions to our wasm module.
     // We're not importing anything, so make an empty import object.
@@ -96,7 +96,7 @@ use wasmer_runtime::{error, imports, instantiate, Func};
 // Our entry point to our application
 fn main() -> error::Result<()> {
     // Let's get the .wasm file as bytes
-    let wasm_bytes = include_bytes!("modules/add.wasm");
+    let wasm_bytes = include_bytes!("add.wasm");
 
     // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
 
