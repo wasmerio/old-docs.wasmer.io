@@ -6,7 +6,7 @@ sidebar_label: Getting Started
 
 # Getting Started
 
-Otherwise, you can install the Wasmer CLI by following the instructions below:
+You can install the Wasmer Standalone runtime by following the instructions below:
 
 If you haven't already, Install the Wasmer CLI.
 

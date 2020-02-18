@@ -3,7 +3,7 @@
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/blob/master/docs/runtime/rust-integration/examples/early_exit.rs).
 
-> Please take a look at the [setup steps for the Rust integration](../setup.md).
+> Please take a look at the [setup steps for the Rust integration](../installation.md).
 {% endhint %}
 
 WebAssembly is currently always run synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host \(your Rust application\).
