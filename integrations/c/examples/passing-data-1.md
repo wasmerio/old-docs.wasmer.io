@@ -1,10 +1,16 @@
 # Passing Data
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/passing-data)
+{% hint style="success" %}
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/passing-data)
+
+> Please take a look at the [setup steps for the C/C++ integration](../installation.md).
+{% endhint %}
 
 Linear memory is one of the major concepts in WebAssembly.
 
-WebAssembly is sandboxed and WebAssembly is still young, memory must be copied between the host \(your rust application\) the Wasm module. Upcoming proposals like the WebAssembly Interface types will make this process much easier, but it is still a work in progress.
+{% hint style="info" %}
+Because WebAssembly is sandboxed, memory must be copied between the host \(your Rust application\) and the Wasm module. Upcoming proposals like WebAssembly Interface types will make this process much easier, but it is still a work in progress.
+{% endhint %}
 
 The way that this memory is allocated, freed, passed, organized, etc... can vary depending on the API exposed by the Wasm module.
 

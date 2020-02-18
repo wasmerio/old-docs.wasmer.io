@@ -1,6 +1,10 @@
 # Hello World
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/hello-world)
+{% hint style="success" %}
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/blob/master/docs/runtime/rust-integration/examples/hello_world.rs)
+
+> Please take a look at the [setup steps for the C/C++ integration](../installation.md).
+{% endhint %}
 
 Please take a look at the installation steps for the C/C++ integration.
 
