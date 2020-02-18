@@ -64,7 +64,11 @@ fn main() -> error::Result<()> {
 }
 ```
 
-And now we can just call the "add\_one" function:
+{% hint style="info" %}
+You can download the `add.wasm` WebAssembly module here:  
+{% endhint %}
+
+And now we can just call the `add_one` function \(remember to use it inside the `main()` function\).
 
 ```rust
     // Let's get `add_one` as a function which takes one `u32` and returns one `u32`

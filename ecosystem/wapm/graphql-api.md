@@ -17,7 +17,7 @@ If you want to learn more about GraphQL, please visit the official Website: [Gra
 {% hint style="info" %}
 #### Did you know...?
 
-[WebAssembly.sh](../webassembly.sh.md) is using the WAPM GraphQL API to expose the WASI modules in the shell automatically?
+[WebAssembly.sh](../webassembly.sh.md) is using the WAPM GraphQL API to expose the WASI modules in the shell automatically
 {% endhint %}
 
 ### How I can use the WAPM API?
