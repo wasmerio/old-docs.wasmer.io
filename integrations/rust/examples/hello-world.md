@@ -19,6 +19,7 @@ This should generate two important files for us, `Cargo.toml` and `src/main.rs`.
 
 Let's modify our `Cargo.toml` to add the [`wasmer-runtime` crate](https://crates.io/crates/wasmer-runtime/0.13.1) to our project. At the time of this writing, the crate is at version `0.13.1`. So we change the `Cargo.toml` to the following:
 
+{% code title="Cargo.toml" %}
 ```yaml
 [package]
 name = "hello-world"
@@ -30,6 +31,7 @@ edition = "2018"
 # Add the wasmer-runtime as a dependency
 wasmer-runtime = "0.13.1"
 ```
+{% endcode %}
 
 Now that we have the Wasmer runtime added as a dependency, let's go ahead and try it out! For our hello world, what we will do is use the Wasmer runtime to execute an exported function on a WebAssembly module, that adds one the the integer passed to the function.
 
@@ -50,12 +52,12 @@ Now that we have access to the `instantiate` and imports macro, we should be abl
 
 ```rust
 fn main() -> error::Result<()> {
+    // Let's get the .wasm file as bytes
+    let wasm_bytes = include_bytes!("modules/add.wasm");
+
     // Our import object, that allows exposing functions to our wasm module.
     // We're not importing anything, so make an empty import object.
     let import_object = imports! {};
-    
-    // Let's read the Wasm file
-    let wasm_bytes = include_bytes!("/target/wasm32-unknown-unknown/release/hello_world_guest.wasm");
 
     // Let's create an instance of wasm module running in the wasmer-runtime
     let instance = instantiate(&wasm_vec, &import_object)?;
@@ -93,8 +95,8 @@ use wasmer_runtime::{error, imports, instantiate, Func};
 
 // Our entry point to our application
 fn main() -> error::Result<()> {
-    // Let's read in our .wasm file as bytes
-    let wasm_bytes = include_bytes!("/target/wasm32-unknown-unknown/release/hello_world_guest.wasm");
+    // Let's get the .wasm file as bytes
+    let wasm_bytes = include_bytes!("modules/add.wasm");
 
     // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
 
