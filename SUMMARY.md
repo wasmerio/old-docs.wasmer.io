@@ -61,7 +61,7 @@
         * [transforming-wasi-modules](runtime-1/wasmer-js/client/examples/transforming-wasi-modules/transforming-wasi-modules.md)
       * [handling-input-output](runtime-1/wasmer-js/client/examples/handling-input-output/README.md)
         * [handling-input-output](runtime-1/wasmer-js/client/examples/handling-input-output/handling-input-output.md)
-  * [Module Transformation](integrations/javascript/module-transformation.md)
+  * [Module Transformation](runtime-1/wasmer-js/module-transformation.md)
   * [Wasmer-JS CLI](runtime-1/wasmer-js/installation.md)
 
 ## Community
