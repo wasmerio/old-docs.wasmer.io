@@ -3,12 +3,12 @@
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/rust-integration/examples/handling_errors.rs)
 
-> Please take a look at the [setup steps for the Rust integration](../installation.md).
+> Please take a look at the [setup steps for the Rust integration](../setup.md).
 {% endhint %}
 
 
 
-Please take a look at the [setup steps for the Rust integration](../installation.md).
+Please take a look at the [setup steps for the Rust integration](../setup.md).
 
 There will come a time where running a WebAssembly module will not work, and trying to figure out why it does not work can be a difficult task! In the current MVP of WebAssembly, debugging isn't explicitly defined for runtimes both in and out of the browser. So we'll have to write some error handling code ourselves.
 

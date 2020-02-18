@@ -20,7 +20,7 @@
 ## Language Integrations <a id="integrations"></a>
 
 * [Rust](integrations/rust/README.md)
-  * [Setup](integrations/rust/installation.md)
+  * [Setup](integrations/rust/setup.md)
   * [Examples](integrations/rust/examples/README.md)
     * [Hello World](integrations/rust/examples/hello-world.md)
     * [Passing Data Between Rust and Wasm](integrations/rust/examples/passing-data.md)
@@ -29,7 +29,7 @@
     * [Interrupting Execution](integrations/rust/examples/early-exit.md)
   * [Wasmer Rust API](https://docs.rs/wasmer-runtime/)
 * [C](integrations/c/README.md)
-  * [Setup](integrations/c/installation.md)
+  * [Setup](integrations/c/setup.md)
   * [Examples](integrations/c/examples/README.md)
     * [Hello World](integrations/c/examples/hello-world-1.md)
     * [Passing Data](integrations/c/examples/passing-data-1.md)

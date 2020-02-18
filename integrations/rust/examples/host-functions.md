@@ -3,7 +3,7 @@
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/rust-integration/examples/host_functions.rs)
 
-> Please take a look at the [setup steps for the Rust integration](../installation.md).
+> Please take a look at the [setup steps for the Rust integration](../setup.md).
 {% endhint %}
 
 Up until now, our WebAssembly program has only been able to do pure computation, that is, take arguments and return values. Most interesting use cases require more than just computation though. In this section we'll go over how to give the Wasm modules we run extra abilties in the form of host functions in an `ImportObject`.

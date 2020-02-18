@@ -3,7 +3,7 @@
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/blob/master/docs/runtime/rust-integration/examples/hello_world.rs)
 
-> Please take a look at the [setup steps for the Rust integration](../installation.md).
+> Please take a look at the [setup steps for the Rust integration](../setup.md).
 {% endhint %}
 
 In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats directly right now, thus to keep it simple we will be writing a host application that calls the "add\_one" function of a guest wasm module, which adds 1 to the value passed as a parameter, and returns the result.
