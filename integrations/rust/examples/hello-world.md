@@ -76,7 +76,7 @@ And now we can just call the `add_one` function \(remember to use it inside the 
     let result = add_one.call(42)?;
 
     // Log the new value
-    println!("New Value: {}", result);
+    println!("Result: {}", result);
 
     // Asserting that the returned value from the function is our expected value.
     assert_eq!(result, 43);  // 42 + 1
@@ -102,8 +102,6 @@ fn main() -> error::Result<()> {
     // Let's get the .wasm file as bytes
     let wasm_bytes = include_bytes!("add.wasm");
 
-    // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
-
     // Our import object, that allows exposing functions to our wasm module.
     // We're not importing anything, so make an empty import object.
     let import_object = imports! {};
@@ -111,16 +109,12 @@ fn main() -> error::Result<()> {
     // Let's create an instance of wasm module running in the wasmer-runtime
     let instance = instantiate(&wasm_vec, &import_object)?;
 
-    // Let's get a number we want to add one to
-    let value_to_add = 42;
-    println!("Original Value: {}", value_to_add);
-
     // Let's get `add_one` as a function which takes one `u32` and returns one `u32`
     let add_one: Func<u32, u32> = instance.func("add_one")?;
-    let result = add_one.call(value_to_add)?;
+    let result = add_one.call(42)?;
 
     // Log the new value
-    println!("New Value: {}", 43);
+    println!("Result: {}", result);
 
     // Asserting that the returned value from the function is our expected value.
     assert_eq!(result, 43);
