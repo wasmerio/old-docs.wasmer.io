@@ -4,12 +4,12 @@
 
 ## Ecosystem
 
-* [Wasmer Runtime](ecosystem/cli/README.md)
-  * [Getting Started](ecosystem/cli/getting-started.md)
-  * [CLI Usage](ecosystem/cli/usage.md)
-  * [Wasmer Features](ecosystem/cli/wasmer-features.md)
-  * [Building from Source](ecosystem/cli/building-from-source/README.md)
-    * [Testing](ecosystem/cli/building-from-source/testing.md)
+* [Wasmer Runtime](ecosystem/wasmer/README.md)
+  * [Getting Started](ecosystem/wasmer/getting-started.md)
+  * [CLI Usage](ecosystem/wasmer/usage.md)
+  * [Wasmer Features](ecosystem/wasmer/wasmer-features.md)
+  * [Building from Source](ecosystem/wasmer/building-from-source/README.md)
+    * [Testing](ecosystem/wasmer/building-from-source/testing.md)
 * [WAPM](ecosystem/wapm/README.md)
   * [Install](ecosystem/wapm/installation.md)
   * [Getting Started](ecosystem/wapm/getting-started.md)

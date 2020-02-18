@@ -13,6 +13,8 @@ Also, Wasmer provides multiple features for their users:
   * Emscripten
   * WASI
 
+
+
 ### Support of features by Backend
 
 |  | Singlepass | Cranelift | LLVM |
@@ -20,10 +22,18 @@ Also, Wasmer provides multiple features for their users:
 | Caching | ✅ | ✅ | ✅ |
 | Emscripten | ✅ | ✅ | ✅ |
 | Metering | ✅ | ⬜ | ✅ |
-| Multi-value return | ⬜ | ⬜ | ⬜ |
+| Multi-value return | 🔄 | 🔄 | 🔄 |
 | SIMD | ⬜ | ⬜ | ✅ |
 | WASI | ✅ | ✅ | ✅ |
 | `WASMER_BACKTRACE` | ✅ | ⬜ | ⬜ |
+
+{% hint style="info" %}
+### Legend
+
+* ✅ Supported
+* 🔄 On the works
+* ⬜ Not yet supported \(please ping us if you need this feature!\)
+{% endhint %}
 
 ### Support by Operating System
 

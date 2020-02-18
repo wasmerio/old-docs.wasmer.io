@@ -8,7 +8,7 @@ Once you have it installed, please download our SDK for the C-API from [Wasmer r
 * macOS: `wasmer-c-api-darwin-amd64.tar.gz` 
 * Linux: `wasmer-c-api-windows.tar.gz` 
 
-You can also [build the C-API from source](../../ecosystem/cli/building-from-source/#building-the-c-api-from-source).
+You can also [build the C-API from source](../../ecosystem/wasmer/building-from-source/#building-the-c-api-from-source).
 
 {% hint style="info" %}
 We suggest [Cmake](https://cmake.org/), and make for building your host application
