@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 
-## Ecosystem
+## 🏔 Ecosystem
 
 * [Wasmer Runtime](ecosystem/wasmer/README.md)
   * [Getting Started](ecosystem/wasmer/getting-started.md)
@@ -17,12 +17,12 @@
   * [CLI Usage](ecosystem/wapm/cli.md)
 * [WebAssembly.sh](ecosystem/webassembly.sh.md)
 
-## Language Integrations <a id="integrations"></a>
+## 🔧 Language Integrations <a id="integrations"></a>
 
 * [Rust](runtime-1/rust-integration/README.md)
   * [Setup](runtime-1/rust-integration/installation.md)
   * [Examples](runtime-1/rust-integration/examples/README.md)
-    * [Hello World](integrations/rust/examples/hello-world.md)
+    * [Hello World](runtime-1/rust-integration/examples/hello-world.md)
     * [Passing Data Between Rust and Wasm](runtime-1/rust-integration/examples/passing-data.md)
     * [Exposing Host Functions to WebAssembly](runtime-1/rust-integration/examples/host-functions.md)
     * [Handling Errors](runtime-1/rust-integration/examples/handling-errors.md)
@@ -64,7 +64,7 @@
   * [Module Transformation](runtime-1/wasmer-js/module-transformation.md)
   * [Wasmer-JS CLI](runtime-1/wasmer-js/installation.md)
 
-## Community
+## 👥 Community
 
 * [Built with Wasmer](community/built-with-wasmer.md)
 * [Wasmer Twitter](https://twitter.com/wasmerio)
