@@ -36,7 +36,7 @@
     * [Passing Data](integrations/c/examples/passing-data.md)
     * [Exposing Host Functions to WebAssembly](integrations/c/examples/host-functions.md)
     * [Handling Errors](integrations/c/examples/handling-errors.md)
-    * [Interrupting Execution](integrations/c/examples/early-exit.md)
+    * [Interrupting Execution](integrations/c/examples/interrupting-execution.md)
   * [Wasmer C API](https://wasmerio.github.io/wasmer/c/runtime-c-api/)
 * [Javascript](integrations/javascript/README.md)
   * [Introduction](integrations/javascript/introduction.md)
