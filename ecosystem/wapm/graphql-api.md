@@ -6,7 +6,7 @@ description: >-
 
 # GraphQL API
 
-All WAPM services \(both the registry: [wapm.io](https://wapm.io/) and the CLI client [wapm-cli](https://github.com/wasmerio/wapm-cli)\) are using the WAPM GraphQL API to get the data from the available modules.
+All WAPM services \(both the registry frontend: [wapm.io](https://wapm.io/) and the CLI client [wapm-cli](https://github.com/wasmerio/wapm-cli)\) are using the WAPM GraphQL API to interact and retrieve data from the WAPM Registry.
 
 ### What is GraphQL?
 
