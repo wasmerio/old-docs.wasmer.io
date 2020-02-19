@@ -1,7 +1,7 @@
 # Hello World
 
 {% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/hello-world)
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/hello-world).
 
 _Please take a look at the_ [_setup steps for Rust_](https://github.com/wasmerio/docs.wasmer.io/tree/f2ebe6a08e0ac5f6bd58ababffa793df6ab4424d/integrations/rust/examples/setup.md)_._
 {% endhint %}
@@ -60,7 +60,12 @@ fn main() -> error::Result<()> {
 }
 ```
 
-c And now we can just call the `add_one` function \(remember to use it inside the `main()` function\).
+{% hint style="info" %}
+You can download the `add.wasm` WebAssembly module here:  
+[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/add.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/add.wasm)
+{% endhint %}
+
+And now we can just call the `add_one` function \(remember to use it inside the `main()` function\).
 
 ```rust
     // Let's get `add_one` as a function which takes one `u32` and returns one `u32`

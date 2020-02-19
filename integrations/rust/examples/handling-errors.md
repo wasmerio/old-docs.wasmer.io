@@ -1,14 +1,12 @@
 # Handling Errors
 
 {% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/rust-integration/examples/handling_errors.rs)
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/handling-errors).
 
 _Please take a look at the_ [_setup steps for Rust_](https://github.com/wasmerio/docs.wasmer.io/tree/f2ebe6a08e0ac5f6bd58ababffa793df6ab4424d/integrations/rust/examples/setup.md)_._
 {% endhint %}
 
-
-
-Please take a look at the [setup steps for the Rust integration](../installation.md).
+Please take a look at the [setup steps for the Rust integration](https://github.com/wasmerio/docs.wasmer.io/tree/85cb4e01fe7bae4777aedabc409c3e4fe2d058af/integrations/rust/installation.md).
 
 There will come a time where running a WebAssembly module will not work, and trying to figure out why it does not work can be a difficult task! In the current MVP of WebAssembly, debugging isn't explicitly defined for runtimes both in and out of the browser. So we'll have to write some error handling code ourselves.
 
@@ -58,6 +56,11 @@ fn main() -> error::Result<()> {
     Ok(())
 }
 ```
+
+{% hint style="info" %}
+You can download the `handling-errors.wasm` WebAssembly module here:  
+[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/handling-errors.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/handling-errors.wasm)
+{% endhint %}
 
 If we run the following code with `cargo run`, we would see a result like:
 
@@ -109,3 +112,4 @@ If we look our for our file name \(`src/main.rs`\), we will see at step 10, ther
 It's important to keep in mind that that compiling in `release` mode reduces the amount of debug information available by default. Debug information can be enabled with the `[profile.release]` section in the `Cargo.toml`, simple add `debug = true` to this section and your release builds will include debug information.
 
 Next, let's take a look at how we can interrupt an executing Wasm module.
+

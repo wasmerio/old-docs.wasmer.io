@@ -1,7 +1,7 @@
 # Interrupting Execution
 
 {% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/blob/master/docs/runtime/rust-integration/examples/early_exit.rs).
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/early-exit).
 
 _Please take a look at the_ [_setup steps for Rust_](https://github.com/wasmerio/docs.wasmer.io/tree/f2ebe6a08e0ac5f6bd58ababffa793df6ab4424d/integrations/rust/examples/setup.md)_._
 {% endhint %}
@@ -28,7 +28,7 @@ use wasmer_runtime::{
 // Our entry point to our application
 fn main() -> error::Result<()> {
     // Let's read in our .wasm file as bytes
-    let wasm_bytes = include_bytes!("../../../../shared/early-exit.wasm");
+    let wasm_bytes = include_bytes!("early-exit.wasm");
 
     // Let's define the import object used to import our function
     // into our webassembly sample application.
@@ -81,4 +81,10 @@ fn interrupt_execution(_ctx: &mut Ctx) -> Result<(), ()> {
 }
 ```
 
+{% hint style="info" %}
+You can download the `early-exit.wasm` WebAssembly module here:  
+[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/early-exit.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/early-exit.wasm)
+{% endhint %}
+
 In addition to exiting in host calls, Wasmer also offers a metering API for allowing a pre-defined amount of execution before interrupting. The docs for metering are not yet written -- stay tuned for more!
+
