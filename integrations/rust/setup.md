@@ -1,6 +1,6 @@
 # Setup
 
-To be able to run the examples, we will need Rust installed in our system.
+To be able to run Wasmer inside our Rust application, we will need Rust installed in our system.
 
 The easiest way to get [Rust](https://www.rust-lang.org/) in your system is via [Rustup](https://rustup.rs/).  
 To get Rustup on Linux and macOS, you can run the following:

@@ -2,11 +2,9 @@
 
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/early-exit).
-
-_Please take a look at the_ [_setup steps for Rust_](https://github.com/wasmerio/docs.wasmer.io/tree/f2ebe6a08e0ac5f6bd58ababffa793df6ab4424d/integrations/rust/examples/setup.md)_._
 {% endhint %}
 
-WebAssembly is currently always run synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host \(your Rust application\).
+WebAssembly is currently always run in the same process synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host \(your Rust application\).
 
 However, there are cases where you may want to interrupt this synchronous execution while the guest WebAssembly module is calling a host function. This can be useful for saving resources, and not returning back to the guest WebAssembly for execution, when you already know the Wasm execution will fail, or no longer be needed.
 
@@ -16,7 +14,6 @@ In this example, we will run a Wasm module that calls the imported host function
 // Import the wasmer runtime so we can use it
 use wasmer_runtime::{
     error,
-    // Include the function macro
     func,
     imports,
     instantiate,

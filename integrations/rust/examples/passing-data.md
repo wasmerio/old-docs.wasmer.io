@@ -2,8 +2,6 @@
 
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/passing-data).
-
-_Please take a look at the_ [_setup steps for Rust_](https://github.com/wasmerio/docs.wasmer.io/tree/f2ebe6a08e0ac5f6bd58ababffa793df6ab4424d/integrations/rust/examples/setup.md)_._
 {% endhint %}
 
 Linear memory is one of the major concepts in WebAssembly:

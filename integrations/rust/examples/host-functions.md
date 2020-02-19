@@ -2,8 +2,6 @@
 
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/host-functions).
-
-_Please take a look at the_ [_setup steps for Rust_](https://github.com/wasmerio/docs.wasmer.io/tree/f2ebe6a08e0ac5f6bd58ababffa793df6ab4424d/integrations/rust/examples/setup.md)_._
 {% endhint %}
 
 Up until now, our WebAssembly program has only been able to do pure computation, that is, take arguments and return values. Most interesting use cases require more than just computation though. In this section we'll go over how to give the Wasm modules we run extra abilties in the form of host functions in an `ImportObject`.
@@ -26,14 +24,8 @@ Let's generate a new project, and update our `src/main.rs` to look something lik
 use std::{cell::RefCell, sync::Arc};
 
 // Import the wasmer runtime so we can use it
-use wasmer_runtime::{
-    error,
-    // Include the function macro
-    func,
-    imports,
-    instantiate,
-    Func,
-};
+use wasmer_runtime::{error, imports, instantiate, func, Func};
+
 
 // Our entry point to our application
 fn main() -> error::Result<()> {

@@ -2,8 +2,6 @@
 
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/hello-world).
-
-_Please take a look at the_ [_setup steps for Rust_](https://github.com/wasmerio/docs.wasmer.io/tree/f2ebe6a08e0ac5f6bd58ababffa793df6ab4424d/integrations/rust/examples/setup.md)_._
 {% endhint %}
 
 In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats directly right now, thus to keep it simple we will be writing a host application that calls the `add_one` function of a guest Wasm module, which adds `1` to the value passed as a parameter, and returns the result.
@@ -63,6 +61,8 @@ fn main() -> error::Result<()> {
 {% hint style="info" %}
 You can download the `add.wasm` WebAssembly module here:  
 [https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/add.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/add.wasm)
+
+Note: the implementation of this file is here
 {% endhint %}
 
 And now we can just call the `add_one` function \(remember to use it inside the `main()` function\).
@@ -77,6 +77,9 @@ And now we can just call the `add_one` function \(remember to use it inside the 
 
     // Asserting that the returned value from the function is our expected value.
     assert_eq!(result, 43);  // 42 + 1
+    
+    // Return OK since everything executed successfully!
+    Ok(())
 ```
 
 {% hint style="success" %}

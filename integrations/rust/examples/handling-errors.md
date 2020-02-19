@@ -2,8 +2,6 @@
 
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/handling-errors).
-
-_Please take a look at the_ [_setup steps for Rust_](https://github.com/wasmerio/docs.wasmer.io/tree/f2ebe6a08e0ac5f6bd58ababffa793df6ab4424d/integrations/rust/examples/setup.md)_._
 {% endhint %}
 
 Please take a look at the [setup steps for the Rust integration](https://github.com/wasmerio/docs.wasmer.io/tree/85cb4e01fe7bae4777aedabc409c3e4fe2d058af/integrations/rust/installation.md).
