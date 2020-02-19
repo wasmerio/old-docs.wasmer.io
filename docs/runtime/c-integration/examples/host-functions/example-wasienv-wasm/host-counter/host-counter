@@ -1,2 +1,0 @@
-#!/bin/bash
-wasirun /Users/torch2424/Source/wasmer-examples/c/host-functions/example-wasienv-wasm/host-counter/host-counter.wasm "$@"

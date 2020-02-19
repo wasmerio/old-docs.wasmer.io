@@ -1,2 +1,0 @@
-# Wasmer JS API
-
