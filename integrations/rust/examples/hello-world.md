@@ -59,8 +59,8 @@ fn main() -> error::Result<()> {
     let instance = instantiate(wasm_bytes, &import_object)?;
 }
 ```
-c
-And now we can just call the `add_one` function \(remember to use it inside the `main()` function\).
+
+c And now we can just call the `add_one` function \(remember to use it inside the `main()` function\).
 
 ```rust
     // Let's get `add_one` as a function which takes one `u32` and returns one `u32`

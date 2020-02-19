@@ -25,7 +25,7 @@
   * [Examples](integrations/rust/examples/README.md)
     * [Hello World](integrations/rust/examples/hello-world.md)
     * [Passing Data](integrations/rust/examples/passing-data.md)
-    * [Exposing Host Functions to WebAssembly](integrations/rust/examples/exposing-host-functions-to-webassembly.md)
+    * [Exposing Host Functions to WebAssembly](integrations/rust/examples/host-functions.md)
     * [Handling Errors](integrations/rust/examples/handling-errors.md)
     * [Interrupting Execution](integrations/rust/examples/interrupting-execution.md)
   * [Wasmer Rust API](https://docs.rs/wasmer-runtime/)

@@ -110,21 +110,6 @@ You can download the `host-functions.wasm` WebAssembly module here:
 [https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/host-functions.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/host-functions.wasm)
 {% endhint %}
 
-Both of the functions in this case are closures, but they don't have to be. Host functions can take an optional `&mut Ctx` argument as their first argument, which is how host functions get access to Wasm memory and other Wasm-related data.
-
-In the above example we exposed host functions to the guest Wasm module with the namespace and name given in the `imports!` macro. The used namespace is `host` so we list `get_counter` and `add_to_counter` there.
-
-{% hint style="info" %}
-Depending on the ABI of the Wasm module, we may need to expose functions under a different namespace. On the guest side, a non-default import namespace looks like:
-
-```rust
-extern "C" {
-   #[link_name = "namespace"]
-   fn import_name(arg: u32);
-}
-```
-{% endhint %}
-
 Now we should be ready to run it!
 
 ```bash
@@ -140,6 +125,20 @@ cd docs.wasmer.io/integrations/rust/host-functions
 ```
 {% endhint %}
 
+Both of the functions in this case are closures, but they don't have to be. Host functions can take an optional `&mut Ctx` argument as their first argument, which is how host functions get access to Wasm memory and other Wasm-related data.
+
+In the above example we exposed host functions to the guest Wasm module with the namespace and name given in the `imports!` macro. The used namespace is `host` so we list `get_counter` and `add_to_counter` there.
+
+{% hint style="info" %}
+Depending on the ABI of the Wasm module, we may need to expose functions under a different namespace. On the guest side, a non-default import namespace looks like:
+
+```rust
+extern "C" {
+   #[link_name = "namespace"]
+   fn import_name(arg: u32);
+}
+```
+{% endhint %}
 
 Next, we will take a look at handling errors from a WebAssembly module!
 

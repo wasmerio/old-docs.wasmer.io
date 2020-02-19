@@ -1,10 +1,11 @@
-# Passing Data Between Rust and Wasm
+# Passing Data
 
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/passing-data)
 
 _Please take a look at the_ [_setup steps for Rust_](https://github.com/wasmerio/docs.wasmer.io/tree/f2ebe6a08e0ac5f6bd58ababffa793df6ab4424d/integrations/rust/examples/setup.md)_._
 {% endhint %}
+
 Linear memory is one of the major concepts in WebAssembly:
 
 {% hint style="info" %}
@@ -87,7 +88,6 @@ You can download the `passing-data.wasm` WebAssembly module here:
 [https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/passing-data.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/passing-data.wasm)
 {% endhint %}
 
-
 Taking a look at the `src/main.rs` above, we see that we:
 
 1. Load our wasm module from a file
@@ -114,3 +114,4 @@ cd docs.wasmer.io/integrations/rust/passing-data
 {% endhint %}
 
 Now that we have a general idea of how we can pass data back and forth between the Host and a Wasm module using its linear memory, let's take a look at how we can expose Host functions to the Wasm module.
+
