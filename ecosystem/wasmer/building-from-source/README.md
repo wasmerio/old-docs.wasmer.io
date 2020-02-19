@@ -122,12 +122,12 @@ make release
 ```
 
 {% hint style="info" %}
-For compiling with all backends, you will need to set nightly as the default \(for Singlepass\) and you will also need LLVM installed in your system \(LLVM\)
+For compiling with all backends, you will need to set the [`nightly` toolchain as the default for Rust](./#singlepass-backend) \(for Singlepass\) and you will also need [LLVM installed in your system](./#llvm-backend) \(LLVM\)
 {% endhint %}
 
 ## Running your Wasmer binary
 
-Once you run a `release-*` \(or simply `release`\) command, you will have a new binary ready to be used!
+Once you run a `make release-*` \(or simply `make release`\) command, you will have a new binary ready to be used!
 
 ```text
 ./target/release/wasmer quickjs.wasm
@@ -135,9 +135,26 @@ Once you run a `release-*` \(or simply `release`\) command, you will have a new 
 
 ## Building Wasmer C-API from source
 
-Wasmer provides a pre-compiled version for the C-API in it's [release page](https://github.com/wasmerio/wasmer/releases), but you can also compile it from source:
+Wasmer provides a pre-compiled version for the C-API on it's [release page](https://github.com/wasmerio/wasmer/releases).
+
+However, you can also compile the shared library from source:
 
 ```text
 make capi
 ```
+
+This will generate the shared library \(depending on your system\):
+
+* Windows: `target/release/wasmer_runtime_c_api.dll`
+* macOS: `target/release/libwasmer_runtime_c_api.dylib`
+* Linux: `target/release/libwasmer_runtime_c_api.so`
+
+{% hint style="warning" %}
+By default, the Wasmer C API shared library is built with the Cranelift as the default backend.  
+You can generate the C-API for a specific backend with:
+
+* Singlepass: `make capi-singlepass`
+* Cranelift: `make capi-cranelift`
+* LLVM: `make capi-llvm`
+{% endhint %}
 
