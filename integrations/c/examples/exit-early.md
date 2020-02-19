@@ -2,8 +2,6 @@
 
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/exit-early)
-
-> Please take a look at the [setup steps for the C/C++ integration](../installation.md).
 {% endhint %}
 
 WebAssembly in its current state is currently run synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host \(your C application\).
