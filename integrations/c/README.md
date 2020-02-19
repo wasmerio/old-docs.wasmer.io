@@ -1,11 +1,11 @@
 # C/C++
 
-Wasmer lets you use WebAssembly modules in your own C/C++ codebase.
+Wasmer lets you use WebAssembly modules in your C/C++ codebase.
 
 {% hint style="info" %}
 #### Did you know ...?
 
-Some of our language extensions are using the Wasmer C API under the hood. Examples of this are:
+Some of our language extensions are using the Wasmer C integration under the hood:
 
 * [Wasmer PHP Extension](https://github.com/wasmerio/php-ext-wasm)
 * [Wasmer Go Extension](https://github.com/wasmerio/go-ext-wasm)

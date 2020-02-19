@@ -2,6 +2,15 @@
 
 Wasmer lets you use WebAssembly modules in your own Rust codebase.
 
+{% hint style="info" %}
+#### Did you know ...?
+
+Some of our language extensions are using the Wasmer Rust crate under the hood.
+
+* [Wasmer Python Extension](https://github.com/wasmerio/python-ext-wasm)
+* [Wasmer Ruby Extension](https://github.com/wasmerio/ruby-ext-wasm)
+{% endhint %}
+
 In this section we will go through the instructions on how to setup your Rust environment, to then visit different examples of how to use Wasmer in Rust.
 
 {% page-ref page="setup.md" %}
