@@ -36,7 +36,7 @@ We can do a POST to [https://registry.wapm.io/graphql](https://registry.wapm.io/
 
 ```graphql
 {
-	getPackageVersion(name: "python") {
+    getPackageVersion(name: "python") {
     version
     repository
     homepage

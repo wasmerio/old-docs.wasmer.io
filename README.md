@@ -26,7 +26,7 @@ This provide three key services:
 2. It acts as a secure bridge for WASM modules to interact with native "OS" functionality, via ABIs such as [`WASI`](https://github.com/webassembly/wasi) and [`Emscripten`](https://github.com/emscripten-core/emscripten)
 
 {% hint style="warning" %}
-#### Important
+### Important
 
 The term "OS" used above is in quotes to indicate that the native function being called might not actually be provided by the host's operating system.
 
@@ -58,7 +58,7 @@ If you would like to see tutorials, examples, or reference API documentation abo
 
 Language Integrations \(to use WebAssembly there\):
 
-* [Wasmer in Rust](integrations/rust/)
-* [Wasmer in C](integrations/c/)
-* [Wasmer in Javascript](integrations/javascript/)
+* [Wasmer in Rust](https://github.com/wasmerio/docs.wasmer.io/tree/5c49b94d489d174570aef618013adfbc144893a5/integrations/rust/README.md)
+* [Wasmer in C](https://github.com/wasmerio/docs.wasmer.io/tree/5c49b94d489d174570aef618013adfbc144893a5/integrations/c/README.md)
+* [Wasmer in Javascript](https://github.com/wasmerio/docs.wasmer.io/tree/5c49b94d489d174570aef618013adfbc144893a5/integrations/javascript/README.md)
 

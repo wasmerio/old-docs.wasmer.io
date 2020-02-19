@@ -16,5 +16,3 @@ The tool comes bundled with [wasmer: the WebAssembly runtime](https://wasmer.io/
 The name WAPM is an abbreviation for WebAssembly Package Manager
 {% endhint %}
 
-
-

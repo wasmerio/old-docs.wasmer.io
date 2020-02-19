@@ -45,7 +45,7 @@ Now, you will need to:
 
 Creating an account in WAPM is very easy, just go to the following url and sign up!
 
-{% embed url="https://wapm.io/signup" %}
+{% embed url="https://wapm.io/signup" caption="" %}
 
 ### Login from the wapm CLI into your local account
 
@@ -87,7 +87,7 @@ name = "my_cmd"
 module = "my_program_wasi"
 ```
 
-Now called `wapm run my_cmd` will execute the module defined with the name `my_program_wasi`. Under the hood,  `wapm` calls `wasmer`, the WebAssembly server runtime.
+Now called `wapm run my_cmd` will execute the module defined with the name `my_program_wasi`. Under the hood, `wapm` calls `wasmer`, the WebAssembly server runtime.
 
 If you want to learn more about the manifest format, please jump into the next article!
 

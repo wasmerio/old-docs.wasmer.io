@@ -29,7 +29,7 @@ wapm install cowsay
 
 Installing a package creates a local package directory called `wapm_packages` where all packages are installed. While in a directory with wapm packages, one may execute them with the `run` command:
 
-```
+```text
 wapm run cowsay hello wapm!
 ```
 
