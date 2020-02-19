@@ -24,5 +24,3 @@ Apart from this, Wasmer publishes also different Packages to Crates:
 
 Let's now setup your Rust environment!
 
-
-
