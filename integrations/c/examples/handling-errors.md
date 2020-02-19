@@ -10,7 +10,7 @@ In this example, we will load a WebAssembly module that purposely divide by zero
 
 ```c
 #include <stdio.h>
-#include "dist/wasmer-build/src/wasmer-runtime-c-api/lib/runtime-c-api/wasmer.h"
+#include "wasmer.h"
 #include <assert.h>
 #include <string.h>
 

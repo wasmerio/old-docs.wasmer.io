@@ -65,7 +65,7 @@ Now that we have our CMake file, let's create the entrypoint file that the CMake
 
 ```c
 #include <stdio.h>
-#include "dist/wasmer-build/src/wasmer-runtime-c-api/lib/runtime-c-api/wasmer.h"
+#include "wasmer.h"
 #include <assert.h>
 #include <string.h>
 

@@ -20,7 +20,7 @@ So if we create a new C project, following the same process as the **hello world
 
 ```c
 #include <stdio.h>
-#include "dist/wasmer-build/src/wasmer-runtime-c-api/lib/runtime-c-api/wasmer.h"
+#include "wasmer.h"
 #include <assert.h>
 #include <string.h>
 

@@ -12,7 +12,7 @@ In this example, we will run a Wasm module that calls the imported host function
 
 ```c
 #include <stdio.h>
-#include "dist/wasmer-build/src/wasmer-runtime-c-api/lib/runtime-c-api/wasmer.h"
+#include "wasmer.h"
 #include <assert.h>
 #include <string.h>
 
