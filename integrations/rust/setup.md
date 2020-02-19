@@ -1,4 +1,4 @@
-# Setup
+# Setup your Rust environment
 
 To be able to run Wasmer inside our Rust application, we will need Rust installed in our system.
 

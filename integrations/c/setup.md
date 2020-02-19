@@ -1,4 +1,4 @@
-# Setup
+# Setup your C/C++ environment
 
 To build C applications that use the Wasmer runtime as a host for guest wasm modules, you will need a C compiler installed \(clang or gcc, for example\).
 
