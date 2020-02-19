@@ -15,38 +15,20 @@ There will come a time where running a WebAssembly module will not work, and try
 In this example, we will load a WebAssembly module that purposely `panic!()`s in its exported function call. The Host \(our Rust application\) will pattern match for the error and output the error message returned from Wasmer:
 
 ```rust
-// Import the Filesystem so we can read our .wasm file
-use std::fs::File;
-use std::io::prelude::*;
-
 // Import the wasmer runtime so we can use it
 use wasmer_runtime::{error, imports, instantiate, Func, error::{RuntimeError}};
-
-const WASM_FILE_PATH: &str = concat!(
-    env!("CARGO_MANIFEST_DIR"),
-    "/target/wasm32-unknown-unknown/release/handling_errors_guest.wasm"
-);
 
 // Our entry point to our application
 fn main() -> error::Result<()> {
     // Let's read in our .wasm file as bytes
-
-    // Let's open the file.
-    let mut file = File::open(WASM_FILE_PATH).expect(&format!("wasm file at {}", WASM_FILE_PATH));
-
-    // Let's read the file into a Vec
-    let mut wasm_vec = Vec::new();
-    file.read_to_end(&mut wasm_vec)
-        .expect("Error reading the wasm file");
-
-    // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
+    let wasm_bytes = include_bytes!("../../../../shared/handling-errors.wasm");
 
     // Our import object, that allows exposing functions to our wasm module.
     // We're not importing anything, so make an empty import object.
     let import_object = imports! {};
 
     // Let's create an instance of wasm module running in the wasmer-runtime
-    let instance = instantiate(&wasm_vec, &import_object)?;
+    let instance = instantiate(wasm_bytes, &import_object)?;
 
     // Let's call the exported "throw_error" function ont the wasm module.
     let throw_error_func: Func<(), ()> = instance

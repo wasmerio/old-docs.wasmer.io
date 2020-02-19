@@ -18,7 +18,21 @@ fn main() -> error::Result<()> {
         .func("throw_wasm_error")
         .expect("throw_wasm_error function was not found");
 
-    let _response = throw_error_func.call()?;
+    let response = throw_error_func.call();
+
+    match response {
+       Ok(_) => {
+            // This should have thrown an error, return an error
+            panic!("throw_wasm_error did not error");
+       },
+        Err(RuntimeError::Trap { msg }) => {
+           // Log the error
+           println!("Trap caught from `throw_wasm_error`: {}", msg);
+       },
+        Err(RuntimeError::Error { .. }) => {
+            panic!("Expected Trap, found Error with unknown data!");
+        },
+    }
 
     // Log a success message.
     println!("Success!");
