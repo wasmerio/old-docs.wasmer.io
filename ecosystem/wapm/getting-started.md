@@ -8,20 +8,26 @@ sidebar_label: Getting Started
 
 This guide will introduce the `wapm` tool and show a few common workflows. The wapm client can install packages, manage WebAssembly dependencies, and expose WebAssembly behavior with commands.
 
+## Install WAPM
+
+WAPM comes bundled with Wasmer, so you just need to install Wasmer in your system to have the `wapm` CLI!
+
+{% page-ref page="../wasmer/getting-started.md" %}
+
 ## **What is WAPM?**
 
 The WAPM ecosystem makes WebAssembly more accessible to developers. The system is enabled by a couple tools:
 
-* wapm package registry for storing and serving packages
-* wapm package client \(called _wapm-cli_\) for installing and managing packages
+* WAPM package registry for storing and serving packages
+* WAPM package client \(called `wapm` CLI\) for installing and managing packages
 
-The tool comes bundled with [wasmer: the WebAssembly runtime](https://wasmer.io/), but it works great with the other [server-side runtimes](https://github.com/mbasso/awesome-wasm#non-web-embeddings) and the web!
+The tool comes bundled with [Wasmer: the WebAssembly runtime](https://wasmer.io/), but it works great with the other [server-side runtimes](https://github.com/mbasso/awesome-wasm#non-web-embeddings) and the web!
 
-The name wapm is an abbreviation for WebAssembly Package Manager, but then name represents the ecosystem of packages and the tools.
+The name WAPM is an abbreviation for WebAssembly Package Manager, but then name represents the ecosystem of packages and the tools.
 
 ## **Basic Usage**
 
-With the tools installed, one can easily start using universal Wasm binaries by using the `install` command of _wapm-cli_:
+With the tools installed, one can easily start using universal Wasm binaries by using the `install` command of `wapm` CLI:
 
 ```text
 wapm install cowsay
