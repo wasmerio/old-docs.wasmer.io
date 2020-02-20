@@ -22,7 +22,16 @@ With the tools installed, one can easily start using universal Wasm binaries by 
 wapm install cowsay
 ```
 
-Installing a package creates a local package directory called `wapm_packages` where all packages are installed. While in a directory with wapm packages, one may execute them with the `run` command:
+Installing a package creates a local package directory called `wapm_packages` where all packages are installed.
+
+{% hint style="info" %}
+#### Did you know ...?
+
+You can install gslobally the package passing the `-g` flag.  
+Eg:`wapm install -g cowsay`
+{% endhint %}
+
+While in a directory with wapm packages, one may execute them with the `run` command:
 
 ```text
 wapm run cowsay hello wapm!
