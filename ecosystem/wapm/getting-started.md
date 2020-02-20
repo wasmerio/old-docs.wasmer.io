@@ -14,17 +14,6 @@ WAPM comes bundled with Wasmer, so you just need to install Wasmer in your syste
 
 {% page-ref page="../wasmer/getting-started.md" %}
 
-## **What is WAPM?**
-
-The WAPM ecosystem makes WebAssembly more accessible to developers. The system is enabled by a couple tools:
-
-* WAPM package registry for storing and serving packages
-* WAPM package client \(called `wapm` CLI\) for installing and managing packages
-
-The tool comes bundled with [Wasmer: the WebAssembly runtime](https://wasmer.io/), but it works great with the other [server-side runtimes](https://github.com/mbasso/awesome-wasm#non-web-embeddings) and the web!
-
-The name WAPM is an abbreviation for WebAssembly Package Manager, but then name represents the ecosystem of packages and the tools.
-
 ## **Basic Usage**
 
 With the tools installed, one can easily start using universal Wasm binaries by using the `install` command of `wapm` CLI:
