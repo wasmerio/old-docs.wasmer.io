@@ -1,8 +1,6 @@
-# hello-world-client
+# Hello World in the Browser
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/hello-world)
-
-## Hello World! in the Browser
 
 In this introductory example, we will develop a Browser-based application that uses the following call chain.
 
@@ -10,9 +8,11 @@ In this introductory example, we will develop a Browser-based application that u
 
 In this case, we will invoke the WASM module [`as-echo`](https://github.com/torch2424/as-echo) that receives a text string and does nothing more than echo it back by writing it to standard out.
 
-> #### Under the Hood
->
-> The WASM function `as-echo` calls the native "OS" function `fd_write` that writes data to a particular file descriptor \(hence `fd` in the function name\)
+{% hint style="info" %}
+#### Under the Hood
+
+The WASM function `as-echo` calls the native "OS" function `fd_write` that writes data to a particular file descriptor \(hence `fd` in the function name\)
+{% endhint %}
 
 However, interaction with file descriptors such as "standard in" and "standard out" is not normally possible for a WebAssembly module, since this type of functionality belongs to the underlying "OS". Therefore, we must make use of the following two packages:
 
@@ -21,9 +21,11 @@ However, interaction with file descriptors such as "standard in" and "standard o
 | `@wasmer/wasi` | A set of JavaScript polyfills to bridge the gap between the black-box world of a WebAssembly module and functionality available in the host environment |
 | `@wasmer/wasmfs` | Provide access to a sand-boxed filesystem with which `@wasmer/wasi` can interact |
 
-> #### REMINDER!
->
-> The term "OS" used above is in quotes because in this particular case, the native function called by `as-echo` that writes to standard out, belongs to the JavaScript runtime, and not the actual underlying operating system.
+{% hint style="warning" %}
+#### Reminder
+
+The term "OS" used above is in quotes because in this particular case, the native function called by `as-echo` that writes to standard out, belongs to the JavaScript runtime, and not the actual underlying operating system.
+{% endhint %}
 
 This example will be bundled and served by [Parcel](https://parceljs.org/) and run in the browser.
 
@@ -201,3 +203,4 @@ $ npm install -g parcel
 11. As long as `parcel` is still running, after saving `index.js`, your browser should automatically refresh and you should see `Standard Output: Hello World!` appear both on the browser screen and in the JavaScript console.
 
 Next, let's take a look at transforming WASI modules that require transformations.
+

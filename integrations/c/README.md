@@ -16,8 +16,6 @@ In this section we will go through the instructions on how to setup your C/C++ e
 
 {% page-ref page="setup.md" %}
 
-{% page-ref page="examples/" %}
-
 {% embed url="https://wasmerio.github.io/wasmer/c/runtime-c-api/" %}
 
 

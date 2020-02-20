@@ -1,8 +1,6 @@
-# transforming-wasi-modules
+# Transforming WASI Modules in the Browser
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/transforming-wasi-modules)
-
-## Transforming WASI Modules in the Browser
 
 Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/docs/wasmer-js/wasmer-js-module-transformation/README.md) will always be needed.
 
@@ -30,9 +28,10 @@ Now that the interface has been transformed, we can instantiate the WebAssembly 
 ```javascript
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Imports
-import { WASI }            from '@wasmer/wasi'
 import { WasmFs }          from '@wasmer/wasmfs'
 import { lowerI64Imports } from "@wasmer/wasm-transformer"
+import { WASI }            from '@wasmer/wasi'
+import browserBindings     from "@wasmer/wasi/lib/bindings/browser"
 
 const wasmFilePath = './clock_time_get.wasm'  // Path to our WASI module
 
@@ -54,7 +53,7 @@ let wasi = new WASI({
 
   // Bindings used by the WASI instance (fs, path, etc...)
   bindings: {
-    ...WASI.defaultBindings,
+    ...browserBindings,
     fs: wasmFs.fs
   }
 })
@@ -102,10 +101,13 @@ startWasiTask()
 
 On the both the browser screen and the JavaScript console, you should see the text `Done!`.
 
-> #### Known Limitation
->
-> This example is somewhat contrived because the WebAssembly module has been hard-coded to return the text string `Done!` rather than the time value from `clock_time_get`.
->
-> Anything written to standard out should be a printable string followed by a carriage return character, not the raw `i32` value returned from `clock_time_get`. Therefore, before being able to return the actual clock time, this WebAssembly module would additionally need to convert the raw `i32` value to a printable string before then writing it to standard out.
+{% hint style="warning" %}
+#### Known Limitation
+
+This example is somewhat contrived because the WebAssembly module has been hard-coded to return the text string `Done!` rather than the time value from `clock_time_get`.
+
+Anything written to standard out should be a printable string followed by a carriage return character, not the raw `i32` value returned from `clock_time_get`. Therefore, before being able to return the actual clock time, this WebAssembly module would additionally need to convert the raw `i32` value to a printable string before then writing it to standard out.
+{% endhint %}
 
 Next, let's look at handling input and output via WASI.
+

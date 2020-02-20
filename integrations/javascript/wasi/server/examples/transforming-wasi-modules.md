@@ -1,4 +1,4 @@
-# Transforming WASI Modules
+# transforming-wasi-modules
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/server/examples/transforming-wasi-modules)
 
@@ -69,3 +69,4 @@ Run the program:
 $ node server.js
 Done!
 ```
+

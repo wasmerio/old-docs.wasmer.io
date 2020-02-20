@@ -1,8 +1,8 @@
-# WASI on the Server
+# hello-world-server
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/server/examples/hello-world)
 
-## Hello World! (Server)
+## Hello World! \(Server\)
 
 In this introductory example, we will develop a NodeJS-based application that calls a WebAssembly module that in turn, calls a native "OS" function. This is exactly the same call chain as was used in the client-side example:
 
@@ -103,3 +103,4 @@ However, as we saw with the [client-side `hello-world` example](https://github.c
    ```
 
 Next, let's take a look at running WASM modules whose interfaces require transformation.
+

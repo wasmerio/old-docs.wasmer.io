@@ -1,16 +1,15 @@
-
 # Wasmer-JS CLI
 
-The Wasmer-JS command line interface (CLI) uses a modern Javascript Workflow, which depends on [Node.js](https://nodejs.org/en/).
+The Wasmer-JS command line interface \(CLI\) uses a modern Javascript Workflow, which depends on [Node.js](https://nodejs.org/en/).
 
 ## Install Node.js
 
-First, we will start by installing the latest Long Term Support (LTS) version of Node.js which includes Node's Package Manager `npm`.
+First, we will start by installing the latest Long Term Support \(LTS\) version of Node.js which includes Node's Package Manager `npm`.
 
 There several are different ways to install Node.js. You could:
 
 * Download a binary installer from the [Node.js download site](https://nodejs.org/en/download/), or
-* You can use a tool such as `nvm`. (Mac and Linux: [here](https://github.com/creationix/nvm), Windows: [here](https://github.com/coreybutler/nvm-windows)).
+* You can use a tool such as `nvm`. \(Mac and Linux: [here](https://github.com/creationix/nvm), Windows: [here](https://github.com/coreybutler/nvm-windows)\).
 
   ```bash
   nvm install --lts
@@ -56,3 +55,4 @@ SUBCOMMANDS:
 Please take a look at the help output to start running Wasm modules.
 
 The same help output is also available in this documentation as the [User Guide](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/cli/wasmer-js-cli-user-guide/README.md) on the sidebar.
+

@@ -81,7 +81,7 @@ let wasi = new WASI({
 
 `wasiInstance.FD_MAP: Map<number, File>`
 
-[Javascript Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), where the key is the file descriptor, and the value is a [JavaScript File](https://developer.mozilla.org/en-US/docs/Web/API/File).
+[Javascript Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), where the key is the file descriptor, and the value is a [Javascript File](https://developer.mozilla.org/en-US/docs/Web/API/File).
 
 #### exports
 
@@ -93,10 +93,11 @@ WASI API to be imported in the importObject on instantiation.
 
 `wasiInstance.bindings: WASIBindings`
 
-The bindings for common node like objects, such as `fs` for filesystem, these should work by default, but are applied depending on the platoform. You can view the source code for your respective platform's bindings here.
+The bindings for common node like objects, such as `fs` for filesystem, these should work by default, but are applied depending on the platform. You can view the source code for your respective platform's bindings here.
 
 #### start
 
 `wasiInstance.start(wasmInstance: WebAssembly.Instance): void`
 
 Function that takes in a WASI WebAssembly Instance and starts it.
+

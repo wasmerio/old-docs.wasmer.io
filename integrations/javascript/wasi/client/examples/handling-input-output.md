@@ -1,8 +1,6 @@
-# handling-input-output
+# Handling Input and Output in the Browser
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/handling-input-output)
-
-## Handling Input and Output in the Browser
 
 In the Hello World example, we covered how to run the `as-echo` WASM module, and then read it's output. However, there may be times we want to interact with WASI modules that accept input as well!
 
@@ -165,3 +163,4 @@ const startWasiTask = async () => {
 };
 startWasiTask();
 ```
+

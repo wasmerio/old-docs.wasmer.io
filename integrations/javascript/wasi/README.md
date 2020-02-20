@@ -15,11 +15,9 @@ Within the context of a JavaScript runtime environment, WASI functionality must 
 ![](../../../.gitbook/assets/image%20%285%29.png)
 
 {% hint style="warning" %}
-#### Important
+### Important
 
-The JavaScript environment shown here could either be on the client \(within a browser\), or on the server \(provided by Node.js\); either way, the native functions invoked from WebAssembly via Wasmer-JS and WASI belong to the JavaScript runtime environment, not the underlying operating system.
+The JavaScript environment shown here could either be on the client \(within a browser\), or on the server \(provided by Node.js\).  
+Either way, the native functions invoked from WebAssembly via Wasmer-JS and WASI belong to the JavaScript runtime environment, not the underlying operating system.
 {% endhint %}
 
-This project has been set up as mono-repo of multiple JavaScript packages.
-
-* [Github Repo](https://github.com/wasmerio/wasmer-js)
