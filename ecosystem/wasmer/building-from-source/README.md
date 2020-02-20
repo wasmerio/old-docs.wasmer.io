@@ -8,9 +8,9 @@ sidebar_label: Building from Source
 
 ## Installing Rustup
 
-Building Wasmer requires [Rust](https://rustup.rs/) for building it from source.
+Building Wasmer from source requires [Rust](https://rustup.rs/).
 
-The easiest way to get Rust in your system is via Rustup.  
+The easiest way to install Rust on your system is via Rustup.
 To get Rustup on Linux and macOS, you can run the following:
 
 ```bash
@@ -135,7 +135,7 @@ Once you run a `make release-*` \(or simply `make release`\) command, you will h
 
 ## Building Wasmer C-API from source
 
-Wasmer provides a pre-compiled version for the C-API on it's [release page](https://github.com/wasmerio/wasmer/releases).
+Wasmer provides a pre-compiled version for the C-API on its [release page](https://github.com/wasmerio/wasmer/releases).
 
 However, you can also compile the shared library from source:
 
