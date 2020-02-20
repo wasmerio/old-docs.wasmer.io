@@ -1,9 +1,9 @@
 # C/C++
 
-Wasmer lets you use WebAssembly modules in your C/C++ codebase.
+Wasmer lets you use WebAssembly modules in your C/C++ projects.
 
 {% hint style="info" %}
-## Did you know ...?
+### Did you know ...?
 
 Some of our language extensions are using the Wasmer C integration under the hood:
 

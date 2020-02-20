@@ -1,6 +1,6 @@
 # Setup your C/C++ environment
 
-To build C applications that use the Wasmer runtime as a host for guest Wasm modules, you will need a C compiler installed \(`clang` or `gcc`, for example\). Check the compiler installation instructions [here](setup.md#installing-clang-gcc).
+To build C applications that use the Wasmer runtime as a host for guest Wasm modules, you will need a C compiler installed \(`clang` or `gcc`, for example\).
 
 Download our SDK for the C-API from [Wasmer releases page](https://github.com/wasmerio/wasmer/releases).  
 Depending on your system, you will need to download:
@@ -9,7 +9,7 @@ Depending on your system, you will need to download:
 * macOS: `wasmer-c-api-darwin-amd64.tar.gz` 
 * Windows: `wasmer-c-api-windows.tar.gz` 
 
-Once you have downloaded the c-api file, you can now extract its contents and set the `WASMER_C_API` environment variable to the path of the wasmer-c-api directory \(this will be very useful when running the examples\):
+Once you have downloaded the c-api file, you can now extract its contents and set the `WASMER_C_API` environment variable to the path of the dir \(this will be very useful for the examples\):
 
 ```bash
 # Extract the contents to a dir

@@ -1,9 +1,9 @@
 # Rust
 
-Wasmer lets you use WebAssembly modules in your own Rust codebase.
+Wasmer lets you use WebAssembly modules in your Rust projects.
 
 {% hint style="info" %}
-#### Did you know ...?
+### Did you know ...?
 
 Some of our language extensions are using the Wasmer Rust crate under the hood.
 
@@ -17,9 +17,9 @@ In this section we will go through the instructions on how to setup your Rust en
 
 {% page-ref page="examples/" %}
 
-{% embed url="https://docs.rs/wasmer-runtime/0.13.1/wasmer\_runtime/" %}
+{% embed url="https://docs.rs/wasmer-runtime/0.13.1/wasmer\_runtime/" caption="" %}
 
-### Published Crates
+## Published Crates
 
 Apart from this, Wasmer publishes also different Packages to Crates:
 
