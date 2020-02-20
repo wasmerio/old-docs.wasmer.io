@@ -158,3 +158,11 @@ You can generate the C-API for a specific backend with:
 * LLVM: `make capi-llvm`
 {% endhint %}
 
+If you want to generate the library and headers for Wasmer, so you can use them easily, you can execute:
+
+```bash
+make build-capi
+```
+
+This command will generate a `capi` directory, that you can then use easily in the Wasmer C API examples.
+

@@ -6,39 +6,35 @@ Once you have it installed, please download our SDK for the C-API from [Wasmer r
 
 * Linux: `wasmer-c-api-linux-amd64.tar.gz` 
 * macOS: `wasmer-c-api-darwin-amd64.tar.gz` 
-* Linux: `wasmer-c-api-windows.tar.gz` 
-
-You can also [build the C-API from source](../../ecosystem/wasmer/building-from-source/#building-the-c-api-from-source).
+* Windows: `wasmer-c-api-windows.tar.gz` 
 
 {% hint style="info" %}
-We suggest [Cmake](https://cmake.org/), and make for building your host application
+Note: You can also [build the C-API from source](../../ecosystem/wasmer/building-from-source/#building-the-c-api-from-source).
 {% endhint %}
 
-## Installing CMake
+Once you have downloaded the c-api file, you can now extract its contents and set the `WASMER_C_API` environment variable to the path of the dir \(this will be very useful for the examples\):
 
-First, you can test if make is installed already by running:
+```bash
+# Extract the contents to a dir
+mkdir wasmer-c-api
+tar -C wasmer-c-api -zxvf wasmer-c-api*.tar.gz
 
-```text
-cmake --help
+export WASMER_C_API=`pwd`/wasmer-c-api
 ```
 
-If this command does not return the make version, then see the following:
-
-Please take a look at the CMake documentation for [installing CMake on Windows, Mac, and Unix](https://cmake.org/install/). CMake may already be installed on your machine by default.
-
-## Installing Make
+## Installing Clang/GCC
 
 First, you can test if make is installed already by running:
 
 ```text
-make -v
+gcc --version
 ```
 
 If this command does not return the make version, then see the following:
 
 ### MacOS
 
-Make is usually installed by default. However, if it is not, you can [install make by installing xcode-select](http://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/) on your mac.
+`gcc` / `clang` is usually installed by default. However, if it is not, you can [install make by installing xcode-select](http://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/) on your mac.
 
 ### Debian / Debian Based / Linux
 
@@ -54,12 +50,13 @@ Make should be installable on your favorite linux distro as well. Please search 
 
 To install Make on Windows, you will probably want to install a GNU environment on windows. We suggest using [MinGW](http://www.mingw.org/).
 
-Now that all of our dependencies are installed, let's take a look at the hello world example!
+```text
+gcc --version
+```
 
-* Make a directory called build for Cmake
-* cd into build
-* cmake ..
-* Must be rust 1.38 \(rustc —version\)
-* make -j
-* Done! Run `./hello-world`.
+{% hint style="success" %}
+If these commands work, Clang or GCC are successfully installed!
+{% endhint %}
+
+Next, let's take a look at building a simple Hello World Example!
 

@@ -69,7 +69,7 @@ int main() {
   assert(compile_result == WASMER_OK);
 
    // Call the exported "hello_wasm" function of our instance
-  
+
   // Define our parameters we are passing into the guest wasm function call.
   // Params are created with the following properties
   // .tag is the tag of the type of the param being passed to the guest wasm function
@@ -113,7 +113,6 @@ int main() {
 
 Please take a look at the comments of the `hello-world.c` file to see how everything is working.
 
-
 {% hint style="info" %}
 You can download the `add.wasm` WebAssembly module here:  
 [https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.wasm)
@@ -121,7 +120,7 @@ You can download the `add.wasm` WebAssembly module here:
 Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/c/add.c)
 {% endhint %}
 
-Now, we should be ready to compile it with our favorite C compiler (`gcc` or `clang`):
+Now, we should be ready to compile it with our favorite C compiler \(`gcc` or `clang`\):
 
 ```bash
 gcc hello-world.c -I${WASMER_C_API}/include -L${WASMER_C_API}/lib -lwasmer
@@ -151,5 +150,5 @@ cd docs.wasmer.io/integrations/c/hello-world
 ```
 {% endhint %}
 
-Next, let's take a look at how we can pass data between our host application, and our guest wasm module.
+Next, let's take a look at how we can pass data between our host application, and our guest Wasm module.
 
