@@ -10,6 +10,12 @@ Welcome to the Wasmer Documentation! 👋
 
 For an overview of WebAssembly, and what WebAssembly is, [take a look here](https://webassembly.org/).
 
+{% hint style="info" %}
+You can find the source code of the docs here: [github.com/wasmerio/docs.wasmer.io](https://github.com/wasmerio/docs.wasmer.io)
+
+Any page can be easily edited, just by clicking on the **Edit on Github** link at the top right
+{% endhint %}
+
 ### Projects
 
 Apart of the [Wasmer WebAssembly Runtime](ecosystem/wasmer/), we participate in other projects such as:

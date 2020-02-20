@@ -11,7 +11,7 @@ sidebar_label: Building from Source
 Building Wasmer requires [Rust](https://rustup.rs/) for building it from source.
 
 The easiest way to get Rust in your system is via Rustup.  
-To get rustup on Linux and macOS, you can run the following:
+To get Rustup on Linux and macOS, you can run the following:
 
 ```bash
 curl https://sh.rustup.rs -sSf | sh

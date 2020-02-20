@@ -20,7 +20,7 @@ export WASMER_C_API=`pwd`/wasmer-c-api
 ```
 
 {% hint style="info" %}
-Note: You can also [build the C-API from source](../../ecosystem/wasmer/building-from-source/#building-the-c-api-from-source).
+Note: You can also [build the C-API from source](../../ecosystem/wasmer/building-from-source/#building-wasmer-c-api-from-source).
 {% endhint %}
 
 ## Installing Clang/GCC
