@@ -13,6 +13,6 @@ The WAPM ecosystem makes WebAssembly more accessible to developers. The system i
 The tool comes bundled with [wasmer: the WebAssembly runtime](https://wasmer.io/), but it works great with the other [server-side runtimes](https://github.com/mbasso/awesome-wasm#non-web-embeddings) and the web!
 
 {% hint style="info" %}
-The name WAPM is an abbreviation for WebAssembly Package Manager
+The name WAPM is an acronym for WebAssembly Package Manager
 {% endhint %}
 
