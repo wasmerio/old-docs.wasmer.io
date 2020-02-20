@@ -21,7 +21,7 @@ The name wapm is an abbreviation for WebAssembly Package Manager, but then name 
 
 ## **Basic Usage**
 
-With the tools installed, one can easily start using universal wasm binaries by using the `install` command of _wapm-cli_:
+With the tools installed, one can easily start using universal Wasm binaries by using the `install` command of _wapm-cli_:
 
 ```text
 wapm install cowsay

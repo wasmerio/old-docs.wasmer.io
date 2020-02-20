@@ -75,7 +75,7 @@ If your program is a WASI program, it will be automatically available in the [We
 
 ## **Commands**
 
-Commands \(not to be confused with _wapm-cli_ subcommands\) are a feature that enables easily executing wasm code from a wapm package.
+Commands \(not to be confused with _wapm-cli_ subcommands\) are a feature that enables easily executing Wasm code from a wapm package.
 
 Commands are what allows one to call the `run` subcommand, like above when running `wapm run cowsay hello wapm!`.
 

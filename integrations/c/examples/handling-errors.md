@@ -29,7 +29,7 @@ wasmer_instance_t *create_wasmer_instance() {
   // Create module name for our imports
 
   // Create a UTF-8 string as bytes for our module name. 
-  // And, place the string into the wasmer_byte_array type so it can be used by our guest wasm instance.
+  // And, place the string into the wasmer_byte_array type so it can be used by our guest Wasm instance.
   const char *module_name = "env";
   wasmer_byte_array module_name_bytes = { .bytes = (const uint8_t *) module_name,
     .bytes_len = strlen(module_name) };
@@ -37,7 +37,7 @@ wasmer_instance_t *create_wasmer_instance() {
   // Define an array containing our imports
   wasmer_import_t imports[] = {};
 
-  // Read the wasm file bytes
+  // Read the Wasm file bytes
   FILE *file = fopen("handling-errors.wasm", "r");
   assert(file != NULL);
   fseek(file, 0, SEEK_END);
@@ -47,10 +47,10 @@ wasmer_instance_t *create_wasmer_instance() {
   fread(bytes, 1, len, file);
   fclose(file);
 
-  // Instantiate a WebAssembly Instance from wasm bytes and imports
+  // Instantiate a WebAssembly Instance from Wasm bytes and imports
   wasmer_instance_t *instance = NULL;
   wasmer_result_t compile_result = wasmer_instantiate(
-      &instance, // Our reference to our wasm instance 
+      &instance, // Our reference to our Wasm instance 
       bytes, // The bytes of the WebAssembly modules
       len, // The length of the bytes of the WebAssembly module
       imports, // The Imports array the will be used as our importObject
@@ -63,7 +63,7 @@ wasmer_instance_t *create_wasmer_instance() {
     print_wasmer_error();
   }
 
-  // Assert the wasm instantion completed
+  // Assert the Wasm instantion completed
   assert(compile_result == WASMER_OK);
 
   // Return the Wasmer Instance
@@ -75,28 +75,28 @@ int main() {
   // Initialize our Wasmer Instance
   wasmer_instance_t *instance = create_wasmer_instance();
 
-  // Let's call the our throw_wasm_error Function in the guest wasm module
+  // Let's call the our throw_wasm_error Function in the guest Wasm module
 
   // Define our results. Results are created with { 0 } to avoid null issues,
-  // And will be filled with the proper result after calling the guest wasm function.
+  // And will be filled with the proper result after calling the guest Wasm function.
   wasmer_value_t result_one = { 0 };
   wasmer_value_t results[] = {result_one};
 
-  // Define our parameters (none) we are passing into the guest wasm function call.
+  // Define our parameters (none) we are passing into the guest Wasm function call.
   wasmer_value_t params[] = {0};
 
 
-  // Call the wasm function
+  // Call the Wasm function
   wasmer_result_t call_result = wasmer_instance_call(
       instance, // Our Wasm Instance
-      "throw_wasm_error", // the name of the exported function we want to call on the guest wasm module
+      "throw_wasm_error", // the name of the exported function we want to call on the guest Wasm module
       params, // Our array of parameters
       0, // The number of parameters
       results, // Our array of results
       1 // The number of results
       );
 
-  // Assert that the guest wasm function call Error'd
+  // Assert that the guest Wasm function call Error'd
   // Checking both WASMER_OK and WASMER_ERROR just for
   // demonstrating the two statuses exposed by the header file.
   assert(call_result != WASMER_OK);
@@ -137,7 +137,7 @@ Error str: `Call error: WebAssembly trap occurred during runtime: illegal arithm
 Test ran sucessfully, ending execution ...
 ```
 
-Meaning we were able to cause an error in our guest wasm module, and then get a hint on what caused the error!
+Meaning we were able to cause an error in our guest Wasm module, and then get a hint on what caused the error!
 
-Next, let's take a look at interrupting the execution of a wasm module.
+Next, let's take a look at interrupting the execution of a Wasm module.
 

@@ -51,7 +51,7 @@ fn main() -> error::Result<()> {
         *counter_ref
     };
 
-    // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
+    // Now that we have the Wasm file as bytes, let's run it with the wasmer runtime
 
     // Let's define the import object used to import our function
     // into our webassembly sample application.
@@ -59,7 +59,7 @@ fn main() -> error::Result<()> {
     // Make sure to check your function signature (parameter and return types) carefully!
     let import_object = imports! {
         // Define the "host" namespace that was used
-        // by our example rust wasm crate.
+        // by our example rust Wasm crate.
         "host" => {
             // Key should be the name of the imported function
             // Value should be the func! macro, with the function passed in.
@@ -68,7 +68,7 @@ fn main() -> error::Result<()> {
         },
     };
 
-    // Let's create an instance of wasm module running in the wasmer-runtime
+    // Let's create an instance of Wasm module running in the wasmer-runtime
     let instance = instantiate(wasm_bytes, &import_object)?;
 
     // Define the number of times we want to loop our increment

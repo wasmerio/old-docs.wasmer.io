@@ -7,7 +7,7 @@ const char END_OF_STRING = '\0';
 
 // Define a fixed size byte array
 // That we can use as a buffer for passing data between
-// The host application, and this guest wasm module
+// The host application, and this guest Wasm module
 unsigned char byte_buffer[MAX_BUFFER_SIZE];
 
 // Function to return a pointer to our buffer
@@ -43,11 +43,11 @@ int add_wasm_is_cool() {
     }
   }
 
-  // Define our wasm is cool string, and get its length
+  // Define our Wasm is cool string, and get its length
   char wasm_is_cool[15] = "Wasm is cool!";
   int wasm_is_cool_length = sizeof(wasm_is_cool) / sizeof(wasm_is_cool[0]);
 
-  // Loop over the wasm is cool string, concatenate it to the total string
+  // Loop over the Wasm is cool string, concatenate it to the total string
   for (int i = 0; i < wasm_is_cool_length; i++) {
     total_string[passed_string_length + i] = wasm_is_cool[i];
   }

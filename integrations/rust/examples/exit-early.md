@@ -33,7 +33,7 @@ fn main() -> error::Result<()> {
     // Make sure to check your function signature (parameter and return types) carefully!
     let import_object = imports! {
         // Define the "env" namespace that was implicitly used
-        // by our example rust wasm crate.
+        // by our example rust Wasm crate.
         "env" => {
             // Key should be the name of the imported function
             // Value should be the func! macro, with the function passed in.
@@ -41,10 +41,10 @@ fn main() -> error::Result<()> {
         },
     };
 
-    // Let's create an instance of wasm module running in the wasmer-runtime
+    // Let's create an instance of Wasm module running in the wasmer-runtime
     let instance = instantiate(wasm_bytes, &import_object)?;
 
-    // Let's call the exported "exit_early" function on the wasm module.
+    // Let's call the exported "exit_early" function on the Wasm module.
     let exit_early_func: Func<(), i32> = instance
         .func("exit_early")
         .expect("exit_early function not found");
@@ -68,12 +68,12 @@ fn main() -> error::Result<()> {
     Ok(())
 }
 
-// Function that is imported into the guest wasm module, that will immediately stop execution
+// Function that is imported into the guest Wasm module, that will immediately stop execution
 fn interrupt_execution(_ctx: &mut Ctx) -> Result<(), ()> {
     // Log that we were called
     println!("interrupt_execution called!");
 
-    // Return an error, which will immediately stop execution of the wasm module
+    // Return an error, which will immediately stop execution of the Wasm module
     Err(())
 }
 ```

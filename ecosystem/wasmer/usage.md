@@ -64,7 +64,7 @@ OPTIONS:
         --em-symbol-map <em-symbol-map>      Emscripten symbol map
         --env <env-vars>...                  Pass custom environment variables
         --loader <loader>                    Custom code loader [possible values: local, kernel]
-        --mapdir <mapped-dirs>...            Map a host directory to a different location for the wasm module
+        --mapdir <mapped-dirs>...            Map a host directory to a different location for the Wasm module
         --llvm-object-file <obj-file>        Emit LLVM generated native code object file.
         --llvm-post-opt-ir <post-opt-ir>     Emit LLVM IR after optimization pipeline.
         --dir <pre-opened-directories>...    WASI pre-opened directory

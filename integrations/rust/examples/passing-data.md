@@ -27,25 +27,25 @@ fn main() -> error::Result<()> {
     // Let's get the .wasm file as bytes
     let wasm_bytes = include_bytes!("passing-data.wasm");
 
-    // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
-    // Our import object, that allows exposing functions to our wasm module.
+    // Now that we have the Wasm file as bytes, let's run it with the wasmer runtime
+    // Our import object, that allows exposing functions to our Wasm module.
     // We're not importing anything, so make an empty import object.
     let import_object = imports! {};
-    // Let's create an instance of wasm module running in the wasmer-runtime
+    // Let's create an instance of Wasm module running in the wasmer-runtime
     let instance = instantiate(wasm_bytes, &import_object)?;
 
     // Lets get the context and memory of our Wasm Instance
     let wasm_instance_context = instance.context();
     let wasm_instance_memory = wasm_instance_context.memory(0);
 
-    // Let's get the pointer to the buffer defined by the wasm module in the wasm memory.
+    // Let's get the pointer to the buffer defined by the Wasm module in the Wasm memory.
     // We use the type system and the power of generics to get a function we can call
     // directly with a type signature of no arguments and returning a WasmPtr<u8, Array>
     let get_wasm_memory_buffer_pointer: Func<(), WasmPtr<u8, Array>> = instance
         .func("get_wasm_memory_buffer_pointer")
         .expect("get_wasm_memory_buffer_pointer");
     let wasm_buffer_pointer = get_wasm_memory_buffer_pointer.call().unwrap();
-    // Let's write a string to the wasm memory
+    // Let's write a string to the Wasm memory
     let original_string = "Did you know";
     println!("The original string is: {}", original_string);
 
@@ -88,8 +88,8 @@ You can download the `passing-data.wasm` WebAssembly module here:
 
 Taking a look at the `src/main.rs` above, we see that we:
 
-1. Load our wasm module from a file
-2. Instantiate this wasm module
+1. Load our Wasm module from a file
+2. Instantiate this Wasm module
 3. Create a `WasmPtr` from the pointer returned from the exported function
 4. Write the bytes of our string to the `WasmPtr` location
 5. Call the exported transformation function

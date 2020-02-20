@@ -35,8 +35,8 @@ int main() {
   // Our guest module does not use any import functions, or memory, so we omit them.
   wasmer_import_t imports[] = {};
 
-  // Read the wasm file bytes from "../../../shared/c/add.wasm"
-  // NOTE: You should replace this file path for where your guest wasm module is.
+  // Read the Wasm file bytes from "../../../shared/c/add.wasm"
+  // NOTE: You should replace this file path for where your guest Wasm module is.
   FILE *file = fopen("../../../shared/c/add.wasm", "r");
   assert(file != NULL);
   fseek(file, 0, SEEK_END);
@@ -46,10 +46,10 @@ int main() {
   fread(bytes, 1, len, file);
   fclose(file);
 
-  // Instantiate a WebAssembly Instance from wasm bytes and imports
+  // Instantiate a WebAssembly Instance from Wasm bytes and imports
   wasmer_instance_t *instance = NULL;
   wasmer_result_t compile_result = wasmer_instantiate(
-      &instance, // Our reference to our wasm instance 
+      &instance, // Our reference to our Wasm instance 
       bytes, // The bytes of the WebAssembly modules
       len, // The length of the bytes of the WebAssembly module
       imports, // The Imports array the will be used as our importObject
@@ -64,29 +64,29 @@ int main() {
       print_wasmer_error();
   }
 
-  // Assert the wasm instantion completed
+  // Assert the Wasm instantion completed
   assert(compile_result == WASMER_OK);
 
    // Call the exported "hello_wasm" function of our instance
 
-  // Define our parameters we are passing into the guest wasm function call.
+  // Define our parameters we are passing into the guest Wasm function call.
   // Params are created with the following properties
-  // .tag is the tag of the type of the param being passed to the guest wasm function
-  // .value.I32 is the value being passed to the guest wasm function
+  // .tag is the tag of the type of the param being passed to the guest Wasm function
+  // .value.I32 is the value being passed to the guest Wasm function
   wasmer_value_t param_one = { .tag = WASM_I32, .value.I32 = 24 };
 
   // Create our array of our params
   wasmer_value_t params[] = { param_one };
 
   // Define our results. Results are created with { 0 } to avoid null issues,
-  // And will be filled with the proper result after calling the guest wasm function.
+  // And will be filled with the proper result after calling the guest Wasm function.
   wasmer_value_t result_one = { 0 };
   wasmer_value_t results[] = {result_one};
 
-  // Call the wasm function
+  // Call the Wasm function
   wasmer_result_t call_result = wasmer_instance_call(
       instance, // Our Wasm Instance
-      "add_one", // the name of the exported function we want to call on the guest wasm module
+      "add_one", // the name of the exported function we want to call on the guest Wasm module
       params, // Our array of parameters
       1, // The number of parameters
       results, // Our array of results
