@@ -77,7 +77,7 @@ And now we can just call the `add_one` function \(remember to use it inside the 
 
     // Asserting that the returned value from the function is our expected value.
     assert_eq!(result, 43);  // 42 + 1
-    
+
     // Return OK since everything executed successfully!
     Ok(())
 ```

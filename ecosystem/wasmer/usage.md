@@ -24,7 +24,7 @@ SUBCOMMANDS:
     validate       Validate a Web Assembly binary
 ```
 
-### `wasmer cache`
+## `wasmer cache`
 
 ```text
 USAGE:
@@ -40,7 +40,7 @@ SUBCOMMANDS:
     help     Prints this message or the help of the given subcommand(s)
 ```
 
-### `wasmer run`
+## `wasmer run`
 
 It runs a WebAssembly file. Formats accepted: wasm, wat
 
@@ -75,11 +75,11 @@ ARGS:
     <>...     Application arguments
 ```
 
-### `wasmer self-update`
+## `wasmer self-update`
 
 It auto-updates Wasmer to the most-recent published version.
 
-### `wasmer validate <path>`
+## `wasmer validate <path>`
 
 It validates that the provided Wasm file is valid.
 
