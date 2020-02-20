@@ -14,9 +14,9 @@ This provide three key services:
 2. Enables extremely portable binaries that can run unmodified in any OS that is supported by Wasmer \(Linux, macOS, Windows and FreeBSD\).
 3. It acts as a secure bridge for WASM modules to interact with native "OS" functionality, via ABIs such as [`WASI`](https://github.com/webassembly/wasi) and [`Emscripten`](https://github.com/emscripten-core/emscripten)
 
-For the first case, we offer multiple language integrations, that allows you to run Wasm files universally in any programming language.
+For the first case, we offer [multiple language integrations](./#wasmer-language-integrations), that allows you to run Wasm files universally in any programming language.
 
-And for the second case, we offer our Standalone Runtime to run unmodified binaries in any platform and chipset.
+And for the second case, we offer our [Standalone Runtime](getting-started.md) to run unmodified binaries in any platform and chipset.
 
 {% hint style="warning" %}
 ### Important
