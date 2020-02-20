@@ -2,7 +2,7 @@
 
 [WAPM](https://wapm.io/) is a package manager for WebAssembly modules to be used standalone by any WebAssembly Runtime \(such as the Wasmer Runtime\):
 
-* [wapm.io](https://cheerpxdemos.leaningtech.com/prehisto.html)
+* [wapm.io](https://wapm.io/)
 * [wapm-cli Github Repo](https://github.com/wasmerio/wapm-cli)
 
 The WAPM ecosystem makes WebAssembly more accessible to developers. The system is enabled by a couple tools:

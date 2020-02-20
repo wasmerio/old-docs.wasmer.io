@@ -11,7 +11,7 @@ The manifest \(`wapm.toml`\) is optional for using the `wapm` CLI tool; it manag
 However, a manifest is required [to publish](publishing-your-package.md) to the [WAPM registry](https://wapm.io).
 
 {% hint style="success" %}
-If you want to get assistance creating the `wapm.toml` file you can simply run `wapm init` in your directory and the CLI will guide you
+If you want to get assistance creating the `wapm.toml` file you can simply run `wapm init` in your directory and the CLI will guide you!
 {% endhint %}
 
 The manifest file contains 4 sections:
