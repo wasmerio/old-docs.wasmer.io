@@ -118,7 +118,7 @@ Please take a look at the comments of the `hello-world.c` file to see how everyt
 You can download the `add.wasm` WebAssembly module here:  
 [https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.wasm)
 
-Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.rs)
+Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.c)
 {% endhint %}
 
 Now, we should be ready to compile it with our favorite C compiler (`gcc` or `clang`):
