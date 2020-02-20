@@ -23,10 +23,9 @@ So if we create a new C project, following the same process as the **hello world
 void print_wasmer_error()
 {
   int error_len = wasmer_last_error_length();
-  printf("Error len: `%d`\n", error_len);
   char *error_str = malloc(error_len);
   wasmer_last_error_message(error_str, error_len);
-  printf("Error str: `%s`\n", error_str);
+  printf("Error: `%s`\n", error_str);
 }
 
 // Global counter our wasm module will be updating

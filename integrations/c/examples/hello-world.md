@@ -24,11 +24,10 @@ Let's create the entrypoint file `hello-world.c`.
 // Function to print the most recent error string from Wasmer if we have them
 void print_wasmer_error()
 {
-    int error_len = wasmer_last_error_length();
-    printf("Error len: `%d`\n", error_len);
-    char *error_str = malloc(error_len);
-    wasmer_last_error_message(error_str, error_len);
-    printf("Error str: `%s`\n", error_str);
+  int error_len = wasmer_last_error_length();
+  char *error_str = malloc(error_len);
+  wasmer_last_error_message(error_str, error_len);
+  printf("Error: `%s`\n", error_str);
 }
 
 int main() {
@@ -123,7 +122,7 @@ Note: You can [find the implementation of it here](https://github.com/wasmerio/d
 Now, we should be ready to compile it with our favorite C compiler \(`gcc` or `clang`\):
 
 ```bash
-gcc hello-world.c -I${WASMER_C_API}/include -L${WASMER_C_API}/lib -lwasmer
+gcc hello-world.c -I${WASMER_C_API}/include -L${WASMER_C_API}/lib -lwasmer -o hello-world
 # Add -rpath ${WASMER_C_API}/lib if you are on macOS
 ```
 

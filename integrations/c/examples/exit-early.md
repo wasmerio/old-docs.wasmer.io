@@ -20,10 +20,9 @@ In this example, we will run a Wasm module that calls the imported host function
 void print_wasmer_error()
 {
   int error_len = wasmer_last_error_length();
-  printf("Error len: `%d`\n", error_len);
   char *error_str = malloc(error_len);
   wasmer_last_error_message(error_str, error_len);
-  printf("Error str: `%s`\n", error_str);
+  printf("Error: `%s`\n", error_str);
 }
 
 // The function to interrupt the execution of our guest wasm module.

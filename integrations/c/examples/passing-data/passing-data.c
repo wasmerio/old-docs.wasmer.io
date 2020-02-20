@@ -1,24 +1,3 @@
-# Passing Data
-
-{% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/passing-data)
-{% endhint %}
-
-Linear memory is one of the major concepts in WebAssembly.
-
-{% hint style="info" %}
-Because WebAssembly is sandboxed, memory must be copied between the host \(your C application\) and the Wasm module. Upcoming proposals like WebAssembly Interface types will make this process much easier, but it is still a work in progress.
-{% endhint %}
-
-The way that this memory is allocated, freed, passed, organized, etc... can vary depending on the API exposed by the Wasm module.
-
-For example, some ABIs will provide explicit function for allocation and freeing of memory from the host. And some Wasm modules may want to control their memory themself, and the host may only need to modify that memory in place. You will want to take a look at the documentation of your wasm module, to see how it wants to interact with its memory from a Host.
-
-In this example, let's say we have a wasm module than can perform transformations on a string passed into the module's memory. This module exports a function that returns a pointer to a fixed size static buffer, which allows one transformation at a time. This Wasm module will take in a string, and concatenate the string " Wasm is cool!". This example shows how we can read and write memory from the host \(your rust application\), and the Wasm module can also read and write to the same memory.
-
-So if we create a new C project, following the same process as the **hello world example**, we can create a `passing-data.c` file with the following source code:
-
-```c
 #include <stdio.h>
 #include "wasmer.h"
 #include <assert.h>
@@ -97,7 +76,7 @@ wasmer_instance_t *create_wasmer_instance(wasmer_memory_t *memory) {
   wasmer_import_t imports[] = {memory_import};
 
   // Read the wasm file bytes
-  FILE *file = fopen("example-wasienv-wasm/strings-wasm-is-cool/strings-wasm-is-cool.wasm", "r");
+  FILE *file = fopen("../../../shared/c/passing-data.wasm", "r");
   assert(file != NULL);
   fseek(file, 0, SEEK_END);
   long len = ftell(file);
@@ -224,40 +203,3 @@ int main() {
 
   return 0;
 }
-```
-
-Taking a look at the source code above, we see that we:
-
-1. Create an instance of wasmer memory
-2. Create an instance of wasmer, passing our memory so it may be imported by the wasmer instance.
-3. Get a byte \(uint8\_t\) representation of the shared linear memory in the guest wasm module, using the wasmer instance context
-   1. NOTE: You must get the memory from the wasmer instance context. The memory that is imported cannot be used.
-4. Call a function on the guest wasm module, to get the pointer to the unsigned char array that is in the shared linear memory from the guest wasm module.
-5. Write a string into the shared linear memory, at the index given by our guest wasm module buffer pointer.
-6. Call the exported `add_wasm_is_cool` transformation function.
-7. Retrieve the transformed string from the Wasm module
-
-Now, we should be ready to run it!
-
-```text
-gcc passing-data.c -I${WASMER_C_API}/include -L${WASMER_C_API}/lib -lwasmer -o passing-data
-# Add -rpath ${WASMER_C_API}/lib if you are on macOS
-```
-
-If everything works properly, we can now run `./passing-data` and we should see something similar to:
-
-```
-original_string: "Hello there, "
-new_string: "Hello there, Wasm is cool!"
-```
-
-{% hint style="info" %}
-If you want to run the examples from the docs codebase directly, you can also do:
-
-```bash
-git clone https://github.com/wasmerio/docs.wasmer.io.git
-cd docs.wasmer.io/integrations/c/passing-data
-```
-{% endhint %}
-
-Now that we have a general idea of how we can pass data back and forth between the Host and a Wasm module using its linear memory, let's take a look at how we can expose Host functions to the Wasm module.
