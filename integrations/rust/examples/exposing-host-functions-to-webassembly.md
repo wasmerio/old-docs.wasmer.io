@@ -1,3 +1,28 @@
+# Exposing Host Functions to WebAssembly
+
+{% hint style="success" %}
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/host-functions)
+
+_Please take a look at the_ [_setup steps for Rust_](https://github.com/wasmerio/docs.wasmer.io/tree/f2ebe6a08e0ac5f6bd58ababffa793df6ab4424d/integrations/rust/examples/setup.md)_._
+{% endhint %}
+
+Up until now, our WebAssembly program has only been able to do pure computation, that is, take arguments and return values. Most interesting use cases require more than just computation though. In this section we'll go over how to give the Wasm modules we run extra abilties in the form of host functions in an `ImportObject`.
+
+In this example, we'll create a system for getting and adjusting a counter value. However host functions are not limited to storing data outside of Wasm memory, they're normal Rust functions and can do anything that Rust can do.
+
+1. There will be a `get_counter` function that will return an `i32` of
+
+   the current global counter.
+
+2. There will be an `add_to_counter` function will add the passed
+
+   `i32` value to the counter, and return an `i32` of the current
+
+   global counter.
+
+Let's generate a new project, and update our `src/main.rs` to look something like this:
+
+```rust
 use std::{cell::RefCell, sync::Arc};
 
 // Import the wasmer runtime so we can use it
@@ -13,7 +38,7 @@ use wasmer_runtime::{
 // Our entry point to our application
 fn main() -> error::Result<()> {
     // Let's get the .wasm file as bytes
-    let wasm_bytes = include_bytes!("../../../../shared/rust/host-functions.wasm");
+    let wasm_bytes = include_bytes!("host-functions.wasm");
 
     // We create some shared data here, [`Arc`] is required because we may
     // move our WebAssembly instance to another thread to run it.  RefCell
@@ -78,3 +103,43 @@ fn main() -> error::Result<()> {
     // Return OK since everything executed successfully!
     Ok(())
 }
+```
+
+{% hint style="info" %}
+You can download the `host-functions.wasm` WebAssembly module here:  
+[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/host-functions.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/host-functions.wasm)
+{% endhint %}
+
+Both of the functions in this case are closures, but they don't have to be. Host functions can take an optional `&mut Ctx` argument as their first argument, which is how host functions get access to Wasm memory and other Wasm-related data.
+
+In the above example we exposed host functions to the guest Wasm module with the namespace and name given in the `imports!` macro. The used namespace is `host` so we list `get_counter` and `add_to_counter` there.
+
+{% hint style="info" %}
+Depending on the ABI of the Wasm module, we may need to expose functions under a different namespace. On the guest side, a non-default import namespace looks like:
+
+```rust
+extern "C" {
+   #[link_name = "namespace"]
+   fn import_name(arg: u32);
+}
+```
+{% endhint %}
+
+Now we should be ready to run it!
+
+```bash
+cargo run
+```
+
+{% hint style="info" %}
+If you want to run the examples from the docs codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/docs.wasmer.io.git
+cd docs.wasmer.io/integrations/rust/host-functions
+```
+{% endhint %}
+
+
+Next, we will take a look at handling errors from a WebAssembly module!
+

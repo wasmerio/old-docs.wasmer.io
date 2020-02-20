@@ -13,7 +13,7 @@ use wasmer_runtime::{
 // Our entry point to our application
 fn main() -> error::Result<()> {
     // Let's read in our .wasm file as bytes
-    let wasm_bytes = include_bytes!("../../../../shared/early-exit.wasm");
+    let wasm_bytes = include_bytes!("../../../../shared/rust/exit-early.wasm");
 
     // Let's define the import object used to import our function
     // into our webassembly sample application.

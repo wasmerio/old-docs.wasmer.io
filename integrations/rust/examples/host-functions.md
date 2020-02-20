@@ -99,7 +99,7 @@ fn main() -> error::Result<()> {
 
 {% hint style="info" %}
 You can download the `host-functions.wasm` WebAssembly module here:  
-[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/host-functions.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/host-functions.wasm)
+[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/host-functions.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/host-functions.wasm)
 {% endhint %}
 
 Now we should be ready to run it!

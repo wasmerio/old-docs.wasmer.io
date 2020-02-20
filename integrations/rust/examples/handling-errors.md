@@ -17,7 +17,7 @@ use wasmer_runtime::{error, imports, instantiate, Func, error::{RuntimeError}};
 // Our entry point to our application
 fn main() -> error::Result<()> {
     // Let's read in our .wasm file as bytes
-    let wasm_bytes = include_bytes!("../../../../shared/handling-errors.wasm");
+    let wasm_bytes = include_bytes!("../../../../shared/rust/handling-errors.wasm");
 
     // Our import object, that allows exposing functions to our wasm module.
     // We're not importing anything, so make an empty import object.
@@ -57,7 +57,7 @@ fn main() -> error::Result<()> {
 
 {% hint style="info" %}
 You can download the `handling-errors.wasm` WebAssembly module here:  
-[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/handling-errors.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/handling-errors.wasm)
+[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/handling-errors.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/handling-errors.wasm)
 {% endhint %}
 
 If we run the following code with `cargo run`, we would see a result like:
@@ -73,7 +73,7 @@ use wasmer_runtime::{error, imports, instantiate, Func, error::{RuntimeError}};
 // Our entry point to our application
 fn main() -> error::Result<()> {
     // Let's read in our .wasm file as bytes
-    let wasm_bytes = include_bytes!("../../../../shared/handling-errors.wasm");
+    let wasm_bytes = include_bytes!("../../../../shared/rust/handling-errors.wasm");
 
     // Our import object, that allows exposing functions to our wasm module.
     // We're not importing anything, so make an empty import object.

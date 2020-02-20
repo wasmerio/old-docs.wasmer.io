@@ -1,21 +1,3 @@
-# Hello World
-
-{% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/c/examples/hello-world).
-{% endhint %}
-
-In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats directly right now, thus to keep it simple we will be writing a host application that calls the `add_one` function of a guest Wasm module, which adds `1` to the value passed as a parameter, and returns the result.
-
-First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. In this example, we will create a new project named `hello-world`. Thus, lets create the directory for it, and navigate to it:
-
-```bash
-mkdir hello-world
-cd hello-world
-```
-
-Let's create the entrypoint file `hello-world.c`.
-
-```c
 #include <stdio.h>
 #include "wasmer.h"
 #include <assert.h>
@@ -109,47 +91,3 @@ int main() {
   wasmer_instance_destroy(instance);
   return 0;
 }
-```
-
-Please take a look at the comments of the `hello-world.c` file to see how everything is working.
-
-
-{% hint style="info" %}
-You can download the `add.wasm` WebAssembly module here:  
-[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.wasm)
-
-Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.rs)
-{% endhint %}
-
-Now, we should be ready to compile it with our favorite C compiler (`gcc` or `clang`):
-
-```bash
-gcc hello-world.c -I${WASMER_C_API}/include -L${WASMER_C_API}/lib -lwasmer
-# Add -rpath ${WASMER_C_API}/lib if you are on macOS
-```
-
-If all of this works, you should now have a `hello-world` executable. If you run:
-
-`./hello-world`
-
-Your output should look something like:
-
-```bash
-Compile result:  1
-Call result:  1
-Result value:  25
-```
-
-Which means we have our first application!
-
-{% hint style="info" %}
-If you want to run the examples from the docs codebase directly, you can also do:
-
-```bash
-git clone https://github.com/wasmerio/docs.wasmer.io.git
-cd docs.wasmer.io/integrations/c/hello-world
-```
-{% endhint %}
-
-Next, let's take a look at how we can pass data between our host application, and our guest wasm module.
-

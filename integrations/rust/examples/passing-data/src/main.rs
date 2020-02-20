@@ -4,7 +4,7 @@ use wasmer_runtime::{error, imports, instantiate, Array, Func, WasmPtr};
 // Our entry point to our application
 fn main() -> error::Result<()> {
     // Let's get the .wasm file as bytes
-    let wasm_bytes = include_bytes!("../../../../shared/passing-data.wasm");
+    let wasm_bytes = include_bytes!("../../../../shared/rust/passing-data.wasm");
 
     // Now that we have the wasm file as bytes, let's run it with the wasmer runtime
     // Our import object, that allows exposing functions to our wasm module.

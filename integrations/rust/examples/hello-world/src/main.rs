@@ -7,7 +7,7 @@ use wasmer_runtime::{error, imports, instantiate, Func};
 
 fn main() -> error::Result<()> {
     // Let's get the .wasm file as bytes
-    let wasm_bytes = include_bytes!("../../../../shared/add.wasm");
+    let wasm_bytes = include_bytes!("../../../../shared/rust/add.wasm");
 
     // Our import object, that allows exposing functions to our wasm module.
     // We're not importing anything, so make an empty import object.
