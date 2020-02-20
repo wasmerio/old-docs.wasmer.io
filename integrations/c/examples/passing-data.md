@@ -1,3 +1,9 @@
+---
+description: >-
+  In this example we will learn how to pass data between the host system and
+  Wasm
+---
+
 # Passing Data
 
 {% hint style="success" %}
