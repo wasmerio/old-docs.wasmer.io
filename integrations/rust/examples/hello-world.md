@@ -62,7 +62,7 @@ fn main() -> error::Result<()> {
 You can download the `add.wasm` WebAssembly module here:  
 [https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/add.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/add.wasm)
 
-Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/add.rs)
+Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/rust/add.rs)
 {% endhint %}
 
 And now we can just call the `add_one` function \(remember to use it inside the `main()` function\).
