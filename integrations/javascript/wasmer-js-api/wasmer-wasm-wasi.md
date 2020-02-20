@@ -1,4 +1,4 @@
-# @wasmer/wasm-transformer
+# @wasmer/wasi
 
 ## WASI
 
