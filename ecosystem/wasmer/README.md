@@ -8,22 +8,22 @@ Consequently, access to OS-level resources such as file descriptors, network soc
 
 However, there are many cases in which a WebAssembly module needs to do more than perform pure computation; they must interact with native "OS" functionality.
 
-This provide three key services:
+This provides three key features:
 
-1. Enable programs to run in any programming language
-2. Enables extremely portable binaries that can run unmodified in any OS that is supported by Wasmer \(Linux, macOS, Windows and FreeBSD\).
+1. Enables programs to run in any programming language
+2. Enables extremely portable binaries that can run unmodified on any OS that is supported by Wasmer \(Linux, macOS, Windows and FreeBSD\).
 3. It acts as a secure bridge for WASM modules to interact with native "OS" functionality, via ABIs such as [`WASI`](https://github.com/webassembly/wasi) and [`Emscripten`](https://github.com/emscripten-core/emscripten)
 
-For the first case, we offer [multiple language integrations](./#wasmer-language-integrations), that allows you to run Wasm files universally in any programming language.
+For the first case, we offer [multiple language integrations](./#wasmer-language-integrations), that allows you to run Wasm files universally from any programming language.
 
-And for the second case, we offer our [Standalone Runtime](getting-started.md) to run unmodified binaries in any platform and chipset.
+And for the second case, we offer our [Standalone Runtime](getting-started.md) to run Wasm binaries on any platform and chipset.
 
 {% hint style="warning" %}
 ### Important
 
 The term "OS" used above is in quotes to indicate that the native function being called might not actually be provided by the host's operating system.
 
-In reality, native functions always belong to the host environment within which the WebAssembly module is being run, and that could be either the host language's runtime environment \(for example, JavaScript, Python or Ruby\), or it might be the actual operating system.
+In reality, native functions always belong to the host environment within which the WebAssembly module is being run, and that could be either the host language's runtime environment \(for example, JavaScript, Python, or Ruby\), or it might be the actual operating system.
 
 Either way though, from a WebAssembly point of view, we don't need to care too much about this detail. All we need to know is that:
 
