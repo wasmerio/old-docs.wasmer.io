@@ -10,11 +10,7 @@ Welcome to the Wasmer Documentation! 👋
 
 For an overview of WebAssembly, and what WebAssembly is, [take a look here](https://webassembly.org/).
 
-## Background
-
-
-
-## Projects
+### Projects
 
 Apart of the [Wasmer WebAssembly Runtime](ecosystem/wasmer/), we also have other projects such as:
 
@@ -23,13 +19,11 @@ Apart of the [Wasmer WebAssembly Runtime](ecosystem/wasmer/), we also have other
 
 to name but a few...
 
-For the latest articles on Wasmer features and developments, check out our blog!
+### Social
 
-{% embed url="https://medium.com/wasmer" %}
+For the latest articles on Wasmer features and developments, check out [our blog](https://medium.com/wasmer) or [follow us on Twitter](https://twitter.com/wasmerio)!
 
-
-
-## Tutorials
+### Tutorials
 
 If you would like to see tutorials, examples, or reference API documentation about a specific Wasmer project, please use the sidebar to the left, or the search bar at the top of this page in the header.
 
