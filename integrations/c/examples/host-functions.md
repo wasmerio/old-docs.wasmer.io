@@ -1,7 +1,7 @@
 # Exposing Host Functions to WebAssembly
 
 {% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/host-functions)
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/integrations/c/examples/host-functions)
 {% endhint %}
 
 Importing function into a WebAssembly object is another great feature about WebAssembly. Using the `importObject` we can expose functions in the host \(our rust application\) for the WebAssembly module to call, and interact with host from within the WebAssembly modules.

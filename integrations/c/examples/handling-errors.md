@@ -1,7 +1,7 @@
 # Handling Errors
 
 {% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/handling-errors)
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/integrations/c/examples/handling-errors)
 {% endhint %}
 
 There will come a time where running a WebAssembly module will not work, and trying to figure out why it does not work can be a difficult task! In the current MVP of WebAssembly, debugging is quite vauge, in runtimes for both the browser and the server. But errors can still be handled and debugged gracefully.

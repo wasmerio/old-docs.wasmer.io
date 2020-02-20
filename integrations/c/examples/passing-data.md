@@ -1,7 +1,7 @@
 # Passing Data
 
 {% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/runtime/c-integration/examples/passing-data)
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/integrations/c/examples/passing-data)
 {% endhint %}
 
 Linear memory is one of the major concepts in WebAssembly.
