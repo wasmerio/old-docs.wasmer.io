@@ -1,6 +1,6 @@
 # C/C++
 
-Wasmer lets you use WebAssembly modules in your C/C++ projects.
+You can use Wasmer in your C and C++ projects to interact with WebAssembly modules easily.
 
 {% hint style="info" %}
 ### Did you know ...?

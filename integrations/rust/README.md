@@ -1,6 +1,6 @@
 # Rust
 
-Wasmer lets you use WebAssembly modules in your Rust projects.
+You can use Wasmer in your Rust projects to interact with WebAssembly modules easily.
 
 {% hint style="info" %}
 ### Did you know ...?
