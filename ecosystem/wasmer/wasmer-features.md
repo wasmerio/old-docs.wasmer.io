@@ -1,14 +1,14 @@
 # Wasmer Features
 
-Wasmer WebAssembly runtime provides multiple features for their users/developers:
+The Wasmer WebAssembly runtime provides various features for users and developers:
 
-* **Backends:** Wasmer supports multiple backends: _Singlepass_, _Cranelift_ and _LLVM_. Each of those with different tradeoffs for compilation and runtime speed.
-* **Caching**: it allows to reuse the compiled WebAssembly code, so subsequent runs of a Wasm file will run as fast as possible
-* **Metering**: it allows to track and limit the usage of functions within the host. This is also known as "gas metering"
+* **Backends:** Wasmer supports multiple compiler backends: _Singlepass_, _Cranelift_ and _LLVM_. Each of these have different tradeoffs of compilation speed vs runtime speed.
+* **Caching**: compiled WebAssembly modules can be reused so subsequent runs of a Wasm file will have very little start up time
+* **Metering**: computation time and other resources can be monitored and limits set to control how the Wasm code runs. This is also known as "gas metering"
 * _WebAssembly Features_:
-  * **Multi-value return**: it's a proposal that allows function to return more than one value at a time
-  * **SIMD**: Single Instruction, Multiple data
-* ABIs: it allows to run different programs compiled to WebAssembly, with ABIs such as:
+  * **Multi-value return**: return multiple values from functions making data transfer between host and guest simpler
+  * **SIMD**: Single Instruction, Multiple data: do heavy number crunching more quickly and/or with lower power usage
+* ABIs: it allows to run different types of programs compiled to WebAssembly, with ABIs such as:
   * **Emscripten**
   * **WASI**
 
@@ -28,7 +28,7 @@ Wasmer WebAssembly runtime provides multiple features for their users/developers
 ### Legend
 
 * ✅ Supported
-* 🔄 On the works
+* 🔄 In the works
 * ⬜ Not yet supported \(please ping us if you need this feature!\)
 {% endhint %}
 
