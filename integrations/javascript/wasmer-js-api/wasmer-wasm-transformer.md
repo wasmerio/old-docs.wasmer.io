@@ -1,102 +1,57 @@
 # @wasmer/wasm-transformer
 
-## WASI
+### version
 
-The default exported ES6 class of `@wasmer/wasi`, also available as `import { WASI } from "@wasmer/wasi"`
+`version(): string`
 
-### Constructor
-
-`new WASI(wasiConfigObject): WASI`
-
-Constructs a new WASI instance.
-
-The `wasiConfigObject` is is as follows:
+Exported function that returns a string of the current version of the package.
 
 ```javascript
-let myWASIInstance = new WASI({
-  // OPTIONAL: The pre-opened dirctories
-  preopenDirectories: {},
-
-  // OPTIONAL: The environment vars
-  env: {},
-
-  // OPTIONAL: The arguments provided
-  args: [],
-
-  // OPTIONAL: The environment bindings (fs, path),
-  // useful for using WASI in diferent environments
-  // such as Node.js, Browsers, ...
-  bindings: {
-    // hrtime: WASI.defaultBindings.hrtime,
-    // exit: WASI.defaultBindings.exit,
-    // kill: WASI.defaultBindings.kill,
-    // randomFillSync: WASI.defaultBindings.randomFillSync,
-    // isTTY: WASI.defaultBindings.isTTY,
-    // fs: WASI.defaultBindings.fs,
-    // path: WASI.defaultBindings.path,
-    ...WASI.defaultBindings
-  }
-});
+import { version } from "wasm-transformer";
+console.log(version()) // x.x.x
 ```
 
-This returns a WASI instance. Please see the Instance properties section to learn about the WASI instance.
+## wasmTransformerInit
 
-### Class Properties
+### Node / Unoptimized
 
-#### defaultBindings
+**This export is not needed, and should be skipped**
 
-`WASI.defaultBindings: WASIBindings`
+### Optimized
 
-The [default bindings](https://github.com/wasmerio/wasmer-js/tree/master/packages/wasi/src/bindings) for the environment that are set on the `bindings` property of the constructor config object. This is useful for use cases like, you want to plugin in your own file system. For example:
+`wasmTransformerInit(wasmTransformerUrl: string): Promise`
 
-```text
-const myFs = require("fs");
+Exported function that takes in the url to the wasm file for that the wasm-transformer uses. This is usually within your `node_modules` with the path: `"node_modules/@wasmer/wasm-transformer/wasm-transformer.wasm"`. But this path will be different depending on where you host the wasm file.
 
-let wasi = new WASI({
-  preopenDirectories: {},
-  env: {},
-  args: [],
-  bindings: {
-    fs: myFs,
-    ...WASI.defaultBindings
-  }
-});
+```javascript
+import { wasmTransformerInit } from "wasm-transformer/optimized/wasm-transformer.esm";
+wasmTransformerInit(
+  // IMPORTANT: This URL points to wherever the wasm-transformer.wasm is hosted
+  "node_modules/@wasmer/wasm-transformer/wasm-transformer.wasm"
+).then(() => {
+  // The wasm-transformer is now ready, and all exported transformations can be run.
+})
 ```
 
-### Instance Properties
+## lowerI64Imports
 
-#### memory
+### Node / Unoptimized
 
-`wasiInstance.memory: WebAssembly.Memory`
+`lowerI64Imports(wasmBinaryWithI64Imports: Uint8Array): Promise<Uint8Array>`
 
-[`WebAssembly.memory`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Memory) object, that is a view into the Wasm Module's linear memory.
+### Optimized
 
-#### view
+`lowerI64Imports(wasmBinaryWithI64Imports: Uint8Array): Uint8Array`
 
-`wasiInstance.view: DataView`
+Exported Function to insert trampoline functions for imports that have i64 params or returns. This is useful for running Wasm modules in browsers that [do not support JavaScript BigInt -&gt; Wasm i64 integration](https://github.com/WebAssembly/proposals/issues/7). Especially in the case for [i64 WASI Imports](https://github.com/CraneStation/wasmtime/blob/master/docs/WASI-api.md#clock_time_get). Returns or resolves the lowered wasm binary as a Uint8Array.
 
-[DataView](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView) object, that is a view into the Wasm Module's linear memory.
-
-#### FD\_MAP
-
-`wasiInstance.FD_MAP: Map<number, File>`
-
-[Javascript Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), where the key is the file descriptor, and the value is a [JavaScript File](https://developer.mozilla.org/en-US/docs/Web/API/File).
-
-#### exports
-
-`wasiInstance.exports: Exports`
-
-WASI API to be imported in the importObject on instantiation.
-
-#### bindings
-
-`wasiInstance.bindings: WASIBindings`
-
-The bindings for common node like objects, such as `fs` for filesystem, these should work by default, but are applied depending on the platoform. You can view the source code for your respective platform's bindings here.
-
-#### start
-
-`wasiInstance.start(wasmInstance: WebAssembly.Instance): void`
-
-Function that takes in a WASI WebAssembly Instance and starts it.
+```javascript
+import { lowerI64Imports } from "@wasmer/wasm-transformer";
+const transformWasmModuleBytes = async () => {
+  const myWasmModuleBytes = new Uint8Array([ ... ]);
+  // NOTE: Optimized Bundles must import/call wasmInit, 
+  // and this function does not return a promise
+  const loweredWasmModuleBytes = await lowerI64Imports(myWasmModulesBytes);
+};
+transformWasmModuleBytes();
+```
