@@ -126,6 +126,11 @@ gcc hello-world.c -I${WASMER_C_API}/include -L${WASMER_C_API}/lib -lwasmer -o he
 # Add -rpath ${WASMER_C_API}/lib if you are on macOS
 ```
 
+{% hint style="warning" %}
+Make sure the `WASMER_C_API` environment var is properly set before runnning the command.  
+You can follow the [Setup C/C++ environment instructions](../setup.md).
+{% endhint %}
+
 If all of this works, you should now have a `hello-world` executable. If you run:
 
 `./hello-world`
