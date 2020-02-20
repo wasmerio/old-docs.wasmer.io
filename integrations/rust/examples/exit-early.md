@@ -80,7 +80,7 @@ fn interrupt_execution(_ctx: &mut Ctx) -> Result<(), ()> {
 
 {% hint style="info" %}
 You can download the `exit-early.wasm` WebAssembly module here:  
-[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/exit-early.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/exit-early.wasm)
+[integrations/shared/rust/exit-early.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/exit-early.wasm)
 {% endhint %}
 
 In addition to exiting in host calls, Wasmer also offers a metering API for allowing a pre-defined amount of execution before interrupting. The docs for metering are not yet written -- stay tuned for more!

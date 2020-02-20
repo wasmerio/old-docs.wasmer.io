@@ -57,7 +57,7 @@ fn main() -> error::Result<()> {
 
 {% hint style="info" %}
 You can download the `handling-errors.wasm` WebAssembly module here:  
-[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/handling-errors.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/handling-errors.wasm)
+[integrations/shared/rust/handling-errors.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/handling-errors.wasm)
 {% endhint %}
 
 If we run the following code with `cargo run`, we would see a result like:

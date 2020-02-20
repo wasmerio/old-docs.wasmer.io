@@ -222,7 +222,7 @@ The main idea here, is that we want to assign our `get_counter` function to the 
 
 {% hint style="info" %}
 You can download the `host-functions.wasm` WebAssembly module here:  
-[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/passing-data.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/host-functions.wasm)
+[integrations/shared/c/passing-data.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/host-functions.wasm)
 
 Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/c/host-functions.c)
 {% endhint %}

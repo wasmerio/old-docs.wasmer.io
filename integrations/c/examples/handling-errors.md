@@ -120,7 +120,7 @@ int main() {
 
 {% hint style="info" %}
 You can download the `handling-errors.wasm` WebAssembly module here:  
-[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/handling-errors.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/handling-errors.wasm)
+[integrations/shared/c/handling-errors.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/handling-errors.wasm)
 
 Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/c/handling-errors.c)
 {% endhint %}

@@ -60,7 +60,7 @@ fn main() -> error::Result<()> {
 
 {% hint style="info" %}
 You can download the `add.wasm` WebAssembly module here:  
-[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/add.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/add.wasm)
+[integrations/shared/rust/add.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/add.wasm)
 
 Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/rust/add.rs)
 {% endhint %}

@@ -211,7 +211,7 @@ int main() {
 
 {% hint style="info" %}
 You can download the `exit-early.wasm` WebAssembly module here:  
-[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/exit-early.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/exit-early.wasm)
+[integrations/shared/c/exit-early.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/exit-early.wasm)
 
 Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/c/exit-early.c)
 {% endhint %}

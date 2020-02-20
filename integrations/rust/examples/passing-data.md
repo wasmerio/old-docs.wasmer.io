@@ -83,7 +83,7 @@ fn main() -> error::Result<()> {
 
 {% hint style="info" %}
 You can download the `passing-data.wasm` WebAssembly module here:  
-[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/passing-data.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/passing-data.wasm)
+[integrations/shared/rust/passing-data.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/passing-data.wasm)
 {% endhint %}
 
 Taking a look at the `src/main.rs` above, we see that we:

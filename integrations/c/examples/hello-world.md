@@ -114,7 +114,7 @@ Please take a look at the comments of the `hello-world.c` file to see how everyt
 
 {% hint style="info" %}
 You can download the `add.wasm` WebAssembly module here:  
-[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.wasm)
+[integrations/shared/c/add.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/add.wasm)
 
 Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/c/add.c)
 {% endhint %}
