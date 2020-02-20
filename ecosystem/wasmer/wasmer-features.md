@@ -1,9 +1,8 @@
 # Wasmer Features
 
-Wasmer runtime has three different backends: Singlepass, Cranelift and LLVM. Each of those with a different tradeoff between compilation and runtime speed.
+The Wasmer WebAssembly runtime provides multiple features for their users/developers:
 
-Also, Wasmer provides multiple features for their users:
-
+* **Backends:** Wasmer has _Singlepass_, _Cranelift_ and _LLVM_. Each of those with different tradeoffs for compilation and runtime speed
 * **Caching**: it allows to reuse the compiled WebAssembly code, so subsequent runs of a Wasm file will run as fast as possible
 * **Metering**: it allows to track and limit the usage of functions within the host. This is also known as "gas metering"
 * _WebAssembly Features_:
@@ -12,8 +11,6 @@ Also, Wasmer provides multiple features for their users:
 * ABIs: it allows to run different programs compiled to WebAssembly, with ABIs such as:
   * **Emscripten**
   * **WASI**
-
-
 
 ### Support of features by Backend
 
