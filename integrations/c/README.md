@@ -3,7 +3,7 @@
 Wasmer lets you use WebAssembly modules in your C/C++ codebase.
 
 {% hint style="info" %}
-#### Did you know ...?
+## Did you know ...?
 
 Some of our language extensions are using the Wasmer C integration under the hood:
 
@@ -17,7 +17,11 @@ In this section we will go through the instructions on how to setup your C/C++ e
 
 {% page-ref page="setup.md" %}
 
+{% page-ref page="examples/" %}
+
 {% embed url="https://wasmerio.github.io/wasmer/c/runtime-c-api/" %}
 
-Now, let's start setting up the C/C++ environment!
+
+
+Now, let's start setting up your C/C++ environment!
 
