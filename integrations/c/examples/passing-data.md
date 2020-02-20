@@ -230,7 +230,7 @@ Taking a look at the source code above, we see that we:
 
 1. Create an instance of wasmer memory
 2. Create an instance of wasmer, passing our memory so it may be imported by the wasmer instance.
-3. Get a byte \(uint8\_t\) representation of the shared linear memory in the guest wasm module, using the wasmer instance context
+3. Get a byte (`uint8_t`) representation of the shared linear memory in the guest wasm module, using the wasmer instance context
    1. NOTE: You must get the memory from the wasmer instance context. The memory that is imported cannot be used.
 4. Call a function on the guest wasm module, to get the pointer to the unsigned char array that is in the shared linear memory from the guest wasm module.
 5. Write a string into the shared linear memory, at the index given by our guest wasm module buffer pointer.
