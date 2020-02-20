@@ -6,12 +6,12 @@
 
 Importing function into a WebAssembly object is another great feature about WebAssembly. Using the `importObject` we can expose functions in the host \(our rust application\) for the WebAssembly module to call, and interact with host from within the WebAssembly modules.
 
-In this example, let's assume we have a WebAssemblly module, that expects some "counter" functions from the host. The idea of the functions being:
+In this example, let's assume we have a WebAssembly module, that expects some "counter" functions from the host. The idea of the functions being:
 
 1. There will be a `get_counter` function that will return an `i32` of the current global counter.
 2. There will be an `add_to_counter` function will add the passed `i32` value to a global counter, and will return an `i32` of the current global counter.
 
-So if we create a new C project, following the same process as the **hello world example**, we can create a passing-data.c file with the following source code:
+So if we create a new C project, following the same process as the [**hello world example**](hello-world.md), we can create a passing-data.c file with the following source code:
 
 ```c
 #include <stdio.h>
@@ -99,7 +99,7 @@ wasmer_instance_t *create_wasmer_instance(
   wasmer_import_t imports[] = {get_counter_import, add_to_counter_import};
 
   // Read the wasm file bytes
-  FILE *file = fopen("example-wasienv-wasm/host-counter/host-counter.wasm", "r");
+  FILE *file = fopen("host-functions.wasm", "r");
   assert(file != NULL);
   fseek(file, 0, SEEK_END);
   long len = ftell(file);
@@ -218,9 +218,16 @@ int main() {
 }
 ```
 
-The main idea here, is that we want to assign our "get\_counter" function to the "get\_counter" key in our importObject. And since we are using the default "env" namespace, these functions should be nested under the "env" object in our `importObject`.
+The main idea here, is that we want to assign our `get_counter` function to the `"get_counter"` key in our `importObject`. And since we are using the default "env" namespace, these functions should be nested under the `"env"` object in our `importObject`.
 
-Depending on the wasm module, the function may need to be nested differently. You will want to take a look at the module's documentation, or the module's source language documentation to see how the import object should be nested to expose the function to the module.
+{% hint style="info" %}
+You can download the `host-functions.wasm` WebAssembly module here:  
+[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/passing-data.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/host-functions.wasm)
+
+Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/c/host-functions.c)
+{% endhint %}
+
+Depending on the Wasm module, the function may need to be nested differently. You will want to take a look at the module's documentation, or the module's source language documentation to see how the import object should be nested to expose the function to the module.
 
 Next, we will take a look at handling errors from a WebAssembly module!
 

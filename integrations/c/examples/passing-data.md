@@ -237,6 +237,13 @@ Taking a look at the source code above, we see that we:
 6. Call the exported `add_wasm_is_cool` transformation function.
 7. Retrieve the transformed string from the Wasm module
 
+{% hint style="info" %}
+You can download the `passing-data.wasm` WebAssembly module here:  
+[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/passing-data.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/passing-data.wasm)
+
+Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/c/passing-data.c)
+{% endhint %}
+
 Now, we should be ready to run it!
 
 ```text

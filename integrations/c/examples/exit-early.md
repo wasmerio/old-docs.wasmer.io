@@ -8,7 +8,7 @@ WebAssembly in its current state is currently run synchronously. Thus, once WebA
 
 However, there are cases where you may want to interrupt this synchronous execution while the guest WebAssembly module is calling a host function. This can be useful for saving resources, and not returning back to the guest WebAssembly for execution, when you already know the Wasm execution will fail, or no longer be needed.
 
-In this example, we will run a Wasm module that calls the imported host function, "interrupt\_execution". This host function will immediately stop executing the WebAssembly module:
+In this example, we will run a Wasm module that calls the imported host function, `"interrupt_execution"`. This host function will immediately stop executing the WebAssembly module:
 
 ```c
 #include <stdio.h>
@@ -109,7 +109,7 @@ wasmer_instance_t *create_wasmer_instance(
   wasmer_import_t imports[] = {interrupt_execution_import, should_not_be_called_import};
 
   // Read the wasm file bytes
-  FILE *file = fopen("example-wasienv-wasm/exit-early-import/exit-early-import.wasm", "r");
+  FILE *file = fopen("exit-early.wasm", "r");
   assert(file != NULL);
   fseek(file, 0, SEEK_END);
   long len = ftell(file);
@@ -208,4 +208,11 @@ int main() {
   return 0;
 }
 ```
+
+{% hint style="info" %}
+You can download the `exit-early.wasm` WebAssembly module here:  
+[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/exit-early.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/exit-early.wasm)
+
+Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/c/exit-early.c)
+{% endhint %}
 

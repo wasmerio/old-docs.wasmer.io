@@ -38,7 +38,7 @@ wasmer_instance_t *create_wasmer_instance() {
   wasmer_import_t imports[] = {};
 
   // Read the wasm file bytes
-  FILE *file = fopen("example-wasienv-wasm/throw-wasm-error/throw-wasm-error.wasm", "r");
+  FILE *file = fopen("handling-errors.wasm", "r");
   assert(file != NULL);
   fseek(file, 0, SEEK_END);
   long len = ftell(file);
@@ -117,6 +117,13 @@ int main() {
   return 0;
 }
 ```
+
+{% hint style="info" %}
+You can download the `handling-errors.wasm` WebAssembly module here:  
+[https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/handling-errors.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/c/handling-errors.wasm)
+
+Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/c/handling-errors.c)
+{% endhint %}
 
 The expected output of this program would be:
 
