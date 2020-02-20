@@ -131,11 +131,7 @@ Make sure the `WASMER_C_API` environment var is properly set before runnning the
 You can follow the [Setup C/C++ environment instructions](../setup.md).
 {% endhint %}
 
-If all of this works, you should now have a `hello-world` executable. If you run:
-
-`./hello-world`
-
-Your output should look something like:
+If all of this works, you should now have a `hello-world` executable. After running it, your output should look something like:
 
 ```bash
 Compile result:  1
