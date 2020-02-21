@@ -16,7 +16,7 @@ If you want to learn more about GraphQL, please visit the official Website: [Gra
 
 ### How I can use the WAPM API?
 
-The WAPM GraphQL API \(and the GraphiQL IDE\) is online here:
+The WAPM GraphQL API \(and the GraphiQL IDE\) can be accessed here:
 
 ### \*\*\*\*[**registry.wapm.io/graphql**](https://registry.wapm.io/graphql)\*\*\*\*
 
