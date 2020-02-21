@@ -1,4 +1,4 @@
-# Exposing Host Functions to WebAssembly
+# Exposing Host Functions
 
 {% hint style="success" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/integrations/c/examples/host-functions)

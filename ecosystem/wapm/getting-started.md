@@ -25,7 +25,7 @@ wapm install cowsay
 Installing a package creates a local package directory called `wapm_packages` where all packages are installed.
 
 {% hint style="info" %}
-#### Did you know ...?
+### Did you know ...?
 
 You can install gslobally the package passing the `-g` flag.  
 Eg:`wapm install -g cowsay`

@@ -37,8 +37,6 @@ Either way though, from a WebAssembly point of view, we don't need to care too m
 
 {% page-ref page="../../integrations/c/" %}
 
-{% page-ref page="../../integrations/javascript/" %}
-
 And many more \(for which we will be creating docs here soon!\)
 
 * [Python](https://github.com/wasmerio/python-ext-wasm)

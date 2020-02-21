@@ -12,7 +12,7 @@ The Wasmer WebAssembly runtime provides various features for users and developer
   * **Emscripten**
   * **WASI**
 
-### Support of features by Backend
+## Support of features by Backend
 
 |  | Singlepass | Cranelift | LLVM |
 | :--- | :--- | :--- | :--- |
@@ -25,14 +25,14 @@ The Wasmer WebAssembly runtime provides various features for users and developer
 | `WASMER_BACKTRACE` | ✅ | ⬜ | ⬜ |
 
 {% hint style="info" %}
-### Legend
+## Legend
 
 * ✅ Supported
 * 🔄 In the works
 * ⬜ Not yet supported \(please ping us if you need this feature!\)
 {% endhint %}
 
-### Support by Operating System
+## Support by Operating System
 
 |  | GNU Linux | Mac OSX | Windows NT |
 | :--- | :--- | :--- | :--- |
@@ -43,7 +43,7 @@ The Wasmer WebAssembly runtime provides various features for users and developer
 
 * `poll_fd` is not fully implemented for Windows yet
 
-### Language integration
+## Language integration
 
 TODO: define a set of features that are relevant and mark them here
 
@@ -60,6 +60,4 @@ Current ideas:
 | Terminate in host call | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
 | WASI | ✅ | ✅ | 🔄 | ⬜ | ⬜ |
 | WASI FS API | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-
-
 
