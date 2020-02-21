@@ -14,21 +14,21 @@ All WAPM services \(both the registry frontend: [wapm.io](https://wapm.io/) and 
 
 If you want to learn more about GraphQL, please visit the official Website: [GraphQL.org](https://graphql.org/)
 
-{% hint style="info" %}
-#### Did you know...?
-
-[WebAssembly.sh](../webassembly.sh.md) is using the WAPM GraphQL API to expose the WASI modules in the shell automatically
-{% endhint %}
-
 ### How I can use the WAPM API?
 
 The WAPM GraphQL API \(and the GraphiQL IDE\) is online here:
 
-{% embed url="https://registry.wapm.io/graphql" caption="https://registry.wapm.io/graphql" %}
+### [https://registry.wapm.io/graphql](https://registry.wapm.io/graphql)
 
-Let's see now a few things that we can do with it!
+{% hint style="info" %}
+#### Did you know...?
+
+[WebAssembly.sh](../webassembly.sh.md) is using the WAPM GraphQL API to automatically expose the WASI modules and commands in the online shell
+{% endhint %}
 
 ## Examples
+
+Let's see now a few things that we can do with it!
 
 ### Get a Package Version
 
