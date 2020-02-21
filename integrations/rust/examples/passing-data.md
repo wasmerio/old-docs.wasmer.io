@@ -10,7 +10,7 @@ description: >-
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/passing-data).
 {% endhint %}
 
-Linear memory is one of the major concepts in WebAssembly:
+Linear memory is a major concept in WebAssembly:
 
 {% hint style="info" %}
 Because WebAssembly is sandboxed, memory must be copied between the host \(your Rust application\) and the Wasm module. Upcoming proposals like WebAssembly Interface types will make this process much easier, but it is still a work in progress.
@@ -18,7 +18,7 @@ Because WebAssembly is sandboxed, memory must be copied between the host \(your 
 
 The way that this memory is allocated, freed, passed, organized, etc... can vary depending on the ABI of the Wasm module.
 
-For example, some ABIs will provide functions, either as imports or exports, for allocation and freeing of memory from the host or guest. Some Wasm ABIs may want to control their memory implictly, for example the ABI may say that the host can reserve memory addresses 0 to 1000 for a special purpose and simply write there directly. You will want to take a look at the documentation of the ABI of your Wasm module, to see what conventions are used for memory allocation.
+For example, some ABIs will provide functions, either as imports or exports, for allocation and freeing of memory from the host or guest. Some Wasm ABIs may want to control their memory implicitly, for example the ABI may say that the host can reserve memory addresses 0 to 1000 for a special purpose and simply write there directly. You will want to take a look at the documentation of the ABI of your Wasm module, to see what conventions are used for memory allocation.
 
 In this example, let's say we have a Wasm module that can perform transformations on a string passed into the module's memory. This module exports a function that returns a pointer to a fixed size static buffer. This Wasm module will take in a string, and append the string " Wasm is cool!" to the end. This example shows how we can read and write memory from the host \(your Rust application\), and how the Wasm module can also read and write to the same memory.
 
