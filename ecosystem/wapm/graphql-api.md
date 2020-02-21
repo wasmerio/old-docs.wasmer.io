@@ -18,7 +18,7 @@ If you want to learn more about GraphQL, please visit the official Website: [Gra
 
 The WAPM GraphQL API \(and the GraphiQL IDE\) is online here:
 
-### [https://registry.wapm.io/graphql](https://registry.wapm.io/graphql)
+### \*\*\*\*[**registry.wapm.io/graphql**](https://registry.wapm.io/graphql)\*\*\*\*
 
 {% hint style="info" %}
 #### Did you know...?
