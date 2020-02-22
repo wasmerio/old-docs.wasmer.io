@@ -25,31 +25,31 @@ Note: You can also [build the C-API from source](../../ecosystem/wasmer/building
 
 ## Installing Clang/GCC
 
-First, you can test if make is installed already by running:
+First, you can test if `clang` or `gcc` is installed already by running:
 
 ```text
 gcc --version
 ```
 
-If this command does not return the make version, then see the following:
+If this command does not return the version, then see the following:
 
 ### MacOS
 
-`gcc` / `clang` is usually installed by default. However, if it is not, you can [install make by installing xcode-select](http://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/) on your mac.
+`gcc` / `clang` is usually installed by default. However, if it is not, you can [install gcc/clang by installing xcode-select](http://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/) on your mac.
 
 ### Debian / Debian Based / Linux
 
-To install make on a debian based, you will want to run the following:
+To install gcc on a debian based, you will want to run the following:
 
 ```text
 sudo apt-get install build-essential
 ```
 
-Make should be installable on your favorite linux distro as well. Please search for the correct command for your desired distribution.
+Gcc should be installable on your favorite linux distro as well. Please search for the correct command for your desired distribution.
 
 ### Windows
 
-To install Make on Windows, you will probably want to install a GNU environment on windows. We suggest using [MinGW](http://www.mingw.org/).
+To install gcc on Windows, you will probably want to install a GNU environment on windows. We suggest using [MinGW](http://www.mingw.org/).
 
 ```bash
 gcc --version
