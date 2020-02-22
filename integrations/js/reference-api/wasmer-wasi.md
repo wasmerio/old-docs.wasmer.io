@@ -1,3 +1,7 @@
+---
+description: The Package for using WASI easily from Node and the Browser
+---
+
 # @wasmer/wasi
 
 ## WASI
@@ -84,3 +88,4 @@ The bindings for common node like objects, such as `fs` for filesystem, these sh
 `wasiInstance.start(wasmInstance: WebAssembly.Instance): void`
 
 Function that takes in a WASI WebAssembly Instance and starts it.
+

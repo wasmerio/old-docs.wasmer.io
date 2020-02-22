@@ -49,7 +49,7 @@
       * [Examples](integrations/js/wasi/server/examples/README.md)
         * [Hello World](integrations/js/wasi/server/examples/hello-world.md)
         * [Transforming WASI Modules in the Server](integrations/js/wasi/server/examples/transforming-wasi-modules-in-the-server.md)
-  * [Wasmer JS API](integrations/js/reference-api/README.md)
+  * [Wasmer JS Reference API](integrations/js/reference-api/README.md)
     * [@wasmer/wasi](integrations/js/reference-api/wasmer-wasi.md)
     * [@wasmer/wasm-transformer](integrations/js/reference-api/wasmer-wasm-transformer.md)
     * [@wasmer/wasm-terminal](integrations/js/reference-api/wasmer-wasm-terminal.md)

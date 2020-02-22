@@ -1,3 +1,9 @@
+---
+description: >-
+  Do you want to run a full terminal with WebAssembly files? This is your
+  package!
+---
+
 # @wasmer/wasm-terminal
 
 ## WasmTerminal
@@ -88,3 +94,4 @@ fetchCommandFromWAPM(options: {
 ```
 
 Exported function from the `@wasmer/wasm-terminal` package. This function is meant to be returned in the fetchCommand config property of the WasmTerminal Class. This takes in the name of command, the command arguments, and the envioronment variables, and returns a Promise that resolves a Uint8Array of the Wasm binary from WAPM.
+

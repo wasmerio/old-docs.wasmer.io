@@ -1,3 +1,7 @@
+---
+description: The filesystem for Wasm!
+---
+
 # @wasmer/wasmfs
 
 ## WasmFS
@@ -41,3 +45,4 @@ wasmFs.fs.writeFileSync("/dev/stdout", "Quick Start!");
 `wasmFs.getStdOut(): string`
 
 Function that returns the current standard output \(`/dev/stdout`\) of the filesystem.
+

@@ -1,3 +1,9 @@
+---
+description: >-
+  It helps to run WebAssembly modules in Browsers that doesn't have Wasm BigInt
+  support
+---
+
 # @wasmer/wasm-transformer
 
 ## version
@@ -27,3 +33,4 @@ const transformWasmModuleBytes = async () => {
 };
 transformWasmModuleBytes();
 ```
+
