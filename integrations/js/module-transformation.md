@@ -90,12 +90,13 @@ Next, look a little further down to line 5. Here we can see an `import` statemen
 
 This `import` statement tells us several things:
 
-1. This WASM module needs to call an external function.  
+1. This WASM module needs to call an external function.
 
-    In this particular case, this is a native "OS" function accessible through WASI
+   In this particular case, this is a native "OS" function accessible through WASI
 
 2. The native "OS" function is called `clock_time_get` and lives in an external library called `wasi_unstable`
 3. Within our WebAssembly module, this external function will be referred to using the alias `$wasi_unstable.clock_time_get`
 4. The interface to this function is described by the type declaration `$t0`
 
 We know from the definition of `$t0` \(on line 2\) that this function must be passed an `i64` as its second parameter; therefore, we can be certain that before this WASM module can call function `clock_time_get` \(using the Wasmer-js polyfill\), the interface must first be transformed.
+

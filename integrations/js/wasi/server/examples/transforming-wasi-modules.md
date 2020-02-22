@@ -1,4 +1,4 @@
-# Transffforming WASI Modules
+# Transforming WASI Modules
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/server/examples/transforming-wasi-modules)
 

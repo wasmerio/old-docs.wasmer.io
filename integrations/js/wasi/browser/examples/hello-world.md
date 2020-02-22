@@ -1,4 +1,4 @@
-# Hello World in the Browser
+# Hello World
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/hello-world)
 

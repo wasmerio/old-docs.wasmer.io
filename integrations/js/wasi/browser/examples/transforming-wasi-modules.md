@@ -1,17 +1,17 @@
-# Transforming WASI Modules in the Browser
+# Transforming WASI Modules
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/transforming-wasi-modules)
 
 Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/docs/wasmer-js/wasmer-js-module-transformation/README.md) will always be needed.
 
-### Setup Instructions
+## Setup Instructions
 
 Please repeat the step-by-step instructions given in the [Hello World](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/docs/wasmer-js/client/examples/hello-world/wasmer-js-client-hello-world/README.md) example, but with the following changes:
 
 1. Call your project `wasmer-js-transforming-wasi`
 2. Download the WASM module [`clock_time_get.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/wasm_lib/clock_time_get.wasm) and store it in the `static` directory
 
-### JavaScript Coding
+## JavaScript Coding
 
 The coding seen below is very similar to the coding used for the previous Hello World example — but with one very important difference!
 
@@ -102,7 +102,7 @@ startWasiTask()
 On the both the browser screen and the JavaScript console, you should see the text `Done!`.
 
 {% hint style="warning" %}
-#### Known Limitation
+### Known Limitation
 
 This example is somewhat contrived because the WebAssembly module has been hard-coded to return the text string `Done!` rather than the time value from `clock_time_get`.
 

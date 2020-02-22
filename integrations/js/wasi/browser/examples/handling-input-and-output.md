@@ -1,4 +1,4 @@
-# Handling Input and Output in the Browser
+# Handling Input and Output
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/handling-input-output)
 

@@ -163,5 +163,5 @@ If you want to generate the library and headers for using them easily, you can e
 make build-capi
 ```
 
-This command will generate a `capi` directory, that you can then use easily in the [Wasmer C API examples](../../../integrations/c/examples/).
+This command will generate a `capi` directory, that you can then use easily in the [Wasmer C API examples]().
 

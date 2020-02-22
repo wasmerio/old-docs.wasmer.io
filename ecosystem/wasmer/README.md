@@ -12,7 +12,7 @@ This provides three key features:
 
 1. Enables programs to run in any programming language
 2. Enables extremely portable binaries that can run unmodified on any OS that is supported by Wasmer \(Linux, macOS, Windows and FreeBSD\).
-3. It acts as a secure bridge for WASM modules to interact with native "OS" functionality, via ABIs such as [`WASI`](https://github.com/webassembly/wasi) and [`Emscripten`](https://github.com/emscripten-core/emscripten) (version 1.38.43 and earlier).
+3. It acts as a secure bridge for WASM modules to interact with native "OS" functionality, via ABIs such as [`WASI`](https://github.com/webassembly/wasi) and [`Emscripten`](https://github.com/emscripten-core/emscripten) \(version 1.38.43 and earlier\).
 
 For the first case, we offer [multiple language integrations](./#wasmer-language-integrations), that allows you to run Wasm files universally from any programming language.
 
