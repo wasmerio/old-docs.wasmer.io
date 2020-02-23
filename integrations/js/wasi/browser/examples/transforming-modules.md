@@ -1,15 +1,17 @@
-# Transforming WASI Modules
+# Transforming Modules
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/transforming-wasi-modules)
+{% hint style="success" %}
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/browser/examples/transforming-modules).
+{% endhint %}
 
-Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/docs/wasmer-js/wasmer-js-module-transformation/README.md) will always be needed.
+Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](/integrations/js/module-transformation) will be always needed until browsers land `BigInt` support in WebAssembly. 
 
 ## Setup Instructions
 
-Please repeat the step-by-step instructions given in the [Hello World](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/docs/wasmer-js/client/examples/hello-world/wasmer-js-client-hello-world/README.md) example, but with the following changes:
+Please repeat the step-by-step instructions given in the [Hello World](/integrations/js/wasi/browser/examples/hello-world) example, but with the following changes:
 
 1. Call your project `wasmer-js-transforming-wasi`
-2. Download the Wasm module [`clock_time_get.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/wasm_lib/clock_time_get.wasm) and store it in the `static` directory
+2. Download the Wasm module [`clocktimeget.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/wat/wasi/clocktimeget.wasm) and store it in the `static` directory
 
 ## JavaScript Coding
 
@@ -26,16 +28,13 @@ The call to function `lowerI64Imports` performs the all-important transformation
 Now that the interface has been transformed, we can instantiate the WebAssembly module and invoke it as before.
 
 ```javascript
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Imports
 import { WasmFs } from '@wasmer/wasmfs'
 import { lowerI64Imports } from "@wasmer/wasm-transformer"
 import { WASI } from '@wasmer/wasi'
 import browserBindings from "@wasmer/wasi/lib/bindings/browser"
 
-const wasmFilePath = './clock_time_get.wasm'  // Path to our WASI module
+const wasmFilePath = '/clocktimeget.wasm'  // Path to our WASI module
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Instantiate new WASI and WasmFs Instances
 // IMPORTANT:
 // Instantiating WasmFs is only needed when running in a browser.
@@ -58,7 +57,6 @@ let wasi = new WASI({
   }
 })
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Async Function to run our WASI module/instance
 const startWasiTask =
   async () => {
@@ -77,10 +75,9 @@ const startWasiTask =
 
     wasi.start(instance)                      // Start the transformed WASI instance
     let stdout = await wasmFs.getStdOut()     // Get the contents of stdout
-    console.log(`Standard Output: ${stdout}`) // Write stdout to the DOM
+    document.write(`Standard Output: ${stdout}`) // Write stdout to the DOM
   }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Everything starts here
 startWasiTask()
 ```
@@ -97,3 +94,12 @@ Anything written to standard out should be a printable string followed by a carr
 
 Next, let's look at handling input and output via WASI.
 
+{% hint style="info" %}
+If you want to run the examples from the docs codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/docs.wasmer.io.git
+cd docs.wasmer.io/integrations/js/wasi/browser/examples/transforming-modules
+npm run dev
+```
+{% endhint %}

@@ -1,0 +1,16 @@
+{
+  "name": "transforming-modules",
+  "version": "1.0.0",
+  "description": "The server-side transforming Wasm modules example",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@wasmer/wasi": "^0.8.4",
+    "@wasmer/wasm-transformer": "^0.8.4"
+  }
+}

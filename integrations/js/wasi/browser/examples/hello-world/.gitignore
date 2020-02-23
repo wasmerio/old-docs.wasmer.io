@@ -1,0 +1,5 @@
+# We copy it from other place of the repo, so we don't need to
+# commit it here.
+static/helloworld.wasm
+dist/
+.cache

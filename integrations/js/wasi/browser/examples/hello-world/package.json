@@ -1,0 +1,24 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "description": "The WASI Browser hello-world example",
+  "main": "index.js",
+  "scripts": {
+    "collect-static": "cp ../../../../../shared/wat/wasi/helloworld.wasm static",
+    "dev": "npm run collect-static && parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": [
+    "last 1 Chrome versions"
+  ],
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.3.1"
+  },
+  "dependencies": {
+    "@wasmer/wasi": "^0.8.4",
+    "@wasmer/wasmfs": "^0.8.4"
+  }
+}

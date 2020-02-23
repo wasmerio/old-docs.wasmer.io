@@ -1,6 +1,4 @@
-all:
-	rustc add.rs --target=wasm32-unknown-unknown
-	rustc passing-data.rs --target=wasm32-unknown-unknown
-	rustc host-functions.rs --target=wasm32-unknown-unknown
-	rustc handling-errors.rs --target=wasm32-unknown-unknown
-	rustc exit-early.rs --target=wasm32-unknown-unknown
+%.wasm: %.rs
+	rustc $^ -o $@ --target=wasm32-unknown-unknown
+
+all: add.wasm passing-data.wasm host-functions.wasm handling-errors.wasm exit-early.wasm

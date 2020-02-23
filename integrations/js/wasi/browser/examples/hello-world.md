@@ -1,5 +1,9 @@
 # Hello World
 
+{% hint style="success" %}
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/browser/examples/hello-world).
+{% endhint %}
+
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/hello-world)
 
 In this introductory example, we will develop a Browser-based application that uses the following call chain.
@@ -127,16 +131,13 @@ $ npm install -g parcel
     > Also, please read the comment explaining the use of `@wasmer/wasm-transformer`; we will cover this very important detail in a later example.
 
     ```javascript
-    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    // Imports
     import { WASI } from '@wasmer/wasi'
     import browserBindings from '@wasmer/wasi/lib/bindings/browser'
     import { WasmFs } from '@wasmer/wasmfs'
 
-    const wasmFilePath = './helloworld.wasm'  // Path to our WASI module
+    const wasmFilePath = '/helloworld.wasm'  // Path to our WASI module
     const echoStr      = 'Hello World!'    // Text string to echo
 
-    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // Instantiate new WASI and WasmFs Instances
     // IMPORTANT:
     // Instantiating WasmFs is only needed when running in a browser.
@@ -181,7 +182,7 @@ $ npm install -g parcel
 
         wasi.start(instance)                      // Start the WASI instance
         let stdout = await wasmFs.getStdOut()     // Get the contents of stdout
-        console.log(`Standard Output: ${stdout}`) // Write stdout data to the DOM
+        document.write(`Standard Output: ${stdout}`) // Write stdout data to the DOM
       }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -191,5 +192,15 @@ $ npm install -g parcel
 
 11. As long as `parcel` is still running, after saving `index.js`, your browser should automatically refresh and you should see `Standard Output: Hello World!` appear both on the browser screen and in the JavaScript console.
 
-Next, let's take a look at transforming WASI modules that require transformations.
+{% hint style="info" %}
+If you want to run the examples from the docs codebase directly, you can also do:
 
+```bash
+git clone https://github.com/wasmerio/docs.wasmer.io.git
+cd docs.wasmer.io/integrations/js/wasi/browser/examples/hello-world
+npm run dev
+```
+{% endhint %}
+
+
+Next, let's take a look at transforming WASI modules that require transformations.

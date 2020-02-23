@@ -1,17 +1,17 @@
-# Transforming WASI Modules
+# Transforming Modules
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/server/examples/transforming-wasi-modules)
+{% hint style="success" %}
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/server/examples/transforming-modules).
+{% endhint %}
 
-## Transforming WASI Modules in the Server
-
-Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/integrations/js/server/wasmer-js-module-transformation/README.md) will always be needed.
+Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](/integrations/js/module-transformation) will be always needed until browsers land `BigInt` support in WebAssembly. 
 
 ### Setup Instructions
 
-Please repeat the step-by-step instructions given in the [Hello World](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/server/examples/hello-world/wasmer-js-server-hello-world/README.md) example, but with the following changes:
+Please repeat the step-by-step instructions given in the [Hello World](/integrations/js/wasi/server/examples/hello-world) example, but with the following changes:
 
 1. Call your project `wasmer-js-transforming-wasi`
-2. Download the Wasm module [`clock_time_get.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/wasm_lib/clock_time_get.wasm) and store it in the `wasm_lib` directory
+2. Download the Wasm module [`clocktimeget.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/wat/wasi/clocktimeget.wasm)
 
 ### JavaScript Coding
 
@@ -29,16 +29,20 @@ Now that the interface has been transformed, we can instantiate the WebAssembly 
 
 ```javascript
 const fs  = require("fs")
-
-const { WASI }            = require("@wasmer/wasi")
+const { WASI } = require("@wasmer/wasi")
+const nodeBindings = require("@wasmer/wasi/lib/bindings/node");
 const { lowerI64Imports } = require("@wasmer/wasm-transformer")
 
-const wasmFilePath = "./wasm_lib/clock_time_get.wasm"
+const wasmFilePath = "./clocktimeget.wasm"
 
 // Instantiate a new WASI Instance
 let wasi = new WASI({
-  args : [wasmFilePath]
-, env  : {}
+  args: [wasmFilePath],
+  env: {},
+  bindings: {
+    ...nodeBindings,
+    fs: fs
+  }
 })
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -70,3 +74,12 @@ $ node server.js
 Done!
 ```
 
+{% hint style="info" %}
+If you want to run the examples from the docs codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/docs.wasmer.io.git
+cd docs.wasmer.io/integrations/js/wasi/server/examples/transforming-modules
+npm run dev
+```
+{% endhint %}

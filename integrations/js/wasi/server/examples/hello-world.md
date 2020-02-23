@@ -1,8 +1,8 @@
 # Hello World
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/server/examples/hello-world)
-
-## Hello World! \(Server\)
+{% hint style="success" %}
+**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/server/examples/hello-world).
+{% endhint %}
 
 In this introductory example, we will develop a NodeJS-based application that calls a WebAssembly module that in turn, calls a native "OS" function. This is exactly the same call chain as was used in the client-side example:
 
@@ -49,7 +49,7 @@ Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _*
    ```
 
 4. Download the WebAssembly module [`helloworld.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/wat/wasi/helloworld.wasm) and store it in this directory
-5. Create the file `server.js` and add the coding shown below.
+5. Create the file `index.js` and add the coding shown below.
 
    > #### Important Difference
    >
@@ -68,10 +68,12 @@ Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _*
     let wasi = new WASI({
       args: [wasmFilePath],
       env: {},
-      bindings: nodeBindings
+      bindings: {
+        ...nodeBindings,
+        fs: fs
+      }
     })
 
-    // *****************************************************************************
     // Async function to run our Wasm module/instance
     const startWasiTask =
       async pathToWasmFile => {
@@ -87,16 +89,25 @@ Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _*
         wasi.start(instance)
       }
 
-    // *****************************************************************************
     // Everything starts here
     startWasiTask(wasmFilePath)
    ```
 
-6. Save `server.js` and run it using:
+6. Save `index.js` and run it using:
 
    ```bash
-    $ node server.js
+    $ node index.js
     Hello World!
    ```
 
 Next, let's take a look at running Wasm modules whose interfaces require transformation.
+
+{% hint style="info" %}
+If you want to run the examples from the docs codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/docs.wasmer.io.git
+cd docs.wasmer.io/integrations/js/wasi/server/examples/hello-world
+npm run dev
+```
+{% endhint %}

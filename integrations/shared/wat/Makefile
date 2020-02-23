@@ -1,2 +1,4 @@
-wasi/helloworld.wasm: wasi/helloworld.wat
-	wat2wasm wasi/helloworld.wat -o wasi/helloworld.wasm
+%.wasm: %.wat
+	wat2wasm $^ -o $@
+
+all: wasi/helloworld.wasm wasi/clocktimeget.wasm
