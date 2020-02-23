@@ -28,10 +28,10 @@ Now that the interface has been transformed, we can instantiate the WebAssembly 
 ```javascript
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Imports
-import { WasmFs }          from '@wasmer/wasmfs'
+import { WasmFs } from '@wasmer/wasmfs'
 import { lowerI64Imports } from "@wasmer/wasm-transformer"
-import { WASI }            from '@wasmer/wasi'
-import browserBindings     from "@wasmer/wasi/lib/bindings/browser"
+import { WASI } from '@wasmer/wasi'
+import browserBindings from "@wasmer/wasi/lib/bindings/browser"
 
 const wasmFilePath = './clock_time_get.wasm'  // Path to our WASI module
 
@@ -57,20 +57,6 @@ let wasi = new WASI({
     fs: wasmFs.fs
   }
 })
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Preserve the original console.log functionality
-const consoleLog = console.log
-
-// Implement our own console.log functionality that also writes to the DOM
-console.log = (...args) =>
-  (logTxt => {
-    consoleLog(logTxt)
-    document.body.appendChild(
-      document.createTextNode(logTxt)
-    )
-  })
-  (args.join(' '))
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Async Function to run our WASI module/instance
