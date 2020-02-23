@@ -35,13 +35,13 @@ let myWASIInstance = new WASI({
   // useful for using WASI in diferent environments
   // such as Node.js, Browsers, ...
   bindings: {
-    // hrtime: WASI.defaultBindings.hrtime,
-    // exit: WASI.defaultBindings.exit,
-    // kill: WASI.defaultBindings.kill,
-    // randomFillSync: WASI.defaultBindings.randomFillSync,
-    // isTTY: WASI.defaultBindings.isTTY,
-    // fs: WASI.defaultBindings.fs,
-    // path: WASI.defaultBindings.path,
+    // hrtime: (time?: [number, number]) -> number
+    // exit: (code?: number) -> void
+    // kill: (pid: number, signal?: string | number) -> void
+    // randomFillSync: (buffer: Buffer, offset?: number, size?: number) -> Buffer
+    // isTTY: () -> bool
+    // fs: Filesystem (with similar API interface as Node 'fs' module)
+    // path: Path  (with similar API Interface as Node 'path' module)
     ...browserBindings // Use `nodeBindings` for Node
   }
 });

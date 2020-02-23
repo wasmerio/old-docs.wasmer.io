@@ -2,28 +2,19 @@
 
 [Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/handling-input-output)
 
-In the Hello World example, we covered how to run the `as-echo` WASM module, and then read it's output. However, there may be times we want to interact with WASI modules that accept input as well!
+In the Hello World example, we covered how to run the `helloworld` Wasm module, and then read it's output. However, there may be times we want to interact with WASI modules that accept input as well!
 
 In this example, we will be using the [QuickJS WASI module](https://wapm.io/package/quickjs), to execute Javascript in the QuickJS runtime. To handle input, we will create our own `stdinRead` fucntion, that is bound to the zero-index file descriptor in WasmFS \(`/dev/stdin`\). This will allow us to intercept read requests, and send whatever input we would like to the wasi application. See the code below:
 
 ```javascript
 // Imports
 import { WASI } from '@wasmer/wasi';
+import browserBindings from '@wasmer/wasi/lib/bindings/browser';
 import { WasmFs } from '@wasmer/wasmfs';
 import { lowerI64Imports } from "@wasmer/wasm-transformer";
 
 // The file path to the wasi module we want to run
 const wasmFilePath = './quickjs.wasm';
-
-// A quick wrapper for console.log, to also output logs to the body
-const consoleLog = console.log;
-console.log = function() {
-  const args = Array.prototype.slice.call(arguments);
-  consoleLog(args);
-  const log = args.join(' ');
-  consoleLog(log);
-  document.body.appendChild(document.createTextNode('JavaScript Console: ' + log));
-}
 
 /**
   This function removes the ansi escape characters
@@ -55,7 +46,7 @@ let wasi = new WASI({
     env: {},
     // Bindings that are used by the Wasi Instance (fs, path, etc...)
     bindings: {
-      ...WASI.defaultBindings,
+      ...browserBindings,
       fs: wasmFs.fs
     }
 });

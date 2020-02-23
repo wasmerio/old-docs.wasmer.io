@@ -9,13 +9,13 @@ Irrespective of whether your JavaScript code runs on the client or the server, t
 Please repeat the step-by-step instructions given in the [Hello World](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/docs/wasmer-js/client/examples/hello-world/wasmer-js-client-hello-world/README.md) example, but with the following changes:
 
 1. Call your project `wasmer-js-transforming-wasi`
-2. Download the WASM module [`clock_time_get.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/wasm_lib/clock_time_get.wasm) and store it in the `static` directory
+2. Download the Wasm module [`clock_time_get.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/wasm_lib/clock_time_get.wasm) and store it in the `static` directory
 
 ## JavaScript Coding
 
 The coding seen below is very similar to the coding used for the previous Hello World example — but with one very important difference!
 
-Inside function `startWasiTask`, we fetch the WASM file contents and convert it to a `Uint8Array` as before, but then there is the additional line:
+Inside function `startWasiTask`, we fetch the Wasm file contents and convert it to a `Uint8Array` as before, but then there is the additional line:
 
 ```javascript
 const loweredWasmBytes = await lowerI64Imports(wasmBytes)
@@ -43,7 +43,7 @@ const wasmFilePath = './clock_time_get.wasm'  // Path to our WASI module
 const wasmFs = new WasmFs()
 
 let wasi = new WASI({
-  // Arguments passed to the WASM Module
+  // Arguments passed to the Wasm Module
   // The first argument is usually the filepath to the executable WASI module
   // we want to run.
   args: [wasmFilePath],
@@ -76,7 +76,7 @@ console.log = (...args) =>
 // Async Function to run our WASI module/instance
 const startWasiTask =
   async () => {
-    // Fetch our WASM File
+    // Fetch our Wasm File
     const response  = await fetch(wasmFilePath)
     const wasmBytes = new Uint8Array(await response.arrayBuffer())
 

@@ -8,17 +8,19 @@ In this introductory example, we will develop a NodeJS-based application that ca
 
 `JavaScript` --&gt; `WebAssembly` --&gt; `Native "OS" function`
 
-In this case, we will invoke the WASM module [`as-echo`](https://github.com/torch2424/as-echo) that receives a text string and echoes it back by writing it to standard out.
+In this case, we will invoke the a simple WASI module that does nothing more than writing `hello world` to standard out.
 
-However, as we saw with the [client-side `hello-world` example](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/docs/wasmer-js/client/examples/hello-world/wasmer-js-client-hello-world/README.md), file descriptors such as "standard in" and "standard out" are not normally available to a WebAssembly module since they belong to the underlying "OS". Therefore, we must again make use of the following package:
+However, as we saw with the [client-side `hello-world` example](/integrations/js/wasi/browser/examples/hello-world), file descriptors such as "standard in" and "standard out" are not normally available to a WebAssembly module since they belong to the underlying "OS". Therefore, we must again make use of the following package:
 
 | Package Name | Description |
 | :--- | :--- |
 | `@wasmer/wasi` | A set of JavaScript polyfills that bridge the gap between the black-box world of a WebAssembly module and functionality available from the host environment |
 
-> #### IMPORTANT
->
-> Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _**not**_ needed.
+{% hint style="warning" %}
+#### Important
+
+Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _**not**_ needed.
+{% endhint %}
 
 ## Setup Instructions
 
@@ -46,39 +48,34 @@ However, as we saw with the [client-side `hello-world` example](https://github.c
    $ npm install --save @wasmer/wasi
    ```
 
-4. Create a new directory called `wasm_lib`
-
-   ```bash
-    $ mkdir wasm_lib
-   ```
-
-5. Download the WebAssembly module [`as-echo.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/docs/wasmer-js/wasm_lib/as-echo.wasm) and store it in this directory
-6. Create the file `server.js` and add the coding shown below.
+4. Download the WebAssembly module [`helloworld.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/wat/wasi/helloworld.wasm) and store it in this directory
+5. Create the file `server.js` and add the coding shown below.
 
    > #### Important Difference
    >
-   > In contrast to running in the browser, the server-side implementation of the same WASM module is noticeably smaller.
+   > In contrast to running in the browser, the server-side implementation of the same Wasm module is noticeably smaller.
    >
-   > When running server-side, we do not need to write any code to obtain the contents of standard out after the `as-echo` WASM module has executed, since when running server-side, anything written to standard out by a WASM module appears directly in the console.
+   > When running server-side, we do not need to write any code to obtain the contents of standard out after the Wasm module has executed, since when running server-side, anything written to standard out by a Wasm module appears directly in the console.
 
    ```javascript
     const fs       = require("fs")
     const { WASI } = require("@wasmer/wasi")
+    const nodeBindings = require("@wasmer/wasi/lib/bindings/node")
 
-    const wasmFilePath = "./wasm_lib/as-echo.wasm"
-    const echoStr      = "Hello World!"
+    const wasmFilePath = "./helloworld.wasm"
 
     // Instantiate a new WASI Instance
     let wasi = new WASI({
-      args : [wasmFilePath, echoStr]
-    , env  : {}
+      args: [wasmFilePath],
+      env: {},
+      bindings: nodeBindings
     })
 
     // *****************************************************************************
-    // Async function to run our WASM module/instance
+    // Async function to run our Wasm module/instance
     const startWasiTask =
       async pathToWasmFile => {
-        // Fetch our WASM File
+        // Fetch our Wasm File
         let wasmBytes = new Uint8Array(fs.readFileSync(pathToWasmFile)).buffer
 
         // Instantiate the WebAssembly file
@@ -95,11 +92,11 @@ However, as we saw with the [client-side `hello-world` example](https://github.c
     startWasiTask(wasmFilePath)
    ```
 
-7. Save `server.js` and run it using:
+6. Save `server.js` and run it using:
 
    ```bash
     $ node server.js
     Hello World!
    ```
 
-Next, let's take a look at running WASM modules whose interfaces require transformation.
+Next, let's take a look at running Wasm modules whose interfaces require transformation.
