@@ -4,8 +4,6 @@
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/browser/examples/hello-world).
 {% endhint %}
 
-[Full Example Project Source Code](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/client/examples/hello-world)
-
 In this introductory example, we will develop a Browser-based application that uses the following call chain.
 
 `JavaScript` --&gt; `WebAssembly` --&gt; `Native "OS" function`
