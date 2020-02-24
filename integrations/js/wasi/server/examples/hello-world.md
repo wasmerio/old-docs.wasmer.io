@@ -10,7 +10,7 @@ In this introductory example, we will develop a NodeJS-based application that ca
 
 In this case, we will invoke the a simple WASI module that does nothing more than writing `hello world` to standard out.
 
-However, as we saw with the [client-side `hello-world` example](/integrations/js/wasi/browser/examples/hello-world), file descriptors such as "standard in" and "standard out" are not normally available to a WebAssembly module since they belong to the underlying "OS". Therefore, we must again make use of the following package:
+However, as we saw with the [client-side `hello-world` example](https://github.com/wasmerio/docs.wasmer.io/tree/e0f7639306bb4cf18cd0c23876b80f787d6b5876/integrations/js/wasi/browser/examples/hello-world/README.md), file descriptors such as "standard in" and "standard out" are not normally available to a WebAssembly module since they belong to the underlying "OS". Therefore, we must again make use of the following package:
 
 | Package Name | Description |
 | :--- | :--- |
@@ -53,9 +53,9 @@ Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _*
 
    > #### Important Difference
    >
-   > In contrast to running in the browser, the server-side implementation of the same Wasm module is noticeably smaller.
+   > In contrast to running in the browser, the server-side implementation of the same WASM module is noticeably smaller.
    >
-   > When running server-side, we do not need to write any code to obtain the contents of standard out after the Wasm module has executed, since when running server-side, anything written to standard out by a Wasm module appears directly in the console.
+   > When running server-side, we do not need to write any code to obtain the contents of standard out after the WASM module has executed, since when running server-side, anything written to standard out by a WASM module appears directly in the console.
 
    ```javascript
     const fs       = require("fs")
@@ -74,7 +74,7 @@ Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _*
       }
     })
 
-    // Async function to run our Wasm module/instance
+    // Async function to run our WASM module/instance
     const startWasiTask =
       async pathToWasmFile => {
         // Fetch our Wasm File
@@ -100,7 +100,7 @@ Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _*
     Hello World!
    ```
 
-Next, let's take a look at running Wasm modules whose interfaces require transformation.
+Next, let's take a look at running WASM modules whose interfaces require transformation.
 
 {% hint style="info" %}
 If you want to run the examples from the docs codebase directly, you can also do:
@@ -111,3 +111,4 @@ cd docs.wasmer.io/integrations/js/wasi/server/examples/hello-world
 npm run dev
 ```
 {% endhint %}
+

@@ -57,13 +57,13 @@ This returns a WASI instance. Please see the Instance properties section to lear
 
 `wasiInstance.memory: WebAssembly.Memory`
 
-[`WebAssembly.memory`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Memory) object, that is a view into the Wasm Module's linear memory.
+[`WebAssembly.memory`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Memory) object, that is a view into the WASM Module's linear memory.
 
 #### view
 
 `wasiInstance.view: DataView`
 
-[DataView](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView) object, that is a view into the Wasm Module's linear memory.
+[DataView](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView) object, that is a view into the WASM Module's linear memory.
 
 #### FD\_MAP
 

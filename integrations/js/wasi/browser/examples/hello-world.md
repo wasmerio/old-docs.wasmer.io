@@ -11,10 +11,9 @@ In this introductory example, we will develop a Browser-based application that u
 In this case, we will invoke the a simple WASI module that does nothing more than writing `hello world` to standard out.
 
 {% hint style="info" %}
-
 #### Under the Hood
 
-The Wasm module calls the native "OS" function `fd_write` that writes data to a particular file descriptor \(hence `fd` in the function name\)
+The WASM module calls the native "OS" function `fd_write` that writes data to a particular file descriptor \(hence `fd` in the function name\)
 {% endhint %}
 
 However, interaction with file descriptors such as "standard in" and "standard out" is not normally possible for a WebAssembly module, since this type of functionality belongs to the underlying "OS". Therefore, we must make use of the following two packages:
@@ -66,7 +65,7 @@ $ npm install -g parcel
 
 3. For the purposes of testing, we need to install both the `parcel-bundler` and `parcel-plugin-static-files-copy` packages.
 
-   These packages allow `parcel` to serve our Wasm files as static assets:
+   These packages allow `parcel` to serve our WASM files as static assets:
 
    ```bash
     npm install --save-dev parcel-bundler parcel-plugin-static-files-copy
@@ -117,7 +116,6 @@ $ npm install -g parcel
    ```
 
 9. Download the WebAssembly module [`helloworld.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/wat/wasi/helloworld.wasm) and store it in this directory
-
 10. Now we need to change the contents of `index.js` to implement the required functionality.
 
     > #### Code Sample
@@ -143,7 +141,7 @@ $ npm install -g parcel
     const wasmFs = new WasmFs()
 
     let wasi = new WASI({
-      // Arguments passed to the Wasm Module
+      // Arguments passed to the WASM Module
       // The first argument is usually the filepath to the executable WASI module
       // we want to run.
       args: [wasmFilePath, echoStr],
@@ -186,7 +184,7 @@ $ npm install -g parcel
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // Everything starts here
     startWasiTask(wasmFilePath)
-  ```
+    ```
 
 11. As long as `parcel` is still running, after saving `index.js`, your browser should automatically refresh and you should see `Standard Output: Hello World!` appear both on the browser screen and in the JavaScript console.
 
@@ -200,5 +198,5 @@ npm run dev
 ```
 {% endhint %}
 
-
 Next, let's take a look at transforming WASI modules that require transformations.
+

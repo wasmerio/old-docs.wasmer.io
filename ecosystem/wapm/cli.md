@@ -39,25 +39,26 @@ Search for packages related to the `query`.
 Installs missing dependencies and the latest version of the package, optionally, specified.
 
 {% hint style="info" %}
-You can install globally the package passing the `-g` flag. Eg:  
-`wapm install -g cowsay`
+A WAPM package can be installed globally by adding the `-g` flag
+
+ EG: `wapm install -g cowsay`
 {% endhint %}
 
 ### `wapm run`
 
-Executes a package command with the `run` cli command. The command will be run with the wasmer runtime.
+Executes a package command with the `run` cli command. The command will be run with the Wasmer runtime.
 
 ### `wapm validate <wapm_package_dir>`
 
-Validate the sources of local wapm modules. Will display an error if the sources are not valid WebAssembly.
+Validate the sources of local WAPM modules. Will display an error if the sources are not valid WebAssembly.
 
 ### `wapm completions <shell>`
 
-Generate a shell completion script for wapm for the specified shell.
+Generate a shell completion script for WAPM for the specified shell.
 
 ### `wapm init`
 
-Initialize a new wapm project by generating a `wapm.toml` in the current directory.
+Initialize a new WAPM project by generating a `wapm.toml` in the current directory.
 
 ### `wapm list`
 
@@ -73,15 +74,15 @@ Print the `.bin` directory path for the local package. Get the global path with 
 
 ### `wapm keys`
 
-WAPM allows to sign packages so you can assure they are not tampered.
+WAPM packages can be signed to ensure that they haven't been tampered with.
 
 #### `wapm keys list [-a]`
 
-list personal keypairs and trusted public keys
+list personal key pairs and trusted public keys
 
 #### `wapm keys generate <path>`
 
-generate a key pair at location `<path>` and register them with wapm
+generate a key pair at location `<path>` and register them with WAPM
 
 #### `wapm keys import <public-key-value> --user-name=<user-name>`
 
@@ -89,11 +90,11 @@ import a public key for the given user
 
 #### `wapm keys register --public <public-key-location> --private <private-key-location>`
 
-register an existing keypair with wapm
+register an existing key pair with WAPM
 
 #### `wapm keys delete <public-key-id>`
 
-delete the keypair matching `<public-key-id>`
+delete the key pair matching `<public-key-id>`
 
 {% hint style="warning" %}
 ### Telemetry

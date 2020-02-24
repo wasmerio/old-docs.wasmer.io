@@ -1,6 +1,6 @@
 # Setup your C/C++ environment
 
-To build C applications that use the Wasmer runtime as a host for guest Wasm modules, you will need a C compiler installed \(`clang` or `gcc`, for example\). Check the compiler installation instructions [here](setup.md#installing-clang-gcc).
+To build C applications that use the Wasmer runtime as a host for guest WASM modules, you will need a C compiler installed \(`clang` or `gcc`, for example\). Check the compiler installation instructions [here](setup.md#installing-clang-gcc).
 
 Download our SDK for the C-API from [Wasmer releases page](https://github.com/wasmerio/wasmer/releases).  
 Depending on your system, you will need to download:
@@ -39,7 +39,7 @@ If this command does not return the version, then see the following:
 
 ### Debian / Debian Based / Linux
 
-To install gcc on a debian based, you will want to run the following:
+To install gcc on a Debian based, you will want to run the following:
 
 ```text
 sudo apt-get install build-essential

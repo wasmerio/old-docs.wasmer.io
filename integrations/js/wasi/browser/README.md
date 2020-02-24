@@ -1,6 +1,6 @@
 # Browser
 
-Wasmer-JS has multiple packages that enables using Wasm WASI Modules in your Browser.
+Wasmer-JS has multiple packages that enables using WASM WASI Modules in your Browser.
 
 ### `@wasmer/wasi`
 
@@ -12,7 +12,7 @@ It's a wrapper on top of [memfs](https://github.com/streamich/memfs). It provide
 
 ### `@wasmer/wasm-transformer`
 
-Sometimes the Wasm modules that you want to use in the browser can't run because some of it's import functions have BigInts as arguments, and browsers doesn't support it yet.  
+Sometimes the WASM modules that you want to use in the browser can't run because some of it's import functions have BigInts as arguments, and browsers doesn't support it yet.  
 This module helps enables running Wasm modules on Browsers.  
 You can find more info here: [Module Transformation page](../../module-transformation.md).
 

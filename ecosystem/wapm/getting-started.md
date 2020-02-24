@@ -6,7 +6,7 @@ sidebar_label: Getting Started
 
 # Getting Started
 
-This guide will introduce the `wapm` tool and show a few common workflows. The wapm client can install packages, manage WebAssembly dependencies, and expose WebAssembly behavior with commands.
+This guide will introduce the `wapm` tool and show a few common workflows. The WAPM client can install packages, manage WebAssembly dependencies, and expose WebAssembly behavior with commands.
 
 ## Install WAPM
 
@@ -16,7 +16,7 @@ WAPM comes bundled with Wasmer, so you just need to install Wasmer in your syste
 
 ## **Basic Usage**
 
-With the tools installed, one can easily start using universal Wasm binaries by using the `install` command of `wapm` CLI:
+With the tools installed, one can easily start using universal WASM binaries by using the `install` command of `wapm` CLI:
 
 ```text
 wapm install cowsay
@@ -27,11 +27,11 @@ Installing a package creates a local package directory called `wapm_packages` wh
 {% hint style="info" %}
 ### Did you know ...?
 
-You can install gslobally the package passing the `-g` flag.  
+A WAPM package can be installed globally by adding the `-g` flag.  
 Eg:`wapm install -g cowsay`
 {% endhint %}
 
-While in a directory with wapm packages, one may execute them with the `run` command:
+While in a directory with WAPM packages, one may execute them with the `run` command:
 
 ```text
 wapm run cowsay hello wapm!

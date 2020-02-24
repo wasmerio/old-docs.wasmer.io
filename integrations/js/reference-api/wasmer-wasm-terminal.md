@@ -14,7 +14,7 @@ description: >-
 
 `new WasmTerminal(jsObject: WasmTerminalConfig): WasmTerminal`
 
-Constructor for the WasmTerminal, that returns an instance of the WasmTerminal.
+Constructor that returns an instance of the `WasmTerminal`.
 
 The [WasmTerminalConfig](https://github.com/wasmerio/wasmer-js/blob/master/packages/wasm-terminal/src/wasm-terminal-config.ts) can be described as the following:
 
@@ -33,9 +33,9 @@ The [WasmTerminalConfig](https://github.com/wasmerio/wasmer-js/blob/master/packa
 }
 ```
 
-CallbackCommands are functions that can be returned in the fetchCommand config property. They are simply Javascript callback that take in the command name, command arguments, enviroment variables, and returns a Promise that resolves stdout.
+`callbackCommands` are functions that can be returned in the `fetchCommand` config property. They are simply Javascript callbacks that take in the command name, command arguments, environment variables, and return a `Promise` that resolves `stdout`.
 
-Since these callback commands handle stdin and stdout, that can be used as normal commands that can be piped!
+Since these callback commands handle `stdin` and `stdout`, they can be used as normal commands that can be piped!
 
 ```typescript
 export type CallbackCommand = (options: {
@@ -50,37 +50,39 @@ export type CallbackCommand = (options: {
 
 `wasmTerminal.open(containerElement: Element): void`
 
-Function to set the container of the wasmTerminal. containerElement can be any [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element).
+Sets the container of the `wasmTerminal.` The `containerElement` can be any [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element).
 
 #### fit
 
 `wasmTerminal.fit()`: void
 
-Function to resize the terminal to fit the size of its container.
+Resizes the terminal to fit the size of its container.
 
 #### focus
 
 `wasmTerminal.focus()`: void
 
-Function to [focus](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) on the `wasmTerminal` element, and allow input into the shell.
+Gives the `wasmTerminal` element focus, and allows input into the shell.
 
 #### print
 
 `wasmTerminal.print(message: string)`: void
 
-Function to print text to the wasmTerminal. Useful for printing a welcome message before the wasmTerminal is opened.
+Prints text to the `wasmTerminal`.
+
+Useful for things such as showing a welcome message before the `wasmTerminal` is opened.
 
 #### scrollToCursor
 
 `wasmTerminal.scrollToCursor()`:void
 
-Function to scroll the terminal cursor into view.
+Scrolls the terminal cursor into view.
 
 #### runCommand
 
 `wasmTerminal.runCommand(commandString: string)`: void
 
-Function to run the passed string as if it was entered as a command, from the wasm terminal.
+Runs the supplied string as if it had been entered as a command, typed into the WASM terminal.
 
 ## fetchCommandFromWAPM
 
@@ -93,5 +95,5 @@ fetchCommandFromWAPM(options: {
 }): Promise<Uint8Array>
 ```
 
-Exported function from the `@wasmer/wasm-terminal` package. This function is meant to be returned in the fetchCommand config property of the WasmTerminal Class. This takes in the name of command, the command arguments, and the envioronment variables, and returns a Promise that resolves a Uint8Array of the Wasm binary from WAPM.
+Exported function from the `@wasmer/wasm-terminal` package. This function is meant to be returned in the `fetchCommand` config property of the `WasmTerminal` Class. This takes in the name of command, the command arguments, and the environment variables, and returns a `Promise` that resolves a `Uint8Array` of binary WASM bytes from WAPM.
 

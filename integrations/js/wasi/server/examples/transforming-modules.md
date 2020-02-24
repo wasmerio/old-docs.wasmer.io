@@ -4,20 +4,20 @@
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/server/examples/transforming-modules).
 {% endhint %}
 
-Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](/integrations/js/module-transformation) will be always needed until browsers land `BigInt` support in WebAssembly. 
+Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](https://github.com/wasmerio/docs.wasmer.io/tree/e0f7639306bb4cf18cd0c23876b80f787d6b5876/integrations/js/module-transformation/README.md) will be always needed until browsers land `BigInt` support in WebAssembly.
 
-### Setup Instructions
+## Setup Instructions
 
-Please repeat the step-by-step instructions given in the [Hello World](/integrations/js/wasi/server/examples/hello-world) example, but with the following changes:
+Please repeat the step-by-step instructions given in the [Hello World](https://github.com/wasmerio/docs.wasmer.io/tree/e0f7639306bb4cf18cd0c23876b80f787d6b5876/integrations/js/wasi/server/examples/hello-world/README.md) example, but with the following changes:
 
 1. Call your project `wasmer-js-transforming-wasi`
-2. Download the Wasm module [`clocktimeget.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/wat/wasi/clocktimeget.wasm)
+2. Download the WASM module [`clocktimeget.wasm`](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/wat/wasi/clocktimeget.wasm)
 
-### JavaScript Coding
+## JavaScript Coding
 
 The coding seen below is very similar to the coding used for the previous Hello World example — but with one very important difference!
 
-Inside function `startWasiTask`, we fetch the Wasm file contents and convert it to a `Uint8Array` as before, but then there is the additional line:
+Inside function `startWasiTask`, we fetch the WASM file contents and convert it to a `Uint8Array` as before, but then there is the additional line:
 
 ```javascript
 const loweredWasmBytes = await lowerI64Imports(wasmBytes)
@@ -46,7 +46,7 @@ let wasi = new WASI({
 })
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Async function to run our Wasm module/instance
+// Async function to run our WASM module/instance
 const startWasiTask =
   async pathToWasmFile => {
     // Fetch the Wasm module and transform its interface
@@ -83,3 +83,4 @@ cd docs.wasmer.io/integrations/js/wasi/server/examples/transforming-modules
 npm run dev
 ```
 {% endhint %}
+

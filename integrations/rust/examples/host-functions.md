@@ -4,9 +4,9 @@
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/host-functions).
 {% endhint %}
 
-Up until now, our WebAssembly program has only been able to do pure computation, that is, take arguments and return values. Most interesting use cases require more than just computation though. In this section we'll go over how to give the Wasm modules we run extra abilties in the form of host functions in an `ImportObject`.
+Up until now, our WebAssembly program has only been able to do pure computation, that is, take arguments and return values. Most interesting use cases require more than just computation though. In this section we'll go over how to give the WASM modules we run extra abilities in the form of host functions in an `ImportObject`.
 
-In this example, we'll create a system for getting and adjusting a counter value. However host functions are not limited to storing data outside of Wasm memory, they're normal Rust functions and can do anything that Rust can do.
+In this example, we'll create a system for getting and adjusting a counter value. However host functions are not limited to storing data outside of WASM memory, they're normal Rust functions and can do anything that Rust can do.
 
 1. There will be a `get_counter` function that will return an `i32` of
 
@@ -51,7 +51,7 @@ fn main() -> error::Result<()> {
         *counter_ref
     };
 
-    // Now that we have the Wasm file as bytes, let's run it with the wasmer runtime
+    // Now that we have the WASM file as bytes, let's run it with the wasmer runtime
 
     // Let's define the import object used to import our function
     // into our webassembly sample application.
@@ -59,7 +59,7 @@ fn main() -> error::Result<()> {
     // Make sure to check your function signature (parameter and return types) carefully!
     let import_object = imports! {
         // Define the "host" namespace that was used
-        // by our example rust Wasm crate.
+        // by our example rust WASM crate.
         "host" => {
             // Key should be the name of the imported function
             // Value should be the func! macro, with the function passed in.
@@ -68,7 +68,7 @@ fn main() -> error::Result<()> {
         },
     };
 
-    // Let's create an instance of Wasm module running in the wasmer-runtime
+    // Let's create an instance of WASM module running in the wasmer-runtime
     let instance = instantiate(wasm_bytes, &import_object)?;
 
     // Define the number of times we want to loop our increment
@@ -117,12 +117,12 @@ cd docs.wasmer.io/integrations/rust/host-functions
 ```
 {% endhint %}
 
-Both of the functions in this case are closures, but they don't have to be. Host functions can take an optional `&mut Ctx` argument as their first argument, which is how host functions get access to Wasm memory and other Wasm-related data.
+Both of the functions in this case are closures, but they don't have to be. Host functions can take an optional `&mut Ctx` argument as their first argument, which is how host functions get access to WASM memory and other WASM-related data.
 
-In the above example we exposed host functions to the guest Wasm module with the namespace and name given in the `imports!` macro. The used namespace is `host` so we list `get_counter` and `add_to_counter` there.
+In the above example we exposed host functions to the guest WASM module with the namespace and name given in the `imports!` macro. The used namespace is `host` so we list `get_counter` and `add_to_counter` there.
 
 {% hint style="info" %}
-Depending on the ABI of the Wasm module, we may need to expose functions under a different namespace. On the guest side, a non-default import namespace looks like:
+Depending on the ABI of the WASM module, we may need to expose functions under a different namespace. On the guest side, a non-default import namespace looks like:
 
 ```rust
 extern "C" {

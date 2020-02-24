@@ -52,7 +52,7 @@ SUBCOMMANDS:
     validate       Validate a Web Assembly binary
 ```
 
-Please take a look at the help output to start running Wasm modules.
+Please take a look at the help output to start running WASM modules.
 
 The same help output is also available in this documentation as the [User Guide](https://github.com/wasmerio/docs.wasmer.io/tree/master/docs/wasmer-js/cli/wasmer-js-cli-user-guide/README.md) on the sidebar.
 

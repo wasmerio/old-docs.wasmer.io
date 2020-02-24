@@ -1,7 +1,7 @@
 ---
 description: >-
   In this example we will learn how to pass data between the host system and
-  Wasm
+  WASM
 ---
 
 # Passing Data
@@ -13,14 +13,14 @@ description: >-
 Linear memory is a major concept in WebAssembly:
 
 {% hint style="info" %}
-Because WebAssembly is sandboxed, memory must be copied between the host \(your Rust application\) and the Wasm module. Upcoming proposals like WebAssembly Interface types will make this process much easier, but it is still a work in progress.
+Because WebAssembly is sandboxed, memory must be copied between the host \(your Rust application\) and the WASM module. Upcoming proposals like WebAssembly Interface types will make this process much easier, but it is still a work in progress.
 {% endhint %}
 
-The way that this memory is allocated, freed, passed, organized, etc... can vary depending on the ABI of the Wasm module.
+The way that this memory is allocated, freed, passed, organized, etc... can vary depending on the ABI of the WASM module.
 
-For example, some ABIs will provide functions, either as imports or exports, for allocation and freeing of memory from the host or guest. Some Wasm ABIs may want to control their memory implicitly, for example the ABI may say that the host can reserve memory addresses 0 to 1000 for a special purpose and simply write there directly. You will want to take a look at the documentation of the ABI of your Wasm module, to see what conventions are used for memory allocation.
+For example, some ABIs will provide functions, either as imports or exports, for allocation and freeing of memory from the host or guest. Some WASM ABIs may want to control their memory implicitly, for example the ABI may say that the host can reserve memory addresses 0 to 1000 for a special purpose and simply write there directly. You will want to take a look at the documentation of the ABI of your WASM module, to see what conventions are used for memory allocation.
 
-In this example, let's say we have a Wasm module that can perform transformations on a string passed into the module's memory. This module exports a function that returns a pointer to a fixed size static buffer. This Wasm module will take in a string, and append the string " Wasm is cool!" to the end. This example shows how we can read and write memory from the host \(your Rust application\), and how the Wasm module can also read and write to the same memory.
+In this example, let's say we have a WASM module that can perform transformations on a string passed into the module's memory. This module exports a function that returns a pointer to a fixed size static buffer. This WASM module will take in a string, and append the string " WASM is cool!" to the end. This example shows how we can read and write memory from the host \(your Rust application\), and how the WASM module can also read and write to the same memory.
 
 So if we generate a new project, we can modify our `src/main.rs` to be the following:
 
@@ -33,18 +33,18 @@ fn main() -> error::Result<()> {
     // Let's get the .wasm file as bytes
     let wasm_bytes = include_bytes!("passing-data.wasm");
 
-    // Now that we have the Wasm file as bytes, let's run it with the wasmer runtime
-    // Our import object, that allows exposing functions to our Wasm module.
+    // Now that we have the WASM file as bytes, let's run it with the wasmer runtime
+    // Our import object, that allows exposing functions to our WASM module.
     // We're not importing anything, so make an empty import object.
     let import_object = imports! {};
-    // Let's create an instance of Wasm module running in the wasmer-runtime
+    // Let's create an instance of WASM module running in the wasmer-runtime
     let instance = instantiate(wasm_bytes, &import_object)?;
 
-    // Lets get the context and memory of our Wasm Instance
+    // Lets get the context and memory of our WASM Instance
     let wasm_instance_context = instance.context();
     let wasm_instance_memory = wasm_instance_context.memory(0);
 
-    // Let's get the pointer to the buffer defined by the Wasm module in the Wasm memory.
+    // Let's get the pointer to the buffer defined by the WASM module in the WASM memory.
     // We use the type system and the power of generics to get a function we can call
     // directly with a type signature of no arguments and returning a WasmPtr<u8, Array>
     let get_wasm_memory_buffer_pointer: Func<(), WasmPtr<u8, Array>> = instance
@@ -66,7 +66,7 @@ fn main() -> error::Result<()> {
     // Let's call the exported function that concatenates a phrase to our string.
     let add_wasm_is_cool: Func<u32, u32> = instance
         .func("add_wasm_is_cool")
-        .expect("Wasm is cool export");
+        .expect("WASM is cool export");
     let new_string_length = add_wasm_is_cool.call(original_string.len() as u32).unwrap();
 
     // Get our pointer again, since memory may have shifted around
@@ -78,7 +78,7 @@ fn main() -> error::Result<()> {
 
     println!("The new string is: {}", new_string);
     // Asserting that the returned value from the function is our expected value.
-    assert_eq!(new_string, "Did you know Wasm is cool!");
+    assert_eq!(new_string, "Did you know WASM is cool!");
 
     // Log a success message
     println!("Success!");
@@ -94,13 +94,13 @@ You can download the `passing-data.wasm` WebAssembly module here:
 
 Taking a look at the `src/main.rs` above, we see that we:
 
-1. Load our Wasm module from a file
-2. Instantiate this Wasm module
+1. Load our WASM module from a file
+2. Instantiate this WASM module
 3. Create a `WasmPtr` from the pointer returned from the exported function
 4. Write the bytes of our string to the `WasmPtr` location
 5. Call the exported transformation function
-6. Get a new `WasmPtr`, in case any memory has moved around in Wasm module
-7. Retrieve the transformed string from the Wasm module
+6. Get a new `WasmPtr`, in case any memory has moved around in WASM module
+7. Retrieve the transformed string from the WASM module
 
 Now, we should be ready to run it!
 
@@ -117,5 +117,5 @@ cd docs.wasmer.io/integrations/rust/passing-data
 ```
 {% endhint %}
 
-Now that we have a general idea of how we can pass data back and forth between the Host and a Wasm module using its linear memory, let's take a look at how we can expose Host functions to the Wasm module.
+Now that we have a general idea of how we can pass data back and forth between the Host and a WASM module using its linear memory, let's take a look at how we can expose Host functions to the WASM module.
 

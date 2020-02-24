@@ -18,7 +18,7 @@ Any page can be easily edited, just by clicking on the **Edit on Github** link a
 
 ### Projects
 
-Apart of the [Wasmer WebAssembly Runtime](ecosystem/wasmer/), we participate in other projects such as:
+In addition to the [Wasmer WebAssembly Runtime](ecosystem/wasmer/), we also participate in other projects such as:
 
 1. The [WAPM \(WebAssembly Package Manager\)](ecosystem/wapm/)
 2. The [WebAssembly Shell](ecosystem/webassembly.sh.md)
