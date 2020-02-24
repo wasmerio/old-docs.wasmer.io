@@ -56,6 +56,7 @@
     * [@wasmer/wasmfs](integrations/js/reference-api/wasmer-wasmfs.md)
   * [Module Transformation](integrations/js/module-transformation.md)
   * [Wasmer-JS CLI](integrations/js/wasmer-js-cli.md)
+  * [Wasmer-JS on Github](https://github.com/wasmerio/wasmer-js)
 
 ## 👥 Community
 

@@ -1,6 +1,10 @@
-# Browser
+# Server
 
-Wasmer-JS has multiple packages that enables using Wasm WASI Modules in your Browser.
+Wasmer-JS has multiple packages that enables using Wasm WASI Modules in Node.js.
+
+### `@wasmer/cli`
+
+It's a CLI that allows you to run Wasm WASI modules in your shell very easily, with the same interface as the [Wasmer WebAssembly Runtime](../../../../ecosystem/wasmer/).
 
 ### `@wasmer/wasi`
 
@@ -16,22 +20,13 @@ Sometimes the Wasm modules that you want to use in the browser can't run because
 This module helps enables running Wasm modules on Browsers.  
 You can find more info here: [Module Transformation page](../../module-transformation.md).
 
-### `@wasmer/wasm-terminal`
-
-It's a terminal emulator based on [xTerm.js](https://xtermjs.org/).  
-Is used in the online [WebAssembly shell](../../../../ecosystem/webassembly.sh.md) :\)
-
 {% embed url="https://github.com/wasmerio/wasmer-js" %}
 
 ## Examples
 
-Here are some useful examples you can visit to learn how to use Wasmer-JS in your project!
+Here are some useful examples you can visit to learn how to use Wasmer-JS in your server!
 
 {% page-ref page="examples/hello-world.md" %}
 
 {% page-ref page="examples/transforming-modules.md" %}
-
-{% page-ref page="examples/handling-io.md" %}
-
-
 
