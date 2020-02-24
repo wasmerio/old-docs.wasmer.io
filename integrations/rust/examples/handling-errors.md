@@ -19,14 +19,14 @@ fn main() -> error::Result<()> {
     // Let's read in our .wasm file as bytes
     let wasm_bytes = include_bytes!("../../../../shared/rust/handling-errors.wasm");
 
-    // Our import object, that allows exposing functions to our WASM module.
+    // Our import object, that allows exposing functions to our Wasm module.
     // We're not importing anything, so make an empty import object.
     let import_object = imports! {};
 
-    // Let's create an instance of WASM module running in the wasmer-runtime
+    // Let's create an instance of Wasm module running in the wasmer-runtime
     let instance = instantiate(wasm_bytes, &import_object)?;
 
-    // Let's call the exported "throw_error" function ont the WASM module.
+    // Let's call the exported "throw_error" function ont the Wasm module.
     let throw_error_func: Func<(), ()> = instance
         .func("throw_wasm_error")
         .expect("throw_wasm_error function was not found");
@@ -75,14 +75,14 @@ fn main() -> error::Result<()> {
     // Let's read in our .wasm file as bytes
     let wasm_bytes = include_bytes!("../../../../shared/rust/handling-errors.wasm");
 
-    // Our import object, that allows exposing functions to our WASM module.
+    // Our import object, that allows exposing functions to our Wasm module.
     // We're not importing anything, so make an empty import object.
     let import_object = imports! {};
 
-    // Let's create an instance of WASM module running in the wasmer-runtime
+    // Let's create an instance of Wasm module running in the wasmer-runtime
     let instance = instantiate(wasm_bytes, &import_object)?;
 
-    // Let's call the exported "throw_error" function on the WASM module.
+    // Let's call the exported "throw_error" function on the Wasm module.
     let throw_error_func: Func<(), ()> = instance
         .func("throw_wasm_error")
         .expect("throw_wasm_error function was not found");
@@ -109,5 +109,5 @@ If we look our for our file name \(`src/main.rs`\), we will see at step 10, ther
 
 It's important to keep in mind that that compiling in `release` mode reduces the amount of debug information available by default. Debug information can be enabled with the `[profile.release]` section in the `Cargo.toml`, simple add `debug = true` to this section and your release builds will include debug information.
 
-Next, let's take a look at how we can interrupt an executing WASM module.
+Next, let's take a look at how we can interrupt an executing Wasm module.
 

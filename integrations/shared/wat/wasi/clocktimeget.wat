@@ -169,9 +169,9 @@
 
   ;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   ;; Dummy start function
-  ;; If you want to call this WASM module from a JavaScript interface such as Wasmer-js, then there must be a function
+  ;; If you want to call this Wasm module from a JavaScript interface such as Wasmer-js, then there must be a function
   ;; called "$_start".  This function does not necessarily need to do anything, but it must be present as it will be
-  ;; called automatically when the WASM instance is started
+  ;; called automatically when the Wasm instance is started
   ;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   (func $_start (type $unitFnType))
 
@@ -229,8 +229,8 @@
 
   ;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   ;; Declare the use of one 64Kb memory page and export it using the name "memory"
-  ;; If you want to call this WASM module from a JavaScript interface such as Wasmer-js, then this interface expects to
-  ;; be able to access WASM memory using exactly the name "memory"
+  ;; If you want to call this Wasm module from a JavaScript interface such as Wasmer-js, then this interface expects to
+  ;; be able to access Wasm memory using exactly the name "memory"
   ;; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   (memory (export "memory") 1)
 

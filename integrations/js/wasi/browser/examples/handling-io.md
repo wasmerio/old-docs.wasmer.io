@@ -4,7 +4,7 @@
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/browser/examples/handling-io).
 {% endhint %}
 
-In the Hello World example, we covered how to run the `helloworld` WASM module, and then read its output. However, there may be times we want to interact with WASI modules that accept input as well!
+In the Hello World example, we covered how to run the `helloworld` Wasm module, and then read its output. However, there may be times we want to interact with WASI modules that accept input as well!
 
 In this example, we will be using the [QuickJS WASI module](https://wapm.io/package/quickjs), to execute Javascript in the QuickJS runtime. To handle input, we will create our own `stdinRead` function, that is bound to the zero-index file descriptor in WasmFS \(`/dev/stdin`\). This will allow us to intercept read requests, and send whatever input we would like to the WASI application. See the code below:
 
@@ -39,7 +39,7 @@ const cleanStdout = (stdout) => {
 // "Sandbox" our file system operations
 const wasmFs = new WasmFs();
 let wasi = new WASI({
-    // Arguments to pass to the WASM Module
+    // Arguments to pass to the Wasm Module
     // The first argument usually should be the filepath to the "executable wasi module"
     // That we want to run.
     args: [wasmFilePath],
@@ -61,7 +61,7 @@ let wasi = new WASI({
 // per the C api. Otherwise, the Wasi module will error.
 let readStdinCounter = 0
 const stdinRead = (
-    stdinBuffer, // Uint8Array of the buffer that is sent to the guest WASM module's standard input
+    stdinBuffer, // Uint8Array of the buffer that is sent to the guest Wasm module's standard input
     offset, // offset for the standard input
     length, // length of the standard input
     position // Position in the input
@@ -85,7 +85,7 @@ const stdinRead = (
       );
 
   // When the user cancels, throw an error to get out of the standard input read loop
-  // From the guest WASM modules (quickjs)
+  // From the guest Wasm modules (quickjs)
   if (responseStdin === null) {
     const userError = new Error("Process killed by Prompt Cancellation");
     userError.user = true;
@@ -109,7 +109,7 @@ wasmFs.volume.fds[0].node.read = stdinRead;
 
 // Async Function to run our wasi module/instance
 const startWasiTask = async () => {
-  // Fetch our WASM File
+  // Fetch our Wasm File
   const response = await fetch(wasmFilePath);
   const responseArrayBuffer = await response.arrayBuffer();
   const wasmBytes = new Uint8Array(responseArrayBuffer);

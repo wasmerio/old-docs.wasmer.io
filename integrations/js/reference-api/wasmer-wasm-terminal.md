@@ -82,7 +82,7 @@ Scrolls the terminal cursor into view.
 
 `wasmTerminal.runCommand(commandString: string)`: void
 
-Runs the supplied string as if it had been entered as a command, typed into the WASM terminal.
+Runs the supplied string as if it had been entered as a command, typed into the Wasm terminal.
 
 ## fetchCommandFromWAPM
 
@@ -95,5 +95,5 @@ fetchCommandFromWAPM(options: {
 }): Promise<Uint8Array>
 ```
 
-Exported function from the `@wasmer/wasm-terminal` package. This function is meant to be returned in the `fetchCommand` config property of the `WasmTerminal` Class. This takes in the name of command, the command arguments, and the environment variables, and returns a `Promise` that resolves a `Uint8Array` of binary WASM bytes from WAPM.
+Exported function from the `@wasmer/wasm-terminal` package. This function is meant to be returned in the `fetchCommand` config property of the `WasmTerminal` Class. This takes in the name of command, the command arguments, and the environment variables, and returns a `Promise` that resolves a `Uint8Array` of binary Wasm bytes from WAPM.
 

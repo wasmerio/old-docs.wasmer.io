@@ -53,9 +53,9 @@ Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _*
 
    > #### Important Difference
    >
-   > In contrast to running in the browser, the server-side implementation of the same WASM module is noticeably smaller.
+   > In contrast to running in the browser, the server-side implementation of the same Wasm module is noticeably smaller.
    >
-   > When running server-side, we do not need to write any code to obtain the contents of standard out after the WASM module has executed, since when running server-side, anything written to standard out by a WASM module appears directly in the console.
+   > When running server-side, we do not need to write any code to obtain the contents of standard out after the Wasm module has executed, since when running server-side, anything written to standard out by a Wasm module appears directly in the console.
 
    ```javascript
     const fs       = require("fs")
@@ -74,7 +74,7 @@ Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _*
       }
     })
 
-    // Async function to run our WASM module/instance
+    // Async function to run our Wasm module/instance
     const startWasiTask =
       async pathToWasmFile => {
         // Fetch our Wasm File
@@ -100,7 +100,7 @@ Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _*
     Hello World!
    ```
 
-Next, let's take a look at running WASM modules whose interfaces require transformation.
+Next, let's take a look at running Wasm modules whose interfaces require transformation.
 
 {% hint style="info" %}
 If you want to run the examples from the docs codebase directly, you can also do:

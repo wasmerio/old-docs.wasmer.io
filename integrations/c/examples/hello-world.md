@@ -4,7 +4,7 @@
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/c/examples/hello-world).
 {% endhint %}
 
-In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats directly right now, thus to keep it simple we will be writing a host application that calls the `add_one` function of a guest WASM module, which adds `1` to the value passed as a parameter, and returns the result.
+In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats directly right now, thus to keep it simple we will be writing a host application that calls the `add_one` function of a guest Wasm module, which adds `1` to the value passed as a parameter, and returns the result.
 
 First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. In this example, we will create a new project named `hello-world`. Thus, lets create the directory for it, and navigate to it:
 
@@ -35,8 +35,8 @@ int main() {
   // Our guest module does not use any import functions, or memory, so we omit them.
   wasmer_import_t imports[] = {};
 
-  // Read the WASM file bytes from "../../../shared/c/add.wasm"
-  // NOTE: You should replace this file path for where your guest WASM module is.
+  // Read the Wasm file bytes from "../../../shared/c/add.wasm"
+  // NOTE: You should replace this file path for where your guest Wasm module is.
   FILE *file = fopen("../../../shared/c/add.wasm", "r");
   assert(file != NULL);
   fseek(file, 0, SEEK_END);
@@ -46,7 +46,7 @@ int main() {
   fread(bytes, 1, len, file);
   fclose(file);
 
-  // Instantiate a WebAssembly Instance from WASM bytes and imports
+  // Instantiate a WebAssembly Instance from Wasm bytes and imports
   wasmer_instance_t *instance = NULL;
   wasmer_result_t compile_result = wasmer_instantiate(
       &instance, // Our reference to our Wasm instance 
@@ -64,29 +64,29 @@ int main() {
       print_wasmer_error();
   }
 
-  // Assert the WASM instantion completed
+  // Assert the Wasm instantion completed
   assert(compile_result == WASMER_OK);
 
    // Call the exported "hello_wasm" function of our instance
 
-  // Define our parameters we are passing into the guest WASM function call.
+  // Define our parameters we are passing into the guest Wasm function call.
   // Params are created with the following properties
-  // .tag is the tag of the type of the param being passed to the guest WASM function
-  // .value.I32 is the value being passed to the guest WASM function
+  // .tag is the tag of the type of the param being passed to the guest Wasm function
+  // .value.I32 is the value being passed to the guest Wasm function
   wasmer_value_t param_one = { .tag = WASM_I32, .value.I32 = 24 };
 
   // Create our array of our params
   wasmer_value_t params[] = { param_one };
 
   // Define our results. Results are created with { 0 } to avoid null issues,
-  // And will be filled with the proper result after calling the guest WASM function.
+  // And will be filled with the proper result after calling the guest Wasm function.
   wasmer_value_t result_one = { 0 };
   wasmer_value_t results[] = {result_one};
 
-  // Call the WASM function
+  // Call the Wasm function
   wasmer_result_t call_result = wasmer_instance_call(
-      instance, // Our WASM Instance
-      "add_one", // the name of the exported function we want to call on the guest WASM module
+      instance, // Our Wasm Instance
+      "add_one", // the name of the exported function we want to call on the guest Wasm module
       params, // Our array of parameters
       1, // The number of parameters
       results, // Our array of results
@@ -150,5 +150,5 @@ cd docs.wasmer.io/integrations/c/hello-world
 ```
 {% endhint %}
 
-Next, let's take a look at how we can pass data between our host application, and our guest WASM module.
+Next, let's take a look at how we can pass data between our host application, and our guest Wasm module.
 

@@ -13,7 +13,7 @@ In this case, we will invoke the a simple WASI module that does nothing more tha
 {% hint style="info" %}
 #### Under the Hood
 
-The WASM module calls the native "OS" function `fd_write` that writes data to a particular file descriptor \(hence `fd` in the function name\)
+The Wasm module calls the native "OS" function `fd_write` that writes data to a particular file descriptor \(hence `fd` in the function name\)
 {% endhint %}
 
 However, interaction with file descriptors such as "standard in" and "standard out" is not normally possible for a WebAssembly module, since this type of functionality belongs to the underlying "OS". Therefore, we must make use of the following two packages:
@@ -65,7 +65,7 @@ $ npm install -g parcel
 
 3. For the purposes of testing, we need to install both the `parcel-bundler` and `parcel-plugin-static-files-copy` packages.
 
-   These packages allow `parcel` to serve our WASM files as static assets:
+   These packages allow `parcel` to serve our Wasm files as static assets:
 
    ```bash
     npm install --save-dev parcel-bundler parcel-plugin-static-files-copy
@@ -141,7 +141,7 @@ $ npm install -g parcel
     const wasmFs = new WasmFs()
 
     let wasi = new WASI({
-      // Arguments passed to the WASM Module
+      // Arguments passed to the Wasm Module
       // The first argument is usually the filepath to the executable WASI module
       // we want to run.
       args: [wasmFilePath, echoStr],

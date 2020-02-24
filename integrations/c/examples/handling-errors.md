@@ -29,7 +29,7 @@ wasmer_instance_t *create_wasmer_instance() {
   // Create module name for our imports
 
   // Create a UTF-8 string as bytes for our module name. 
-  // And, place the string into the wasmer_byte_array type so it can be used by our guest WASM instance.
+  // And, place the string into the wasmer_byte_array type so it can be used by our guest Wasm instance.
   const char *module_name = "env";
   wasmer_byte_array module_name_bytes = { .bytes = (const uint8_t *) module_name,
     .bytes_len = strlen(module_name) };
@@ -47,10 +47,10 @@ wasmer_instance_t *create_wasmer_instance() {
   fread(bytes, 1, len, file);
   fclose(file);
 
-  // Instantiate a WebAssembly Instance from WASM bytes and imports
+  // Instantiate a WebAssembly Instance from Wasm bytes and imports
   wasmer_instance_t *instance = NULL;
   wasmer_result_t compile_result = wasmer_instantiate(
-      &instance, // Our reference to our WASM instance 
+      &instance, // Our reference to our Wasm instance 
       bytes, // The bytes of the WebAssembly modules
       len, // The length of the bytes of the WebAssembly module
       imports, // The Imports array the will be used as our importObject
@@ -63,7 +63,7 @@ wasmer_instance_t *create_wasmer_instance() {
     print_wasmer_error();
   }
 
-  // Assert the WASM instantiation completed
+  // Assert the Wasm instantiation completed
   assert(compile_result == WASMER_OK);
 
   // Return the Wasmer Instance
@@ -75,35 +75,35 @@ int main() {
   // Initialize our Wasmer Instance
   wasmer_instance_t *instance = create_wasmer_instance();
 
-  // Let's call the our throw_wasm_error Function in the guest WASM module
+  // Let's call the our throw_wasm_error Function in the guest Wasm module
 
   // Define our results. Results are created with { 0 } to avoid null issues,
-  // And will be filled with the proper result after calling the guest WASM function.
+  // And will be filled with the proper result after calling the guest Wasm function.
   wasmer_value_t result_one = { 0 };
   wasmer_value_t results[] = {result_one};
 
-  // Define our parameters (none) we are passing into the guest WASM function call.
+  // Define our parameters (none) we are passing into the guest Wasm function call.
   wasmer_value_t params[] = {0};
 
 
-  // Call the WASM function
+  // Call the Wasm function
   wasmer_result_t call_result = wasmer_instance_call(
       instance, // Our Wasm Instance
-      "throw_wasm_error", // the name of the exported function we want to call on the guest WASM module
+      "throw_wasm_error", // the name of the exported function we want to call on the guest Wasm module
       params, // Our array of parameters
       0, // The number of parameters
       results, // Our array of results
       1 // The number of results
       );
 
-  // Assert that the guest WASM function call Error'd
+  // Assert that the guest Wasm function call Error'd
   // Checking both WASMER_OK and WASMER_ERROR just for
   // demonstrating the two statuses exposed by the header file.
   assert(call_result != WASMER_OK);
   assert(call_result == WASMER_ERROR);
 
   // Print out what happened (So it is not confusing to see an error).
-  printf("The Guest WASM Function \"throw_wasm_error\" threw and error like we expected!\n");
+  printf("The Guest Wasm Function \"throw_wasm_error\" threw and error like we expected!\n");
   printf("Printing the error ...\n\n");
 
   // Print out the error
@@ -128,7 +128,7 @@ Note: You can [find the implementation of it here](https://github.com/wasmerio/d
 The expected output of this program would be:
 
 ```text
-The Guest WASM Function "throw_wasm_error" threw and error like we expected!
+The Guest Wasm Function "throw_wasm_error" threw and error like we expected!
 Printing the error ...
 
 Error len: `83`
@@ -137,7 +137,7 @@ Error str: `Call error: WebAssembly trap occurred during runtime: illegal arithm
 Test ran sucessfully, ending execution ...
 ```
 
-Meaning we were able to cause an error in our guest WASM module, and then get a hint on what caused the error!
+Meaning we were able to cause an error in our guest Wasm module, and then get a hint on what caused the error!
 
-Next, let's take a look at interrupting the execution of a WASM module.
+Next, let's take a look at interrupting the execution of a Wasm module.
 

@@ -28,7 +28,7 @@ void print_wasmer_error()
   printf("Error: `%s`\n", error_str);
 }
 
-// Global counter our WASM module will be updating
+// Global counter our Wasm module will be updating
 int counter = 0;
 
 int get_counter(wasmer_instance_context_t *ctx) {
@@ -73,7 +73,7 @@ wasmer_instance_t *create_wasmer_instance(
   // Create module name for our imports
 
   // Create a UTF-8 string as bytes for our module name. 
-  // And, place the string into the wasmer_byte_array type so it can be used by our guest WASM instance.
+  // And, place the string into the wasmer_byte_array type so it can be used by our guest Wasm instance.
   const char *module_name = "env";
   wasmer_byte_array module_name_bytes = { .bytes = (const uint8_t *) module_name,
     .bytes_len = strlen(module_name) };
@@ -98,7 +98,7 @@ wasmer_instance_t *create_wasmer_instance(
   // Define an array containing our imports
   wasmer_import_t imports[] = {get_counter_import, add_to_counter_import};
 
-  // Read the WASM file bytes
+  // Read the Wasm file bytes
   FILE *file = fopen("host-functions.wasm", "r");
   assert(file != NULL);
   fseek(file, 0, SEEK_END);
@@ -108,10 +108,10 @@ wasmer_instance_t *create_wasmer_instance(
   fread(bytes, 1, len, file);
   fclose(file);
 
-  // Instantiate a WebAssembly Instance from WASM bytes and imports
+  // Instantiate a WebAssembly Instance from Wasm bytes and imports
   wasmer_instance_t *instance = NULL;
   wasmer_result_t compile_result = wasmer_instantiate(
-      &instance, // Our reference to our WASM instance 
+      &instance, // Our reference to our Wasm instance 
       bytes, // The bytes of the WebAssembly modules
       len, // The length of the bytes of the WebAssembly module
       imports, // The Imports array the will be used as our importObject
@@ -124,25 +124,25 @@ wasmer_instance_t *create_wasmer_instance(
     print_wasmer_error();
   }
 
-  // Assert the WASM instantion completed
+  // Assert the Wasm instantion completed
   assert(compile_result == WASMER_OK);
 
   // Return the Wasmer Instance
   return instance;
 }
 
-// Function to call a function on the guest WASM module, and return an i32 result
+// Function to call a function on the guest Wasm module, and return an i32 result
 int call_wasm_function_and_return_i32(wasmer_instance_t *instance, char* functionName, wasmer_value_t params[], int num_params) {
   // Define our results. Results are created with { 0 } to avoid null issues,
-  // And will be filled with the proper result after calling the guest WASM function.
+  // And will be filled with the proper result after calling the guest Wasm function.
   wasmer_value_t result_one = { 0 };
   wasmer_value_t results[] = {result_one};
 
 
-  // Call the WASM function
+  // Call the Wasm function
   wasmer_result_t call_result = wasmer_instance_call(
-      instance, // Our WASM Instance
-      functionName, // the name of the exported function we want to call on the guest WASM module
+      instance, // Our Wasm Instance
+      functionName, // the name of the exported function we want to call on the guest Wasm module
       params, // Our array of parameters
       num_params, // The number of parameters
       results, // Our array of results
@@ -196,11 +196,11 @@ int main() {
   counter = 24;
   printf("Initial counter value: %d\n", counter);
 
-  // Let's get the pointer to the buffer exposed by our Guest WASM Module
-  // Define our parameters we are passing into the guest WASM function call.
+  // Let's get the pointer to the buffer exposed by our Guest Wasm Module
+  // Define our parameters we are passing into the guest Wasm function call.
   // Params are created with the following properties
-  // .tag is the tag of the type of the param being passed to the guest WASM function
-  // .value.I32 is the value being passed to the guest WASM function
+  // .tag is the tag of the type of the param being passed to the guest Wasm function
+  // .value.I32 is the value being passed to the guest Wasm function
   wasmer_value_t increment_counter_loop_param_one = { .tag = WASM_I32, .value.I32 = 10 };
   wasmer_value_t increment_counter_loop_params[] = { increment_counter_loop_param_one };
   int buffer_pointer = call_wasm_function_and_return_i32(instance, "increment_counter_loop", increment_counter_loop_params, 1);
@@ -227,7 +227,7 @@ You can download the `host-functions.wasm` WebAssembly module here:
 Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/c/host-functions.c)
 {% endhint %}
 
-Depending on the WASM module, the function may need to be nested differently. You will want to take a look at the module's documentation, or the module's source language documentation to see how the import object should be nested to expose the function to the module.
+Depending on the Wasm module, the function may need to be nested differently. You will want to take a look at the module's documentation, or the module's source language documentation to see how the import object should be nested to expose the function to the module.
 
 Next, we will take a look at handling errors from a WebAssembly module!
 

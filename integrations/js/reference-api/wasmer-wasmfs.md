@@ -25,7 +25,7 @@ Please see the section below on instance properties to see a list of the propert
 [memfs](https://github.com/streamich/memfs)' [node fs](https://nodejs.org/api/fs.html) implementation object. See the [node fs documentation](https://nodejs.org/api/fs.html) for API usage.
 
 {% hint style="info" %}
-**NOTE:** The functions on this `fs` implementation can easily be over-ridden to provide custom functionality when your WASM module \(running with [`@wasmer/wasi`](https://github.com/wasmerio/wasmer-js/tree/master/packages/wasi)\) tries to do file system operations
+**NOTE:** The functions on this `fs` implementation can easily be over-ridden to provide custom functionality when your Wasm module \(running with [`@wasmer/wasi`](https://github.com/wasmerio/wasmer-js/tree/master/packages/wasi)\) tries to do file system operations
 
 ```javascript
 const wasmFs = new WasmFs();

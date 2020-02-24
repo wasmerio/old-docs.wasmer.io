@@ -1,10 +1,10 @@
 # Server
 
-Wasmer-JS has multiple packages that enables using WASM WASI Modules in Node.js.
+Wasmer-JS has multiple packages that enables using Wasm WASI Modules in Node.js.
 
 ### `@wasmer/cli`
 
-It's a CLI that allows you to run WASM WASI modules in your shell very easily, with the same interface as the [Wasmer WebAssembly Runtime](../../../../ecosystem/wasmer/).
+It's a CLI that allows you to run Wasm WASI modules in your shell very easily, with the same interface as the [Wasmer WebAssembly Runtime](../../../../ecosystem/wasmer/).
 
 ### `@wasmer/wasi`
 

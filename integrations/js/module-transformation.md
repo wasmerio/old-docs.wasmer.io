@@ -8,7 +8,7 @@ sidebar_label: Data Transfer Between JavaScript & WASM
 
 ## What is Module Transformation and Why is it Necessary?
 
-In the Browser-based [Hello World](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/docs/wasmer-js/client/examples/hello-world/wasmer-js-client-hello-world/README.md) example, we call a WASM module called `as-echo` that does nothing more than receive a text string as an argument, and echo it back via standard out.
+In the Browser-based [Hello World](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/docs/wasmer-js/client/examples/hello-world/wasmer-js-client-hello-world/README.md) example, we call a Wasm module called `as-echo` that does nothing more than receive a text string as an argument, and echo it back via standard out.
 
 In this case, the values passed from WebAssembly to the native "OS" function \(that writes to standard out\) are all compatible with JavaScript data types. However, some WASI modules might contain function calls whose interfaces are not compatible, and therefore, such modules cannot immediately be called.
 
@@ -36,7 +36,7 @@ Technically, this transformation adapts the WebAssembly interface so that it can
 This is achieved by transforming a JavaScript `BigInt` into a `Uint8Array` containing 8, unsigned, 8-bit integers.
 {% endhint %}
 
-## How Do I Know if a WASM Module Needs Transformation?
+## How Do I Know if a Wasm Module Needs Transformation?
 
 Good question!
 
@@ -90,7 +90,7 @@ Next, look a little further down to line 5. Here we can see an `import` statemen
 
 This `import` statement tells us several things:
 
-1. This WASM module needs to call an external function.
+1. This Wasm module needs to call an external function.
 
    In this particular case, this is a native "OS" function accessible through WASI
 
@@ -98,5 +98,5 @@ This `import` statement tells us several things:
 3. Within our WebAssembly module, this external function will be referred to using the alias `$wasi_unstable.clock_time_get`
 4. The interface to this function is described by the type declaration `$t0`
 
-We know from the definition of `$t0` \(on line 2\) that this function must be passed an `i64` as its second parameter; therefore, we can be certain that before this WASM module can call function `clock_time_get` \(using the Wasmer-js polyfill\), the interface must first be transformed.
+We know from the definition of `$t0` \(on line 2\) that this function must be passed an `i64` as its second parameter; therefore, we can be certain that before this Wasm module can call function `clock_time_get` \(using the Wasmer-js polyfill\), the interface must first be transformed.
 

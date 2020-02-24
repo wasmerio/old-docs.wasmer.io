@@ -6,9 +6,9 @@
 
 WebAssembly is currently always run in the same process synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host \(your Rust application\).
 
-However, there are cases where you may want to interrupt this synchronous execution while the guest WebAssembly module is calling a host function. This can be useful for saving resources, and not returning back to the guest WebAssembly for execution, when you already know the WASM execution will fail, or no longer be needed.
+However, there are cases where you may want to interrupt this synchronous execution while the guest WebAssembly module is calling a host function. This can be useful for saving resources, and not returning back to the guest WebAssembly for execution, when you already know the Wasm execution will fail, or no longer be needed.
 
-In this example, we will run a WASM module that calls the imported host function `interrupt_execution`. This host function will immediately stop executing the WebAssembly module:
+In this example, we will run a Wasm module that calls the imported host function `interrupt_execution`. This host function will immediately stop executing the WebAssembly module:
 
 ```rust
 // Import the wasmer runtime so we can use it
@@ -17,7 +17,7 @@ use wasmer_runtime::{
     func,
     imports,
     instantiate,
-    // Include the Context for our WASM Instance for passing imported host functions
+    // Include the Context for our Wasm Instance for passing imported host functions
     Ctx,
     Func,
 };
@@ -33,7 +33,7 @@ fn main() -> error::Result<()> {
     // Make sure to check your function signature (parameter and return types) carefully!
     let import_object = imports! {
         // Define the "env" namespace that was implicitly used
-        // by our example rust WASM crate.
+        // by our example rust Wasm crate.
         "env" => {
             // Key should be the name of the imported function
             // Value should be the func! macro, with the function passed in.
@@ -41,10 +41,10 @@ fn main() -> error::Result<()> {
         },
     };
 
-    // Let's create an instance of WASM module running in the wasmer-runtime
+    // Let's create an instance of Wasm module running in the wasmer-runtime
     let instance = instantiate(wasm_bytes, &import_object)?;
 
-    // Let's call the exported "exit_early" function on the WASM module.
+    // Let's call the exported "exit_early" function on the Wasm module.
     let exit_early_func: Func<(), i32> = instance
         .func("exit_early")
         .expect("exit_early function not found");
@@ -68,12 +68,12 @@ fn main() -> error::Result<()> {
     Ok(())
 }
 
-// Function that is imported into the guest WASM module, that will immediately stop execution
+// Function that is imported into the guest Wasm module, that will immediately stop execution
 fn interrupt_execution(_ctx: &mut Ctx) -> Result<(), ()> {
     // Log that we were called
     println!("interrupt_execution called!");
 
-    // Return an error, which will immediately stop execution of the WASM module
+    // Return an error, which will immediately stop execution of the Wasm module
     Err(())
 }
 ```

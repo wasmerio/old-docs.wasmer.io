@@ -2,21 +2,21 @@
 
 Wasmer allows you to run WebAssembly modules either **Standalone** or **Embedded** within [other languages](./#wasmer-language-integrations) such as C/C++, Rust, Python, Go, PHP, Ruby...
 
-By design, the environment within which a WebAssembly module runs is completely isolated \(or _sandboxed_\) from the native functionality of the underlying host system. This means that _by default_, WASM modules are designed to perform nothing more than pure computation.
+By design, the environment within which a WebAssembly module runs is completely isolated \(or _sandboxed_\) from the native functionality of the underlying host system. This means that _by default_, Wasm modules are designed to perform nothing more than pure computation.
 
 Consequently, access to "OS"-level resources such as file descriptors, network sockets, the system clock, and random numbers is not normally possible from WASM.
 
-However, there are many cases in which a WASM module needs to do more than perform pure computation; they must interact with native "OS" functionality.
+However, there are many cases in which a Wasm module needs to do more than perform pure computation; they must interact with native "OS" functionality.
 
 Wasmer is designed to provide three key features:
 
 1. Enable programs to run in any programming language
 2. Enable extremely portable binaries to run unmodified on any "OS" supported by Wasmer \(for example, Linux, macOS, Windows and FreeBSD\).
-3. Act as a secure bridge for WASM modules to interact with native "OS" functionality, via Application Binary Interfaces \(ABIs\) such as [`WASI`](https://github.com/webassembly/wasi) and [`Emscripten`](https://github.com/emscripten-core/emscripten) \(version 1.38.43 and earlier\).
+3. Act as a secure bridge for Wasm modules to interact with native "OS" functionality, via Application Binary Interfaces \(ABIs\) such as [`WASI`](https://github.com/webassembly/wasi) and [`Emscripten`](https://github.com/emscripten-core/emscripten) \(version 1.38.43 and earlier\).
 
-For the first case, we offer [multiple language integrations](./#wasmer-language-integrations), that allow the same WASM module to be run from within any programming language.
+For the first case, we offer [multiple language integrations](./#wasmer-language-integrations), that allow the same Wasm module to be run from within any programming language.
 
-And for the second case, we offer our [Standalone Runtime](getting-started.md) to run WASM binaries on any platform and chipset.
+And for the second case, we offer our [Standalone Runtime](getting-started.md) to run Wasm binaries on any platform and chipset.
 
 {% hint style="warning" %}
 ### Important

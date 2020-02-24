@@ -16,7 +16,7 @@ WAPM comes bundled with Wasmer, so you just need to install Wasmer in your syste
 
 ## **Basic Usage**
 
-With the tools installed, one can easily start using universal WASM binaries by using the `install` command of `wapm` CLI:
+With the tools installed, one can easily start using universal Wasm binaries by using the `install` command of `wapm` CLI:
 
 ```text
 wapm install cowsay
