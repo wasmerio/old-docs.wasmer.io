@@ -31,7 +31,7 @@ wasmer-runtime = "0.13.1"
 ```
 {% endcode %}
 
-Now that we have the Wasmer runtime added as a dependency, let's go ahead and try it out! For our hello world, what we will do is use the Wasmer runtime to execute an exported function on a WebAssembly module, that adds one the the integer passed to the function.
+Now that we have the Wasmer runtime added as a dependency, let's go ahead and try it out! For our hello world, what we will do is use the Wasmer runtime to execute an exported function on a WebAssembly module, that adds one to the integer passed to the function.
 
 To do this, we will create a new `src/main.rs` file.
 
