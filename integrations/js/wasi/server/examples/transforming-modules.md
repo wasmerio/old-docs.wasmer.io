@@ -40,7 +40,7 @@ let wasi = new WASI({
   args: [wasmFilePath],
   env: {},
   bindings: {
-    ...nodeBindings,
+     ...(nodeBindings.default || nodeBindings),
     fs: fs
   }
 })

@@ -69,7 +69,7 @@ Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _*
       args: [wasmFilePath],
       env: {},
       bindings: {
-        ...nodeBindings,
+        ...(nodeBindings.default || nodeBindings),
         fs: fs
       }
     })
