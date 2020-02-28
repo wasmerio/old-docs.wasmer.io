@@ -21,7 +21,7 @@ You can find more info here: [Module Transformation page](../../module-transform
 It's a terminal emulator based on [xTerm.js](https://xtermjs.org/).  
 Is used in the online [WebAssembly shell](../../../../ecosystem/webassembly.sh.md) :\)
 
-{% embed url="https://github.com/wasmerio/wasmer-js" %}
+{% embed url="https://github.com/wasmerio/wasmer-js" caption="" %}
 
 ## Examples
 
@@ -32,6 +32,4 @@ Here are some useful examples you can visit to learn how to use Wasmer-JS in you
 {% page-ref page="examples/transforming-modules.md" %}
 
 {% page-ref page="examples/handling-io.md" %}
-
-
 

@@ -49,3 +49,15 @@ wapm run cowsay hello wapm!
 
 Great! You used a WAPM package in your system... now let's try to create our own package and publish it to WAPM so other users can use it
 
+{% hint style="success" %}
+When executing WAPM, you can also customize the WebAssembly runtime used under the hood.
+
+For example, if you want to use [`wasmer-js`](../../integrations/js/wasmer-js-cli.md) as the runtime, you can do:
+
+```text
+WAPM_RUNTIME=wasmer-js wapm run cowsay hello wapm!
+```
+{% endhint %}
+
+
+

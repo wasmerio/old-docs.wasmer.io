@@ -20,7 +20,7 @@ Sometimes the Wasm modules that you want to use in the browser can't run because
 This module helps enables running Wasm modules on Browsers.  
 You can find more info here: [Module Transformation page](../../module-transformation.md).
 
-{% embed url="https://github.com/wasmerio/wasmer-js" %}
+{% embed url="https://github.com/wasmerio/wasmer-js" caption="" %}
 
 ## Examples
 

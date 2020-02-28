@@ -49,14 +49,13 @@
       * [Examples](integrations/js/wasi/server/examples/README.md)
         * [Hello World](integrations/js/wasi/server/examples/hello-world.md)
         * [Transforming Modules](integrations/js/wasi/server/examples/transforming-modules.md)
-  * [Untitled](integrations/js/untitled.md)
+  * [Wasmer-JS CLI](integrations/js/wasmer-js-cli.md)
+  * [Module Transformation](integrations/js/module-transformation.md)
   * [Wasmer JS Reference API](integrations/js/reference-api/README.md)
     * [@wasmer/wasi](integrations/js/reference-api/wasmer-wasi.md)
     * [@wasmer/wasm-transformer](integrations/js/reference-api/wasmer-wasm-transformer.md)
     * [@wasmer/wasm-terminal](integrations/js/reference-api/wasmer-wasm-terminal.md)
     * [@wasmer/wasmfs](integrations/js/reference-api/wasmer-wasmfs.md)
-  * [Module Transformation](integrations/js/module-transformation.md)
-  * [Wasmer-JS CLI](integrations/js/wasmer-js-cli.md)
   * [Wasmer-JS on Github](https://github.com/wasmerio/wasmer-js)
 
 ## 👥 Community
