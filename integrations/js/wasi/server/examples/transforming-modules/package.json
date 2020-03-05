@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wasmer/wasi": "^0.8.4",
-    "@wasmer/wasm-transformer": "^0.8.4"
+    "@wasmer/wasi": "^0.10.0",
+    "@wasmer/wasm-transformer": "^0.10.0"
   }
 }

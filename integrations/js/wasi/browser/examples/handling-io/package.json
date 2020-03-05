@@ -17,7 +17,8 @@
     "parcel-plugin-static-files-copy": "^2.3.1"
   },
   "dependencies": {
-    "@wasmer/wasi": "^0.8.4",
-    "@wasmer/wasmfs": "^0.8.4"
+    "@wasmer/wasi": "^0.10.0",
+    "@wasmer/wasm-transformer": "^0.10.0",
+    "@wasmer/wasmfs": "^0.10.0"
   }
 }

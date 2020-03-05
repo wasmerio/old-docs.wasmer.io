@@ -39,10 +39,11 @@ const startWasiTask =
     const loweredWasmBytes = await lowerI64Imports(wasmBytes)
 
     // Instantiate the WebAssembly file
-    let { instance } = await WebAssembly.instantiate(loweredWasmBytes, {
-      wasi_unstable: wasi.wasiImport
-    })
-
+    let wasmModule = await WebAssembly.compile(loweredWasmBytes);
+    let instance = await WebAssembly.instantiate(wasmModule, {
+      ...wasi.getImports(wasmModule)
+    });
+  
     wasi.start(instance)                      // Start the transformed WASI instance
     let stdout = await wasmFs.getStdOut()     // Get the contents of stdout
     document.write(`Standard Output: ${stdout}`) // Write stdout to the DOM

@@ -81,9 +81,10 @@ Notice that for a server-side implementation, the `@wasmer/wasmfs` package is _*
         let wasmBytes = new Uint8Array(fs.readFileSync(pathToWasmFile)).buffer
 
         // Instantiate the WebAssembly file
-        let { instance } = await WebAssembly.instantiate(wasmBytes, {
-          wasi_unstable: wasi.wasiImport
-        })
+        let wasmModule = await WebAssembly.compile(wasmBytes);
+        let instance = await WebAssembly.instantiate(wasmModule, {
+          ...wasi.getImports(wasmModule)
+        });
 
         // Start the WASI instance
         wasi.start(instance)

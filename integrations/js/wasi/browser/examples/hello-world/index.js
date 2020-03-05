@@ -43,10 +43,11 @@ const startWasiTask =
     // a later example
 
     // Instantiate the WebAssembly file
-    let { instance } = await WebAssembly.instantiate(wasmBytes, {
-      wasi_unstable: wasi.wasiImport
-    })
-
+    let wasmModule = await WebAssembly.compile(wasmBytes);
+    let instance = await WebAssembly.instantiate(wasmModule, {
+      ...wasi.getImports(wasmModule)
+    });
+  
     wasi.start(instance)                      // Start the WASI instance
     let stdout = await wasmFs.getStdOut()     // Get the contents of stdout
     document.write(`Standard Output: ${stdout}`) // Write stdout data to the DOM
