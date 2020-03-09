@@ -17,6 +17,9 @@ mkdir wasmer-c-api
 tar -C wasmer-c-api -zxvf wasmer-c-api*.tar.gz
 
 export WASMER_C_API=`pwd`/wasmer-c-api
+
+# Update LD_LIBRARY_PATH to link against the libwasmer.so in the examples
+export LD_LIBRARY_PATH=`pwd`/wasmer-c-api/lib/:$LD_LIBRARY_PATH
 ```
 
 {% hint style="info" %}
