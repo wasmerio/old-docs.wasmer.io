@@ -13,6 +13,7 @@
 * [WAPM](ecosystem/wapm/README.md)
   * [Getting Started](ecosystem/wapm/getting-started.md)
   * [Publishing your Package](ecosystem/wapm/publishing-your-package.md)
+  * [wax](ecosystem/wapm/wax.md)
   * [Manifest](ecosystem/wapm/manifest.md)
   * [CLI Usage](ecosystem/wapm/cli.md)
   * [GraphQL API](ecosystem/wapm/graphql-api.md)

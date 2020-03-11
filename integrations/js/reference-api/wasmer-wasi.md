@@ -93,6 +93,5 @@ Function that takes in a WASI WebAssembly Instance and starts it.
 
 `wasiInstance.getImports(wasmModule: WebAssembly.Module): Exports`
 
-Function that returns the map of corresponding imports for the WASI module.
-It will throw an error in case the `wasmModule` is not a WASI Module, or it have
-an incompatible version.
+Function that returns the map of corresponding imports for the WASI module. It will throw an error in case the `wasmModule` is not a WASI Module, or it have an incompatible version.
+
