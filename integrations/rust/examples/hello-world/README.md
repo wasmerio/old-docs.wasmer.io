@@ -130,7 +130,8 @@ If you want to run the examples from the docs codebase directly, you can also do
 
 ```bash
 git clone https://github.com/wasmerio/docs.wasmer.io.git
-cd docs.wasmer.io/integrations/rust/hello-world
+cd docs.wasmer.io/integrations/rust/examples/hello-world
+cargo run
 ```
 {% endhint %}
 
