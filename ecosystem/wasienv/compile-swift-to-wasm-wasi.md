@@ -9,7 +9,9 @@ wasienv install-swift
 ```
 
 {% hint style="warning" %}
-If you don't have wasienv installed in your system, please [follow the instructions here](getting-started.md)
+You will need the latest version of version of Wasienv installed.
+
+If you don't have wasienv installed in your system, or want to upgrade it please [follow the instructions here](getting-started.md)
 {% endhint %}
 
 Once that's done, just create an example Swift file:

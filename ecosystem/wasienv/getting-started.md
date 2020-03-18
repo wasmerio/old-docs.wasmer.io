@@ -10,6 +10,8 @@ To install [Wasienv](https://github.com/wasienv/wasienv) you just need to run th
 curl https://raw.githubusercontent.com/wasienv/wasienv/master/install.sh | sh
 ```
 
+**Note:** This command will also automatically update Wasienv in case you already have it installed
+
 {% hint style="info" %}
 #### Important
 
