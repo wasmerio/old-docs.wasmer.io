@@ -18,6 +18,9 @@
   * [CLI Usage](ecosystem/wapm/cli.md)
   * [GraphQL API](ecosystem/wapm/graphql-api.md)
 * [WebAssembly.sh](ecosystem/webassembly.sh.md)
+* [Wasienv](ecosystem/wasienv/README.md)
+  * [Getting Started](ecosystem/wasienv/getting-started.md)
+  * [Compile C/C++ to Wasm WASI](ecosystem/wasienv/compile-c-c++-to-wasm-wasi.md)
 
 ## 🔧 Language Integrations <a id="integrations"></a>
 
