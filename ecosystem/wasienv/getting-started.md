@@ -16,3 +16,7 @@ Note: Wasienv is written in Python. You will need `python` and `pip` accessible 
 
 Now that you have Wasienv installed, let's start compiling some languages!
 
+{% page-ref page="compile-c-c++-to-wasm-wasi.md" %}
+
+
+
