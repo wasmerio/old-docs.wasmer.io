@@ -1,10 +1,12 @@
 # Compile C/C++ to Wasm WASI
 
-Now that you have [Wasienv installed](getting-started.md), it should be really easy to start using it!
+Now that you have [Wasienv installed](getting-started.md), let's get our hands dirty!
 
-### Compiling C files with wasic
+Wasienv comes with C/C++ support preinstalled, so you just need to run one command to get things running 🙂
 
-If you want to compile a very simple C file, you can just create the following:
+### Compiling C files with \`wasic\`
+
+If you want to compile a simple C example, you can just create the following:
 
 {% tabs %}
 {% tab title="example.c" %}
@@ -21,6 +23,42 @@ int main(int argc, char **argv)
 }
 ```
 {% endtab %}
+
+{% tab title="fizzbuzz.c" %}
+```c
+// CPP program to print Fizz Buzz 
+#include <stdio.h> 
+  
+int main(void) 
+{ 
+    int i; 
+    for (i=1; i<=100; i++) 
+    { 
+        // number divisible by 3 and 5 will 
+        // always be divisible by 15, print  
+        // 'FizzBuzz' in place of the number 
+        if (i%15 == 0)         
+            printf ("FizzBuzz\t");     
+          
+        // number divisible by 3? print 'Fizz' 
+        // in place of the number 
+        else if ((i%3) == 0)     
+            printf("Fizz\t");                  
+          
+        // number divisible by 5, print 'Buzz'   
+        // in place of the number 
+        else if ((i%5) == 0)                        
+            printf("Buzz\t");                  
+      
+        else // print the number             
+            printf("%d\t", i);                  
+  
+    } 
+  
+    return 0; 
+}
+```
+{% endtab %}
 {% endtabs %}
 
 Now that you have this file created, you can execute `wasicc`
@@ -29,14 +67,23 @@ Now that you have this file created, you can execute `wasicc`
 wasicc example.c -o example
 ```
 
-And voilá... you will have a new file `example.wasm` ready to be executed with your favorite WebAssembly runtime!
+Et voilá... you will have a new file `example.wasm` ready to be executed with your favorite WebAssembly runtime!
 
 ```text
 $ wasmer example.wasm
 Hello, WASI!
 ```
 
-### Compiling C++ files with wasic++
+{% hint style="success" %}
+#### Did you know?
+
+You can also execute the `example.wasm` file in your **browser** or in **Node.js** using [@wasmer/wasi](../../integrations/js/wasi/). Check out the examples on how to do it!
+
+* [WASI in the browser](../../integrations/js/wasi/browser/examples/hello-world.md)
+* [WASI in Node.js](../../integrations/js/wasi/server/examples/hello-world.md)
+{% endhint %}
+
+### Compiling C++ files with \`wasic++\`
 
 Wasienv also allows you to compile C++ files to Wasm WASI, just run it with `wasic++`
 
@@ -56,6 +103,12 @@ Wasienv also has a wrapper for Makefiles
 wasimake make
 ```
 
+{% hint style="info" %}
+Here's an example of a C Project that was compiled to Wasm WASI with wasienv:
+
+[https://github.com/wapm-packages/jq/blob/master/build.sh](https://github.com/wapm-packages/jq/blob/master/build.sh)
+{% endhint %}
+
 ## Using CMake
 
 Similarly to configure and make, we also have another command that will automatically compile all your projects made with CMake
@@ -65,14 +118,11 @@ wasicmake cmake .
 make
 ```
 
-Here's an example project: quickjs that was compiled to WebAssembly WASI thanks to Wasienv!
-
-{% embed url="https://github.com/saghul/wasi-lab/tree/master/qjs-wasi" %}
+{% hint style="info" %}
+Here's an [example project: quickjs](https://github.com/saghul/wasi-lab/tree/master/qjs-wasi) that was compiled to WebAssembly WASI thanks to Wasienv!
 
 And the [build.sh file they used](https://github.com/saghul/wasi-lab/blob/master/qjs-wasi/build.sh) for generating the wasm file:
 
-{% tabs %}
-{% tab title="build.sh" %}
 ```bash
 #!/bin/bash
 
@@ -85,6 +135,5 @@ wasimake cmake ..
 cd ..
 make -C build
 ```
-{% endtab %}
-{% endtabs %}
+{% endhint %}
 

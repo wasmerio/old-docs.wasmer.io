@@ -21,6 +21,7 @@
 * [Wasienv](ecosystem/wasienv/README.md)
   * [Getting Started](ecosystem/wasienv/getting-started.md)
   * [Compile C/C++ to Wasm WASI](ecosystem/wasienv/compile-c-c++-to-wasm-wasi.md)
+  * [Compile Swift to Wasm WASI](ecosystem/wasienv/compile-swift-to-wasm-wasi.md)
 
 ## 🔧 Language Integrations <a id="integrations"></a>
 

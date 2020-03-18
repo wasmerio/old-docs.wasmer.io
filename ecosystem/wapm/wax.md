@@ -1,12 +1,24 @@
+---
+description: "The WebAssembly package Runner \U0001F3C3\U0001F3FD‍♂️"
+---
+
 # wax
 
-wax is a tool that allows running any command available in wapm, directy in your shell, without global installations that pollute your directory.
+wax allows running any command available in wapm, directy in your shell, without global installations that pollute your directory.
 
-It will be automatically available when you [install Wasmer](../wasmer/getting-started.md).
+{% hint style="success" %}
+wax is automatically available when you [install Wasmer](../wasmer/getting-started.md).
+{% endhint %}
+
+wax is a tool intended to ease the use of command-line WebAssembly applications on your system. Similarly to `wapm`, that allows the installation and usage of packages and commands, wax enables use of CLI tools without installing them globally or changing your `PATH`.
 
 ![](../../.gitbook/assets/wax-gif1.gif)
 
 
+
+You can read more details about wax in our media announcement!
+
+{% embed url="https://medium.com/wasmer/introducing-wax-a-webassembly-package-runner-d69943209d58" %}
 
 ### Technical details
 
