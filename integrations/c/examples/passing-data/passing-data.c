@@ -126,7 +126,7 @@ uint32_t get_length_of_memory(wasmer_instance_t *instance) {
   // NOTE: To get the memory from the Wasmer Instance, it MUST be
   // from the instance context, and NOT the imported memory.
   const wasmer_instance_context_t *ctx = wasmer_instance_context_get(instance);
-  const wasmer_memory_t *memory = wasmer_instance_context_memory(ctx, 0);
+  wasmer_memory_t *memory = wasmer_instance_context_memory(ctx, 0);
 
   // Return the length (as in number of uint8 bytes) of the guest Wasm linear memory
   return wasmer_memory_data_length(memory);
@@ -136,7 +136,8 @@ uint32_t get_length_of_memory(wasmer_instance_t *instance) {
 int call_wasm_function_and_return_i32(wasmer_instance_t *instance, char* functionName, wasmer_value_t params[], int num_params) {
   // Define our results. Results are created with { 0 } to avoid null issues,
   // And will be filled with the proper result after calling the guest Wasm function.
-  wasmer_value_t result_one = { 0 };
+  wasmer_value_t result_one = { .tag  = WASM_I32,
+                                .value = { .I32 = 0 } };
   wasmer_value_t results[] = {result_one};
 
 
@@ -146,12 +147,17 @@ int call_wasm_function_and_return_i32(wasmer_instance_t *instance, char* functio
       functionName, // the name of the exported function we want to call on the guest Wasm module
       params, // Our array of parameters
       num_params, // The number of parameters
-      results, // Our array of results
+      &results[0], // Our array of results
       1 // The number of results
       );
 
+  if (call_result != WASMER_OK)
+  {
+    print_wasmer_error();
+  }
+
   // Get our response, we know the function is an i32, thus we assign the value to an int
-  int response_tag = results[0].tag;
+  assert(results[0].tag == WASM_I32);
   int response_value = results[0].value.I32; 
 
   // Return the i32 (int) result.
@@ -170,32 +176,39 @@ int main() {
 
   // Let's get the pointer to the buffer exposed by our Guest Wasm Module
   wasmer_value_t get_buffer_pointer_params[] = { 0 };
-  int buffer_pointer = call_wasm_function_and_return_i32(instance, "get_buffer_pointer", get_buffer_pointer_params, 0);
+  int buffer_pointer = call_wasm_function_and_return_i32(instance, "get_wasm_memory_buffer_pointer", get_buffer_pointer_params, 0);
+  printf("Found pointer at 0x%x\n", buffer_pointer);
 
   // Define and print our original string
-  char original_string[13] = "Hello there, ";
+  char original_string[] = "Did you know";
+  int og_str_len = sizeof(original_string);
   printf("original_string: \"%s\"\n", original_string);
 
   // Get the length of the original string, and write it to the guest wasm's exposed buffer.
-  int original_string_length = sizeof(original_string) / sizeof(original_string[0]);
-  for (int i = 0; i < original_string_length; i++) {
-    memory_data[buffer_pointer + i] = original_string[i];
-  }
+  memcpy(&memory_data[buffer_pointer], original_string, sizeof(original_string));
 
   // Call the exported "add_wasm_is_cool" function of our instance
-  wasmer_value_t add_wasm_is_cool_params[] = { 0 };
-  int new_string_length = call_wasm_function_and_return_i32(instance, "add_wasm_is_cool", add_wasm_is_cool_params, 0);
+  wasmer_value_t add_wasm_is_cool_params[] = { { .tag = WASM_I32,
+                                                 .value = { .I32 = og_str_len - 1 }, } };
+  int new_string_length = call_wasm_function_and_return_i32(instance, "add_wasm_is_cool", add_wasm_is_cool_params, 1);
+  printf("Return value: %d\n", new_string_length);
+  assert(new_string_length > og_str_len);
+
+  buffer_pointer = call_wasm_function_and_return_i32(instance, "get_wasm_memory_buffer_pointer", get_buffer_pointer_params, 0);
+
+  memory_data = get_pointer_to_memory(instance);
+  memory_length = get_length_of_memory(instance);
 
   // Get the new string from the guest wasm's exposed buffer
-  char new_string[100];
-  for (int i = 0; i < new_string_length; i++) {
-    char char_in_buffer = memory_data[buffer_pointer + i];
-    new_string[i] = char_in_buffer;
-  }
+  char new_string[101];
+  assert(new_string_length < sizeof(new_string));
+
+  memcpy(new_string, &memory_data[buffer_pointer], new_string_length);
+  new_string[new_string_length] = 0;
 
   // Print and assert the new string
   printf("new_string: \"%s\"\n", new_string);
-  assert(strcmp(new_string, "Hello there, Wasm is cool!") == 0);
+  assert(strcmp(new_string, "Did you know Wasm is cool!") == 0);
 
   // Destroy the instances we created for our wasmer
   wasmer_memory_destroy(memory);

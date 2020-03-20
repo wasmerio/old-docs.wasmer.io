@@ -24,6 +24,7 @@ fn main() -> error::Result<()> {
         .func("get_wasm_memory_buffer_pointer")
         .expect("get_wasm_memory_buffer_pointer");
     let wasm_buffer_pointer = get_wasm_memory_buffer_pointer.call().unwrap();
+    dbg!(wasm_buffer_pointer);
     // Let's write a string to the Wasm memory
     let original_string = "Did you know";
     println!("The original string is: {}", original_string);
