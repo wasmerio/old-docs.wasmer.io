@@ -64,7 +64,7 @@ int main(void)
 Now that you have this file created, you can execute `wasicc`
 
 ```bash
-wasicc example.c -o example
+wasicc example.c -o example.wasm
 ```
 
 Et voilá... you will have a new file `example.wasm` ready to be executed with your favorite WebAssembly runtime!
