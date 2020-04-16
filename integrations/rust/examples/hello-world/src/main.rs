@@ -1,7 +1,3 @@
-// Import the Filesystem so we can read our .wasm file
-use std::fs::File;
-use std::io::prelude::*;
-
 // Import the wasmer runtime so we can use it
 use wasmer_runtime::{error, imports, instantiate, Func};
 
