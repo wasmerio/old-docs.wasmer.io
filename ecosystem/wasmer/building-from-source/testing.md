@@ -9,24 +9,26 @@ make test
 ```
 
 {% hint style="info" %}
-`make test` will require all the backends to be installed. Please follow the Building from Source guide to make sure you have [all the requirements fulfilled](./#all-backends-default).
+`make test` will automatically detect the backends installed on your system.
+
+Please follow the Building from Source guide see how you can[ prepare your system with the requirements needed for each of the backends](./#all-backends-default).
 {% endhint %}
 
 ### Testing backends
 
 Each backend can be tested separately:
 
-* Singlepass: `make singlepass`
-* Cranelift: `make cranelift`
-* LLVM: `make llvm`
+* **Singlepass**: `make singlepass`
+* **Cranelift**: `make cranelift`
+* **LLVM**: `make llvm`
 
 ### Testing integrations
 
 Each integration can be tested separately:
 
 * Spec tests: `make spectests`
-* Emscripten: `make emtests`
 * WASI: `make wasitests`
+* Emscripten: `make emtests`
 * Middleware: `make middleware`
 * C API: `make capi`
 

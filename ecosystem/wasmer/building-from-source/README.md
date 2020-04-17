@@ -56,7 +56,7 @@ Windows support is _experimental_. WASI is fully supported, but Emscripten suppo
 2. Install [Rust for Windows](https://win.rustup.rs/)
 3. Install [Git for Windows](https://git-scm.com/download/win). Allow it to add `git.exe` to your PATH \(default settings for the installer are fine\).
 4. Install [CMake](https://cmake.org/download/). Ensure CMake is in your PATH.
-5. Install [LLVM 8.0](https://prereleases.llvm.org/win-snapshots/LLVM-8.0.0-r351033-win64.exe)
+5. \(optional\) Install [LLVM 8.0](https://prereleases.llvm.org/win-snapshots/LLVM-8.0.0-r351033-win64.exe)
 
 ## Building the Wasmer Runtime
 
@@ -79,11 +79,14 @@ The Singlepass backend requires nightly, so if you want to use it, set Rust Nigh
 rustup default nightly
 ```
 
-And then, build Wasmer with the singlepass backend:
+And then, build Wasmer:
 
 ```text
-make release-singlepass
+make release
 ```
+
+**Note**: you should see this as the first line in the console:  
+`Available backends: singlepass`
 
 {% hint style="info" %}
 The singlepass backend requires Rust nightly, as it's using the [Dynasm crate](https://github.com/CensoredUsername/dynasm-rs) which depends on Rust features only available in Rust nightly
@@ -91,11 +94,15 @@ The singlepass backend requires Rust nightly, as it's using the [Dynasm crate](h
 
 ### Cranelift Backend
 
-The Cranelift backend will work with both nightly and stable versions of Rust.
+The Cranelift backend will work with both nightly and stable versions of Rust if you are in a X86 machine, so you don't need to do anything in your system to enable it.  
+In ARM systems is disabled by default \(as is not yet available there\)
 
 ```text
-make release-clif
+make release
 ```
+
+**Note**: should see this as the first line in the console:  
+`Available backends: cranelift`
 
 ### LLVM Backend
 
@@ -103,22 +110,27 @@ If you want support for the Wasmer LLVM backend, then you will also need to ensu
 
 * Ensure that LLVM 8.0.x &gt; is installed on your system
   * You can also [download and use a prebuilt LLVM binary](https://releases.llvm.org/download.html)
-* Set the correct environment variable for LLVM to access
-  * For example, the environment variable for LLVM 8.0.x would be: `LLVM_SYS_80_PREFIX=/path/to/unpacked/llvm-8.0` 
+* In case `llvm-config` is not accesible, set the correct environment variable for LLVM to access: For example, the environment variable for LLVM 8.0.x would be: `LLVM_SYS_80_PREFIX=/path/to/unpacked/llvm-8.0` 
 
 And create a Wasmer release
 
 ```bash
-make release-llvm
+make release
 ```
 
-### All backends \(default\)
+**Note**: you should see this as the first line in the console:  
+`Available backends: llvm`
 
-If you want to support all backends \(by default\), you can just run:
+### All backends
+
+Once you have LLVM and Rust nightly installed, you can just run:
 
 ```bash
 make release
 ```
+
+**Note**: you should see this as the first line in the console:  
+`Available backends: singlepass cranelift llvm`
 
 {% hint style="info" %}
 For compiling with all backends, you will need to set the [`nightly` toolchain as the default for Rust](./#singlepass-backend) \(for Singlepass\) and you will also need [LLVM installed in your system](./#llvm-backend) \(LLVM\)
@@ -126,7 +138,7 @@ For compiling with all backends, you will need to set the [`nightly` toolchain a
 
 ## Running your Wasmer binary
 
-Once you run a `make release-*` \(or simply `make release`\) command, you will have a new binary ready to be used!
+Once you run the `make release` command, you will have a new binary ready to be used!
 
 ```text
 ./target/release/wasmer quickjs.wasm
