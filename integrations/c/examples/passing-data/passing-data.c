@@ -126,7 +126,7 @@ uint32_t get_length_of_memory(wasmer_instance_t *instance) {
   // NOTE: To get the memory from the Wasmer Instance, it MUST be
   // from the instance context, and NOT the imported memory.
   const wasmer_instance_context_t *ctx = wasmer_instance_context_get(instance);
-  wasmer_memory_t *memory = wasmer_instance_context_memory(ctx, 0);
+  const wasmer_memory_t *memory = wasmer_instance_context_memory(ctx, 0);
 
   // Return the length (as in number of uint8 bytes) of the guest Wasm linear memory
   return wasmer_memory_data_length(memory);
