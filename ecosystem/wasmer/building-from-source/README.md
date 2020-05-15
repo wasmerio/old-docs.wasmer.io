@@ -110,7 +110,7 @@ If you want support for the Wasmer LLVM backend, then you will also need to ensu
 
 * Ensure that LLVM 8.0.x &gt; is installed on your system
   * You can also [download and use a prebuilt LLVM binary](https://releases.llvm.org/download.html)
-* In case `llvm-config` is not accesible, set the correct environment variable for LLVM to access: For example, the environment variable for LLVM 8.0.x would be: `LLVM_SYS_80_PREFIX=/path/to/unpacked/llvm-8.0` 
+* In case `llvm-config` is not accessible, set the correct environment variable for LLVM to access: For example, the environment variable for LLVM 8.0.x would be: `LLVM_SYS_80_PREFIX=/path/to/unpacked/llvm-8.0` 
 
 And create a Wasmer release
 
