@@ -125,8 +125,8 @@ In the above example we exposed host functions to the guest Wasm module with the
 Depending on the ABI of the Wasm module, we may need to expose functions under a different namespace. On the guest side, a non-default import namespace looks like:
 
 ```rust
+#[link(wasm_import_module = "namespace")]
 extern "C" {
-   #[link_name = "namespace"]
    fn import_name(arg: u32);
 }
 ```
