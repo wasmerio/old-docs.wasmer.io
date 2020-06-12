@@ -172,7 +172,7 @@ You can generate the C-API for a specific backend with:
 If you want to generate the library and headers for using them easily, you can execute:
 
 ```bash
-make build-capi
+make build-capi-package
 ```
 
 This command will generate a `capi` directory, that you can then use easily in the [Wasmer C API examples](./).
