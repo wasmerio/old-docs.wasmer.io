@@ -69,7 +69,7 @@ And now we can just call the `add_one` function \(remember to use it inside the 
 
 ```rust
     // Let's get `add_one` as a function which takes one `u32` and returns one `u32`
-    let add_one: Func<u32, u32> = instance.func("add_one")?;
+    let add_one: Func<u32, u32> = instance.exports.get("add_one")?;
     let result = add_one.call(42)?;
 
     // Log the new value
@@ -106,7 +106,7 @@ fn main() -> error::Result<()> {
     let instance = instantiate(wasm_bytes, &import_object)?;
 
     // Let's get `add_one` as a function which takes one `u32` and returns one `u32`
-    let add_one: Func<u32, u32> = instance.func("add_one")?;
+    let add_one: Func<u32, u32> = instance.exports.get("add_one")?;
     let result = add_one.call(42)?;
 
     // Log the new value
