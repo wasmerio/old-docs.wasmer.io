@@ -17,10 +17,6 @@ Constructs a new WASI instance.
 The `wasiConfigObject` is is as follows:
 
 ```javascript
-const browserBindings = require("@wasmer/wasi/lib/bindings/browser");
-// for Node:
-// const nodeBindings = require("@wasmer/wasi/lib/bindings/node");
-
 let myWASIInstance = new WASI({
   // OPTIONAL: The pre-opened dirctories
   preopenDirectories: {},
@@ -42,7 +38,7 @@ let myWASIInstance = new WASI({
     // isTTY: () -> bool
     // fs: Filesystem (with similar API interface as Node 'fs' module)
     // path: Path  (with similar API Interface as Node 'path' module)
-    ...browserBindings // Use `nodeBindings` for Node
+    ...WASI.defaultBindings,
   }
 });
 ```
