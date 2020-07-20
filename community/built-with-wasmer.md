@@ -28,6 +28,7 @@ description: "A place for all things Wasmer and WebAssembly. Feel free to add yo
 
 ### AssemblyScript
 * AssemblyScript [source](https://github.com/onsails/wasmer-as)
+* Using AssemblyScript inside Rust example [source](https://github.com/bobbo/wasmer-assemblyscript-example)
 
 ## Go
 
