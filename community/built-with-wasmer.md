@@ -57,4 +57,16 @@ description: "A place for all things Wasmer and WebAssembly. Feel free to add yo
 * [Hyperledger Labs](https://www.hyperledger.org/)
 * [BandProtocol](https://bandprotocol.com/)
 
+## Academic papers
+
+* [Gobi: WebAssembly as a Practical Path to Library Sandboxing](https://arxiv.org/pdf/1912.02285.pdf)
+* [AccTEE: A WebAssembly-based Two-way Sandbox for Trusted Resource Accounting](https://dl.acm.org/doi/abs/10.1145/3361525.3361541?download=true)
+* [Everything Old is New Again: Binary Security of WebAssembly](http://www.software-lab.org/publications/usenixSec2020-WebAssembly.pdf)
+* [Considering WebAssembly Containers for Edge Computing on Hardware-Constrained IoT Devices](https://www.diva-portal.org/smash/get/diva2:1451494/FULLTEXT02)
+* [Position Paper: Progressive Memory Safety for WebAssembly](https://cseweb.ucsd.edu/~dstefan/pubs/disselkoen:2019:ms-wasm.pdf)
+* [TruffleWasm: A WebAssembly Interpreter on GraalVM](https://www.research.manchester.ac.uk/portal/files/160212054/salim_TruffleWasm_vee_2020_authorversion.pdf)
+* [Compiling from a typed dialect of Scheme to WebAssembly](https://people.cs.umass.edu/~arjun/archive/rybicki-honors-2020.pdf)
+* [Cross-platform Identity-based Cryptography using WebAssembly](https://www.hte.hu/documents/169298/4647244/InfocomJ_2019_4_5_Vecsi.pdf/8903d312-89a3-f0ef-d8b5-acffa2623a19?version=1.0)
+
+
 ### [Add your project here!](https://github.com/wasmerio/docs.wasmer.io/edit/master/community/built-with-wasmer.md) 🤗
