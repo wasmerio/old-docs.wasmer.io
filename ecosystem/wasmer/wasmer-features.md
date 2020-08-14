@@ -18,8 +18,8 @@ The Wasmer WebAssembly runtime provides various features for users and developer
 | :--- | :--- | :--- | :--- |
 | Caching | ✅ | ✅ | ✅ |
 | Emscripten | ✅ | ✅ | ✅ |
-| Metering | ✅ | ⬜ | ✅ |
-| Multi-value return | 🔄 | 🔄 | 🔄 |
+| Metering | ✅ | ✅ | ✅ |
+| Multi-value return | 🔄 | ✅ | ✅ |
 | SIMD | ⬜ | ⬜ | ✅ |
 | WASI | ✅ | ✅ | ✅ |
 | `WASMER_BACKTRACE` | ✅ | ⬜ | ⬜ |

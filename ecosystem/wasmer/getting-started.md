@@ -8,14 +8,20 @@ sidebar_label: Getting Started
 
 You can install the Wasmer **Standalone** runtime by following the instructions below:
 
-If you haven't done so already, install the Wasmer Command Line Interface \(CLI\).
+If you haven't done so already, install the Wasmer Command Line Interface \(CLI\) for macOS/Linux:
 
 ```text
-$ curl https://get.wasmer.io -sSfL | sh
+curl https://get.wasmer.io -sSfL | sh
+```
+
+Or you can use this PowerShell command if you are in Windows:
+
+```text
+iwr https://win.wasmer.io -useb | iex
 ```
 
 {% hint style="info" %}
-For Windows, Wasmer executables can be found on out [Github Releases Page](https://github.com/wasmerio/wasmer/releases).
+Note: All Wasmer executables can be found on out [Github Releases Page](https://github.com/wasmerio/wasmer/releases).
 {% endhint %}
 
 Once the Wasmer CLI is installed, you can run Wasm modules from the command line!

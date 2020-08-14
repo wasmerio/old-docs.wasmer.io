@@ -5,6 +5,7 @@ description: "A place for all things Wasmer and WebAssembly. Feel free to add yo
 # Built with Wasmer
 
 ## Programs
+
 * [Inkscape](https://inkscape.org/) [source](https://gitlab.com/ted.gould/inkscape)
 * [Dprint](https://dprint.dev/) [source](https://github.com/dprint/dprint)
 
@@ -27,6 +28,7 @@ description: "A place for all things Wasmer and WebAssembly. Feel free to add yo
 * SwiftWasm [source](https://github.com/swiftwasm/carton/)
 
 ### AssemblyScript
+
 * AssemblyScript [source](https://github.com/onsails/wasmer-as)
 * Using AssemblyScript inside Rust example [source](https://github.com/bobbo/wasmer-assemblyscript-example)
 
@@ -43,6 +45,7 @@ description: "A place for all things Wasmer and WebAssembly. Feel free to add yo
 * WASI SDK Docker [source](https://github.com/hltj/wasi-sdk-docker)
 
 ## Cloud
+
 * [CleverCloud](https://www.clever-cloud.com/en/)
 * [Scailable](https://www.scailable.net/)
 
@@ -68,5 +71,5 @@ description: "A place for all things Wasmer and WebAssembly. Feel free to add yo
 * [Compiling from a typed dialect of Scheme to WebAssembly](https://people.cs.umass.edu/~arjun/archive/rybicki-honors-2020.pdf)
 * [Cross-platform Identity-based Cryptography using WebAssembly](https://www.hte.hu/documents/169298/4647244/InfocomJ_2019_4_5_Vecsi.pdf/8903d312-89a3-f0ef-d8b5-acffa2623a19?version=1.0)
 
-
 ### [Add your project here!](https://github.com/wasmerio/docs.wasmer.io/edit/master/community/built-with-wasmer.md) 🤗
+

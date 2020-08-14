@@ -4,7 +4,7 @@ Welcome to the Wasmer Documentation! 👋
 
 [Wasmer](https://wasmer.io/) is an open-source runtime for executing WebAssembly on the Server.
 
-> ![](.gitbook/assets/image%20%286%29.png)
+> ![](.gitbook/assets/image%20%285%29%20%281%29.png)
 >
 > Wasmer mission is make all software universally available
 

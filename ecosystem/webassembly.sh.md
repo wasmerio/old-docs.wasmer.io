@@ -2,7 +2,7 @@
 
 The WebAssembly shell is an online shell where you can drag-and-drop your WebAssembly modules to try them out, and also execute [all the commands of WASI modules available in WAPM](https://wapm.io/interface/wasi).
 
-![](../.gitbook/assets/image.png)
+![](../.gitbook/assets/image%20%281%29.png)
 
 {% embed url="https://webassembly.sh" caption="" %}
 

@@ -1,6 +1,6 @@
 # Testing
 
-Thanks to [spec tests](https://github.com/wasmerio/wasmer/tree/master/lib/spectests/spectests) we can ensure 100% compatibility with the WebAssembly spec test suite.
+Thanks to [spec tests](https://github.com/wasmerio/wasmer/tree/master/tests/wast/spec) we can ensure 100% compatibility with the WebAssembly spec test suite.
 
 You can run all the tests with:
 
@@ -9,28 +9,18 @@ make test
 ```
 
 {% hint style="info" %}
-`make test` will automatically detect the backends installed on your system.
+`make test` will automatically detect the compilers available on your system.
 
-Please follow the Building from Source guide see how you can[ prepare your system with the requirements needed for each of the backends](./#all-backends-default).
+Please follow the Building from Source guide to learn how you can[ prepare your system with the requirements needed for each of the compilers](./#all-backends-default).
 {% endhint %}
 
-### Testing backends
+### Testing Compilers
 
-Each backend can be tested separately:
+Each compiler integration can be tested separately:
 
-* **Singlepass**: `make singlepass`
-* **Cranelift**: `make cranelift`
-* **LLVM**: `make llvm`
-
-### Testing integrations
-
-Each integration can be tested separately:
-
-* Spec tests: `make spectests`
-* WASI: `make wasitests`
-* Emscripten: `make emtests`
-* Middleware: `make middleware`
-* C API: `make capi`
+* **Singlepass**: `make test-singlepass`
+* **Cranelift**: `make test-cranelift`
+* **LLVM**: `make test-llvm`
 
 
 
