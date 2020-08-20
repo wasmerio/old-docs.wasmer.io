@@ -15,7 +15,7 @@ cd hello-world
 
 This should generate two important files for us, `Cargo.toml` and `src/main.rs`. The `Cargo.toml` is a file that describes your project and its dependencies. The `src/main.rs` is the entry point for your project, and contains the `fn main() { .. }` that is run when the project is executed.
 
-Let's modify our `Cargo.toml` to add the [`wasmer-runtime` crate](https://crates.io/crates/wasmer-runtime/0.13.1) to our project. At the time of this writing, the crate is at version `0.13.1`. So we change the `Cargo.toml` to the following:
+We then modify the `Cargo.toml` to add the Wasmer dependencies shown below:
 
 {% code title="Cargo.toml" %}
 ```yaml
@@ -26,12 +26,16 @@ authors = ["The Wasmer Engineering Team <engineering@wasmer.io>"]
 edition = "2018"
 
 [dependencies]
-# Add the wasmer-runtime as a dependency
-wasmer-runtime = "0.13.1"
+# The Wasmer API
+wasmer = "1.0.0-alpha01.0"
+# The Cranelift compiler used by the JIT engine
+wasmer-compiler-cranelift = "1.0.0-alpha01.0"
+# The engine we'll use in the API
+wasmer-engine-jit = "1.0.0-alpha01.0"
 ```
 {% endcode %}
 
-Now that we have the Wasmer runtime added as a dependency, let's go ahead and try it out! For our hello world, what we will do is use the Wasmer runtime to execute an exported function on a WebAssembly module, that adds one to the integer passed to the function.
+Now that we have the Wasmer API added as a dependency, let's go ahead and try it out! For our hello world, what we will do is use the Wasmer runtime to execute an exported function in a WebAssembly module, that adds one to the integer passed to the function.
 
 To do this, we will create a new `src/main.rs` file.
 
@@ -39,23 +43,38 @@ Let's start with the imports.
 
 ```rust
 // Import the wasmer runtime so we can use it
-use wasmer_runtime::{error, imports, instantiate, Func};
+use wasmer::{imports, Instance, Module, NativeFunc, Store};
+use wasmer_compiler_cranelift::Cranelift;
+use wasmer_engine_jit::JIT;
 ```
 
-Now that we have access to the `instantiate` and imports macro, we should be able to create our first WebAssembly Instance!
+Now that we have access to what we need, we can create our first WebAssembly Instance!
 
 ```rust
-fn main() -> error::Result<()> {
-    // Let's get the .wasm file as bytes
-    let wasm_bytes = include_bytes!("add.wasm");
+fn main() {
+    // We start by creating the base data structure of Wasm: the Store.
+    // To create the store we need to create an Engine, we chose Wasmer's JIT
+    // engine for this example which will generate native machine code at runtime
+    // and then execute it.
+    // In order to generate this native machine code, we must choose a compiler.
+    // Wasmer offers 3 compilers to choose from; we're using the Cranelift compiler
+    // in this example because of its balance between compile-time speed and runtime speed.
+    let store = Store::new(&JIT::new(&Cranelift::default()).engine());
 
-    // Our import object, that allows exposing functions to our Wasm module.
-    // We're not importing anything, so make an empty import object.
+    // Now let's get the .wasm file as bytes
+    let wasm_bytes = include_bytes!("../../../../shared/rust/add.wasm");
+
+    // With the Store and the wasm bytes we can create a wasm Module which is
+    // a non-runnable representation of the contents of the wasm file.
+    let module = Module::new(&store, &wasm_bytes[..]).expect("create module");
+
+    // We create an empty ImportObject for the next step because we don't need to
+    // import anything into `add.wasm`.
     let import_object = imports! {};
 
-    // Let's create an instance of Wasm module running in the wasmer-runtime
-    let instance = instantiate(wasm_bytes, &import_object)?;
-}
+    // With our Module and our ImportObject we can create an Instance, which is the runnable
+    // representation of the Wasm file.
+    let instance = Instance::new(&module, &import_object).expect("instantiate module");
 ```
 
 {% hint style="info" %}
@@ -65,21 +84,24 @@ You can download the `add.wasm` WebAssembly module here:
 Note: You can [find the implementation of it here](https://github.com/wasmerio/docs.wasmer.io/blob/master/integrations/shared/rust/add.rs)
 {% endhint %}
 
-And now we can just call the `add_one` function \(remember to use it inside the `main()` function\).
+And now we can get the `add_one` function from the instance and call it!
 
 ```rust
-    // Let's get `add_one` as a function which takes one `u32` and returns one `u32`
-    let add_one: Func<u32, u32> = instance.exports.get("add_one")?;
-    let result = add_one.call(42)?;
+    // We can get functions from our Instance and execute them.
+    // We get the add_one function as a NativeFunc that takes one u32 argument
+    // and returns one u32 value.
+    let add_one: NativeFunc<u32, u32> = instance
+        .exports
+        .get_native_function("add_one")
+        .expect("add_one function in Wasm module");
+    let result = add_one.call(42).unwrap();
 
-    // Log the new value
+    // Log the result
     println!("Result: {}", result);
 
-    // Asserting that the returned value from the function is our expected value.
-    assert_eq!(result, 43);  // 42 + 1
-
-    // Return OK since everything executed successfully!
-    Ok(())
+    // Assert that the returned value from the function is what we expect.
+    assert_eq!(result, 43); // 42 + 1
+}
 ```
 
 {% hint style="success" %}
@@ -91,32 +113,49 @@ Our resulting `src/main.rs` should look like the following:
 {% code title="src/main.rs" %}
 ```rust
 // Import the wasmer runtime so we can use it
-use wasmer_runtime::{error, imports, instantiate, Func};
+use wasmer::{imports, Instance, Module, NativeFunc, Store};
+use wasmer_compiler_cranelift::Cranelift;
+use wasmer_engine_jit::JIT;
 
-// Our entry point to our application
-fn main() -> error::Result<()> {
-    // Let's get the .wasm file as bytes
-    let wasm_bytes = include_bytes!("add.wasm");
+fn main() {
+    // We start by creating the base data structure of Wasm: the Store.
+    // To create the store we need to create an Engine, we chose Wasmer's JIT
+    // engine for this example which will generate native machine code at runtime
+    // and then execute it.
+    // In order to generate this native machine code, we must choose a compiler.
+    // Wasmer offers 3 compilers to choose from; we're using the Cranelift compiler
+    // in this example because of its balance between compile-time speed and runtime speed.
+    let store = Store::new(&JIT::new(&Cranelift::default()).engine());
 
-    // Our import object, that allows exposing functions to our Wasm module.
-    // We're not importing anything, so make an empty import object.
+    // Now let's get the .wasm file as bytes
+    let wasm_bytes = include_bytes!("../../../../shared/rust/add.wasm");
+
+    // With the Store and the wasm bytes we can create a wasm Module which is
+    // a non-runnable representation of the contents of the wasm file.
+    let module = Module::new(&store, &wasm_bytes[..]).expect("create module");
+
+    // We create an empty ImportObject for the next step because we don't need to
+    // import anything into `add.wasm`.
     let import_object = imports! {};
 
-    // Let's create an instance of Wasm module running in the wasmer-runtime
-    let instance = instantiate(wasm_bytes, &import_object)?;
+    // With our Module and our ImportObject we can create an Instance, which is the runnable
+    // representation of the Wasm file.
+    let instance = Instance::new(&module, &import_object).expect("instantiate module");
 
-    // Let's get `add_one` as a function which takes one `u32` and returns one `u32`
-    let add_one: Func<u32, u32> = instance.exports.get("add_one")?;
-    let result = add_one.call(42)?;
+    // We can get functions from our Instance and execute them.
+    // We get the add_one function as a NativeFunc that takes one u32 argument
+    // and returns one u32 value.
+    let add_one: NativeFunc<u32, u32> = instance
+        .exports
+        .get_native_function("add_one")
+        .expect("add_one function in Wasm module");
+    let result = add_one.call(42).unwrap();
 
-    // Log the new value
+    // Log the result
     println!("Result: {}", result);
 
-    // Asserting that the returned value from the function is our expected value.
-    assert_eq!(result, 43);
-
-    // Return OK since everything executed successfully!
-    Ok(())
+    // Assert that the returned value from the function is what we expect.
+    assert_eq!(result, 43); // 42 + 1
 }
 ```
 {% endcode %}
