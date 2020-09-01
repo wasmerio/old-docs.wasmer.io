@@ -1,40 +1,39 @@
-// Import the wasmer runtime so we can use it
-use wasmer_runtime::{
-    error,
-    // Include the function macro
-    func,
-    imports,
-    instantiate,
-    // Include the Context for our Wasm Instance for passing imported host functions
-    Ctx,
-    Func,
-};
+use std::{error, fmt};
+use wasmer::{imports, Function, Instance, Module, NativeFunc, RuntimeError, Store};
+use wasmer_compiler_cranelift::Cranelift;
+use wasmer_engine_jit::JIT;
 
 // Our entry point to our application
-fn main() -> error::Result<()> {
-    // Let's read in our .wasm file as bytes
+fn main() {
+    // We set up the Store with a JIT using the Cranelift compiler.
+    let store = Store::new(&JIT::new(&Cranelift::default()).engine());
+
+    // We then read in the Wasm bytes.
     let wasm_bytes = include_bytes!("../../../../shared/rust/exit-early.wasm");
 
-    // Let's define the import object used to import our function
-    // into our webassembly sample application.
+    // We define the import object used to import our function
+    // into our WebAssembly sample application.
     //
     // Make sure to check your function signature (parameter and return types) carefully!
     let import_object = imports! {
         // Define the "env" namespace that was implicitly used
-        // by our example rust Wasm crate.
+        // by our example Rust Wasm crate.
         "env" => {
             // Key should be the name of the imported function
-            // Value should be the func! macro, with the function passed in.
-            "interrupt_execution" => func!(interrupt_execution),
+            "interrupt_execution" => Function::new_native(&store, interrupt_execution),
         },
     };
 
-    // Let's create an instance of Wasm module running in the wasmer-runtime
-    let instance = instantiate(wasm_bytes, &import_object)?;
+    // We create a module from the Wasm bytes.
+    let module = Module::new(&store, &wasm_bytes[..]).expect("create module");
 
-    // Let's call the exported "exit_early" function on the Wasm module.
-    let exit_early_func: Func<(), i32> = instance
-        .func("exit_early")
+    // We then create an instance of Wasm module with our imports.
+    let instance = Instance::new(&module, &import_object).expect("instantiate module");
+
+    // We then call the exported "exit_early" function on the Wasm module.
+    let exit_early_func: NativeFunc<(), i32> = instance
+        .exports
+        .get_native_function("exit_early")
         .expect("exit_early function not found");
     let response = exit_early_func.call();
 
@@ -51,16 +50,32 @@ fn main() -> error::Result<()> {
 
     // Log a success message.
     println!("Success!");
-
-    // Return OK since everything executed successfully!
-    Ok(())
 }
 
+// We must create an error type to use to exit early
+#[derive(Debug)]
+struct ErrorType {
+    message: String,
+}
+
+// The type must implement `std::error::Error` which means we must also implement
+// `std::fmt::Display` for our type.
+impl fmt::Display for ErrorType {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Error: {}", self.message)
+    }
+}
+
+// Only types implementing `std::error::Error` can be used to interrupt execution.
+impl error::Error for ErrorType {}
+
 // Function that is imported into the guest Wasm module, that will immediately stop execution
-fn interrupt_execution(_ctx: &mut Ctx) -> Result<(), ()> {
+fn interrupt_execution() {
     // Log that we were called
     println!("interrupt_execution called!");
 
     // Return an error, which will immediately stop execution of the Wasm module
-    Err(())
+    RuntimeError::raise(Box::new(ErrorType {
+        message: "interrupt_execution is interrupting execution!".to_string(),
+    }));
 }
