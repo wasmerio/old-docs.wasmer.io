@@ -1,113 +1,124 @@
+---
+description: >-
+  In this example we'll see how to pattern match for the error and output the error message returned from Wasmer.
+---
+
 # Handling Errors
 
 {% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/rust/examples/handling-errors).
+**Note**: The final code for this example can be found on 
+[GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/errors.rs).
+
+_Please take a look at the_ [_setup steps for Rust_](../setup.md)_._
 {% endhint %}
 
-Please take a look at the [setup steps for the Rust integration](https://github.com/wasmerio/docs.wasmer.io/tree/85cb4e01fe7bae4777aedabc409c3e4fe2d058af/integrations/rust/installation.md).
+There will come a time when running a WebAssembly module will not work, and trying to figure out why it does not work 
+can be a difficult task! In the current MVP of WebAssembly, debugging isn't explicitly defined for runtimes both in and 
+out of the browser. So we'll have to write some error handling code ourselves.
 
-There will come a time where running a WebAssembly module will not work, and trying to figure out why it does not work can be a difficult task! In the current MVP of WebAssembly, debugging isn't explicitly defined for runtimes both in and out of the browser. So we'll have to write some error handling code ourselves.
+In this example, we will load a WebAssembly module that purposely produces an error in its exported function call. The 
+Host \(our Rust application\) will pattern match for the error and output the error message returned from Wasmer.
 
-In this example, we will load a WebAssembly module that purposely `panic!()`s in its exported function call. The Host \(our Rust application\) will pattern match for the error and output the error message returned from Wasmer:
+First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. 
+In this example, we will create a new project named `hello-world`. Thus, lets create it with cargo and navigate to it:
+
+```bash
+cargo new errors
+cd errors
+```
+
+This should generate two important files for us, `Cargo.toml` and `src/main.rs`. The `Cargo.toml` is a file that 
+describes your project and its dependencies. The `src/main.rs` is the entry point for your project, and contains 
+the `fn main() { .. }` that is run when the project is executed.
+
+We then modify the `Cargo.toml` to add the Wasmer dependencies as shown below:
+
+{% code title="Cargo.toml" %}
+```yaml
+[package]
+name = "early-exit"
+version = "0.1.0"
+authors = ["The Wasmer Engineering Team <engineering@wasmer.io>"]
+edition = "2018"
+
+[dependencies]
+# The Wasmer API
+wasmer = "1.0.0-alpha4"
+```
+{% endcode %}
+
+Now that we have the Wasmer crate added as a dependency, let's go ahead and try it out!
+
+# Handling the error
+
+There is nothing special about the Wasm module or the way we'll set it up. 
+
+The only things we'll need to do are:
+* Getting the exported function
+* Calling the function;
+* Handling the error.
+
+Here is the easy part, getting and calling the function:
 
 ```rust
-// Import the wasmer runtime so we can use it
-use wasmer_runtime::{error, imports, instantiate, Func, error::{RuntimeError}};
+let div_by_zero = instance.exports.get_function("div_by_zero")?.native::<(), i32>()?;
+let result = div_by_zero.call();
+```
 
-// Our entry point to our application
-fn main() -> error::Result<()> {
-    // Let's read in our .wasm file as bytes
-    let wasm_bytes = include_bytes!("../../../../shared/rust/handling-errors.wasm");
+And here is the interesting part, handling the error:
 
-    // Our import object, that allows exposing functions to our Wasm module.
-    // We're not importing anything, so make an empty import object.
-    let import_object = imports! {};
+```rust
+match result {
+    Ok(_) => {
+        panic!("throw_wasm_error did not error");
+    },
+    Err(e) => {
+        println!("Error caught from `div_by_zero`: {}", e.message());
 
-    // Let's create an instance of Wasm module running in the wasmer-runtime
-    let instance = instantiate(wasm_bytes, &import_object)?;
+        let frames = e.trace();
+        let frames_len = frames.len();
 
-    // Let's call the exported "throw_error" function ont the Wasm module.
-    let throw_error_func: Func<(), ()> = instance
-        .func("throw_wasm_error")
-        .expect("throw_wasm_error function was not found");
-
-    let response = throw_error_func.call();
-
-    match response {
-       Ok(_) => {
-            // This should have thrown an error, return an error
-            panic!("throw_wasm_error did not error");
-       },
-        Err(RuntimeError::Trap { msg }) => {
-           // Log the error
-           println!("Trap caught from `throw_wasm_error`: {}", msg);
-       },
-        Err(RuntimeError::Error { .. }) => {
-            panic!("Expected Trap, found Error with unknown data!");
-        },
+        for i in 0..frames_len {
+            println!(
+                "  Frame #{}: {:?}::{:?}",
+                frames_len - i,
+                frames[i].module_name(),
+                frames[i].function_name().or(Some("<func>")).unwrap()
+            );
+        }
     }
-
-    // Log a success message.
-    println!("Success!");
-
-    // Return OK since everything executed successfully!
-    Ok(())
 }
+```
+
+Here we pattern match the result of calling the function to see if we actually got an error.
+
+If we got an error, we'll format a nice message containing informations to help debugging the problem:
+* the error message;
+* the error trace.
+
+## Running
+
+We now have everything we need to run the Wasm module, let's do it!
+
+You should be able to run it using the `cargo run` command. The output should look like this:
+
+```text
+Compiling module...
+Instantiating module...
+Calling `div_by_zero` function...
+Error caught from `div_by_zero`: integer divide by zero
+  Frame #2: "<module>"::"do_div_by_zero_f"
+  Frame #1: "<module>"::"div_by_zero_f"
+
 ```
 
 {% hint style="info" %}
-You can download the `handling-errors.wasm` WebAssembly module here:  
-[integrations/shared/rust/handling-errors.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/handling-errors.wasm)
-{% endhint %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, 
+you can also do:
 
-If we run the following code with `cargo run`, we would see a result like:
-
-![Cargo Run Terminal Output. Error from throw\_wasm\_error: WebAssemblytrap occured during runtime: unkown](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/img/docs/rust-handling-errors-1.png)
-
-A common occurrence during development is to pass the errors up to main or `unwrap` them. We'll go over the error output for that as well:
-
-```rust
-// Import the wasmer runtime so we can use it
-use wasmer_runtime::{error, imports, instantiate, Func, error::{RuntimeError}};
-
-// Our entry point to our application
-fn main() -> error::Result<()> {
-    // Let's read in our .wasm file as bytes
-    let wasm_bytes = include_bytes!("../../../../shared/rust/handling-errors.wasm");
-
-    // Our import object, that allows exposing functions to our Wasm module.
-    // We're not importing anything, so make an empty import object.
-    let import_object = imports! {};
-
-    // Let's create an instance of Wasm module running in the wasmer-runtime
-    let instance = instantiate(wasm_bytes, &import_object)?;
-
-    // Let's call the exported "throw_error" function on the Wasm module.
-    let throw_error_func: Func<(), ()> = instance
-        .func("throw_wasm_error")
-        .expect("throw_wasm_error function was not found");
-
-    let _response = throw_error_func.call()?;
-
-    // Log a success message.
-    println!("Success!");
-
-    // Return OK since everything executed successfully!
-    Ok(())
-}
+```bash
+git clone https://github.com/wasmerio/wasmer.git
+cd wasmer
+cargo run --example errors --release --features "cranelift"
 ```
-
-If we run the code with `cargo run`, we would see a result like:
-
-![Cargo Run Terminal Output. Main thread panics on unwrap without a line number, and suggests rust backtrace](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/img/docs/rust-handling-errors-2.png)
-
-As you can tell, this error doesn't give us much insight into why we had an error. However it helpfully suggests setting the `RUST_BACKTRACE` environment variable and running it again. When we again run, `RUST_BACKTRACE=1 cargo run`, we see output like:
-
-![Cargo Run Terminal Output. Shows rust back trace, which you can see where things started to break, as explained below](https://github.com/wasmerio/docs.wasmer.io/tree/ca2c9145ea511f3c00439b180be82cc5197a177f/img/docs/rust-handling-errors-3.png)
-
-If we look our for our file name \(`src/main.rs`\), we will see at step 10, there was an error on line 44. Which is the line number for where we call and unwrap the `throw_wasm_error` function. This is great, as now we can start to investigate the particular function call, and why it may be returning and error.
-
-It's important to keep in mind that that compiling in `release` mode reduces the amount of debug information available by default. Debug information can be enabled with the `[profile.release]` section in the `Cargo.toml`, simple add `debug = true` to this section and your release builds will include debug information.
-
-Next, let's take a look at how we can interrupt an executing Wasm module.
-
+{% endhint %}

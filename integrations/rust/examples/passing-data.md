@@ -13,7 +13,7 @@ description: >-
 Linear memory is a major concept in WebAssembly:
 
 {% hint style="info" %}
-Because WebAssembly is sandboxed, memory must be copied between the host \(your Rust application\) and the Wasm module. Upcoming proposals like WebAssembly Interface types will make this process much easier, but it is still a work in progress.
+Because WebAssembly is sandboxed, memory must be copied between the host \(your Rust application\) and the Wasm module. Upcoming proposals like [WebAssembly Interface Types](https://github.com/WebAssembly/interface-types/blob/master/proposals/interface-types/Explainer.md) will make this process much easier, but it is still a work in progress.
 {% endhint %}
 
 The way that this memory is allocated, freed, passed, organized, etc... can vary depending on the ABI of the Wasm module.
@@ -26,64 +26,79 @@ So if we generate a new project, we can modify our `src/main.rs` to be the follo
 
 ```rust
 // Import the wasmer runtime so we can use it
-use wasmer_runtime::{error, imports, instantiate, Array, Func, WasmPtr};
+use wasmer::{imports, Array, Instance, Module, NativeFunc, Store, WasmPtr};
+use wasmer_compiler_cranelift::Cranelift;
+use wasmer_engine_jit::JIT;
 
 // Our entry point to our application
-fn main() -> error::Result<()> {
-    // Let's get the .wasm file as bytes
-    let wasm_bytes = include_bytes!("passing-data.wasm");
+fn main() {
+    // We start by creating the base data structure of Wasm: the Store.
+    // To create the store we need to create an Engine, we chose Wasmer's JIT
+    // engine for this example which will generate native machine code at runtime
+    // and then execute it.
+    // In order to generate this native machine code, we must choose a compiler.
+    // Wasmer offers 3 compilers to choose from; we're using the Cranelift compiler
+    // in this example because of its balance between compile-time speed and runtime speed.
+    let store = Store::new(&JIT::new(&Cranelift::default()).engine());
 
-    // Now that we have the Wasm file as bytes, let's run it with the wasmer runtime
-    // Our import object, that allows exposing functions to our Wasm module.
-    // We're not importing anything, so make an empty import object.
+    // Let's get the .wasm file as bytes
+    let wasm_bytes = include_bytes!("../../../../shared/rust/passing-data.wasm");
+
+    // With the Store and the wasm bytes we can create a wasm Module which is
+    // a non-runnable representation of the contents of the wasm file.
+    let module = Module::new(&store, &wasm_bytes[..]).expect("create module");
+
+    // We create an empty ImportObject for the next step because we don't need to
+    // import anything into `add.wasm`.
     let import_object = imports! {};
-    // Let's create an instance of Wasm module running in the wasmer-runtime
-    let instance = instantiate(wasm_bytes, &import_object)?;
+
+    // With our Module and our ImportObject we can create an Instance, which is the runnable
+    // representation of the Wasm file.
+    let instance = Instance::new(&module, &import_object).expect("instantiate module");
 
     // Lets get the context and memory of our Wasm Instance
-    let wasm_instance_context = instance.context();
-    let wasm_instance_memory = wasm_instance_context.memory(0);
+    let wasm_instance_memory = instance.exports.get_memory("memory").expect("instance memory");
 
     // Let's get the pointer to the buffer defined by the Wasm module in the Wasm memory.
     // We use the type system and the power of generics to get a function we can call
     // directly with a type signature of no arguments and returning a WasmPtr<u8, Array>
-    let get_wasm_memory_buffer_pointer: Func<(), WasmPtr<u8, Array>> = instance
-        .func("get_wasm_memory_buffer_pointer")
-        .expect("get_wasm_memory_buffer_pointer");
+    let get_wasm_memory_buffer_pointer: NativeFunc<(), WasmPtr<u8, Array>> = instance
+        .exports
+        .get_native_function("get_wasm_memory_buffer_pointer")
+        .expect("get_wasm_memory_buffer_pointer in Wasm module");
     let wasm_buffer_pointer = get_wasm_memory_buffer_pointer.call().unwrap();
+    dbg!(wasm_buffer_pointer);
     // Let's write a string to the Wasm memory
     let original_string = "Did you know";
     println!("The original string is: {}", original_string);
 
     // We deref our WasmPtr to get a &[Cell<u8>]
     let memory_writer = wasm_buffer_pointer
-        .deref(wasm_instance_memory, 0, original_string.len() as u32)
+        .deref(&wasm_instance_memory, 0, original_string.len() as u32)
         .unwrap();
     for (i, b) in original_string.bytes().enumerate() {
         memory_writer[i].set(b);
     }
 
     // Let's call the exported function that concatenates a phrase to our string.
-    let add_wasm_is_cool: Func<u32, u32> = instance
-        .func("add_wasm_is_cool")
-        .expect("WASM is cool export");
+    let add_wasm_is_cool: NativeFunc<u32, u32> = instance
+        .exports
+        .get_native_function("add_wasm_is_cool")
+        .expect("Wasm is cool export");
     let new_string_length = add_wasm_is_cool.call(original_string.len() as u32).unwrap();
 
     // Get our pointer again, since memory may have shifted around
     let new_wasm_buffer_pointer = get_wasm_memory_buffer_pointer.call().unwrap();
     // Read the string from that new pointer.
     let new_string = new_wasm_buffer_pointer
-        .get_utf8_string(wasm_instance_memory, new_string_length)
+        .get_utf8_string(&wasm_instance_memory, new_string_length)
         .unwrap();
 
+    // Log the new string
     println!("The new string is: {}", new_string);
+
     // Asserting that the returned value from the function is our expected value.
     assert_eq!(new_string, "Did you know Wasm is cool!");
-
-    // Log a success message
-    println!("Success!");
-    // Return OK since everything executed successfully!
-    Ok(())
 }
 ```
 

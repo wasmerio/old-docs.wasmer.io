@@ -1,19 +1,25 @@
 use std::{cell::RefCell, sync::Arc};
 
 // Import the wasmer runtime so we can use it
-use wasmer_runtime::{
-    error,
-    // Include the function macro
-    func,
-    imports,
-    instantiate,
-    Func,
-};
+use wasmer::{imports, Cranelift, Function, Instance, JIT, Module, NativeFunc, Store};
 
 // Our entry point to our application
-fn main() -> error::Result<()> {
+fn main() {
+    // We start by creating the base data structure of Wasm: the Store.
+    // To create the store we need to create an Engine, we chose Wasmer's JIT
+    // engine for this example which will generate native machine code at runtime
+    // and then execute it.
+    // In order to generate this native machine code, we must choose a compiler.
+    // Wasmer offers 3 compilers to choose from; we're using the Cranelift compiler
+    // in this example because of its balance between compile-time speed and runtime speed.
+    let store = Store::new(&JIT::new(&Cranelift::default()).engine());
+
     // Let's get the .wasm file as bytes
     let wasm_bytes = include_bytes!("../../../../shared/rust/host-functions.wasm");
+
+    // With the Store and the wasm bytes we can create a wasm Module which is
+    // a non-runnable representation of the contents of the wasm file.
+    let module = Module::new(&store, &wasm_bytes[..]).expect("create module");
 
     // We create some shared data here, [`Arc`] is required because we may
     // move our WebAssembly instance to another thread to run it.  RefCell
@@ -22,19 +28,13 @@ fn main() -> error::Result<()> {
     // use a `Mutex`.
     let shared_counter: Arc<RefCell<i32>> = Arc::new(RefCell::new(0));
 
-    // Clone the [`Arc`] for our closure and pass it into the host function
-    let counter = Arc::clone(&shared_counter);
-    let get_counter = move || -> i32 { *counter.borrow() };
-
-    // Clone the [`Arc`] for our closure and pass it into the host function
-    let counter = Arc::clone(&shared_counter);
-    let add_to_counter = move |value_to_add: i32| -> i32 {
-        let mut counter_ref = counter.borrow_mut();
-        *counter_ref += value_to_add;
+    struct Env { counter: Arc<RefCell<i32>> }
+    fn get_counter(env: &mut Env) -> i32 { *env.counter.borrow() }
+    fn add_to_counter(env: &mut Env, add: i32) -> i32 {
+        let mut counter_ref = env.counter.borrow_mut();
+        *counter_ref += add;
         *counter_ref
-    };
-
-    // Now that we have the Wasm file as bytes, let's run it with the wasmer runtime
+    }
 
     // Let's define the import object used to import our function
     // into our webassembly sample application.
@@ -46,35 +46,33 @@ fn main() -> error::Result<()> {
         "host" => {
             // Key should be the name of the imported function
             // Value should be the func! macro, with the function passed in.
-            "get_counter" => func!(get_counter),
-            "add_to_counter" => func!(add_to_counter),
+            "get_counter" => Function::new_native_with_env(&store, Env { counter: shared_counter.clone() }, get_counter),
+            "add_to_counter" => Function::new_native_with_env(&store, Env { counter: shared_counter.clone() }, add_to_counter),
         },
     };
 
-    // Let's create an instance of Wasm module running in the wasmer-runtime
-    let instance = instantiate(wasm_bytes, &import_object)?;
+    // With our Module and our ImportObject we can create an Instance, which is the runnable
+    // representation of the Wasm file.
+    let instance = Instance::new(&module, &import_object).expect("instantiate module");
 
     // Define the number of times we want to loop our increment
     let number_of_times_to_loop: i32 = 5;
 
     // Let's get `increment_counter_loop` as a function which takes one `i32` and returns one `i32`
-    let increment_counter_loop: Func<i32, i32> = instance.func("increment_counter_loop")?;
-    let result = increment_counter_loop.call(number_of_times_to_loop)?;
+    let increment_counter_loop: NativeFunc<i32, i32> = instance
+        .exports
+        .get_native_function("increment_counter_loop")
+        .expect("increment_counter_loop in Wasm module");
+    let result = increment_counter_loop.call(number_of_times_to_loop).unwrap();
 
     let counter_value: i32 = *shared_counter.borrow();
+
+    // Log the new value
+    println!("New Counter Value: {}", counter_value);
 
     // Assert our counter is the expected value
     assert_eq!(number_of_times_to_loop, counter_value);
 
     // Asserting that the returned value from the function is our expected value.
     assert_eq!(result, counter_value);
-
-    // Log the new value
-    println!("New Counter Value: {}", counter_value);
-
-    // Log a success message.
-    println!("Success!");
-
-    // Return OK since everything executed successfully!
-    Ok(())
 }
