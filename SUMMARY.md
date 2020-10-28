@@ -28,7 +28,7 @@
 * [Rust](integrations/rust/README.md)
   * [Setup your Rust environment](integrations/rust/setup.md)
   * [Examples](integrations/rust/examples/README.md)
-    * [Hello World](integrations/rust/examples/hello-world.md)
+    * [Hello World](integrations/rust/examples/instance.md)
     * [Passing Data](integrations/rust/examples/passing-data.md)
     * [Exposing Host Functions](integrations/rust/examples/host-functions.md)
     * [Handling Errors](integrations/rust/examples/handling-errors.md)

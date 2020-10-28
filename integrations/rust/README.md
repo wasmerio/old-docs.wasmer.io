@@ -7,8 +7,9 @@ You can use Wasmer in your Rust projects to execute WebAssembly modules securely
 
 Some of our language extensions are using the Wasmer Rust crate under the hood.
 
-* [Wasmer Python Extension](https://github.com/wasmerio/python-ext-wasm)
-* [Wasmer Ruby Extension](https://github.com/wasmerio/ruby-ext-wasm)
+* [Wasmer Python Extension](https://github.com/wasmerio/wasmer-python)
+* [Wasmer Go Extension](https://github.com/wasmerio/wasmer-go)
+* [Wasmer Ruby Extension](https://github.com/wasmerio/wasmer-ruby)
 * [Wasmex Elixir Extension](https://github.com/tessi/wasmex)
 {% endhint %}
 

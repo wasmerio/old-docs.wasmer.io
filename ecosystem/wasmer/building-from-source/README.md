@@ -76,18 +76,18 @@ Wasmer supports three different compilers at the moment:
 Build Wasmer:
 
 ```text
-make release
+make build-wasmer
 ```
 
 **Note**: you should see this as the first line in the console:  
-`Available backends: singlepass`
+`Available compilers: singlepass`
 
 ### Cranelift Compiler
 
 The Cranelift compiler will work if you are in a X86 or ARM machine, so you don't need to do anything in your system to enable it.
 
 ```text
-make release
+make build-wasmer
 ```
 
 **Note**: should see this as the first line in the console:  
@@ -104,7 +104,7 @@ If you want support for the Wasmer LLVM backend, then you will also need to ensu
 And create a Wasmer release
 
 ```bash
-make release
+make build-wasmer
 ```
 
 **Note**: you should see this as the first line in the console:  
@@ -115,7 +115,7 @@ make release
 Once you have LLVM and Rust, you can just run:
 
 ```bash
-make release
+make build-wasmer
 ```
 
 **Note**: you should see this as the first line in the console:  
@@ -123,7 +123,7 @@ make release
 
 ## Running your Wasmer binary
 
-Once you run the `make release` command, you will have a new binary ready to be used!
+Once you run the `make build-wasmer` command, you will have a new binary ready to be used!
 
 ```text
 ./target/release/wasmer quickjs.wasm
@@ -146,12 +146,16 @@ This will generate the shared library \(depending on your system\):
 * Linux: `target/release/libwasmer_runtime_c_api.so`
 
 {% hint style="warning" %}
-By default, the Wasmer C API shared library is built with Cranelift as the _default_ backend.  
+By default, the Wasmer C API shared library is built with Cranelift as the _default_ backend and JIT enabled.  
 You can generate the C-API for a specific backend with:
 
-* **Singlepass**: `make build-capi-singlepass`
-* **Cranelift**: `make build-capi-cranelift`
+* **Singlepass**: `make build-capi-singlepass-jit`
+* **Cranelift**:
+  * **JIT**: `make build-capi-cranelift-jit`
+  * **Native Engine**: `make build-capi-cranelift-native`
 * **LLVM**: `make build-capi-llvm`
+  * **JIT**: `make build-capi-llvm-jit`
+  * **Native Engine**: `make build-capi-llvm-native`
 {% endhint %}
 
 If you want to generate the library and headers for using them easily, you can execute:
@@ -160,5 +164,5 @@ If you want to generate the library and headers for using them easily, you can e
 make package-capi
 ```
 
-This command will generate a `capi` directory, that you can then use easily in the [Wasmer C API examples](./).
+This command will generate a `package` directory, that you can then use easily in the [Wasmer C API examples](./).
 

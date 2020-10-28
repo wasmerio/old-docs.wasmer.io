@@ -2,13 +2,13 @@
 
 The Wasmer WebAssembly runtime provides various features for users and developers:
 
-* **Backends:** Wasmer supports multiple compiler backends: _Singlepass_, _Cranelift_ and _LLVM_. Each of these have different tradeoffs of compilation speed vs runtime speed.
-* **Caching**: compiled WebAssembly modules can be reused so subsequent runs of a Wasm file will have very little start up time
-* **Metering**: computation time and other resources can be monitored and limits set to control how the Wasm code runs. This is also known as "gas metering"
+* **Backends:** Wasmer supports multiple compiler backends: _Singlepass_, _Cranelift_ and _LLVM_. Each of these have different tradeoffs of compilation speed vs runtime speed;
+* **Caching**: compiled WebAssembly modules can be reused so subsequent runs of a Wasm file will have very little start up time;
+* **Metering**: computation time and other resources can be monitored and limits set to control how the Wasm code runs. This is also known as "gas metering";
 * _WebAssembly Features_:
-  * **Multi-value return**: return multiple values from functions making data transfer between host and guest simpler
-  * **SIMD**: Single Instruction, Multiple data: do heavy number crunching more quickly and/or with lower power usage
-* ABIs: it allows to run different types of programs compiled to WebAssembly, with ABIs such as:
+  * **Multi-value return**: return multiple values from functions making data transfer between host and guest simpler;
+  * **SIMD**: Single Instruction, Multiple data: do heavy number crunching more quickly and/or with lower power usage.
+* ABIs: it allows running different types of programs compiled to WebAssembly, with ABIs such as:
   * **Emscripten**
   * **WASI**
 
@@ -19,7 +19,7 @@ The Wasmer WebAssembly runtime provides various features for users and developer
 | Caching | ✅ | ✅ | ✅ |
 | Emscripten | ✅ | ✅ | ✅ |
 | Metering | ✅ | ✅ | ✅ |
-| Multi-value return | 🔄 | ✅ | ✅ |
+| Multi-value return | ✅ | ✅ | ✅ |
 | SIMD | ⬜ | ⬜ | ✅ |
 | WASI | ✅ | ✅ | ✅ |
 | `WASMER_BACKTRACE` | ✅ | ⬜ | ⬜ |

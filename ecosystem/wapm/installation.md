@@ -22,7 +22,7 @@ For Windows, Wasmer executable can be found on out [Wasmer Github Releases Page]
 
 ## Installing from Source
 
-Alternatively, you can [build the WAPM cli from source](https://github.com/wapmio/cli#compiling-from-source).
+Alternatively, you can [build the WAPM cli from source](https://github.com/wasmerio/wapm-cli#compiling-from-source).
 
 Next, we can try out WAPM with the Getting Started guide.
 
