@@ -65,5 +65,7 @@ ls $WASMER_C_API
 If these commands work, The compiler and the Wasmer C API are successfully installed!
 {% endhint %}
 
-Next, let's take a look at building a simple Hello World Example!
+Next, let's take a look at some examples!
+
+{% page-ref page="../examples/" %}
 

@@ -13,7 +13,7 @@ curl https://raw.githubusercontent.com/wasienv/wasienv/master/install.sh | sh
 **Note:** This command will also automatically update Wasienv in case you already have it installed
 
 {% hint style="info" %}
-#### Important
+## Important
 
 Wasienv is written in Python. You will need `python` and `pip` accessible in your system for Wasienv to work properly. Wasienv is compatible with Python 2 and 3.
 
@@ -25,6 +25,4 @@ Now that you have Wasienv installed, let's start compiling some languages!
 {% page-ref page="compile-c-c++-to-wasm-wasi.md" %}
 
 {% page-ref page="compile-swift-to-wasm-wasi.md" %}
-
-
 

@@ -2,8 +2,6 @@
 
 ![](../../.gitbook/assets/image%20%283%29.png)
 
-
-
 WebAssembly is already available from Javascript for both the browser and the server \(Node.js\) 🤗
 
 In this case, Wasmer provides a lot of useful packages to interact with WebAssembly modules in Javascript easily.

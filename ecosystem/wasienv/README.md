@@ -8,15 +8,13 @@ description: The toolchain for compiling from any language to WebAssembly WASI e
 
 Currently Wasienv supports the following languages:
 
-### C/C++
+## C/C++
 
 {% page-ref page="compile-c-c++-to-wasm-wasi.md" %}
 
-### Swift
+## Swift
 
 {% page-ref page="compile-swift-to-wasm-wasi.md" %}
-
-
 
 ...sounds exciting? Let's get started!
 

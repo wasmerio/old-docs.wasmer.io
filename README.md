@@ -16,7 +16,7 @@ You can find the source code of the docs here: [github.com/wasmerio/docs.wasmer.
 Any page can be easily edited, just by clicking on the **Edit on Github** link at the top right
 {% endhint %}
 
-### Projects
+## Projects
 
 In addition to the [Wasmer WebAssembly Runtime](ecosystem/wasmer/), we also participate in other projects such as:
 
@@ -25,11 +25,11 @@ In addition to the [Wasmer WebAssembly Runtime](ecosystem/wasmer/), we also part
 
 to name but a few...
 
-### Social
+## Social
 
 For the latest articles on Wasmer features and developments, check out [our blog](https://medium.com/wasmer) or [follow us on Twitter](https://twitter.com/wasmerio)!
 
-### Tutorials
+## Tutorials
 
 If you would like to see tutorials, examples, or reference API documentation about a specific Wasmer project, please use the sidebar to the left, or the search bar at the top of this page in the header.
 
