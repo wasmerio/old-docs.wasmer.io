@@ -6,7 +6,7 @@ TODO: Write this section
 
 ## Interrupting Execution
 
-{% hint style="success" %}
+{% hint style="info" %}
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/early_exit.rs).
 
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
@@ -14,9 +14,9 @@ _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 
 WebAssembly is currently always run in the same process synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host \(your Rust application\).
 
-However, there are cases where you may want to interrupt this synchronous execution while the guest Wasm module is calling a host function. This can be useful for saving resources, and not returning back to the guest Wasm for execution, when you already know the Wasm execution will fail, or no longer be needed.
+However, there are cases where you may want to interrupt this synchronous execution while the guest WASM module is calling a host function. This can be useful for saving resources, and not returning back to the guest WASM for execution, when you already know the WASM execution will fail, or no longer be needed.
 
-In this example, we will run a Wasm module that calls the imported host function `interrupt_execution`. This host function will immediately stop executing the WebAssembly module:
+In this example, we will run a WASM module that calls the imported host function `interrupt_execution`. This host function will immediately stop executing the WebAssembly module:
 
 First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. In this example, we will create a new project named `hello-world`. Thus, lets create it with cargo and navigate to it:
 
@@ -45,9 +45,9 @@ wasmer = "1.0.0-alpha4"
 
 Now that we have the Wasmer crate added as a dependency, let's go ahead and try it out!
 
-## Setting up
+### Setting up
 
-Before we start with the Wasm part we'll have to declare the error we'll use to terminate the execution of the guest module:
+Before we start with the WASM part we'll have to declare the error we'll use to terminate the execution of the guest module:
 
 ```rust
 #[derive(Debug, Clone, Copy)]
@@ -64,9 +64,9 @@ impl std::error::Error for ExitCode {}
 
 There is nothing special or Wasmer specific here but it will be required later in the example.
 
-## Defining and importing the host function
+### Defining and importing the host function
 
-To terminate the execution of the Wasm module we'll have to define a function on the host which will then be imported in the guest and called whenever execution is not required to continue. Let's do that:
+To terminate the execution of the WASM module we'll have to define a function on the host which will then be imported in the guest and called whenever execution is not required to continue. Let's do that:
 
 {% code title="src/main.rs" %}
 ```rust
@@ -84,7 +84,7 @@ let import_object = imports! {
 
 As we saw in previous examples we defined a Rust function, wrap it in a native function definition and import it in the guest module, in the `env` namespace, using the `ImportObject`.
 
-## Handling the error
+### Handling the error
 
 Our module will call the `early_exit` function once we call its `run` function \(which is an exported function\). Let's get the function, call it and see how we can handle the error:
 
@@ -115,11 +115,11 @@ We expect to get an error when calling the `run` function so what we do here is 
 * if we get a success, our test will fail;
 * if we get an error, we try to downcast to our `ExitCode` error.
 
-If downcasting succeeds it means we actually got the expected error so we make the test pass. If it fails, it means the Wasm module reported an error but it wasn't the one we expected so we make the test fail.
+If downcasting succeeds it means we actually got the expected error so we make the test pass. If it fails, it means the WASM module reported an error but it wasn't the one we expected so we make the test fail.
 
 ### Running
 
-We now have everything we need to run the Wasm module, let's do it!
+We now have everything we need to run the WASM module, let's do it!
 
 You should be able to run it using the `cargo run` command. The output should look like this:
 

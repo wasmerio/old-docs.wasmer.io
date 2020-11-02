@@ -102,7 +102,7 @@ Let's have a look at this.
 
 ### Using the native flavor
 
-Let's continue with our previous sum function and see how we can make interacting with it better. To do so, we'll be using the native flavor. With this flavor, passing arguments and getting result will feel more natural.
+Let's continue with our previous `sum` function and see how we can make interacting with it better. To do so, we'll be using the native flavor. With this flavor, passing arguments and getting result will feel more natural.
 
 To use this flavor, we have the choice of fetching the function again or transforming the one we already have into a native function:
 

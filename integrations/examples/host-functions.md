@@ -14,9 +14,9 @@ TODO: Write this section
 **Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/imports_function.rs).
 {% endhint %}
 
-Up until now, our WebAssembly program has only been able to do pure computation, that is, take arguments and return values. Most interesting use cases require more than just computation though. In this section we'll go over how to give the Wasm modules we run extra abilities in the form of host functions in an `ImportObject`.
+Up until now, our WebAssembly program has only been able to do pure computation, that is, take arguments and return values. Most interesting use cases require more than just computation though. In this section we'll go over how to give the WASM modules we run extra abilities in the form of host functions.
 
-In this example, we'll create a system for getting and adjusting a counter value. However, host functions are not limited to storing data outside of Wasm memory, they're normal Rust functions and can do anything that Rust can do.
+In this example, we'll create a system for getting and adjusting a counter value. However, host functions are not limited to storing data outside of WASM, they're normal host functions and can do anything that the host can do.
 
 1. There will be a `get_counter` function that will return an `i32` of
 

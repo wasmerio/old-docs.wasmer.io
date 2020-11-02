@@ -75,9 +75,16 @@ Let's create the import object:
 
 {% tabs %}
 {% tab title="Rust" %}
-{% hint style="warning" %}
-TODO: Write this section
-{% endhint %}
+```rust
+let import_object = imports! {
+    "" => {
+        "host_function" => multiply_dynamic,
+    },
+    "env" => {
+        "host_global" => multiply_native,
+    }
+}
+```
 {% endtab %}
 
 {% tab title="Go" %}
@@ -105,9 +112,9 @@ Now that we have our import object ready, we'll need to use it when instantiatin
 
 {% tabs %}
 {% tab title="Rust" %}
-{% hint style="warning" %}
-TODO: Write this section
-{% endhint %}
+```rust
+let instance = Instance::new(&module, &import_object)?;
+```
 {% endtab %}
 
 {% tab title="Go" %}
@@ -169,6 +176,8 @@ if err != nil {
 Again, we'll not cover how to use these entities here as this is the topic of other, more detailed, examples:
 
 {% page-ref page="calling-guest-functions.md" %}
+
+{% page-ref page="host-functions.md" %}
 
 {% page-ref page="using-exported-globals.md" %}
 

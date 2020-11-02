@@ -59,8 +59,9 @@
   * [Using exported globals](integrations/examples/using-exported-globals.md)
   * [Interacting with memory](integrations/examples/memory.md)
   * [Handling Errors](integrations/examples/errors.md)
-  * [Passing Data](integrations/examples/passing-data.md)
   * [Interrupting Execution](integrations/examples/exit-early.md)
+  * [Passing Data](integrations/examples/passing-data.md)
+  * [Using memory pointers](integrations/examples/memory-pointers.md)
 
 ## 👥 Community
 

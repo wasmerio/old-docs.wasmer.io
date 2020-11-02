@@ -67,7 +67,6 @@ The first step will be to load the WASM module we want to use. This is done by h
 
 {% tabs %}
 {% tab title="Rust" %}
-{% code title="src/main.rs" %}
 ```rust
 let wasm_bytes = wat2wasm(br#"
 (module
@@ -79,7 +78,6 @@ let wasm_bytes = wat2wasm(br#"
   (export "add_one" (func $add_one_f)))
 "#)?;
 ```
-{% endcode %}
 
 {% hint style="info" %}
 Here we are using the text representation of the WASM module. Wasmer wants to have a binary representation of the module so we have to use `wat2wasm` to do the translation.
@@ -87,7 +85,6 @@ Here we are using the text representation of the WASM module. Wasmer wants to ha
 {% endtab %}
 
 {% tab title="Go" %}
-{% code title="src/main.go" %}
 ```go
 wasmBytes := []byte(`
 (module
@@ -99,7 +96,33 @@ wasmBytes := []byte(`
   (export "add_one" (func $add_one_f)))
 `)
 ```
-{% endcode %}
+{% endtab %}
+
+{% tab title="C/C++" %}
+```c
+FILE* file = fopen("module.wasm", "rb");
+
+if (!file) {
+  printf("> Error loading module!\n");
+  
+  return 1;
+}
+
+fseek(file, 0L, SEEK_END);
+size_t file_size = ftell(file);
+fseek(file, 0L, SEEK_SET);
+
+wasm_byte_vec_t binary;
+wasm_byte_vec_new_uninitialized(&binary, file_size);
+
+if (fread(binary.data, file_size, 1, file) != 1) {
+  printf("> Error loading module!\n");
+  
+  return 1;
+}
+
+fclose(file);
+```
 {% endtab %}
 {% endtabs %}
 
@@ -107,19 +130,15 @@ Let's assume we have the binary version of the module \(i.e the `.wasm` file\), 
 
 {% tabs %}
 {% tab title="Rust" %}
-{% code title="src/main.rs" %}
 ```rust
 let wasm_bytes = include_bytes!("./path/to/module.wasm");
 ```
-{% endcode %}
 {% endtab %}
 
 {% tab title="Go" %}
-{% code title="src/main.go" %}
 ```go
 wasmBytes, err := ioutil.ReadFile("./path/to/module.wasm")
 ```
-{% endcode %}
 {% endtab %}
 {% endtabs %}
 
@@ -133,23 +152,39 @@ Here is how we can create the store and compile the module:
 
 {% tabs %}
 {% tab title="Rust" %}
-{% code title="src/main.rs" %}
 ```rust
 let engine = JIT::new(&Cranelift::default()).engine();
 let store = Store::new(&engine);
 let module = Module::new(&store, wasm_bytes)?;
 ```
-{% endcode %}
 {% endtab %}
 
 {% tab title="Go" %}
-{% code title="src/main.go" %}
 ```go
 engine := wasmer.NewEngine()
 store := wasmer.NewStore(engine)
 module, err := wasmer.NewModule(store, wasmBytes)
+
+if err != nil {
+  fmt.Println("Failed to compile module:", err)
+}
 ```
-{% endcode %}
+{% endtab %}
+
+{% tab title="C/C++" %}
+```c
+wasm_engine_t* engine = wasm_engine_new();
+wasm_store_t* store = wasm_store_new(engine);
+wasm_module_t* module = wasm_module_new(store, &binary);
+
+if (!module) {
+  printf("> Error compiling module!\n");
+  
+  return 1;
+}
+
+wasm_byte_vec_delete(&binary);
+```
 {% endtab %}
 {% endtabs %}
 
@@ -167,18 +202,29 @@ In fact, WASM modules can define entities they need to work properly. These are 
 
 {% tabs %}
 {% tab title="Rust" %}
-{% code title="src/main.rs" %}
 ```rust
 let import_object = imports! {};
 let instance = Instance::new(&module, &import_object)?;
 ```
-{% endcode %}
 {% endtab %}
 
 {% tab title="Go" %}
 ```go
 importObject := wasmer.NewImportObject()
 instance, err := wasmer.NewInstance(module, importObject)
+```
+{% endtab %}
+
+{% tab title="C/C++" %}
+```c
+wasm_extern_vec_t imports = WASM_EMPTY_VEC;
+wasm_instance_t* instance = wasm_instance_new(store, module, &imports, NULL);
+  
+if (!instance) {
+  printf("> Error instantiating module %d!\n", i);
+
+  return 1;
+}
 ```
 {% endtab %}
 {% endtabs %}
