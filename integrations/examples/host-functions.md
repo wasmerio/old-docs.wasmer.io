@@ -1,22 +1,14 @@
 ---
 description: >-
-  A WASM module can import entities, like functions, memories, globals and
+  A Wasm module can import entities, like functions, memories, globals and
   tables. This example illustrates how to expose functions from the host.
 ---
 
 # Exposing host functions
 
-{% hint style="warning" %}
-TODO: Write this section
-{% endhint %}
+Up until now, our WebAssembly program has only been able to do pure computation, that is, take arguments and return values. Most interesting use cases require more than just computation though. In this section we'll go over how to give the Wasm modules we run extra abilities in the form of host functions.
 
-{% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/imports_function.rs).
-{% endhint %}
-
-Up until now, our WebAssembly program has only been able to do pure computation, that is, take arguments and return values. Most interesting use cases require more than just computation though. In this section we'll go over how to give the WASM modules we run extra abilities in the form of host functions.
-
-In this example, we'll create a system for getting and adjusting a counter value. However, host functions are not limited to storing data outside of WASM, they're normal host functions and can do anything that the host can do.
+In this example, we'll create a system for getting and adjusting a counter value. However, host functions are not limited to storing data outside of Wasm, they're normal host functions and can do anything that the host can do.
 
 1. There will be a `get_counter` function that will return an `i32` of
 
@@ -28,125 +20,145 @@ In this example, we'll create a system for getting and adjusting a counter value
 
    global counter.
 
-Let's generate a new project, and update our `src/main.rs` to look something like this:
+First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. In this example, we will create a new project. Lets create it and navigate to it:
 
+{% tabs %}
+{% tab title="Rust" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/imports_function_env.rs).
+
+_Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
+{% endhint %}
+
+```bash
+cargo new imported-function-env
+cd imported-function-env
+```
+
+This should generate two important files for us, `Cargo.toml` and `src/main.rs`. The `Cargo.toml` is a file that describes your project and its dependencies. The `src/main.rs` is the entry point for your project, and contains the `fn main() { .. }` that is run when the project is executed.
+
+We then modify the `Cargo.toml` to add the Wasmer dependencies as shown below:
+
+{% code title="Cargo.toml" %}
 ```rust
-use std::{cell::RefCell, sync::Arc};
+[package]
+name = "imported-function-env"
+version = "0.1.0"
+authors = ["The Wasmer Engineering Team <engineering@wasmer.io>"]
+edition = "2018"
 
-// Import the wasmer runtime so we can use it
-use wasmer::{imports, Function, Instance, Module, NativeFunc, Store};
-use wasmer_compiler_cranelift::Cranelift;
-use wasmer_engine_jit::JIT;
+[dependencies]
+# The Wasmer API
+wasmer = "1.0.0-alpha4"
+```
+{% endcode %}
+{% endtab %}
+{% endtabs %}
 
-// Our entry point to our application
-fn main() {
-    // We start by creating the base data structure of Wasm: the Store.
-    // To create the store we need to create an Engine, we chose Wasmer's JIT
-    // engine for this example which will generate native machine code at runtime
-    // and then execute it.
-    // In order to generate this native machine code, we must choose a compiler.
-    // Wasmer offers 3 compilers to choose from; we're using the Cranelift compiler
-    // in this example because of its balance between compile-time speed and runtime speed.
-    let store = Store::new(&JIT::new(&Cranelift::default()).engine());
+Now that we have everything set up, let's go ahead and try it out!
 
-    // Let's get the .wasm file as bytes
-    let wasm_bytes = include_bytes!("../../../../shared/rust/host-functions.wasm");
+## Declaring the data
 
-    // With the Store and the wasm bytes we can create a wasm Module which is
-    // a non-runnable representation of the contents of the wasm file.
-    let module = Module::new(&store, &wasm_bytes[..]).expect("create module");
+Because we want to store data outside of the Wasm module and have host functions use this data, we need to do some preparation. We'll need to declare the data we want to use and the container to hold it.
 
-    // We create some shared data here, [`Arc`] is required because we may
-    // move our WebAssembly instance to another thread to run it.  RefCell
-    // lets us get shared mutabilty which is fine because we know we won't
-    // run hostcalls concurrently.  If concurrency is a possibilty, we'd have to
-    // use a `Mutex`.
-    let shared_counter: Arc<RefCell<i32>> = Arc::new(RefCell::new(0));
+{% tabs %}
+{% tab title="Rust" %}
+```rust
+let shared_counter: Arc<RefCell<i32>> = Arc::new(RefCell::new(0));
 
-    struct Env { counter: Arc<RefCell<i32>> }
-    fn get_counter(env: &mut Env) -> i32 { *env.counter.borrow() }
-    fn add_to_counter(env: &mut Env, add: i32) -> i32 {
-        let mut counter_ref = env.counter.borrow_mut();
-        *counter_ref += add;
-        *counter_ref
+struct Env {
+    counter: Arc<RefCell<i32>>,
+}
+```
+
+{% hint style="info" %}
+Here we use a combination of `Arc` and `RefCell` to guarantee thread safety while allowing mutability.
+{% endhint %}
+{% endtab %}
+{% endtabs %}
+
+## Declaring functions and imports
+
+Now that our data is available we'll declare the functions.
+
+{% tabs %}
+{% tab title="Rust" %}
+```rust
+fn get_counter(env: &mut Env) -> i32 {
+    *env.counter.borrow()
+}
+
+fn add_to_counter(env: &mut Env, add: i32) -> i32 {
+    let mut counter_ref = env.counter.borrow_mut();
+
+    *counter_ref += add;
+    *counter_ref
+}
+```
+
+As you can see here, both functions take an extra parameter in the form of a mutable reference to an `Env` which is the container we created to hold our data.
+{% endtab %}
+{% endtabs %}
+
+The last thing we need to do now is to imports the function in the Wasm module.
+
+{% tabs %}
+{% tab title="Rust" %}
+```rust
+let get_counter_func = Function::new_native_with_env(
+    &store, 
+    Env { counter: shared_counter.clone() }, 
+    get_counter
+);
+
+let add_to_counter_func = Function::new_native_with_env(
+    &store, 
+    Env { counter: shared_counter.clone() }, 
+    add_to_counter
+);
+
+let import_object = imports! {
+    "env" => {
+        "get_counter" => get_counter_func,
+        "add_to_counter" => add_to_counter_func,
     }
+};
+```
 
-    // Let's define the import object used to import our function
-    // into our webassembly sample application.
-    //
-    // Make sure to check your function signature (parameter and return types) carefully!
-    let import_object = imports! {
-        // Define the "host" namespace that was used
-        // by our example rust Wasm crate.
-        "host" => {
-            // Key should be the name of the imported function
-            // Value should be the func! macro, with the function passed in.
-            "get_counter" => Function::new_native_with_env(&store, Env { counter: shared_counter.clone() }, get_counter),
-            "add_to_counter" => Function::new_native_with_env(&store, Env { counter: shared_counter.clone() }, add_to_counter),
-        },
-    };
+We use `Function::new_native_with_env` here to tell Wasmer our host functions need our `Env` to be passed in addition to other arguments. 
 
-    // With our Module and our ImportObject we can create an Instance, which is the runnable
-    // representation of the Wasm file.
-    let instance = Instance::new(&module, &import_object).expect("instantiate module");
+If the host function does not need external data \(it is pure\) we can use `Function::new_native` instead of `Function::new_native_with_env`.
+{% endtab %}
+{% endtabs %}
 
-    // Define the number of times we want to loop our increment
-    let number_of_times_to_loop: i32 = 5;
+Now each time the `add_to_counter` will be run from the Wasm module it will alter the data on the host side. 
 
-    // Let's get `increment_counter_loop` as a function which takes one `i32` and returns one `i32`
-    let increment_counter_loop: NativeFunc<i32, i32> = instance
-        .exports
-        .get_native_function("increment_counter_loop")
-        .expect("increment_counter_loop in Wasm module");
-    let result = increment_counter_loop.call(number_of_times_to_loop).unwrap();
+## Running
 
-    let counter_value: i32 = *shared_counter.borrow();
+We now have everything we need to run the WASM module, let's do it!
 
-    // Log the new value
-    println!("New Counter Value: {}", counter_value);
+{% tabs %}
+{% tab title="Rust" %}
+You should be able to run it using the `cargo run` command. The output should look like this:
 
-    // Assert our counter is the expected value
-    assert_eq!(number_of_times_to_loop, counter_value);
-
-    // Asserting that the returned value from the function is our expected value.
-    assert_eq!(result, counter_value);
-}
+```text
+Compiling module...
+Instantiating module...
+Initial ounter value: 0
+Calling `increment_counter_loop` function...
+New counter value (host): 5
+New counter value (guest): 5
 ```
 
 {% hint style="info" %}
-You can download the `host-functions.wasm` WebAssembly module here:  
-[integrations/shared/rust/host-functions.wasm](https://github.com/wasmerio/docs.wasmer.io/raw/master/integrations/shared/rust/host-functions.wasm)
-{% endhint %}
-
-Now we should be ready to run it!
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
 
 ```bash
-cargo run
-```
-
-{% hint style="info" %}
-If you want to run the examples from the docs codebase directly, you can also do:
-
-```bash
-git clone https://github.com/wasmerio/docs.wasmer.io.git
-cd docs.wasmer.io/integrations/rust/examples/host-functions
+git clone https://github.com/wasmerio/wasmer.git
+cd wasmer
+cargo run --example imported-function-env --release --features "cranelift"
 ```
 {% endhint %}
-
-Both of the functions in this case are closures, but they don't have to be. Host functions can take an optional `&mut Ctx` argument as their first argument, which is how host functions get access to Wasm memory and other WASM-related data.
-
-In the above example we exposed host functions to the guest Wasm module with the namespace and name given in the `imports!` macro. The used namespace is `host` so we list `get_counter` and `add_to_counter` there.
-
-{% hint style="info" %}
-Depending on the ABI of the Wasm module, we may need to expose functions under a different namespace. On the guest side, a non-default import namespace looks like:
-
-```rust
-#[link(wasm_import_module = "namespace")]
-extern "C" {
-   fn import_name(arg: u32);
-}
-```
-{% endhint %}
-
-Next, we will take a look at handling errors from a WebAssembly module!
+{% endtab %}
+{% endtabs %}
 

@@ -1,6 +1,6 @@
 ---
 description: >-
-  A WASM module can export entities, like functions, memories, globals and
+  A Wasm module can export entities, like functions, memories, globals and
   tables. This example illustrates how to call exported functions.
 ---
 
@@ -8,7 +8,7 @@ description: >-
 
 In this example we'll see how to use exported functions.
 
-Exported function are the entities you will probably use the most: they will be your entrypoint to calling WASM module logic.
+Exported function are the entities you will probably use the most: they will be your entrypoint to calling Wasm module logic.
 
 Exported function come in two flavors:
 
@@ -22,7 +22,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/exports_function.rs).
 
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 {% endhint %}
@@ -53,7 +53,7 @@ wasmer = "1.0.0-alpha4"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_exports_function_test.go).
 
 _Please take a look at the_ _setup steps for Go._
 {% endhint %}
@@ -68,9 +68,9 @@ go mod init github.com/$USER/wasmer-example-imports-exports
 
 Now that we have everything set up, let's go ahead and try it out!
 
-### Using the dynamic flavor
+## Using the dynamic flavor
 
-We'll start by fetching the guest function and see how to call it using the dynamic flavor. Our WASM module exports a `sum` function, let's get and call it:
+We'll start by fetching the guest function and see how to call it using the dynamic flavor. Our Wasm module exports a `sum` function, let's get and call it:
 
 {% tabs %}
 {% tab title="Rust" %}
@@ -100,7 +100,7 @@ Both example look nice but it does not seem like we are using standard functions
 
 Let's have a look at this.
 
-### Using the native flavor
+## Using the native flavor
 
 Let's continue with our previous `sum` function and see how we can make interacting with it better. To do so, we'll be using the native flavor. With this flavor, passing arguments and getting result will feel more natural.
 
@@ -148,9 +148,9 @@ if err != nil {
 {% endtab %}
 {% endtabs %}
 
-### Running
+## Running
 
-We now have everything we need to run the WASM module, let's do it!
+We now have everything we need to run the Wasm module, let's do it!
 
 {% tabs %}
 {% tab title="Rust" %}

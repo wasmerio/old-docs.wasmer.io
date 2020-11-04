@@ -20,7 +20,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/exports_global.rs).
 
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 {% endhint %}
@@ -51,7 +51,7 @@ wasmer = "1.0.0-alpha4"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_exports_global_test.go).
 
 _Please take a look at the_ _setup steps for Go._
 {% endhint %}
@@ -66,12 +66,12 @@ go mod init github.com/$USER/wasmer-example-imports-exports
 
 Now that we have everything set up, let's go ahead and try it out!
 
-### Querying types information
+## Querying types information
 
 The first interesting thing to do is to query their type information in order to know if they are mutable or not. Our module exports two globals, `one` and `some` Which one is mutable and which one is not?
 
 {% tabs %}
-{% tab title="Rust" %}
+
 ```rust
 let one = instance.exports.get_global("one")?;
 let some = instance.exports.get_global("some")?;
@@ -82,25 +82,23 @@ let some_type = some.ty();
 println!("one type: {:?} {:?}", one_type.mutability, one_type.ty);
 println!("some type: {:?} {:?}", some_type.mutability, some_type.ty);
 ```
-{% endtab %}
 
-{% tab title="Go" %}
 ```go
 one := utils.GetGlobal(instance, "one")
 some := utils.GetGlobal(instance, "some")
 
 oneType := one.Type()
 someType := some.Type()
-	
+
 fmt.Printf(
-	"`one` type: %s %s\n", 
-	oneType.Mutability(), 
-	oneType.ValueType().Kind().String()
+    "`one` type: %s %s\n", 
+    oneType.Mutability(), 
+    oneType.ValueType().Kind().String()
 )
 fmt.Printf(
-	"`some` type: %s %s\n", 
-	someType.Mutability(), 
-	someType.ValueType().Kind().String()
+    "`some` type: %s %s\n", 
+    someType.Mutability(), 
+    someType.ValueType().Kind().String()
 )
 ```
 
@@ -113,59 +111,30 @@ If you want to know how to fetch exported globals, have a look at the following 
 
 {% page-ref page="imports-and-exports.md" %}
 {% endhint %}
-{% endtab %}
-{% endtabs %}
 
-### Getting globals values
+## Getting globals values
 
 The global API is straightforward: it provides a dedicated method to get the value of a given global. Look how easy it is:
 
 {% tabs %}
-{% tab title="Rust" %}
-```rust
-let one_value = one.get();
-let some_value = some.get();
-```
-{% endtab %}
+{% tab %}
 
-{% tab title="Go" %}
-```go
-oneValue, err := one.Get()
-if err != nil {
-  panic(fmt.Sprintln("Failed to get the `one` global value:", err))
-}
-
-someValue, err = some.Get()
-if err != nil {
-  panic(fmt.Sprintln("Failed to get the `some` global value:", err))
-}
-```
 {% endtab %}
 {% endtabs %}
 
-### Setting globals 
+## Setting globals
 
 As we said before, globals come in two flavor. Immutable globals, for which we can only set a value once and mutable ones.
 
 First we'll try to set the value of a immutable global and see what happens:
 
 {% tabs %}
-{% tab title="Rust" %}
-```rust
-let result = one.set(Value::F32(42.0));
-assert_eq!(
-    result.expect_err("Expected an error").message(),
-    "Attempted to set an immutable global"
-);
-```
-{% endtab %}
-
 {% tab title="Go" %}
 ```go
 err = one.Set(float32(42.0), wasmer.F32)
 
 if err == nil {
-	panic(fmt.Sprintln("Setting value to `one` did not error"))
+    panic(fmt.Sprintln("Setting value to `one` did not error"))
 }
 ```
 {% endtab %}
@@ -176,62 +145,23 @@ As you can see here, trying to set a value on a immutable global will always lea
 Now let's see how to correctly set a value on a mutable global:
 
 {% tabs %}
-{% tab title="Rust" %}
-```rust
-some.set(Value::F32(42.0))?;
-let some_result = some.get();
-println!("some value after `set`: {:?}", some_result);
-```
-{% endtab %}
-
 {% tab title="Go" %}
 ```go
 err = some.Set(float32(42.0), wasmer.F32)
 
 if err != nil {
-	panic(fmt.Sprintln("Failed to set the `some` global value:", err))
+    panic(fmt.Sprintln("Failed to set the `some` global value:", err))
 }
 ```
 {% endtab %}
 {% endtabs %}
 
-### Running
+## Running
 
 We now have everything we need to run the WASM module, let's do it!
 
 {% tabs %}
-{% tab title="Rust" %}
-You should be able to run it using the `cargo run` command. The output should look like this:
-
-```text
-Compiling module...
-Instantiating module...
-Getting globals types information...
-one type: Const F32
-some type: Var F32
-Getting global values...
-one value: 1.0
-some value: F32(0.0)
-Setting global values...
-one value after `set`: F32(1.0)
-some value after `set_some`: F32(21.0)
-some value after `set`: F32(42.0)
-```
-
-{% hint style="info" %}
-If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
-
-```bash
-git clone https://github.com/wasmerio/wasmer.git
-cd wasmer
-cargo run --example exported-global --release --features "cranelift"
-```
-{% endhint %}
-{% endtab %}
-
 {% tab title="Go" %}
-You should be able to run it using the `go run main.go` command. The output should look like this:
-
 ```text
 Compiling module...
 Instantiating module...

@@ -33,7 +33,6 @@
   * [Wasmer C API](https://wasmerio.github.io/wasmer/c/runtime-c-api/)
 * [Javascript](integrations/js/README.md)
   * [WASI](integrations/js/wasi/README.md)
-    * [Untitled](integrations/js/wasi/untitled.md)
     * [Browser](integrations/js/wasi/browser/README.md)
       * [Examples](integrations/js/wasi/browser/examples/README.md)
         * [Hello World](integrations/js/wasi/browser/examples/hello-world.md)
@@ -52,7 +51,7 @@
     * [@wasmer/wasmfs](integrations/js/reference-api/wasmer-wasmfs.md)
   * [Wasmer-JS on Github](https://github.com/wasmerio/wasmer-js)
 * [Examples](integrations/examples/README.md)
-  * [Instantiating a WASM module](integrations/examples/instance.md)
+  * [Instantiating a Wasm module](integrations/examples/instance.md)
   * [Imports & exports](integrations/examples/imports-and-exports.md)
   * [Calling guest functions](integrations/examples/calling-guest-functions.md)
   * [Exposing host functions](integrations/examples/host-functions.md)
@@ -60,7 +59,6 @@
   * [Interacting with memory](integrations/examples/memory.md)
   * [Handling Errors](integrations/examples/errors.md)
   * [Interrupting Execution](integrations/examples/exit-early.md)
-  * [Passing Data](integrations/examples/passing-data.md)
   * [Using memory pointers](integrations/examples/memory-pointers.md)
 
 ## 👥 Community

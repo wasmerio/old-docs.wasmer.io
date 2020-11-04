@@ -1,13 +1,13 @@
 ---
 description: >-
-  A WASM module can import and export entities, like functions, memories,
+  A Wasm module can import and export entities, like functions, memories,
   globals and tables. This example illustrates the basics of using these
   entities.
 ---
 
 # Imports & exports
 
-In this example we'll be using a sample WASM module which exports some entities and requires us to also import some of them.
+In this example we'll be using a sample Wasm module which exports some entities and requires us to also import some of them.
 
 The goal here is to give you an idea of how to work with imports and exports. We won't go into the details of each entities, they'll be covered in more details in the other examples.
 
@@ -16,8 +16,6 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
-
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 {% endhint %}
 
@@ -47,7 +45,7 @@ wasmer = "1.0.0-alpha4"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_imports_exports_test.go).
 
 _Please take a look at the_ _setup steps for Go._
 {% endhint %}
@@ -62,9 +60,9 @@ go mod init github.com/$USER/wasmer-example-imports-exports
 
 Now that we have everything set up, let's go ahead and try it out!
 
-### Declaring imports
+## Declaring imports
 
-When a WASM modules declares imports you will have to make them available before you can instantiate the module. Our first task will be to create the required entities.
+When a Wasm modules declares imports you will have to make them available before you can instantiate the module. Our first task will be to create the required entities.
 
 The module we are using needs two imports:
 
@@ -78,10 +76,10 @@ Let's create the import object:
 ```rust
 let import_object = imports! {
     "" => {
-        "host_function" => multiply_dynamic,
+        "host_function" => host_function,
     },
     "env" => {
-        "host_global" => multiply_native,
+        "host_global" => host_global,
     }
 }
 ```
@@ -92,17 +90,17 @@ let import_object = imports! {
 importObject := wasmer.NewImportObject()
 
 importObject.Register(
-	"",
-	map[string]wasmer.IntoExtern{
-		"host_function": hostFunction,
-	},
+    "",
+    map[string]wasmer.IntoExtern{
+        "host_function": hostFunction,
+    },
 )
 
 importObject.Register(
-	"env",
-	map[string]wasmer.IntoExtern{
-		"host_global":   hostGlobal,
-	},
+    "env",
+    map[string]wasmer.IntoExtern{
+        "host_global":   hostGlobal,
+    },
 )
 ```
 {% endtab %}
@@ -130,7 +128,7 @@ We did not go into the details of how to create the imported entities, we encour
 
 {% page-ref page="host-functions.md" %}
 
-### Fetching exports
+## Fetching exports
 
 Let's have a look at our module again: it exports some entities for us in our host program:
 
@@ -157,17 +155,17 @@ if err != nil {
 
 global, err := instance.Exports.GetGlobal("guest_global")
 if err != nil {
-	panic(fmt.Sprintln("Failed to get the exported global:", err))
+    panic(fmt.Sprintln("Failed to get the exported global:", err))
 }
 
 memory, err := instance.Exports.GetMemory("guest_memory")
 if err != nil {
-	panic(fmt.Sprintln("Failed to get the exported memory:", err))
+    panic(fmt.Sprintln("Failed to get the exported memory:", err))
 }
 
 table, err := instance.Exports.GetTable("guest_table")
 if err != nil {
-	panic(fmt.Sprintln("Failed to get the exported table:", err))
+    panic(fmt.Sprintln("Failed to get the exported table:", err))
 }
 ```
 {% endtab %}
@@ -183,9 +181,9 @@ Again, we'll not cover how to use these entities here as this is the topic of ot
 
 {% page-ref page="memory.md" %}
 
-### Running
+## Running
 
-We now have everything we need to run the WASM module, let's do it!
+We now have everything we need to run the Wasm module, let's do it!
 
 {% tabs %}
 {% tab title="Rust" %}

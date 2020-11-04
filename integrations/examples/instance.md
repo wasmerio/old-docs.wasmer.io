@@ -4,11 +4,11 @@ description: >-
   World"-like project.
 ---
 
-# Instantiating a WASM module
+# Instantiating a Wasm module
 
-In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats directly right now, thus to keep it simple we will be writing a host application that calls the `add_one` function of a guest WASM module, which adds `1` to the value passed as a parameter, and returns the result.
+In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats directly right now, thus to keep it simple we will be writing a host application that calls the `add_one` function of a guest Wasm module, which adds `1` to the value passed as a parameter, and returns the result.
 
-The goal here is to show you the basics of using Wasmer, we'll focus on the steps required to get an instance out of a WASM module.
+The goal here is to show you the basics of using Wasmer, we'll focus on the steps required to get an instance out of a Wasm module.
 
 First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. In this example, we will create a new project. Lets create it and navigate to it:
 
@@ -46,7 +46,7 @@ wasmer = "1.0.0-alpha4"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_instance_test.go).
 
 _Please take a look at the_ _setup steps for Go._
 {% endhint %}
@@ -61,9 +61,9 @@ go mod init github.com/$USER/wasmer-example-instance
 
 Now that we have everything set up, let's go ahead and try it out!
 
-### Loading the WASM module
+## Loading the Wasm module
 
-The first step will be to load the WASM module we want to use. This is done by having its contents loaded as bytes:
+The first step will be to load the Wasm module we want to use. This is done by having its contents loaded as bytes:
 
 {% tabs %}
 {% tab title="Rust" %}
@@ -80,7 +80,7 @@ let wasm_bytes = wat2wasm(br#"
 ```
 
 {% hint style="info" %}
-Here we are using the text representation of the WASM module. Wasmer wants to have a binary representation of the module so we have to use `wat2wasm` to do the translation.
+Here we are using the text representation of the Wasm module. Wasmer wants to have a binary representation of the module so we have to use `wat2wasm` to do the translation.
 {% endhint %}
 {% endtab %}
 
@@ -104,7 +104,7 @@ FILE* file = fopen("module.wasm", "rb");
 
 if (!file) {
   printf("> Error loading module!\n");
-  
+
   return 1;
 }
 
@@ -117,7 +117,7 @@ wasm_byte_vec_new_uninitialized(&binary, file_size);
 
 if (fread(binary.data, file_size, 1, file) != 1) {
   printf("> Error loading module!\n");
-  
+
   return 1;
 }
 
@@ -142,9 +142,9 @@ wasmBytes, err := ioutil.ReadFile("./path/to/module.wasm")
 {% endtab %}
 {% endtabs %}
 
-### Compiling the WASM module
+## Compiling the Wasm module
 
-The next step will be to compile the module. To do this, we'll need two things: the WASM module as bytes and a `Store`.
+The next step will be to compile the module. To do this, we'll need two things: the Wasm module as bytes and a `Store`.
 
 The `Store` is a representation of the actual state of the module: it represents the state of every entities in the module during its lifecycle. It also holds the engine which is what will be used to actually compile the module.
 
@@ -179,7 +179,7 @@ wasm_module_t* module = wasm_module_new(store, &binary);
 
 if (!module) {
   printf("> Error compiling module!\n");
-  
+
   return 1;
 }
 
@@ -192,13 +192,13 @@ As you can see, we created a store with the JIT engine and the Cranelift compile
 
 {% hint style="info" %}
 
-### Creating an instance of the module
+## Creating an instance of the module
 
 We are now close to having the module run in our Rust host.
 
-The last step will be to create an `Instance` out of the WASM module. As for the previous step, here we need more than just the compiled module: we also need to define imports.
+The last step will be to create an `Instance` out of the Wasm module. As for the previous step, here we need more than just the compiled module: we also need to define imports.
 
-In fact, WASM modules can define entities they need to work properly. These are called imports. In this example we don't need any of them but we still need to define an empty set and use it to instantiate the module:
+In fact, Wasm modules can define entities they need to work properly. These are called imports. In this example we don't need any of them but we still need to define an empty set and use it to instantiate the module:
 
 {% tabs %}
 {% tab title="Rust" %}
@@ -219,7 +219,7 @@ instance, err := wasmer.NewInstance(module, importObject)
 ```c
 wasm_extern_vec_t imports = WASM_EMPTY_VEC;
 wasm_instance_t* instance = wasm_instance_new(store, module, &imports, NULL);
-  
+
 if (!instance) {
   printf("> Error instantiating module %d!\n", i);
 
@@ -229,9 +229,9 @@ if (!instance) {
 {% endtab %}
 {% endtabs %}
 
-### Running
+## Running
 
-We now have everything we need to run the WASM module, let's do it!
+We now have everything we need to run the Wasm module, let's do it!
 
 {% tabs %}
 {% tab title="Rust" %}

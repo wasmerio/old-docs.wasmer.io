@@ -42,7 +42,7 @@ wasmer = "1.0.0-alpha4"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_early_exit_test.go).
 
 _Please take a look at the_ _setup steps for Go._
 {% endhint %}
@@ -57,7 +57,7 @@ go mod init github.com/$USER/wasmer-example-early-exit
 
 Now that we have everything set up, let's go ahead and try it out!
 
-### Setting up
+## Setting up
 
 Before we start with the WASM part we'll have to declare the error we'll use to terminate the execution of the guest module:
 
@@ -80,11 +80,11 @@ impl std::error::Error for ExitCode {}
 {% tab title="Go" %}
 ```go
 type exitCode struct {
-	code int32
+    code int32
 }
 
 func (self *exitCode) Error() string {
-	return fmt.Sprintf("exit code: %d", self.code)
+    return fmt.Sprintf("exit code: %d", self.code)
 }
 ```
 {% endtab %}
@@ -92,7 +92,7 @@ func (self *exitCode) Error() string {
 
 There is nothing special or Wasmer specific here but it will be required later in the example.
 
-### Defining and importing the host function
+## Defining and importing the host function
 
 To terminate the execution of the WASM module we'll have to define a function on the host which will then be imported in the guest and called whenever execution is not required to continue. Let's do that:
 
@@ -116,19 +116,19 @@ let import_object = imports! {
 {% tab title="Go" %}
 ```go
 func earlyExit(args []wasmer.Value) ([]wasmer.Value, error) {
-	return nil, &exitCode{1}
+    return nil, &exitCode{1}
 }
 
 importObject := wasmer.NewImportObject()
 importObject.Register(
-	"env",
-	map[string]wasmer.IntoExtern{
-		"early_exit": wasmer.NewFunction(
-			store,
-			wasmer.NewFunctionType(wasmer.NewValueTypes(), wasmer.NewValueTypes()),
-			earlyExit,
-		),
-	},
+    "env",
+    map[string]wasmer.IntoExtern{
+        "early_exit": wasmer.NewFunction(
+            store,
+            wasmer.NewFunctionType(wasmer.NewValueTypes(), wasmer.NewValueTypes()),
+            earlyExit,
+        ),
+    },
 )
 ```
 {% endtab %}
@@ -136,12 +136,12 @@ importObject.Register(
 
 As we saw in previous examples we defined a Rust function, wrap it in a native function definition and import it in the guest module, in the `env` namespace, using the `ImportObject`.
 
-### Handling the error
+## Handling the error
 
 Our module will call the `early_exit` function once we call its `run` function \(which is an exported function\). Let's get the function, call it and see how we can handle the error:
 
 {% tabs %}
-{% tab title="Rust" %}
+
 {% code title="src/main.rs" %}
 ```rust
 let run_func: NativeFunc<(i32, i32), i32> = instance
@@ -172,16 +172,14 @@ We expect to get an error when calling the `run` function so what we do here is 
 * if we get an error, we try to downcast to our `ExitCode` error.
 
 If downcasting succeeds it means we actually got the expected error so we make the test pass. If it fails, it means the WASM module reported an error but it wasn't the one we expected so we make the test fail.
-{% endtab %}
 
-{% tab title="Go" %}
 ```go
 run := utils.GetFunction(instance, "run")
 
 _, err = run(1, 7)
 
 if err == nil {
-	panic(fmt.Sprintln("`run` did not error"))
+    panic(fmt.Sprintln("`run` did not error"))
 }
 
 fmt.Println("Exited early with:", err)
@@ -196,56 +194,14 @@ If you want to know how to fetch exported globals, have a look at the following 
 
 {% page-ref page="imports-and-exports.md" %}
 {% endhint %}
-{% endtab %}
-{% endtabs %}
 
-### Running
+## Running
 
 We now have everything we need to run the WASM module, let's do it!
 
 {% tabs %}
-{% tab title="Rust" %}
-You should be able to run it using the `cargo run` command. The output should look like this:
+{% tab %}
 
-```text
-Compiling module...
-Instantiating module...
-Calling `run` function...
-Exited early with exit code: 1
-```
-
-{% hint style="info" %}
-If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
-
-```bash
-git clone https://github.com/wasmerio/wasmer.git
-cd wasmer
-cargo run --example early-exit --release --features "cranelift"
-```
-{% endhint %}
-{% endtab %}
-
-{% tab title="Go" %}
-You should be able to run it using the `go run main.go` command. The output should look like this:
-
-```text
-Compiling module...
-Instantiating module...
-Calling `run` function...
-Exited early with: exit code: 1
-```
-
-{% hint style="info" %}
-If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
-
-```text
-git clone https://github.com/wasmerio/wasmer-go.git
-cd wasmer-go
-go test examples/example_early_exit_test.go
-```
-{% endhint %}
 {% endtab %}
 {% endtabs %}
-
-
 

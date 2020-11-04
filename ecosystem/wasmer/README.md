@@ -4,7 +4,7 @@ Wasmer allows you to run WebAssembly modules either **Standalone** or **Embedded
 
 By design, the environment within which a WebAssembly module runs is completely isolated \(or _sandboxed_\) from the native functionality of the underlying host system. This means that _by default_, Wasm modules are designed to perform nothing more than pure computation.
 
-Consequently, access to "OS"-level resources such as file descriptors, network sockets, the system clock, and random numbers is not normally possible from WASM.
+Consequently, access to "OS"-level resources such as file descriptors, network sockets, the system clock, and random numbers is not normally possible from Wasm.
 
 However, there are many cases in which a Wasm module needs to do more than perform pure computation; they must interact with native "OS" functionality.
 

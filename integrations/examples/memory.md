@@ -21,7 +21,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/memory.rs).
 
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 {% endhint %}
@@ -52,7 +52,7 @@ wasmer = "1.0.0-alpha4"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_memory_test.go).
 
 _Please take a look at the_ _setup steps for Go._
 {% endhint %}
@@ -67,7 +67,7 @@ go mod init github.com/$USER/wasmer-example-memory
 
 Now that we have everything set up, let's go ahead and try it out!
 
-### Querying memory information
+## Querying memory information
 
 The first interesting thing to do is to query information about the memory. To do that we must either have access to the memory \(i.e it has to be exported\) or we must have access to an exported function which is able to give us this information.
 
@@ -100,7 +100,7 @@ memSize := utils.GetFunction(instance, "mem_size")
 memory, err := instance.Exports.GetMemory("memory")
 
 if err != nil {
-	panic(fmt.Sprintln("Failed to get the `memory` memory:", err))
+    panic(fmt.Sprintln("Failed to get the `memory` memory:", err))
 }
 
 size := memory.Size()
@@ -111,7 +111,7 @@ fmt.Println("Memory size (bytes):", memory.DataSize())
 result, err := memSize()
 
 if err != nil {
-	panic(fmt.Sprintln("Failed to call the `mem_size` function:", err))
+    panic(fmt.Sprintln("Failed to call the `mem_size` function:", err))
 }
 
 fmt.Println("Memory size (pages):", result)
@@ -131,32 +131,19 @@ If you want to know how to fetch exported globals, have a look at the following 
 
 Now that we know the size of our memory it's time to see how we can change this.
 
-### Growing the memory
+## Growing the memory
 
-A memory can be grown to allow storing more things into it. This is easily done through 
+A memory can be grown to allow storing more things into it. This is easily done through
 
 {% tabs %}
-{% tab title="Rust" %}
-```rust
-memory.grow(2)?;
+{% tab %}
 
-assert_eq!(memory.size(), Pages::from(3));
-assert_eq!(memory.data_size(), 65536 * 3);
-```
-{% endtab %}
-
-{% tab title="Go" %}
-```go
-memory.Grow(2)
-
-fmt.Println("New memory size (pages):", memory.Size())
-```
 {% endtab %}
 {% endtabs %}
 
 To grow a memory you have to call the dedicated method and provide the number of pages, called the delta, you want to add to the memory.
 
-### Reading from and writing to the memory
+## Reading from and writing to the memory
 
 Now that we know how to query and adjust the size of the memory, let's see how we can write to it or read from it.
 
@@ -165,7 +152,7 @@ We'll only focus on how to do this using exported functions, the goal is to show
 Let's start by using absolute memory addresses to write and read a value.
 
 {% tabs %}
-{% tab title="Rust" %}
+
 ```rust
 let get_at: NativeFunc<i32, i32> = instance
     .exports
@@ -173,7 +160,7 @@ let get_at: NativeFunc<i32, i32> = instance
 let set_at: NativeFunc<(i32, i32), ()> = instance
     .exports
     .get_native_function("set_at")?;
-    
+
 let mem_addr = 0x2220;
 let val = 0xFEFEFFE;
 
@@ -184,31 +171,9 @@ println!("Value at {:#x?}: {:?}", mem_addr, result);
 
 assert_eq!(result, val);
 ```
-{% endtab %}
-
-{% tab title="Go" %}
-```go
-getAt := utils.GetFunction(instance, "get_at")
-setAt := utils.GetFunction(instance, "set_at")
-
-memAddr := 0x2220
-val := 0xFEFEFFE
-_, err = setAt(memAddr, val)
-
-if err != nil {
-	panic(fmt.Sprintln("Failed to call the `set_at` function:", err))
-}
-
-result, err = getAt(memAddr)
-
-if err != nil {
-	panic(fmt.Sprintln("Failed to call the `get_at` function:", err))
-}
-
-fmt.Printf("Value at 0x%x: %d\n", memAddr, result)
-```
 
 {% hint style="warning" %}
+
 Note that here we used an helper function: `utils.GetFunction`. This is just to avoid repeating the boilerplate code required to handle errors.
 
 **This helper function is not part of the Wasmer API.**
@@ -216,45 +181,12 @@ Note that here we used an helper function: `utils.GetFunction`. This is just to 
 If you want to know how to fetch exported globals, have a look at the following example:
 
 {% page-ref page="imports-and-exports.md" %}
-{% endhint %}
-{% endtab %}
-{% endtabs %}
 
 Now assume we want to write a value at the end of the second memory page and the read it. Let's see how we can do that:
 
 {% tabs %}
-{% tab title="Rust" %}
-```rust
-let page_size = 0x1_0000;
-let mem_addr = (page_size * 2) - mem::size_of_val(&val) as i32;
-let val = 0xFEA09;
-set_at.call(mem_addr, val)?;
+{% tab %}
 
-let result = get_at.call(mem_addr)?;
-println!("Value at {:#x?}: {:?}", mem_addr, result);
-assert_eq!(result, val);
-```
-{% endtab %}
-
-{% tab title="Go" %}
-```go
-pageSize := 0x1_0000
-memAddr = (pageSize * 2) - int(unsafe.Sizeof(val))
-val = 0xFEA09
-_, err = setAt(memAddr, val)
-
-if err != nil {
-	panic(fmt.Sprintln("Failed to call the `set_at` function:", err))
-}
-
-result, err = getAt(memAddr)
-
-if err != nil {
-	panic(fmt.Sprintln("Failed to call the `get_at` function:", err))
-}
-
-fmt.Printf("Value at 0x%x: %d\n", memAddr, result)
-```
 {% endtab %}
 {% endtabs %}
 
@@ -270,35 +202,11 @@ It enough for now: we only covered how to interact with the memory through expor
 
 {% page-ref page="memory-pointers.md" %}
 
-### Running
+## Running
 
 We now have everything we need to run the WASM module, let's do it!
 
 {% tabs %}
-{% tab title="Rust" %}
-You should be able to run it using the `cargo run` command. The output should look like this:
-
-```text
-Compiling module...
-Instantiating module...
-Querying memory size...
-Memory size: 1
-Growing memory...
-Value at 0x2220: 267382782
-Value at 0x1fffc: 1042953
-```
-
-{% hint style="info" %}
-If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
-
-```bash
-git clone https://github.com/wasmerio/wasmer.git
-cd wasmer
-cargo run --example memory --release --features "cranelift"
-```
-{% endhint %}
-{% endtab %}
-
 {% tab title="Go" %}
 You should be able to run it using the `go run main.go` command. The output should look like this:
 

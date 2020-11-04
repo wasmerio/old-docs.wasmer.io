@@ -46,7 +46,7 @@ wasmer = "1.0.0-alpha4"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_errors_test.go).
 
 _Please take a look at the_ _setup steps for Go._
 {% endhint %}
@@ -61,7 +61,7 @@ go mod init github.com/$USER/wasmer-example-errors
 
 Now that we have everything set up, let's go ahead and try it out!
 
-### Handling the error
+## Handling the error
 
 There is nothing special about the WASM module or the way we'll set it up.
 
@@ -86,7 +86,7 @@ let result = div_by_zero.call();
 divByZero, err := instance.Exports.GetFunction("div_by_zero")
 
 if err != nil {
-	panic(fmt.Sprintln("Failed to get the `div_by_zero` function:", err))
+    panic(fmt.Sprintln("Failed to get the `div_by_zero` function:", err))
 }
 
 _, err = divByZero()
@@ -125,26 +125,26 @@ match result {
 {% tab title="Go" %}
 ```go
 if err == nil {
-	panic(fmt.Sprintln("`div_by_zero` did not error"))
+    panic(fmt.Sprintln("`div_by_zero` did not error"))
 }
-	
+
 fmt.Println("Error caught from `div_by_zero`:", err)
 
 trap, ok := err.(*wasmer.TrapError)
 
 if !ok {
-	panic(fmt.Sprintln("Error was not of the expected type"))
+    panic(fmt.Sprintln("Error was not of the expected type"))
 }
 
 frames := trap.Trace()
 framesLen := len(frames)
 
 for index, frame := range frames {
-	fmt.Printf(
-		"  Frame #%d: function index: %d\n", 
-		framesLen - index, 
-		frame.FunctionIndex()
-	)
+    fmt.Printf(
+        "  Frame #%d: function index: %d\n", 
+        framesLen - index, 
+        frame.FunctionIndex()
+    )
 }
 ```
 {% endtab %}
@@ -157,7 +157,7 @@ If we got an error we format a nice message containing information to help debug
 * The error message.
 * The error trace.
 
-### Running
+## Running
 
 We now have everything we need to run the WASM module, let's do it!
 
