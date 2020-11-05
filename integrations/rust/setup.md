@@ -26,3 +26,7 @@ If these commands work, Rust is successfully installed!
 
 Next, let's take a look at some examples!
 
+{% page-ref page="../examples/" %}
+
+
+

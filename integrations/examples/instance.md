@@ -48,7 +48,7 @@ wasmer = "1.0.0-alpha4"
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_instance_test.go).
 
-_Please take a look at the_ _setup steps for Go._
+_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
 
 ```text
@@ -166,7 +166,7 @@ let store = Store::new(&engine);
 let module = Module::new(&store, wasm_bytes)?;
 ```
 
-Ce created a store with the JIT engine and the Cranelift compiler with its default configuration. These are good defaults but it will be a good thing to adapt this configuration to your needs.
+We created a store with the JIT engine and the Cranelift compiler with its default configuration. These are good defaults but it will be a good thing to adapt this configuration to your needs.
 {% endhint %}
 {% endtab %}
 

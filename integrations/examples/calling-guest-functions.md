@@ -55,7 +55,7 @@ wasmer = "1.0.0-alpha4"
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_exports_function_test.go).
 
-_Please take a look at the_ _setup steps for Go._
+_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
 
 ```text
