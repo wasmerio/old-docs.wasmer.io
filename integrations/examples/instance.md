@@ -131,7 +131,7 @@ Let's assume we have the binary version of the module \(i.e the `.wasm` file\), 
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let wasm_bytes = include_bytes!("./path/to/module.wasm");
+let wasm_bytes = std::fs::read("./path/to/module.wasm")?;
 ```
 {% endtab %}
 
@@ -153,10 +153,21 @@ Here is how we can create the store and compile the module:
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
+let store = Store::default();
+let module = Module::new(&store, wasm_bytes)?;
+```
+
+{% hint style="info" %}
+We are creating a store using the default settings provided by Wasmer. In some cases, you may want to use a specific engine or compiler. Here is how you would do:
+
+```rust
 let engine = JIT::new(&Cranelift::default()).engine();
 let store = Store::new(&engine);
 let module = Module::new(&store, wasm_bytes)?;
 ```
+
+Ce created a store with the JIT engine and the Cranelift compiler with its default configuration. These are good defaults but it will be a good thing to adapt this configuration to your needs.
+{% endhint %}
 {% endtab %}
 
 {% tab title="Go" %}
@@ -187,10 +198,6 @@ wasm_byte_vec_delete(&binary);
 ```
 {% endtab %}
 {% endtabs %}
-
-As you can see, we created a store with the JIT engine and the Cranelift compiler with its default configuration. These are good defaults but it will be a good thing to adapt this configuration to your needs.
-
-{% hint style="info" %}
 
 ## Creating an instance of the module
 

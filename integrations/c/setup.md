@@ -67,5 +67,3 @@ If these commands work, The compiler and the Wasmer C API are successfully insta
 
 Next, let's take a look at some examples!
 
-{% page-ref page="../examples/" %}
-
