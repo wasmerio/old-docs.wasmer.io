@@ -58,5 +58,3 @@ $ wasmer example.wasm
 Hello, WASI!
 ```
 
-
-

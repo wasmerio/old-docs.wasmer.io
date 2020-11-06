@@ -24,5 +24,9 @@ cargo -V # This will work
 If these commands work, Rust is successfully installed!
 {% endhint %}
 
-Next, let's take a look at building a simple Hello World Example!
+Next, let's take a look at some examples!
+
+{% page-ref page="../examples/" %}
+
+
 

@@ -102,7 +102,6 @@ FLAGS:
                         config` format
         --prefix        Print the installation prefix
     -V, --version       Prints version information
-
 ```
 
 ## `wasmer create-exe`
@@ -277,3 +276,4 @@ OPTIONS:
 ARGS:
     <FILE>    Wast file to run
 ```
+
