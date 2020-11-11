@@ -27,11 +27,11 @@ edition = "2018"
 
 [dependencies]
 # The Wasmer API
-wasmer = "1.0.0-alpha01.0"
+wasmer = "1.0.0-alpha5"
 # The Cranelift compiler used by the JIT engine
-wasmer-compiler-cranelift = "1.0.0-alpha01.0"
+wasmer-compiler-cranelift = "1.0.0-alpha5"
 # The engine we'll use in the API
-wasmer-engine-jit = "1.0.0-alpha01.0"
+wasmer-engine-jit = "1.0.0-alpha5"
 ```
 {% endcode %}
 
