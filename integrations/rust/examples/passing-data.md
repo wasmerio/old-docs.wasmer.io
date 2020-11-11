@@ -22,9 +22,22 @@ For example, some ABIs will provide functions, either as imports or exports, for
 
 In this example, let's say we have a Wasm module that can perform transformations on a string passed into the module's memory. This module exports a function that returns a pointer to a fixed size static buffer. This Wasm module will take in a string, and append the string " Wasm is cool!" to the end. This example shows how we can read and write memory from the host \(your Rust application\), and how the Wasm module can also read and write to the same memory.
 
-So if we generate a new project, we can modify our `src/main.rs` to be the following:
+So if we generate a new project, we will add the following dependencies.
 
-```rust
+```toml Cargo.toml
+[package]
+name = "passing-data"
+version = "0.1.0"
+authors = ["The Wasmer Engineering Team <engineering@wasmer.io>"]
+edition = "2018"
+
+[dependencies]
+wasmer-runtime = "0.17.1"
+```
+
+Then we can modify our `src/main.rs` to be the following:
+
+```rust src/main.rs
 // Import the wasmer runtime so we can use it
 use wasmer_runtime::{error, imports, instantiate, Array, Func, WasmPtr};
 
