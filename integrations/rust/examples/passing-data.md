@@ -61,7 +61,8 @@ fn main() -> error::Result<()> {
     // We use the type system and the power of generics to get a function we can call
     // directly with a type signature of no arguments and returning a WasmPtr<u8, Array>
     let get_wasm_memory_buffer_pointer: Func<(), WasmPtr<u8, Array>> = instance
-        .func("get_wasm_memory_buffer_pointer")
+        .exports
+        .get("get_wasm_memory_buffer_pointer")
         .expect("get_wasm_memory_buffer_pointer");
     let wasm_buffer_pointer = get_wasm_memory_buffer_pointer.call().unwrap();
     // Let's write a string to the Wasm memory
@@ -78,7 +79,8 @@ fn main() -> error::Result<()> {
 
     // Let's call the exported function that concatenates a phrase to our string.
     let add_wasm_is_cool: Func<u32, u32> = instance
-        .func("add_wasm_is_cool")
+        .exports
+        .get("add_wasm_is_cool")
         .expect("WASM is cool export");
     let new_string_length = add_wasm_is_cool.call(original_string.len() as u32).unwrap();
 
