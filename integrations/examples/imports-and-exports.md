@@ -16,6 +16,8 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 {% endhint %}
 
@@ -54,6 +56,36 @@ _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 mkdir wasmer-example-imports-exports
 cd wasmer-example-imports-exports
 go mod init github.com/$USER/wasmer-example-imports-exports
+```
+{% endtab %}
+
+{% tab title="C/C++" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
+
+_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
+{% endhint %}
+
+```text
+mkdir wasmer-example-imports-exports
+cd wasmer-example-imports-exports
+vim Makefile
+```
+
+Let's create a simple `Makefile`:
+
+```c
+CFLAGS = -g -I$(WASMER_C_API)/include
+LDFLAGS = -L$(WASMER_C_API)/lib -Wl,-rpath,$(WASMER_C_API)/lib
+LDLIBS = -lwasmer
+
+.SILENT: imports-exports imports-exports.o
+imports-exports: imports-exports.o
+
+.PHONY: clean
+.SILENT: clean
+clean:
+	rm -f imports-exports.o imports-exports
 ```
 {% endtab %}
 {% endtabs %}
@@ -104,6 +136,26 @@ importObject.Register(
 )
 ```
 {% endtab %}
+
+{% tab title="C/C++" %}
+```c
+wasm_functype_t* host_func_type = wasm_functype_new_0_1(wasm_valtype_new_i32());
+wasm_func_t* host_func = wasm_func_new(store, host_func_type, host_func_callback);
+wasm_functype_delete(host_func_type);
+      
+wasm_globaltype_t* host_global_type = wasm_globaltype_new(wasm_valtype_new(WASM_F32), WASM_CONST);
+wasm_val_t host_global_val = WASM_I32_VAL(42);
+wasm_global_t* host_global = wasm_global_new(store, host_global_type, &host_global_val);
+wasm_globaltype_delete(host_global_type);
+
+wasm_extern_t* externs[] = {
+  wasm_func_as_extern(host_func),
+  wasm_global_as_extern(host_global)
+};
+
+wasm_extern_vec_t import_object = WASM_ARRAY_VEC(externs);
+```
+{% endtab %}
 {% endtabs %}
 
 Now that we have our import object ready, we'll need to use it when instantiating the module:
@@ -118,6 +170,12 @@ let instance = Instance::new(&module, &import_object)?;
 {% tab title="Go" %}
 ```go
 instance, err := wasmer.NewInstance(module, importObject)
+```
+{% endtab %}
+
+{% tab title="C/C++" %}
+```c
+wasm_instance_t* instance = wasm_instance_new(store, module, &import_object, NULL);
 ```
 {% endtab %}
 {% endtabs %}
@@ -158,14 +216,46 @@ if err != nil {
     panic(fmt.Sprintln("Failed to get the exported global:", err))
 }
 
+table, err := instance.Exports.GetTable("guest_table")
+if err != nil {
+    panic(fmt.Sprintln("Failed to get the exported table:", err))
+}
+
 memory, err := instance.Exports.GetMemory("guest_memory")
 if err != nil {
     panic(fmt.Sprintln("Failed to get the exported memory:", err))
 }
+```
+{% endtab %}
 
-table, err := instance.Exports.GetTable("guest_table")
-if err != nil {
-    panic(fmt.Sprintln("Failed to get the exported table:", err))
+{% tab title="C/C++" %}
+```c
+wasm_func_t* func = wasm_extern_as_func(exports.data[0]);
+if (func == NULL) {
+    printf("> Failed to get the exported function!\n");
+
+    return 1;
+}
+
+wasm_global_t* global = wasm_extern_as_global(exports.data[1]);
+if (global == NULL) {
+    printf("> Failed to get the exported global!\n");
+
+    return 1;
+}
+
+wasm_table_t* table = wasm_extern_as_table(exports.data[2]);
+if (table == NULL) {
+    printf("> Failed to get the exported table!\n");
+
+    return 1;
+}
+
+wasm_memory_t* memory = wasm_extern_as_memory(exports.data[3]);
+if (memory == NULL) {
+    printf("> Failed to get the exported memory!\n");
+
+    return 1;
 }
 ```
 {% endtab %}
@@ -213,12 +303,44 @@ Got the exported table: *wasmer.Table
 ```
 
 {% hint style="info" %}
-If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-go) codebase directly, you can also do:
 
 ```text
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_imports_exports_test.go
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="C/C++" %}
+You should be able to run it using the `make clean imports-exports && ./imports-exports` command. The output should look like this:
+
+```text
+Creating the store...
+Compiling module...
+Creating the imported function...
+Creating the imported global...
+Instantiating module...
+Retrieving exports...
+Retrieving the exported function...
+Got the exported function: 0x7f9317e05e00
+Retrieving the exported global...
+Got the exported global: 0x7f9317e05e90
+Retrieving the exported table...
+Got the exported table: 0x7f9317e05ec0
+Retrieving the exported memory...
+Got the exported memory: 0x7f9317e05ef0
+```
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+
+```text
+git clone https://github.com/wasmerio/wasmer.git
+cd wasmer/lib/c-api/examples/imports-exports.c
+make clean imports-exports
+./imports-exports
 ```
 {% endhint %}
 {% endtab %}

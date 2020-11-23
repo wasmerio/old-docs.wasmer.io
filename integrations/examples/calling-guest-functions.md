@@ -59,9 +59,39 @@ _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
 
 ```text
-mkdir wasmer-example-imports-exports
-cd wasmer-example-imports-exports
-go mod init github.com/$USER/wasmer-example-imports-exports
+mkdir wasmer-example-exports-function
+cd wasmer-example-exports-function
+go mod init github.com/$USER/wasmer-example-exports-function
+```
+{% endtab %}
+
+{% tab title="C/C++" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
+
+_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
+{% endhint %}
+
+```text
+mkdir wasmer-example-exports-function
+cd wasmer-example-exports-function
+vim Makefile
+```
+
+Let's create a simple `Makefile`:
+
+```c
+CFLAGS = -g -I$(WASMER_C_API)/include
+LDFLAGS = -L$(WASMER_C_API)/lib -Wl,-rpath,$(WASMER_C_API)/lib
+LDLIBS = -lwasmer
+
+.SILENT: exports-function exports-function.o
+exports-function: exports-function.o
+
+.PHONY: clean
+.SILENT: clean
+clean:
+	rm -f exports-function.o exports-function
 ```
 {% endtab %}
 {% endtabs %}
@@ -90,6 +120,21 @@ if err != nil {
 }
 
 result, err := sum.Call(1, 2)
+```
+{% endtab %}
+
+{% tab title="C/C++" %}
+```c
+wasm_val_t args_val[2] = { WASM_I32_VAL(3), WASM_I32_VAL(4) };
+wasm_val_t results_val[1] = { WASM_INIT_VAL };
+wasm_val_vec_t args = WASM_ARRAY_VEC(args_val);
+wasm_val_vec_t results = WASM_ARRAY_VEC(results_val);
+
+if (wasm_func_call(sum_func, &args, &results)) {
+    printf("> Error calling the `sum` function!\n");
+
+    return 1;
+}
 ```
 {% endtab %}
 {% endtabs %}
@@ -189,12 +234,38 @@ Result of the `sum` function: 7
 ```
 
 {% hint style="info" %}
-If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-go) codebase directly, you can also do:
 
 ```text
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_exports_function_test.go
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="C/C++" %}
+You should be able to run it using the `make clean exports-function && ./exports-function` command. The output should look like this:
+
+```text
+Creating the store...
+Compiling module...
+Creating imports...
+Instantiating module...
+Retrieving exports...
+Retrieving the `sum` function...
+Calling `sum` function...
+Results of `sum`: 7
+```
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+
+```text
+git clone https://github.com/wasmerio/wasmer.git
+cd wasmer/lib/c-api/examples/exports-function.c
+make clean exports-function
+./exports-function
 ```
 {% endhint %}
 {% endtab %}

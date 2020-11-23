@@ -57,6 +57,38 @@ cd wasmer-example-instance
 go mod init github.com/$USER/wasmer-example-instance
 ```
 {% endtab %}
+
+{% tab title="C/C++" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
+
+_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
+{% endhint %}
+
+```text
+mkdir wasmer-example-instance
+cd wasmer-example-instance
+vim Makefile
+```
+
+Let's create a simple `Makefile`:
+
+```c
+CFLAGS = -g -I$(WASMER_C_API)/include
+LDFLAGS = -L$(WASMER_C_API)/lib -Wl,-rpath,$(WASMER_C_API)/lib
+LDLIBS = -lwasmer
+
+.SILENT: instance instance.o
+instance: instance.o
+
+.PHONY: clean
+.SILENT: clean
+clean:
+	rm -f instance.o instance
+```
+
+Wasmer C API includes two header files: `wasm.h` and `wasmer_wasm.h`. The first one provides the standard Wasm C API while the second one adds some useful functions like `wat2wasm` and many others.
+{% endtab %}
 {% endtabs %}
 
 Now that we have everything set up, let's go ahead and try it out!
@@ -100,28 +132,18 @@ wasmBytes := []byte(`
 
 {% tab title="C/C++" %}
 ```c
-FILE* file = fopen("module.wasm", "rb");
+const char *wat_string =
+    "(module\n"
+    "  (type $add_one_t (func (param i32) (result i32)))\n"
+    "  (func $add_one_f (type $add_one_t) (param $value i32) (result i32)\n"
+    "    local.get $value\n"
+    "    i32.const 1\n"
+    "    i32.add)\n"
+    "  (export \"add_one\" (func $add_one_f)))";
 
-if (!file) {
-  printf("> Error loading module!\n");
-
-  return 1;
-}
-
-fseek(file, 0L, SEEK_END);
-size_t file_size = ftell(file);
-fseek(file, 0L, SEEK_SET);
-
-wasm_byte_vec_t binary;
-wasm_byte_vec_new_uninitialized(&binary, file_size);
-
-if (fread(binary.data, file_size, 1, file) != 1) {
-  printf("> Error loading module!\n");
-
-  return 1;
-}
-
-fclose(file);
+wasm_byte_vec_t wat;
+wasm_byte_vec_new(&wat, strlen(wat_string), wat_string);
+wasm_byte_vec_t* wasm_bytes = wat2wasm(&wat);
 ```
 {% endtab %}
 {% endtabs %}
@@ -138,6 +160,33 @@ let wasm_bytes = std::fs::read("./path/to/module.wasm")?;
 {% tab title="Go" %}
 ```go
 wasmBytes, err := ioutil.ReadFile("./path/to/module.wasm")
+```
+{% endtab %}
+
+{% tab title="C/C++" %}
+```c
+FILE* file = fopen("module.wasm", "rb");
+
+if (!file) {
+  printf("> Error loading module!\n");
+
+  return 1;
+}
+
+fseek(file, 0L, SEEK_END);
+size_t file_size = ftell(file);
+fseek(file, 0L, SEEK_SET);
+
+wasm_byte_vec_t wasm_bytes;
+wasm_byte_vec_new_uninitialized(&wasm_bytes, file_size);
+
+if (fread(wasm_bytes.data, file_size, 1, file) != 1) {
+  printf("> Error loading module!\n");
+
+  return 1;
+}
+
+fclose(file);
 ```
 {% endtab %}
 {% endtabs %}
@@ -186,15 +235,13 @@ if err != nil {
 ```c
 wasm_engine_t* engine = wasm_engine_new();
 wasm_store_t* store = wasm_store_new(engine);
-wasm_module_t* module = wasm_module_new(store, &binary);
+wasm_module_t* module = wasm_module_new(store, wasm_bytes);
 
 if (!module) {
-  printf("> Error compiling module!\n");
+    printf("> Error compiling module!\n");
 
-  return 1;
+    return 1;
 }
-
-wasm_byte_vec_delete(&binary);
 ```
 {% endtab %}
 {% endtabs %}
@@ -228,7 +275,7 @@ wasm_extern_vec_t imports = WASM_EMPTY_VEC;
 wasm_instance_t* instance = wasm_instance_new(store, module, &imports, NULL);
 
 if (!instance) {
-  printf("> Error instantiating module %d!\n", i);
+  printf("> Error instantiating module %d!\n");
 
   return 1;
 }
@@ -279,6 +326,31 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_instance_test.go
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="C/C++" %}
+You should be able to run it using the `make clean instance && ./instance` command. The output should look like this:
+
+```text
+Creating the store...
+Compiling module...
+Creating imports...
+Instantiating module...
+Retrieving exports...
+Calling `add_one` function...
+Results of `add_one`: 2
+```
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+
+```text
+git clone https://github.com/wasmerio/wasmer.git
+cd wasmer/lib/c-api/examples/instance.c
+make clean instance
+./instance
 ```
 {% endhint %}
 {% endtab %}

@@ -14,9 +14,9 @@ Once you have downloaded the c-api file, you can now extract its contents and se
 ```bash
 # Extract the contents to a dir
 mkdir wasmer-c-api
-tar -C wasmer-c-api -zxvf wasmer-c-api*.tar.gz
+tar -C wasmer-c-api -zxvf wasmer-*.tar.gz
 
-export WASMER_C_API=`pwd`/wasmer-c-api
+export WASMER_C_API=$(pwd)/wasmer-c-api
 
 # Update LD_LIBRARY_PATH to link against the libwasmer.so in the examples
 export LD_LIBRARY_PATH=$WASMER_C_API/lib/:$LD_LIBRARY_PATH
