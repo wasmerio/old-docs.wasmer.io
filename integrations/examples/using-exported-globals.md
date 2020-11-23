@@ -68,28 +68,39 @@ Now that we have everything set up, let's go ahead and try it out!
 
 ## Querying types information
 
-The first interesting thing to do is to query their type information in order to know if they are mutable or not. Our module exports two globals, `one` and `some` Which one is mutable and which one is not?
+The first interesting thing to do is to query their type information in order to know if they are mutable or not. Our module exports two globals, `one` and `some`. Which one is mutable and which one is not?
 
 {% tabs %}
-
+{% tab title="Rust" %}
 ```rust
-let one = instance.exports.get_global("one")?;
+l​​et one = instance.exports.get_global("one")?;
 let some = instance.exports.get_global("some")?;
 
-let one_type = one.ty();
+​let one_type = one.ty();
 let some_type = some.ty();
 
-println!("one type: {:?} {:?}", one_type.mutability, one_type.ty);
+​println!("one type: {:?} {:?}", one_type.mutability, one_type.ty);
 println!("some type: {:?} {:?}", some_type.mutability, some_type.ty);
 ```
+{% endtab %}
 
+{% tab title="Go" %}
 ```go
-one := utils.GetGlobal(instance, "one")
-some := utils.GetGlobal(instance, "some")
+one, err := instance.Exports.GetGlobal("one")
 
+if err != nil {
+    panic(fmt.Sprintln("Failed to retrieve the `one` global:", err))
+}
+
+some, err := instance.Exports.GetGlobal("some")
+
+if err != nil {
+		panic(fmt.Sprintln("Failed to retrieve the `some` global:", err))
+}
+​
 oneType := one.Type()
 someType := some.Type()
-
+​
 fmt.Printf(
     "`one` type: %s %s\n", 
     oneType.Mutability(), 
@@ -101,24 +112,65 @@ fmt.Printf(
     someType.ValueType().Kind().String()
 )
 ```
+{% endtab %}
 
-{% hint style="warning" %}
-Note that here we used an helper function: utils.GetGlobals. This is just to avoid repeating the boilerplate code required to handle errors.
+{% tab title="C/C++" %}
+```c
+wasm_mutability_t one_mutability = wasm_globaltype_mutability(one_type);
+const wasm_valtype_t* one_content = wasm_globaltype_content(one_type);
+wasm_valkind_t one_kind = wasm_valtype_kind(one_content);
 
-**This helper function is not part of the Wasmer API.**
+wasm_mutability_t some_mutability = wasm_globaltype_mutability(some_type);
+const wasm_valtype_t* some_content = wasm_globaltype_content(some_type);
+wasm_valkind_t some_kind = wasm_valtype_kind(some_content);
 
-If you want to know how to fetch exported globals, have a look at the following example:
+printf(
+    "`one` type: %s %hhu\n", 
+    one_mutability == WASM_CONST ? "const" : "", 
+    one_kind
+);
 
-{% page-ref page="imports-and-exports.md" %}
-{% endhint %}
+printf(
+    "`some` type: %s %hhu\n", 
+    some_mutability == WASM_CONST ? "const" : "", 
+    some_kind
+);
+```
+{% endtab %}
+{% endtabs %}
 
 ## Getting globals values
 
 The global API is straightforward: it provides a dedicated method to get the value of a given global. Look how easy it is:
 
 {% tabs %}
-{% tab %}
+{% tab title="Rust" %}
+```rust
+let some_value = some.get();
 
+println!("`some` value: {:?}", some_value);
+```
+{% endtab %}
+
+{% tab title="Go" %}
+```go
+someValue, err := some.Get()
+
+if err != nil {
+    panic(fmt.Sprintln("Failed to get the `some` global value:", err))
+}
+
+fmt.Printf("`some` value: %.1f\n", someValue)
+```
+{% endtab %}
+
+{% tab title="C/C++" %}
+```c
+wasm_val_t some_value;
+wasm_global_get(some, &some_value);
+
+printf("`some` value: %.1f\n", some_value.of.f32);
+```
 {% endtab %}
 {% endtabs %}
 
@@ -129,12 +181,38 @@ As we said before, globals come in two flavor. Immutable globals, for which we c
 First we'll try to set the value of a immutable global and see what happens:
 
 {% tabs %}
+{% tab title="Rust" %}
+```rust
+let result = one.set(Value::F32(42.0));
+
+assert_eq!(
+    result.expect_err("Expected an error").message(),
+    "Attempted to set an immutable global"
+);
+```
+{% endtab %}
+
 {% tab title="Go" %}
 ```go
 err = one.Set(float32(42.0), wasmer.F32)
 
 if err == nil {
     panic(fmt.Sprintln("Setting value to `one` did not error"))
+}
+```
+{% endtab %}
+
+{% tab title="C/C++" %}
+```c
+wasm_val_t one_set_value = WASM_F32_VAL(42);
+wasm_global_set(one, &one_set_value);
+
+int error_length = wasmer_last_error_length();
+if (error_length > 0) {
+    char *error_message = malloc(error_length);
+    wasmer_last_error_message(error_message, error_length);
+    
+    printf("Attempted to set an immutable global: `%s`\n", error_message);
 }
 ```
 {% endtab %}
@@ -145,6 +223,12 @@ As you can see here, trying to set a value on a immutable global will always lea
 Now let's see how to correctly set a value on a mutable global:
 
 {% tabs %}
+{% tab title="Rust" %}
+```rust
+some.set(Value::F32(42.0))?;
+```
+{% endtab %}
+
 {% tab title="Go" %}
 ```go
 err = some.Set(float32(42.0), wasmer.F32)
@@ -154,6 +238,13 @@ if err != nil {
 }
 ```
 {% endtab %}
+
+{% tab title="C/C++" %}
+```c
+wasm_val_t some_set_value = WASM_F32_VAL(21);
+wasm_global_set(some, &some_set_value);
+```
+{% endtab %}
 {% endtabs %}
 
 ## Running
@@ -161,7 +252,38 @@ if err != nil {
 We now have everything we need to run the WASM module, let's do it!
 
 {% tabs %}
+{% tab title="Rust" %}
+You should be able to run it using the `cargo run` command. The output should look like this:
+
+```text
+Compiling module...
+Instantiating module...
+Getting globals types information...
+`one` type: Const F32
+`some` type: Var F32
+Getting global values...
+`one` value: 1.0
+`some` value: F32(0.0)
+Setting global values...
+`one` value after `set`: F32(1.0)
+`some` value after `set_some`: F32(21.0)
+`some` value after `set`: F32(42.0)
+```
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer.git
+cd wasmer
+cargo run --example exported-function --release --features "cranelift"
+```
+{% endhint %}
+{% endtab %}
+
 {% tab title="Go" %}
+You should be able to run it using the `go run main.go` command. The output should look like this:
+
 ```text
 Compiling module...
 Instantiating module...
@@ -184,6 +306,37 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_exports_global_test.go
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="C/C++" %}
+You should be able to run it using the `make clean exports-global && ./exports-global` command. The output should look like this:
+
+```text
+Creating the store...
+Compiling module...
+Creating imports...
+Instantiating module...
+Retrieving exports...
+Getting globals types information...
+`one` type: const 2
+`some` type:  2
+Getting global values...`one` value: 1.0
+`some` value: 0.0
+Setting global values...
+Attempted to set an immutable global: `RuntimeError: Attempted to set an immutable global`
+`some` value: 0.0
+```
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+
+```text
+git clone https://github.com/wasmerio/wasmer.git
+cd wasmer/lib/c-api/examples/exports-global.c
+make clean exports-global
+./exports-global
 ```
 {% endhint %}
 {% endtab %}

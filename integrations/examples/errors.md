@@ -198,7 +198,7 @@ Error caught from `div_by_zero`: integer divide by zero
 ```
 
 {% hint style="info" %}
-If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-go) codebase directly, you can also do:
 
 ```text
 git clone https://github.com/wasmerio/wasmer-go.git

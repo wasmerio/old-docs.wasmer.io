@@ -141,8 +141,7 @@ As we saw in previous examples we defined a Rust function, wrap it in a native f
 Our module will call the `early_exit` function once we call its `run` function \(which is an exported function\). Let's get the function, call it and see how we can handle the error:
 
 {% tabs %}
-
-{% code title="src/main.rs" %}
+{% tab title="Rust" %}
 ```rust
 let run_func: NativeFunc<(i32, i32), i32> = instance
     .exports
@@ -164,7 +163,8 @@ match run_func.call(1, 7) {
     },
 }
 ```
-{% endcode %}
+{% endtab %}
+{% endtabs %}
 
 We expect to get an error when calling the `run` function so what we do here is look at the result and:
 
