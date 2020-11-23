@@ -49,7 +49,7 @@ edition = "2018"
 
 [dependencies]
 # The Wasmer API
-wasmer = "1.0.0-alpha4"
+wasmer = "1.0.0-alpha5"
 ```
 {% endcode %}
 {% endtab %}
