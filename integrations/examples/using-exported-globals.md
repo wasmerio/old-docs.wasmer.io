@@ -56,7 +56,7 @@ The final code for this example can be found on [GitHub](https://github.com/wasm
 _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
 
-```text
+```bash
 mkdir wasmer-example-imports-exports
 cd wasmer-example-imports-exports
 go mod init github.com/$USER/wasmer-example-imports-exports
@@ -302,7 +302,7 @@ Setting global values...
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
 
-```text
+```bash
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_exports_global_test.go
@@ -332,7 +332,7 @@ Attempted to set an immutable global: `RuntimeError: Attempted to set an immutab
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
 
-```text
+```bash
 git clone https://github.com/wasmerio/wasmer.git
 cd wasmer/lib/c-api/examples/exports-global.c
 make clean exports-global

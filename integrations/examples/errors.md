@@ -29,7 +29,6 @@ This should generate two important files for us, `Cargo.toml` and `src/main.rs`.
 
 We then modify the `Cargo.toml` to add the Wasmer dependencies as shown below:
 
-{% code title="Cargo.toml" %}
 ```yaml
 [package]
 name = "errors"
@@ -41,7 +40,6 @@ edition = "2018"
 # The Wasmer API
 wasmer = "1.0.0-alpha5"
 ```
-{% endcode %}
 {% endtab %}
 
 {% tab title="Go" %}
@@ -51,7 +49,7 @@ The final code for this example can be found on [GitHub](https://github.com/wasm
 _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
 
-```text
+```bash
 mkdir wasmer-example-errors
 cd wasmer-example-errors
 go mod init github.com/$USER/wasmer-example-errors
@@ -200,7 +198,7 @@ Error caught from `div_by_zero`: integer divide by zero
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-go) codebase directly, you can also do:
 
-```text
+```bash
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_errors_test.go

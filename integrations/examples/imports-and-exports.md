@@ -30,7 +30,6 @@ This should generate two important files for us, `Cargo.toml` and `src/main.rs`.
 
 We then modify the `Cargo.toml` to add the Wasmer dependencies as shown below:
 
-{% code title="Cargo.toml" %}
 ```rust
 [package]
 name = "imports-exports"
@@ -42,7 +41,6 @@ edition = "2018"
 # The Wasmer API
 wasmer = "1.0.0-alpha5"
 ```
-{% endcode %}
 {% endtab %}
 
 {% tab title="Go" %}
@@ -52,7 +50,7 @@ The final code for this example can be found on [GitHub](https://github.com/wasm
 _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
 
-```text
+```bash
 mkdir wasmer-example-imports-exports
 cd wasmer-example-imports-exports
 go mod init github.com/$USER/wasmer-example-imports-exports
@@ -66,7 +64,7 @@ The final code for this example can be found on [GitHub](https://github.com/wasm
 _Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
 {% endhint %}
 
-```text
+```bash
 mkdir wasmer-example-imports-exports
 cd wasmer-example-imports-exports
 vim Makefile
@@ -74,7 +72,7 @@ vim Makefile
 
 Let's create a simple `Makefile`:
 
-```c
+```bash
 CFLAGS = -g -I$(WASMER_C_API)/include
 LDFLAGS = -L$(WASMER_C_API)/lib -Wl,-rpath,$(WASMER_C_API)/lib
 LDLIBS = -lwasmer
@@ -305,7 +303,7 @@ Got the exported table: *wasmer.Table
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-go) codebase directly, you can also do:
 
-```text
+```bash
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_imports_exports_test.go
@@ -336,7 +334,7 @@ Got the exported memory: 0x7f9317e05ef0
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
 
-```text
+```bash
 git clone https://github.com/wasmerio/wasmer.git
 cd wasmer/lib/c-api/examples/imports-exports.c
 make clean imports-exports
