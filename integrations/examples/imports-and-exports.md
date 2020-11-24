@@ -73,9 +73,9 @@ vim Makefile
 Let's create a simple `Makefile`:
 
 ```bash
-CFLAGS = -g -I$(WASMER_C_API)/include
-LDFLAGS = -L$(WASMER_C_API)/lib -Wl,-rpath,$(WASMER_C_API)/lib
-LDLIBS = -lwasmer
+CFLAGS = -g -I$(shell $(WASMER_C_API)/bin/wasmer config --includedir)
+LDFLAGS = -Wl,-rpath,$(shell $(WASMER_C_API)/bin/wasmer config --libdir)
+LDLIBS = $(shell $(WASMER_C_API)/bin/wasmer config --libs)
 
 .SILENT: imports-exports imports-exports.o
 imports-exports: imports-exports.o

@@ -62,6 +62,36 @@ cd wasmer-example-imports-exports
 go mod init github.com/$USER/wasmer-example-imports-exports
 ```
 {% endtab %}
+
+{% tab title="C/C++" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/exports-global.c).
+
+_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
+{% endhint %}
+
+```bash
+mkdir wasmer-example-exports-global
+cd wasmer-example-exports-global
+vim Makefile
+```
+
+Let's create a simple `Makefile`:
+
+```bash
+CFLAGS = -g -I$(shell $(WASMER_C_API)/bin/wasmer config --includedir)
+LDFLAGS = -Wl,-rpath,$(shell $(WASMER_C_API)/bin/wasmer config --libdir)
+LDLIBS = $(shell $(WASMER_C_API)/bin/wasmer config --libs)
+
+.SILENT: exports-global exports-global.o
+exports-global: exports-global.o
+
+.PHONY: clean
+.SILENT: clean
+clean:
+	rm -f exports-global.o exports-global
+```
+{% endtab %}
 {% endtabs %}
 
 Now that we have everything set up, let's go ahead and try it out!
