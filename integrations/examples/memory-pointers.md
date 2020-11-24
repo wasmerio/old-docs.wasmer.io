@@ -37,7 +37,6 @@ This should generate two important files for us, `Cargo.toml` and `src/main.rs`.
 
 We then modify the `Cargo.toml` to add the Wasmer dependencies as shown below:
 
-{% code title="Cargo.toml" %}
 ```rust
 [package]
 name = "exported-memory"
@@ -47,9 +46,8 @@ edition = "2018"
 
 [dependencies]
 # The Wasmer API
-wasmer = "1.0.0-alpha4"
+wasmer = "1.0.0-alpha5"
 ```
-{% endcode %}
 {% endtab %}
 {% endtabs %}
 

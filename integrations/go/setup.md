@@ -1,6 +1,6 @@
 # Setup your Go environment
 
-To be able to run Wasmer inside our Rust application, we will need Rust installed in our system.
+To be able to run Wasmer inside our Go application, we will need Go to be installed in our system.
 
 The easiest way to get [Go](https://golang.org/) in your system is to follow the official [documentation](https://golang.org/doc/install).
 

@@ -36,7 +36,6 @@ This should generate two important files for us, `Cargo.toml` and `src/main.rs`.
 
 We then modify the `Cargo.toml` to add the Wasmer dependencies as shown below:
 
-{% code title="Cargo.toml" %}
 ```rust
 [package]
 name = "exports-function"
@@ -46,9 +45,8 @@ edition = "2018"
 
 [dependencies]
 # The Wasmer API
-wasmer = "1.0.0-alpha4"
+wasmer = "1.0.0-alpha5"
 ```
-{% endcode %}
 {% endtab %}
 
 {% tab title="Go" %}
@@ -58,7 +56,7 @@ The final code for this example can be found on [GitHub](https://github.com/wasm
 _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
 
-```text
+```bash
 mkdir wasmer-example-exports-function
 cd wasmer-example-exports-function
 go mod init github.com/$USER/wasmer-example-exports-function
@@ -72,7 +70,7 @@ The final code for this example can be found on [GitHub](https://github.com/wasm
 _Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
 {% endhint %}
 
-```text
+```bash
 mkdir wasmer-example-exports-function
 cd wasmer-example-exports-function
 vim Makefile
@@ -80,10 +78,10 @@ vim Makefile
 
 Let's create a simple `Makefile`:
 
-```c
-CFLAGS = -g -I$(WASMER_C_API)/include
-LDFLAGS = -L$(WASMER_C_API)/lib -Wl,-rpath,$(WASMER_C_API)/lib
-LDLIBS = -lwasmer
+```bash
+CFLAGS = -g -I$(shell $(WASMER_C_API)/bin/wasmer config --includedir)
+LDFLAGS = -Wl,-rpath,$(shell $(WASMER_C_API)/bin/wasmer config --libdir)
+LDLIBS = $(shell $(WASMER_C_API)/bin/wasmer config --libs)
 
 .SILENT: exports-function exports-function.o
 exports-function: exports-function.o
@@ -236,7 +234,7 @@ Result of the `sum` function: 7
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-go) codebase directly, you can also do:
 
-```text
+```bash
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_exports_function_test.go
@@ -261,7 +259,7 @@ Results of `sum`: 7
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
 
-```text
+```bash
 git clone https://github.com/wasmerio/wasmer.git
 cd wasmer/lib/c-api/examples/exports-function.c
 make clean exports-function

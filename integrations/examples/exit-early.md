@@ -25,7 +25,6 @@ This should generate two important files for us, `Cargo.toml` and `src/main.rs`.
 
 We then modify the `Cargo.toml` to add the Wasmer dependencies as shown below:
 
-{% code title="Cargo.toml" %}
 ```yaml
 [package]
 name = "early-exit"
@@ -35,9 +34,8 @@ edition = "2018"
 
 [dependencies]
 # The Wasmer API
-wasmer = "1.0.0-alpha4"
+wasmer = "1.0.0-alpha5"
 ```
-{% endcode %}
 {% endtab %}
 
 {% tab title="Go" %}
@@ -47,7 +45,7 @@ The final code for this example can be found on [GitHub](https://github.com/wasm
 _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
 
-```text
+```bash
 mkdir wasmer-example-early-exit
 cd wasmer-example-early-exit
 go mod init github.com/$USER/wasmer-example-early-exit
@@ -98,7 +96,6 @@ To terminate the execution of the WASM module we'll have to define a function on
 
 {% tabs %}
 {% tab title="Rust" %}
-{% code title="src/main.rs" %}
 ```rust
 fn early_exit() {
     RuntimeError::raise(Box::new(ExitCode(1)));
@@ -110,7 +107,6 @@ let import_object = imports! {
     }
 };
 ```
-{% endcode %}
 {% endtab %}
 
 {% tab title="Go" %}
@@ -163,8 +159,6 @@ match run_func.call(1, 7) {
     },
 }
 ```
-{% endtab %}
-{% endtabs %}
 
 We expect to get an error when calling the `run` function so what we do here is look at the result and:
 
@@ -172,9 +166,16 @@ We expect to get an error when calling the `run` function so what we do here is 
 * if we get an error, we try to downcast to our `ExitCode` error.
 
 If downcasting succeeds it means we actually got the expected error so we make the test pass. If it fails, it means the WASM module reported an error but it wasn't the one we expected so we make the test fail.
+{% endtab %}
 
+{% tab title="Go" %}
 ```go
-run := utils.GetFunction(instance, "run")
+run, err := instance.Exports.GetFunction("run")
+
+if err != nil {
+    panic(fmt.Sprintln("Failed to retrieve the `run` function:", err))
+}
+
 
 _, err = run(1, 7)
 
@@ -184,24 +185,54 @@ if err == nil {
 
 fmt.Println("Exited early with:", err)
 ```
-
-{% hint style="warning" %}
-Note that here we used an helper function: `utils.GetFunction`. This is just to avoid repeating the boilerplate code required to handle errors.
-
-**This helper function is not part of the Wasmer API.**
-
-If you want to know how to fetch exported globals, have a look at the following example:
-
-{% page-ref page="imports-and-exports.md" %}
-{% endhint %}
+{% endtab %}
+{% endtabs %}
 
 ## Running
 
 We now have everything we need to run the WASM module, let's do it!
 
 {% tabs %}
-{% tab %}
+{% tab title="Rust" %}
+You should be able to run it using the `cargo run` command. The output should look like this:
 
+```text
+Compiling module...
+Instantiating module...
+Calling `run` function...
+Exited early with exit code: 1
+```
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer.git
+cd wasmer
+cargo run --example early-exit --release --features "cranelift"
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Go" %}
+You should be able to run it using the `go run main.go` command. The output should look like this:
+
+```text
+Compiling module...
+Instantiating module...
+Calling `run` function...
+Exited early with: exit code: 1
+```
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-go.git
+cd wasmer-go
+go test examples/example_memory_test.go
+```
+{% endhint %}
 {% endtab %}
 {% endtabs %}
 

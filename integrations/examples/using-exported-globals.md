@@ -44,7 +44,7 @@ edition = "2018"
 
 [dependencies]
 # The Wasmer API
-wasmer = "1.0.0-alpha4"
+wasmer = "1.0.0-alpha5"
 ```
 {% endcode %}
 {% endtab %}
@@ -56,10 +56,40 @@ The final code for this example can be found on [GitHub](https://github.com/wasm
 _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
 
-```text
+```bash
 mkdir wasmer-example-imports-exports
 cd wasmer-example-imports-exports
 go mod init github.com/$USER/wasmer-example-imports-exports
+```
+{% endtab %}
+
+{% tab title="C/C++" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/exports-global.c).
+
+_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
+{% endhint %}
+
+```bash
+mkdir wasmer-example-exports-global
+cd wasmer-example-exports-global
+vim Makefile
+```
+
+Let's create a simple `Makefile`:
+
+```bash
+CFLAGS = -g -I$(shell $(WASMER_C_API)/bin/wasmer config --includedir)
+LDFLAGS = -Wl,-rpath,$(shell $(WASMER_C_API)/bin/wasmer config --libdir)
+LDLIBS = $(shell $(WASMER_C_API)/bin/wasmer config --libs)
+
+.SILENT: exports-global exports-global.o
+exports-global: exports-global.o
+
+.PHONY: clean
+.SILENT: clean
+clean:
+	rm -f exports-global.o exports-global
 ```
 {% endtab %}
 {% endtabs %}
@@ -302,7 +332,7 @@ Setting global values...
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
 
-```text
+```bash
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_exports_global_test.go
@@ -332,7 +362,7 @@ Attempted to set an immutable global: `RuntimeError: Attempted to set an immutab
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
 
-```text
+```bash
 git clone https://github.com/wasmerio/wasmer.git
 cd wasmer/lib/c-api/examples/exports-global.c
 make clean exports-global
