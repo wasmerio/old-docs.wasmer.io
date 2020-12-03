@@ -13,13 +13,13 @@ Once you have downloaded the c-api file, you can now extract its contents and se
 
 ```bash
 # Extract the contents to a dir
-mkdir wasmer-c-api
-tar -C wasmer-c-api -zxvf wasmer-*.tar.gz
+mkdir wasmer
+tar -C wasmer -zxvf wasmer-*.tar.gz
 
-export WASMER_C_API=$(pwd)/wasmer-c-api
+export WASMER_DIR=$(pwd)/wasmer
 
 # Update LD_LIBRARY_PATH to link against the libwasmer.so in the examples
-export LD_LIBRARY_PATH=$WASMER_C_API/lib/:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$WASMER_DIR/lib/:$LD_LIBRARY_PATH
 ```
 
 {% hint style="info" %}
@@ -57,8 +57,8 @@ To install gcc on Windows, you will probably want to install a GNU environment o
 ```bash
 gcc --version
 
-# This should output: "LICENSE   README.md include   lib"
-ls $WASMER_C_API
+# This should output: "ATTRIBUTIONS LICENSE      bin          include      lib"
+ls $WASMER_DIR
 ```
 
 {% hint style="success" %}

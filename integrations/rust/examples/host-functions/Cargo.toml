@@ -1,9 +1,0 @@
-[package]
-name = "host-functions"
-version = "0.1.0"
-authors = ["The Wasmer Engineering Team <engineering@wasmer.io>"]
-edition = "2018"
-
-[dependencies]
-# The Wasmer API
-wasmer = "1.0.0-alpha4"
