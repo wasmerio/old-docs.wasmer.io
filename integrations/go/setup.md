@@ -38,3 +38,5 @@ For a detailed installation instructions, please refer to Wasmer Go integration 
 
 Next, let's take a look at some examples!
 
+{% page-ref page="../examples/" %}
+
