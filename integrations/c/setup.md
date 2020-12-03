@@ -32,14 +32,14 @@ Libs: -L/Users/syrus/.wasmer/lib -lwasmer
 
 ## Manual Installation
 
-Download our SDK for the C-API from [Wasmer releases page](https://github.com/wasmerio/wasmer/releases).  
+Download Wasmer from [Wasmer releases page](https://github.com/wasmerio/wasmer/releases).  
 Depending on your system, you will need to download:
 
 * Linux: `wasmer-linux-amd64.tar.gz` or `wasmer-linux-aarch64.tar.gz` 
 * macOS: `wasmer-darwin-amd64.tar.gz` or `wasmer-darwin-arm64.tar.gz`
 * Windows: `wasmer-windows.tar.gz` 
 
-Once you have downloaded the c-api file, you can now extract its contents and set the `WASMER_DIR` environment variable to the path of the wasmer directory \(this will be very useful when running the examples\):
+Once you have downloaded the framework, you can now extract its contents and set the `WASMER_DIR` environment variable to the path of the wasmer directory \(this will be very useful when running the examples\):
 
 ```bash
 # Extract the contents to a dir
