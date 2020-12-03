@@ -19,7 +19,7 @@ The Wasmer WebAssembly runtime provides various features for users and developer
 | Caching | ✅ | ✅ | ✅ |
 | Emscripten | ✅ | ✅ | ✅ |
 | Metering | ✅ | ✅ | ✅ |
-| Multi-value return | ✅ | ✅ | ✅ |
+| Multi-value return | 🔄 | ✅ | ✅ |
 | SIMD | ⬜ | ⬜ | ✅ |
 | WASI | ✅ | ✅ | ✅ |
 | `WASMER_BACKTRACE` | ✅ | ⬜ | ⬜ |
@@ -58,6 +58,6 @@ Current ideas:
 |  | Rust | C / C++ | Go | Python | Ruby |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Terminate in host call | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-| WASI | ✅ | ✅ | 🔄 | ⬜ | ⬜ |
+| WASI | ✅ | ✅ | 🔄 | ✅ | ⬜ |
 | WASI FS API | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
 
