@@ -1,4 +1,4 @@
-# Interrupting Execution
+# 🛑 Interrupting Execution
 
 WebAssembly is currently always run in the same process synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host \(your application\).
 

@@ -4,7 +4,7 @@ description: >-
   module memory.
 ---
 
-# Interacting with memory
+# 💾 Interacting with memory
 
 A WASM module can export its memory. With Wasmer you'll be able to interact with this memory.
 
@@ -88,7 +88,7 @@ memory: memory.o
 .PHONY: clean
 .SILENT: clean
 clean:
-	rm -f memory.o memory
+    rm -f memory.o memory
 ```
 {% endtab %}
 {% endtabs %}
@@ -233,13 +233,13 @@ println!("Value at {:#x?}: {:?}", mem_addr, result);
 getAt, err := instance.Exports.GetFunction("get_at")
 
 if err != nil {
-	panic(fmt.Sprintln("Failed to retrieve the `get_at` function:", err))
+    panic(fmt.Sprintln("Failed to retrieve the `get_at` function:", err))
 }
 
 setAt, err := instance.Exports.GetFunction("set_at")
 
 if err != nil {
-	panic(fmt.Sprintln("Failed to retrieve the `set_at` function:", err))
+    panic(fmt.Sprintln("Failed to retrieve the `set_at` function:", err))
 }
 
 memAddr := 0x2220
@@ -247,13 +247,13 @@ val := 0xFEFEFFE
 _, err = setAt(memAddr, val)
 
 if err != nil {
-	panic(fmt.Sprintln("Failed to call the `set_at` function:", err))
+    panic(fmt.Sprintln("Failed to call the `set_at` function:", err))
 }
 
 result, err = getAt(memAddr)
 
 if err != nil {
-	panic(fmt.Sprintln("Failed to call the `get_at` function:", err))
+    panic(fmt.Sprintln("Failed to call the `get_at` function:", err))
 }
 
 fmt.Printf("Value at 0x%x: %d\n", memAddr, result)
@@ -307,13 +307,13 @@ val = 0xFEA09
 _, err = setAt(memAddr, val)
 
 if err != nil {
-	panic(fmt.Sprintln("Failed to call the `set_at` function:", err))
+    panic(fmt.Sprintln("Failed to call the `set_at` function:", err))
 }
 
 result, err = getAt(memAddr)
 
 if err != nil {
-	panic(fmt.Sprintln("Failed to call the `get_at` function:", err))
+    panic(fmt.Sprintln("Failed to call the `get_at` function:", err))
 }
 
 fmt.Printf("Value at 0x%x: %d\n", memAddr, result)

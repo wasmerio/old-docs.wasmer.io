@@ -5,7 +5,7 @@ description: >-
   entities.
 ---
 
-# Imports & exports
+# 🔁 Imports & exports
 
 In this example we'll be using a sample Wasm module which exports some entities and requires us to also import some of them.
 
@@ -30,13 +30,7 @@ This should generate two important files for us, `Cargo.toml` and `src/main.rs`.
 
 We then modify the `Cargo.toml` to add the Wasmer dependencies as shown below:
 
-```rust
-[package]
-name = "imports-exports"
-version = "0.1.0"
-authors = ["The Wasmer Engineering Team <engineering@wasmer.io>"]
-edition = "2018"
-
+```yaml
 [dependencies]
 # The Wasmer API
 wasmer = "1.0.0-alpha5"
@@ -83,7 +77,7 @@ imports-exports: imports-exports.o
 .PHONY: clean
 .SILENT: clean
 clean:
-	rm -f imports-exports.o imports-exports
+    rm -f imports-exports.o imports-exports
 ```
 {% endtab %}
 {% endtabs %}
@@ -140,7 +134,7 @@ importObject.Register(
 wasm_functype_t* host_func_type = wasm_functype_new_0_1(wasm_valtype_new_i32());
 wasm_func_t* host_func = wasm_func_new(store, host_func_type, host_func_callback);
 wasm_functype_delete(host_func_type);
-      
+
 wasm_globaltype_t* host_global_type = wasm_globaltype_new(wasm_valtype_new(WASM_F32), WASM_CONST);
 wasm_val_t host_global_val = WASM_I32_VAL(42);
 wasm_global_t* host_global = wasm_global_new(store, host_global_type, &host_global_val);

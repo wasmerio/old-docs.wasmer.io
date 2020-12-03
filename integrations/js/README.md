@@ -1,6 +1,6 @@
 # Javascript
 
-![](../../.gitbook/assets/image%20%283%29.png)
+![](../../.gitbook/assets/image%20%283%29%20%282%29%20%281%29.png)
 
 WebAssembly is already available from Javascript for both the browser and the server \(Node.js\) 🤗
 

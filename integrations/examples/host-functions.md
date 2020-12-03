@@ -4,7 +4,7 @@ description: >-
   tables. This example illustrates how to expose functions from the host.
 ---
 
-# Exposing host functions
+# ↩️ Exposing host \(imported\) functions
 
 Up until now, our WebAssembly program has only been able to do pure computation, that is, take arguments and return values. Most interesting use cases require more than just computation though. In this section we'll go over how to give the Wasm modules we run extra abilities in the form of host functions.
 
@@ -123,13 +123,13 @@ let import_object = imports! {
 };
 ```
 
-We use `Function::new_native_with_env` here to tell Wasmer our host functions need our `Env` to be passed in addition to other arguments. 
+We use `Function::new_native_with_env` here to tell Wasmer our host functions need our `Env` to be passed in addition to other arguments.
 
 If the host function does not need external data \(it is pure\) we can use `Function::new_native` instead of `Function::new_native_with_env`.
 {% endtab %}
 {% endtabs %}
 
-Now each time the `add_to_counter` will be run from the Wasm module it will alter the data on the host side. 
+Now each time the `add_to_counter` will be run from the Wasm module it will alter the data on the host side.
 
 ## Running
 

@@ -4,7 +4,7 @@ description: >-
   tables. This example illustrates how to call exported functions.
 ---
 
-# Calling guest functions
+# ↪️ Calling guest \(exported\) functions
 
 In this example we'll see how to use exported functions.
 
@@ -89,7 +89,7 @@ exports-function: exports-function.o
 .PHONY: clean
 .SILENT: clean
 clean:
-	rm -f exports-function.o exports-function
+    rm -f exports-function.o exports-function
 ```
 {% endtab %}
 {% endtabs %}

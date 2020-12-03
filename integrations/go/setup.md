@@ -14,7 +14,9 @@ go version # This will show the Go version
 If these commands work, Go is successfully installed!
 {% endhint %}
 
-Now it's time to create new projects and add Wasmer as a dependency:
+## Start a Go Project
+
+Now it's time to create a new project and add Wasmer as a dependency:
 
 ```bash
 mkdir wasmer-project
@@ -35,6 +37,4 @@ For a detailed installation instructions, please refer to Wasmer Go integration 
 {% endhint %}
 
 Next, let's take a look at some examples!
-
-{% page-ref page="../examples/" %}
 

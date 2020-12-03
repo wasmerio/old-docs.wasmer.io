@@ -4,7 +4,7 @@ description: >-
   tables. This example illustrates how to use exported globals.
 ---
 
-# Using exported globals
+# ✏️ Using guest \(exported\) globals
 
 In this example we'll be using a simple WASM module which exports some globals.
 
@@ -89,7 +89,7 @@ exports-global: exports-global.o
 .PHONY: clean
 .SILENT: clean
 clean:
-	rm -f exports-global.o exports-global
+    rm -f exports-global.o exports-global
 ```
 {% endtab %}
 {% endtabs %}
@@ -125,7 +125,7 @@ if err != nil {
 some, err := instance.Exports.GetGlobal("some")
 
 if err != nil {
-		panic(fmt.Sprintln("Failed to retrieve the `some` global:", err))
+        panic(fmt.Sprintln("Failed to retrieve the `some` global:", err))
 }
 ​
 oneType := one.Type()
@@ -241,7 +241,7 @@ int error_length = wasmer_last_error_length();
 if (error_length > 0) {
     char *error_message = malloc(error_length);
     wasmer_last_error_message(error_message, error_length);
-    
+
     printf("Attempted to set an immutable global: `%s`\n", error_message);
 }
 ```

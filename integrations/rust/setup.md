@@ -16,13 +16,29 @@ To install Rust on Windows, download and run [rustup-init.exe](https://win.rustu
 To ensure this is installed, let's run the following:
 
 ```bash
-rustc -V # This will show the Rust version
-cargo -V # This will work
+rustc -V # This will show Rust version
+cargo -V # This will show Cargo version
 ```
 
 {% hint style="success" %}
 If these commands work, Rust is successfully installed!
 {% endhint %}
+
+## Start a Rust Project
+
+Now it's time to create a new project and add Wasmer as a dependency:
+
+```bash
+cargo new wasmer-project --bin
+```
+
+Now, edit the `Cargo.toml` file to add `wasmer` as a dependency:
+
+```bash
+[dependencies]
+# The Wasmer API
+wasmer = "1.0.0-beta1"
+```
 
 Next, let's take a look at some examples!
 

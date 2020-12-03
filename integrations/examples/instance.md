@@ -4,7 +4,7 @@ description: >-
   World"-like project.
 ---
 
-# Instantiating a Wasm module
+# ⭐️ Instantiating a Wasm module
 
 In this example we will be building a "Hello World"-like project. WebAssembly only supports passing integers and floats directly right now, thus to keep it simple we will be writing a host application that calls the `add_one` function of a guest Wasm module, which adds `1` to the value passed as a parameter, and returns the result.
 
@@ -82,7 +82,7 @@ instance: instance.o
 .PHONY: clean
 .SILENT: clean
 clean:
-	rm -f instance.o instance
+    rm -f instance.o instance
 ```
 
 Wasmer C API includes two header files: `wasm.h` and `wasmer_wasm.h`. The first one provides the standard Wasm C API while the second one adds some useful functions like `wat2wasm` and many others.

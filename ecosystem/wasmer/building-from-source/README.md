@@ -141,22 +141,9 @@ make build-capi
 
 This will generate the shared library \(depending on your system\):
 
-* Windows: `target/release/wasmer_runtime_c_api.dll`
+* Windows: `package/release/libwasmer_c_api.dll`
 * macOS: `target/release/libwasmer_runtime_c_api.dylib`
 * Linux: `target/release/libwasmer_runtime_c_api.so`
-
-{% hint style="warning" %}
-By default, the Wasmer C API shared library is built with Cranelift as the _default_ backend and JIT enabled.  
-You can generate the C-API for a specific backend with:
-
-* **Singlepass**: `make build-capi-singlepass-jit`
-* **Cranelift**:
-  * **JIT**: `make build-capi-cranelift-jit`
-  * **Native Engine**: `make build-capi-cranelift-native`
-* **LLVM**: `make build-capi-llvm`
-  * **JIT**: `make build-capi-llvm-jit`
-  * **Native Engine**: `make build-capi-llvm-native`
-{% endhint %}
 
 If you want to generate the library and headers for using them easily, you can execute:
 
@@ -165,4 +152,32 @@ make package-capi
 ```
 
 This command will generate a `package` directory, that you can then use easily in the [Wasmer C API examples](./).
+
+```text
+package/
+  lib/
+    libwasmer.so
+  headers/
+    wasm.h
+    wasmer.h
+    wasmer.hh
+    wasmer_wasm.h
+```
+
+{% hint style="warning" %}
+By default, the Wasmer C API shared library is built with Cranelift as the _default_ compiler and JIT engine.  
+You can generate the C-API for a specific compiler and engine with:
+
+* **Singlepass**:
+  * **JIT**: `make build-capi-singlepass-jit`
+  * **Native Engine**: not yet available ⚠️
+* **Cranelift**:
+  * **JIT**: `make build-capi-cranelift-jit`
+  * **Native Engine**: `make build-capi-cranelift-native`
+* **LLVM**: `make build-capi-llvm`
+  * **JIT**: `make build-capi-llvm-jit`
+  * **Native Engine**: `make build-capi-llvm-native`
+{% endhint %}
+
+
 

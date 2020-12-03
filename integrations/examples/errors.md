@@ -4,7 +4,7 @@ description: >-
   error message returned from Wasmer.
 ---
 
-# Handling Errors
+# ⚠️ Handling Errors
 
 There will come a time when running a WebAssembly module will not work, and trying to figure out why it does not work can be a difficult task! In the current MVP of WebAssembly, debugging isn't explicitly defined for runtimes both in and out of the browser. So we'll have to write some error handling code ourselves.
 

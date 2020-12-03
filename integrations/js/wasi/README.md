@@ -8,7 +8,7 @@ JavaScript has native support for WebAssembly, but without a tool such as the We
 
 Within the context of a JavaScript runtime environment, WASI functionality must be provided by means of a set of JavaScript polyfills — and this is the role of Wasmer-js.
 
-![](../../../.gitbook/assets/image%20%285%29.png)
+![](../../../.gitbook/assets/image%20%285%29%20%281%29.png)
 
 {% hint style="warning" %}
 ## Important

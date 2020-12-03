@@ -4,7 +4,7 @@ description: >-
   Wasm using memory pointers.
 ---
 
-# Using memory pointers
+# ► Using memory pointers
 
 Linear memory is a major concept in WebAssembly:
 
@@ -74,7 +74,7 @@ The load function will return two things: the offset of the contents and its len
 let load = instance
     .exports
     .get_native_function::<(), (WasmPtr<u8, Array>, i32)>("load")?;
-        
+
 let memory = instance.exports.get_memory("mem")?;
 ```
 
@@ -99,7 +99,7 @@ println!("Memory contents: {:?}", str);
 {% endtab %}
 {% endtabs %}
 
-Done! We were able to get a string out of the Wasm module memory. 
+Done! We were able to get a string out of the Wasm module memory.
 
 ## Writing to the memory
 
@@ -107,15 +107,6 @@ It's now time to write a new string int the guest module's memory. To do that wi
 
 {% tabs %}
 {% tab title="Rust" %}
-```rust
-let new_str = b"Hello, Wasmer!";
-let values = ptr.deref(memory, 0, new_str.len() as u32).unwrap();
-
-for i in 0..new_str.len() {
-    values[i].set(new_str[i]);
-}
-```
-
 What we do here is dereferencing the pointer to get a slice of `Cell`s: we want this slice to be the size of the new string starting at the same offset as our pointer. This allows us to completely overwrite the old string with the new one.
 
 {% hint style="info" %}
@@ -135,8 +126,6 @@ We now have everything we need to run the WASM module, let's do it!
 
 {% tabs %}
 {% tab title="Rust" %}
-You should be able to run it using the `cargo run` command. The output should look like this:
-
 ```text
 Compiling module...
 Instantiating module...
