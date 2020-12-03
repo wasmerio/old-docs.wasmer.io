@@ -5,21 +5,21 @@ To build C applications that use the Wasmer runtime as a host for guest Wasm mod
 Download our SDK for the C-API from [Wasmer releases page](https://github.com/wasmerio/wasmer/releases).  
 Depending on your system, you will need to download:
 
-* Linux: `wasmer-c-api-linux-amd64.tar.gz` 
-* macOS: `wasmer-c-api-darwin-amd64.tar.gz` 
-* Windows: `wasmer-c-api-windows.tar.gz` 
+* Linux: `wasmer-linux-amd64.tar.gz` or `wasmer-linux-aarch64.tar.gz` 
+* macOS: `wasmer-darwin-amd64.tar.gz` 
+* Windows: `wasmer-windows.tar.gz` 
 
 Once you have downloaded the c-api file, you can now extract its contents and set the `WASMER_C_API` environment variable to the path of the wasmer-c-api directory \(this will be very useful when running the examples\):
 
 ```bash
 # Extract the contents to a dir
-mkdir wasmer-c-api
-tar -C wasmer-c-api -zxvf wasmer-c-api*.tar.gz
+mkdir wasmer
+tar -C wasmer -zxvf wasmer-*.tar.gz
 
-export WASMER_C_API=`pwd`/wasmer-c-api
+export WASMER_DIR=$(pwd)/wasmer
 
 # Update LD_LIBRARY_PATH to link against the libwasmer.so in the examples
-export LD_LIBRARY_PATH=`pwd`/wasmer-c-api/lib/:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$WASMER_DIR/lib/:$LD_LIBRARY_PATH
 ```
 
 {% hint style="info" %}
@@ -57,13 +57,13 @@ To install gcc on Windows, you will probably want to install a GNU environment o
 ```bash
 gcc --version
 
-# This should output: "LICENSE   README.md include   lib"
-ls $WASMER_C_API
+# This should output: "ATTRIBUTIONS LICENSE      bin          include      lib"
+ls $WASMER_DIR
 ```
 
 {% hint style="success" %}
 If these commands work, The compiler and the Wasmer C API are successfully installed!
 {% endhint %}
 
-Next, let's take a look at building a simple Hello World Example!
+Next, let's take a look at some examples!
 

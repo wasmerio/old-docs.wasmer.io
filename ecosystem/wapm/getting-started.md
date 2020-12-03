@@ -59,5 +59,3 @@ WAPM_RUNTIME=wasmer-js wapm run cowsay hello wapm!
 ```
 {% endhint %}
 
-
-

@@ -4,7 +4,7 @@ Wasmer allows you to run WebAssembly modules either **Standalone** or **Embedded
 
 By design, the environment within which a WebAssembly module runs is completely isolated \(or _sandboxed_\) from the native functionality of the underlying host system. This means that _by default_, Wasm modules are designed to perform nothing more than pure computation.
 
-Consequently, access to "OS"-level resources such as file descriptors, network sockets, the system clock, and random numbers is not normally possible from WASM.
+Consequently, access to "OS"-level resources such as file descriptors, network sockets, the system clock, and random numbers is not normally possible from Wasm.
 
 However, there are many cases in which a Wasm module needs to do more than perform pure computation; they must interact with native "OS" functionality.
 
@@ -39,10 +39,10 @@ Either way though, from a WebAssembly point of view, we don't need to care too m
 
 And many more \(for which we will be creating docs here soon!\)
 
-* [Python](https://github.com/wasmerio/python-ext-wasm)
-* [Go](https://github.com/wasmerio/go-ext-wasm)
-* [PHP](https://github.com/wasmerio/php-ext-wasm)
-* [Ruby](https://github.com/wasmerio/ruby-ext-wasm)
+* [Python](https://github.com/wasmerio/wasmer-python)
+* [Go](https://github.com/wasmerio/wasmer-go)
+* [PHP](https://github.com/wasmerio/wasmer-php)
+* [Ruby](https://github.com/wasmerio/wasmer-ruby)
 * [C\#](https://github.com/migueldeicaza/WasmerSharp)
 * [R](https://github.com/dirkschumacher/wasmr)
 * [Elixir](https://github.com/tessi/wasmex)
