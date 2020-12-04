@@ -141,7 +141,8 @@ const char *wat_string =
 
 wasm_byte_vec_t wat;
 wasm_byte_vec_new(&wat, strlen(wat_string), wat_string);
-wasm_byte_vec_t* wasm_bytes = wat2wasm(&wat);
+wasm_byte_vec_t wasm_bytes; 
+wat2wasm(&wat, &wasm_bytes);
 ```
 {% endtab %}
 {% endtabs %}
@@ -233,7 +234,7 @@ if err != nil {
 ```c
 wasm_engine_t* engine = wasm_engine_new();
 wasm_store_t* store = wasm_store_new(engine);
-wasm_module_t* module = wasm_module_new(store, wasm_bytes);
+wasm_module_t* module = wasm_module_new(store, &wasm_bytes);
 
 if (!module) {
     printf("> Error compiling module!\n");
