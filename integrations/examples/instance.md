@@ -25,20 +25,12 @@ cargo new instance
 cd instance
 ```
 
-This should generate two important files for us, `Cargo.toml` and `src/main.rs`. The `Cargo.toml` is a file that describes your project and its dependencies. The `src/main.rs` is the entry point for your project, and contains the `fn main() { .. }` that is run when the project is executed.
+We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 
-We then modify the `Cargo.toml` to add the Wasmer dependencies as shown below:
-
-```rust
-[package]
-name = "instance"
-version = "0.1.0"
-authors = ["The Wasmer Engineering Team <engineering@wasmer.io>"]
-edition = "2018"
-
+```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "1.0.0-alpha5"
+wasmer = "1.0.0-beta1"
 ```
 {% endtab %}
 

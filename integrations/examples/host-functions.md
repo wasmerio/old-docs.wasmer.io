@@ -35,20 +35,12 @@ cargo new imported-function-env
 cd imported-function-env
 ```
 
-This should generate two important files for us, `Cargo.toml` and `src/main.rs`. The `Cargo.toml` is a file that describes your project and its dependencies. The `src/main.rs` is the entry point for your project, and contains the `fn main() { .. }` that is run when the project is executed.
+We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 
-We then modify the `Cargo.toml` to add the Wasmer dependencies as shown below:
-
-```rust
-[package]
-name = "imported-function-env"
-version = "0.1.0"
-authors = ["The Wasmer Engineering Team <engineering@wasmer.io>"]
-edition = "2018"
-
+```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "1.0.0-alpha5"
+wasmer = "1.0.0-beta1"
 ```
 {% endtab %}
 {% endtabs %}
@@ -64,6 +56,7 @@ Because we want to store data outside of the Wasm module and have host functions
 ```rust
 let shared_counter: Arc<RefCell<i32>> = Arc::new(RefCell::new(0));
 
+#[derive(WasmerEnv)]
 struct Env {
     counter: Arc<RefCell<i32>>,
 }
@@ -82,11 +75,11 @@ Now that our data is available we'll declare the functions.
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-fn get_counter(env: &mut Env) -> i32 {
+fn get_counter(env: &Env) -> i32 {
     *env.counter.borrow()
 }
 
-fn add_to_counter(env: &mut Env, add: i32) -> i32 {
+fn add_to_counter(env: &Env, add: i32) -> i32 {
     let mut counter_ref = env.counter.borrow_mut();
 
     *counter_ref += add;

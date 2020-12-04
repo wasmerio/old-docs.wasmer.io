@@ -32,6 +32,8 @@ Now it's time to create a new project and add Wasmer as a dependency:
 cargo new wasmer-project --bin
 ```
 
+This should generate two important files for us, `Cargo.toml` and `src/main.rs`. The `Cargo.toml` is a file that describes your project and its dependencies. The `src/main.rs` is the entry point for your project, and contains the `fn main() { .. }` that is run when the project is executed.
+
 Now, edit the `Cargo.toml` file to add `wasmer` as a dependency:
 
 ```bash

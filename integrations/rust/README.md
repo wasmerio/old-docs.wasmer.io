@@ -16,7 +16,7 @@ In this section we will go through the instructions on how to setup your Rust en
 
 {% page-ref page="setup.md" %}
 
-{% embed url="https://docs.rs/wasmer/1.0.0-alpha01.0/wasmer/" caption="" %}
+{% embed url="https://docs.rs/wasmer/1.0.0-beta1/wasmer/" caption="" %}
 
 ## Published Crates
 
