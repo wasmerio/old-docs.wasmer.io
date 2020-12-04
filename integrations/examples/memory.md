@@ -92,7 +92,7 @@ Now that we have everything set up, let's go ahead and try it out!
 The first interesting thing to do is to query information about the memory. To do that we must either have access to the memory \(i.e it has to be exported\) or we must have access to an exported function which is able to give us this information.
 
 {% hint style="info" %}
-One important thing to note: the size of the memory can be expressed as a number of mages or a number of bytes.
+One important thing to note: the size of the memory can be expressed as a number of pages or a number of bytes.
 
 Each page of memory is 64 KiB in size.
 {% endhint %}
