@@ -43,21 +43,16 @@ The Wasmer WebAssembly runtime provides various features for users and developer
 
 * `poll_fd` is not fully implemented for Windows yet
 
-## Language integration
+## Language Embeddings
 
-TODO: define a set of features that are relevant and mark them here
-
-Current ideas:
-
-* Callbacks
-* Metering
-* Caching
-
-> TODO: expand this table, it's focused on new features that we haven't implemented yet and doesn't list all language integrations
+Wasmer enables WebAssembly usage in a lot of different languages.
+Here are some of the features in each of those:
 
 |  | Rust | C / C++ | Go | Python | Ruby |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Terminate in host call | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
 | WASI | ✅ | ✅ | 🔄 | ✅ | ⬜ |
 | WASI FS API | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
+| Serialize/Deserialize | ✅ | ✅ | ✅ | ✅ | ⬜ |
+| Metering | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
 
