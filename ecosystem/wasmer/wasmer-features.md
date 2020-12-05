@@ -2,7 +2,7 @@
 
 The Wasmer WebAssembly runtime provides various features for users and developers:
 
-* **Backends:** Wasmer supports multiple compiler backends: _Singlepass_, _Cranelift_ and _LLVM_. Each of these have different tradeoffs of compilation speed vs runtime speed;
+* **Compilers:** Wasmer supports multiple compilers: _Singlepass_, _Cranelift_ and _LLVM_. Each of these have different tradeoffs of compilation speed vs runtime speed;
 * **Caching**: compiled WebAssembly modules can be reused so subsequent runs of a Wasm file will have very little start up time;
 * **Metering**: computation time and other resources can be monitored and limits set to control how the Wasm code runs. This is also known as "gas metering";
 * _WebAssembly Features_:
