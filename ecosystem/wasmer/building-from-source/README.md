@@ -22,41 +22,14 @@ To install Rust on Windows, download and run [rustup-init.exe](https://win.rustu
 
 ## Installing Additional Dependencies
 
-### MacOS
-
-If you have [Homebrew](https://brew.sh/) installed:
-
-```text
-brew install cmake
-```
-
-Or, if you have [MacPorts](https://www.macports.org/install.php):
-
-```bash
-sudo port install cmake
-```
-
-### Debian-based
-
-```bash
-sudo apt install cmake pkg-config libssl-dev
-```
-
-### FreeBSD
-
-```text
-pkg install cmake
-```
-
 ### Windows
 
-Windows support is _experimental_. WASI is fully supported, but Emscripten support is in the works.
+Windows support is fully supported. WASI is fully supported, but Emscripten support is in the works.
 
 1. Install [Visual Studio](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15)
 2. Install [Rust for Windows](https://win.rustup.rs/)
 3. Install [Git for Windows](https://git-scm.com/download/win). Allow it to add `git.exe` to your PATH \(default settings for the installer are fine\).
-4. Install [CMake](https://cmake.org/download/). Ensure CMake is in your PATH.
-5. \(optional\) Install [LLVM 8.0](https://prereleases.llvm.org/win-snapshots/LLVM-8.0.0-r351033-win64.exe)
+5. \(optional\) Install [LLVM 11.0](https://prereleases.llvm.org/win-snapshots/LLVM-11.0.0-2663a25f-win64.exe)
 
 ## Building the Wasmer Runtime
 
