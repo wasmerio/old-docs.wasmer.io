@@ -77,7 +77,8 @@ clean:
     rm -f instance.o instance
 ```
 
-Wasmer C API includes two header files: `wasm.h` and `wasmer_wasm.h`. The first one provides the standard Wasm C API while the second one adds some useful functions like `wat2wasm` and many others.
+Wasmer C API includes the `wasmer.h` header file that you need to include to start using Wasm in C.
+
 {% endtab %}
 {% endtabs %}
 
