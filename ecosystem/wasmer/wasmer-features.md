@@ -12,7 +12,7 @@ The Wasmer WebAssembly runtime provides various features for users and developer
   * **Emscripten**
   * **WASI**
 
-## Support of features by Backend
+## Support of features by Compiler
 
 |  | Singlepass | Cranelift | LLVM |
 | :--- | :--- | :--- | :--- |
@@ -34,14 +34,23 @@ The Wasmer WebAssembly runtime provides various features for users and developer
 
 ## Support by Operating System
 
-|  | GNU Linux | Mac OSX | Windows NT |
+|  | Linux | macOS | Windows |
 | :--- | :--- | :--- | :--- |
-| Cranelift Backend | ✅ | ✅ | ✅ |
-| LLVM Backend | ✅ | ✅ | ✅ |
-| Singlepass Backend | ✅ | ✅ | [\#347](https://github.com/wasmerio/wasmer/issues/347) |
+| Cranelift | ✅ | ✅ | ✅ |
+| LLVM | ✅ | ✅ | ✅ |
+| Singlepass | ✅ | ✅ | [\#347](https://github.com/wasmerio/wasmer/issues/347) |
 | WASI | ✅ | ✅ | ✅\* |
 
 * `poll_fd` is not fully implemented for Windows yet
+
+
+## Compiler Support by Chipset
+
+|  | x86_64 | arm64 | x86 |
+| :--- | :--- | :--- | :--- |
+| Cranelift | ✅ | ✅ | ✅ |
+| LLVM | ✅ | ✅ | ✅ |
+| Singlepass | ✅ | ✅ | ⬜ |
 
 ## Language Embeddings
 
