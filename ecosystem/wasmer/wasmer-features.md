@@ -50,7 +50,7 @@ The Wasmer WebAssembly runtime provides various features for users and developer
 | :--- | :--- | :--- | :--- |
 | Cranelift | ✅ | ✅ | ✅ |
 | LLVM | ✅ | ✅ | ✅ |
-| Singlepass | ✅ | ✅ | ⬜ |
+| Singlepass | ✅ | 🔄 | ⬜ |
 
 ## Language Embeddings
 
