@@ -64,15 +64,15 @@ make build-wasmer
 ```
 
 **Note**: should see this as the first line in the console:  
-`Available backends: cranelift`
+`Available compilers: cranelift`
 
 ### LLVM Compiler
 
-If you want support for the Wasmer LLVM backend, then you will also need to ensure:
+If you want support for the Wasmer LLVM compiler, then you will also need to ensure:
 
-* Ensure that LLVM 8.0.x &gt; is installed on your system
+* Ensure that LLVM 11.0.x &gt; is installed on your system
   * You can also [download and use a prebuilt LLVM binary](https://releases.llvm.org/download.html)
-* In case `llvm-config` is not accessible, set the correct environment variable for LLVM to access: For example, the environment variable for LLVM 8.0.x would be: `LLVM_SYS_80_PREFIX=/path/to/unpacked/llvm-8.0` 
+* In case `llvm-config` is not accessible, set the correct environment variable for LLVM to access: For example, the environment variable for LLVM 11.0.x would be: `LLVM_SYS_110_PREFIX=/path/to/unpacked/llvm-11.0` 
 
 And create a Wasmer release
 
@@ -81,9 +81,9 @@ make build-wasmer
 ```
 
 **Note**: you should see this as the first line in the console:  
-`Available backends: llvm`
+`Available compilers: llvm`
 
-### All backends
+### All compilers
 
 Once you have LLVM and Rust, you can just run:
 
@@ -92,7 +92,7 @@ make build-wasmer
 ```
 
 **Note**: you should see this as the first line in the console:  
-`Available backends: singlepass cranelift llvm`
+`Available compilers: singlepass cranelift llvm`
 
 ## Running your Wasmer binary
 
