@@ -16,7 +16,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/improts_exports.rs).
 
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 {% endhint %}
@@ -102,8 +102,8 @@ let import_object = imports! {
     },
     "env" => {
         "host_global" => host_global,
-    }
-}
+    },
+};
 ```
 {% endtab %}
 
@@ -189,9 +189,15 @@ To get these entities we'll use the exports API:
 
 {% tabs %}
 {% tab title="Rust" %}
-{% hint style="warning" %}
-TODO: Write this section
-{% endhint %}
+```rust
+let function = instance.exports.get::<Function>("guest_function")?;
+
+let global = instance.exports.get::<Global>("guest_global")?;
+
+let memory = instance.exports.get::<Memory>("guest_memory")?;
+
+let table = instance.exports.get::<Table>("guest_table")?;
+```
 {% endtab %}
 
 {% tab title="Go" %}
@@ -269,8 +275,29 @@ We now have everything we need to run the Wasm module, let's do it!
 {% tab title="Rust" %}
 You should be able to run it using the `cargo run` command. The output should look like this:
 
-{% hint style="warning" %}
-TODO: Write this section
+```text
+Compiling module...
+Creating the imported function...
+Creating the imported global...
+Instantiating module...
+Getting the exported function...
+Got exported function of type: FunctionType { params: [], results: [I32] }
+Getting the exported global...
+Got exported global of type: GlobalType { ty: I32, mutability: Const }
+Getting the exported memory...
+Got exported memory of type: MemoryType { minimum: 1 pages, maximum: None, shared: false }
+Getting the exported table...
+Got exported table of type: TableType { ty: FuncRef, minimum: 1, maximum: Some(1) }
+```
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer.git
+cd wasmer
+cargo run --example imports-exports --release --features "cranelift"
+```
 {% endhint %}
 {% endtab %}
 
