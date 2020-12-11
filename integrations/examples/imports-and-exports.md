@@ -16,7 +16,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/improts_exports.rs).
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/imports_exports.rs).
 
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 {% endhint %}
