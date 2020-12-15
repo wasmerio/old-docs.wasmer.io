@@ -56,7 +56,7 @@ Because we want to store data outside of the Wasm module and have host functions
 ```rust
 let shared_counter: Arc<RefCell<i32>> = Arc::new(RefCell::new(0));
 
-#[derive(WasmerEnv)]
+#[derive(WasmerEnv, Clone)]
 struct Env {
     counter: Arc<RefCell<i32>>,
 }
