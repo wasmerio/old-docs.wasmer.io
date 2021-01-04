@@ -36,7 +36,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "1.0.0-beta1"
+wasmer = "1.0"
 ```
 {% endtab %}
 
