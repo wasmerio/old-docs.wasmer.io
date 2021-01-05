@@ -39,7 +39,7 @@ Now, edit the `Cargo.toml` file to add `wasmer` as a dependency:
 ```bash
 [dependencies]
 # The Wasmer API
-wasmer = "1.0.0-beta1"
+wasmer = "1.0"
 ```
 
 Next, let's take a look at some examples!

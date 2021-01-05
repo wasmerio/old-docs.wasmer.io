@@ -25,7 +25,7 @@ libdir=/Users/syrus/.wasmer/lib
 
 Name: wasmer
 Description: The Wasmer library for running WebAssembly
-Version: 1.0.0-beta1
+Version: 1.0.0
 Cflags: -I/Users/USER/.wasmer/include/wasmer
 Libs: -L/Users/syrus/.wasmer/lib -lwasmer
 ```
