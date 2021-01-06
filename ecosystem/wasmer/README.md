@@ -37,10 +37,11 @@ Either way though, from a WebAssembly point of view, we don't need to care too m
 
 {% page-ref page="../../integrations/c/" %}
 
+{% page-ref page="../../integrations/go/" %}
+
 And many more \(for which we will be creating docs here soon!\)
 
 * [Python](https://github.com/wasmerio/wasmer-python)
-* [Go](https://github.com/wasmerio/wasmer-go)
 * [PHP](https://github.com/wasmerio/wasmer-php)
 * [Ruby](https://github.com/wasmerio/wasmer-ruby)
 * [C\#](https://github.com/migueldeicaza/WasmerSharp)
