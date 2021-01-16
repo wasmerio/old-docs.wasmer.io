@@ -29,7 +29,7 @@ Windows support is fully supported. WASI is fully supported, but Emscripten supp
 1. Install [Visual Studio](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15)
 2. Install [Rust for Windows](https://win.rustup.rs/)
 3. Install [Git for Windows](https://git-scm.com/download/win). Allow it to add `git.exe` to your PATH \(default settings for the installer are fine\).
-5. \(optional\) Install [LLVM 11.0](https://prereleases.llvm.org/win-snapshots/LLVM-11.0.0-2663a25f-win64.exe)
+5. \(optional\) Install [LLVM 10.0](https://prereleases.llvm.org/win-snapshots/LLVM-10.0.0-e20a1e486e1-win64.exe)
 
 ## Building the Wasmer Runtime
 
@@ -70,9 +70,9 @@ make build-wasmer
 
 If you want support for the Wasmer LLVM compiler, then you will also need to ensure:
 
-* Ensure that LLVM 11.0.x &gt; is installed on your system
+* Ensure that LLVM 10.0.x &gt; is installed on your system
   * You can also [download and use a prebuilt LLVM binary](https://releases.llvm.org/download.html)
-* In case `llvm-config` is not accessible, set the correct environment variable for LLVM to access: For example, the environment variable for LLVM 11.0.x would be: `LLVM_SYS_110_PREFIX=/path/to/unpacked/llvm-11.0` 
+* In case `llvm-config` is not accessible, set the correct environment variable for LLVM to access: For example, the environment variable for LLVM 10.0.x would be: `LLVM_SYS_100_PREFIX=/path/to/unpacked/llvm-10.0` 
 
 And create a Wasmer release
 
