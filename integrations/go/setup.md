@@ -28,7 +28,7 @@ Now, edit the `go.mod` file to add `wasmer-go` as a dependency:
 
 ```bash
 require (
-    require github.com/wasmerio/wasmer-go v1.0.0
+    github.com/wasmerio/wasmer-go v1.0.0
 )
 ```
 
