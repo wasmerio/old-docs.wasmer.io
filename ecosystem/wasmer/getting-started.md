@@ -24,6 +24,28 @@ iwr https://win.wasmer.io -useb | iex
 Note: All Wasmer executables can be found on out [Github Releases Page](https://github.com/wasmerio/wasmer/releases).
 {% endhint %}
 
+{% hint style="warning" %}
+Wasmer needs some requirements to be met to run properly. On Linux, you will have to be sure you have a compatible 
+`libc`/`libstdc++`. Wasmer expects the following ABI versions to be available:
+
+* GLIBC: `>= 3.4.21`
+* GLIBCXX: `>= 2.27`
+
+To verify if your environments provides the correct versions you can use the commands below:
+
+```bash
+LIBC_PATH=$(gcc --print-file-name=libc.so.6)
+strings $LIBC_PATH | grep -e '^GLIBC'
+
+LIBCXX_PATH=$(gcc --print-file-name=libstdc++.so.6)
+strings $LIBCXX_PATH | grep -e '^GLIBCXX'
+```
+
+Note that you will need to install `gcc` and `binutils` for these commands to work.
+
+If you can't match these requirements you will have to [build Wasmer](./building-from-source/README.md) manually.
+{% endhint %}
+
 Once the Wasmer CLI is installed, you can run Wasm modules from the command line!
 
 To do this, you want to find a Wasm Module compiled down to an ABI that the Wasmer runtime supports, such as WASI or Emscripten. For instance, we can search for a module on WAPM, and go to the module page, and then click on the "Browse modules" tab.
