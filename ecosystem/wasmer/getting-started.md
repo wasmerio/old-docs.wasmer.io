@@ -28,8 +28,8 @@ Note: All Wasmer executables can be found on out [Github Releases Page](https://
 Wasmer needs some requirements to be met to run properly. On Linux, you will have to be sure you have a compatible 
 `libc`/`libstdc++`. Wasmer expects the following ABI versions to be available:
 
-* GLIBC: `>= 3.4.21`
-* GLIBCXX: `>= 2.27`
+* GLIBC: `>= 2.27`
+* GLIBCXX: `>= 3.4.21`
 
 To verify if your environments provides the correct versions you can use the commands below:
 
