@@ -48,6 +48,21 @@ go mod init github.com/$USER/wasmer-example-instance
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-python/blob/master/examples/instance.py).
+
+_Please take a look at the_ [_setup steps for Python](../python/setup.md)_._
+{% endhint %}
+
+```bash
+mkdir wasmer-example-instance
+cd wasmer-example-instance
+pip install wasmer
+pip install wasmer_compiler_cranelift
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
@@ -121,6 +136,22 @@ wasmBytes := []byte(`
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+```python
+wasm_bytes = wat2wasm(
+    """
+    (module
+      (type $add_one_t (func (param i32) (result i32)))
+      (func $add_one_f (type $add_one_t) (param $value i32) (result i32)
+        local.get $value
+        i32.const 1
+        i32.add)
+      (export "add_one" (func $add_one_f)))
+    """
+)
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 const char *wat_string =
@@ -152,6 +183,12 @@ let wasm_bytes = std::fs::read("./path/to/module.wasm")?;
 {% tab title="Go" %}
 ```go
 wasmBytes, err := ioutil.ReadFile("./path/to/module.wasm")
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```go
+wasmBytes = open('./path/to/module.wasm', 'rb').read()
 ```
 {% endtab %}
 
@@ -223,6 +260,15 @@ if err != nil {
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+```python
+from wasmer_compiler_cranelift import Compiler
+
+engine = engine.JIT(Compiler)
+store = Store(engine)
+module = Module(store, wasm_bytes)
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 wasm_engine_t* engine = wasm_engine_new();
@@ -258,6 +304,12 @@ let instance = Instance::new(&module, &import_object)?;
 ```go
 importObject := wasmer.NewImportObject()
 instance, err := wasmer.NewInstance(module, importObject)
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```go
+instance = Instance(module)
 ```
 {% endtab %}
 
@@ -312,12 +364,27 @@ Results of `add_one`: 2
 ```
 
 {% hint style="info" %}
-If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
-
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-go/) codebase directly, you can also do:
 ```bash
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_instance_test.go
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Python" %}
+You should be able to run it using the `python main.py` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-python/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-python.git
+cd wasmer-python
+just prelude
+source .env/bin/activate
+python examples/instance.py
 ```
 {% endhint %}
 {% endtab %}
