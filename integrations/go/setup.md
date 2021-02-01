@@ -11,10 +11,10 @@ go version # This will show the Go version
 ```
 
 {% hint style="success" %}
-If these commands work, Go is successfully installed!
+If this command work, Go is successfully installed!
 {% endhint %}
 
-## Start a Go Project
+## Start a Go project
 
 Now it's time to create a new project and add Wasmer as a dependency:
 
