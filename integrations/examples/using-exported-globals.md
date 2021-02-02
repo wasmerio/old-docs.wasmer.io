@@ -1,14 +1,14 @@
 ---
 description: >-
-  A WASM module can export entities, like functions, memories, globals and
+  A Wasm module can export entities, like functions, memories, globals and
   tables. This example illustrates how to use exported globals.
 ---
 
 # ✏️ Using guest \(exported\) globals
 
-In this example we'll be using a simple WASM module which exports some globals.
+In this example we'll be using a simple Wasm module which exports some globals.
 
-Globals are probably the simplest entity we'll encounter in WASM modules but there is still some interesting things to talk about. For example, globals come in two flavors:
+Globals are probably the simplest entity we'll encounter in Wasm modules but there is still some interesting things to talk about. For example, globals come in two flavors:
 
 * Immutable globals \(`const`\)
 * Mutable globals \(`var`\)
@@ -325,7 +325,7 @@ wasm_global_set(some, &some_set_value);
 
 ## Running
 
-We now have everything we need to run the WASM module, let's do it!
+We now have everything we need to run the Wasm module, let's do it!
 
 {% tabs %}
 {% tab title="Rust" %}

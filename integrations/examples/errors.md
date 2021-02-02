@@ -53,7 +53,7 @@ Now that we have everything set up, let's go ahead and try it out!
 
 ## Handling the error
 
-There is nothing special about the WASM module or the way we'll set it up.
+There is nothing special about the Wasm module or the way we'll set it up.
 
 The only things we'll need to do are:
 
@@ -149,7 +149,7 @@ If we got an error we format a nice message containing information to help debug
 
 ## Running
 
-We now have everything we need to run the WASM module, let's do it!
+We now have everything we need to run the Wasm module, let's do it!
 
 {% tabs %}
 {% tab title="Rust" %}
