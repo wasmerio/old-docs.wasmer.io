@@ -54,6 +54,21 @@ go mod init github.com/$USER/wasmer-example-imports-exports
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-python/blob/master/examples/exports_global.py).
+
+_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
+{% endhint %}
+
+```bash
+mkdir wasmer-example-imports-exports
+cd wasmer-example-imports-exports
+pip install wasmer
+pip install wasmer_compiler_cranelift
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/exports-global.c).
@@ -135,6 +150,21 @@ fmt.Printf(
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+```python
+one = instance.exports.one
+some = instance.exports.some
+
+one_type = one.type
+assert one_type.type == Type.F32
+assert one_type.mutable == False
+
+some_type = some.type
+assert some_type.type == Type.F32
+assert some_type.mutable == True
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 wasm_mutability_t one_mutability = wasm_globaltype_mutability(one_type);
@@ -185,6 +215,14 @@ fmt.Printf("`some` value: %.1f\n", someValue)
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+```python
+some_value = some.value
+
+assert some_value == 0.0
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 wasm_val_t some_value;
@@ -223,6 +261,17 @@ if err == nil {
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+```go
+try:
+    one.value = 42.0
+except RuntimeError as err:
+    assert str(err) == 'The global variable is not mutable, cannot set a new value'
+else:
+    assert False
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 wasm_val_t one_set_value = WASM_F32_VAL(42);
@@ -246,7 +295,7 @@ Now let's see how to correctly set a value on a mutable global:
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-some.set(Value::F32(42.0))?;
+some.set(Value::F32(21.0))?;
 ```
 {% endtab %}
 
@@ -257,6 +306,12 @@ err = some.Set(float32(42.0), wasmer.F32)
 if err != nil {
     panic(fmt.Sprintln("Failed to set the `some` global value:", err))
 }
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+some.value = 21.0
 ```
 {% endtab %}
 
@@ -327,6 +382,22 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_exports_global_test.go
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Python" %}
+You should be able to run it using the `python main.py` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-python/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-python.git
+cd wasmer-python
+just prelude
+source .env/bin/activate
+python examples/exports_global.py
 ```
 {% endhint %}
 {% endtab %}
