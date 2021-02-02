@@ -39,7 +39,7 @@ wasmer = "1.0"
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_imports_exports_test.go).
 
-_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
+_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_.
 {% endhint %}
 
 ```bash
@@ -49,11 +49,26 @@ go mod init github.com/$USER/wasmer-example-imports-exports
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports_exports.go).
+
+_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_.
+{% endhint %}
+
+```bash
+mkdir wasmer-example-imports-exports
+cd wasmer-example-imports-exports
+pip install wasmer
+pip install wasmer_compiler_cranelift
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
 
-_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
+_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_.
 {% endhint %}
 
 ```bash
@@ -127,6 +142,24 @@ importObject.Register(
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+```python
+import_object = ImportObject()
+import_object.register(
+    "",
+    {
+        "host_function": host_function,
+    }
+)
+import_object.register(
+    "env",
+    {
+        "host_global": host_global,
+    }
+)
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 wasm_functype_t* host_func_type = wasm_functype_new_0_1(wasm_valtype_new_i32());
@@ -160,6 +193,12 @@ let instance = Instance::new(&module, &import_object)?;
 {% tab title="Go" %}
 ```go
 instance, err := wasmer.NewInstance(module, importObject)
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```go
+instance = Instance(module, import_object)
 ```
 {% endtab %}
 
