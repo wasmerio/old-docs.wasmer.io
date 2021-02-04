@@ -263,6 +263,15 @@ if err != nil {
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+```python
+function = instance.exports.guest_function
+global = instance.exports.guest_global
+memory = instance.exports.guest_memory
+table = instance.exports.guest_table
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 wasm_func_t* func = wasm_extern_as_func(exports.data[0]);
@@ -365,6 +374,23 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_imports_exports_test.go
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Python" %}
+You should be able to run it using the `python main.py` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-python) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-python.git
+cd wasmer-python
+just prelude
+source .env/bin/activate
+just build-all $target
+python examples/imports_exports.py
 ```
 {% endhint %}
 {% endtab %}
