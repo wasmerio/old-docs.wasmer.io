@@ -43,6 +43,21 @@ cd wasmer-example-early-exit
 go mod init github.com/$USER/wasmer-example-early-exit
 ```
 {% endtab %}
+
+{% tab title="Python" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports_function_early_exit.py).
+
+_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_.
+{% endhint %}
+
+```bash
+mkdir wasmer-example-early-exit
+cd wasmer-example-early-exit
+pip install wasmer
+pip install wasmer_compiler_cranelift
+```
+{% endtab %}
 {% endtabs %}
 
 Now that we have everything set up, let's go ahead and try it out!
@@ -76,6 +91,13 @@ type exitCode struct {
 func (self *exitCode) Error() string {
     return fmt.Sprintf("exit code: %d", self.code)
 }
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+class ExitCode(Exception):
+    pass
 ```
 {% endtab %}
 {% endtabs %}
@@ -117,6 +139,21 @@ importObject.Register(
             earlyExit,
         ),
     },
+)
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+def early_exit():
+    raise ExitCode("oops")
+
+import_object = ImportObject()
+import_object.register(
+    "env",
+    {
+        "early_exit": Function(store, early_exit),
+    }
 )
 ```
 {% endtab %}
@@ -178,6 +215,17 @@ if err == nil {
 fmt.Println("Exited early with:", err)
 ```
 {% endtab %}
+
+{% tab title="Python" %}
+```go
+try:
+    instance.exports.run(1, 2)
+except RuntimeError as err:
+    assert "oops" in str(err)
+else:
+    assert False
+```
+{% endtab %}
 {% endtabs %}
 
 ## Running
@@ -217,12 +265,29 @@ Exited early with: exit code: 1
 ```
 
 {% hint style="info" %}
-If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-go/) codebase directly, you can also do:
 
 ```bash
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_memory_test.go
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Python" %}
+You should be able to run it using the `python main.py` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-python/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-python.git
+cd wasmer-go
+just prelude
+source .env/bin/activate
+just build-all $target
+python examples/imports_function_early_exit.py
 ```
 {% endhint %}
 {% endtab %}
