@@ -274,7 +274,8 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 git clone https://github.com/wasmerio/wasmer-python.git
 cd wasmer-python
 just prelude
-soruce .env/bin/activate
+source .env/bin/activate
+just build-all $target
 python examples/exports_function.py
 ```
 {% endhint %}

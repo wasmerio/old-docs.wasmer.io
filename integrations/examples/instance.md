@@ -384,6 +384,7 @@ git clone https://github.com/wasmerio/wasmer-python.git
 cd wasmer-python
 just prelude
 source .env/bin/activate
+just build-all $target
 python examples/instance.py
 ```
 {% endhint %}
