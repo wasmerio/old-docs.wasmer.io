@@ -53,6 +53,8 @@
 * [Go](integrations/go/README.md)
   * [Setup your Go environment](integrations/go/setup.md)
   * [Wasmer Go API](https://pkg.go.dev/github.com/wasmerio/wasmer-go/wasmer)
+* [Python](integrations/python/README.md)
+  * [Setup your Python environment](integrations/python/setup.md)
 * [Examples](integrations/examples/README.md)
   * [⭐️ Instantiating a Wasm module](integrations/examples/instance.md)
   * [🔁 Imports & exports](integrations/examples/imports-and-exports.md)

@@ -5,10 +5,15 @@ You can use Wasmer in your Go projects to execute WebAssembly modules securely a
 {% hint style="info" %}
 ## Did you know ...?
 
-Some of our language extensions are using Wasmer under the hood.
+Some of our language extensions are using Wasmer under the hood:
 
+* [Wasmer Java Extension](https://github.com/wasmerio/wasmer-java)
+* [Wasmer PHP Extension](https://github.com/wasmerio/wasmer-php)
 * [Wasmer Python Extension](https://github.com/wasmerio/wasmer-python)
 * [Wasmer Ruby Extension](https://github.com/wasmerio/wasmer-ruby)
+
+Some community made language extensions are also using Wasmer:
+
 * [Wasmex Elixir Extension](https://github.com/tessi/wasmex)
 {% endhint %}
 

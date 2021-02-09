@@ -48,7 +48,7 @@ go mod init github.com/$USER/wasmer-example-early-exit
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports_function_early_exit.py).
 
-_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_.
+_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
 {% endhint %}
 
 ```bash
