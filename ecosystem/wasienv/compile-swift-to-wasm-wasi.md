@@ -1,6 +1,6 @@
 # Compile Swift to Wasm WASI
 
-Thanks to the great work of [Swift WASM](https://swiftwasm.org/) we can now compile Swift to WebAssembly WASI.
+Thanks to the great work of [Swift Wasm](https://swiftwasm.org/) we can now compile Swift to WebAssembly WASI.
 
 Wasienv makes very easy to get started with Swift and WebAssembly.
 

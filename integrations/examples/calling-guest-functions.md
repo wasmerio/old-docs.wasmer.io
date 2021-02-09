@@ -55,6 +55,21 @@ go mod init github.com/$USER/wasmer-example-exports-function
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-python/blob/master/examples/exports_function.py).
+
+_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_.
+{% endhint %}
+
+```bash
+mkdir wasmer-example-exports-function
+cd wasmer-example-exports-function
+pip install wasmer
+pip install wasmer_compiler_cranelift
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
@@ -111,6 +126,10 @@ if err != nil {
 
 result, err := sum.Call(1, 2)
 ```
+{% endtab %}
+
+{% tab title="Python" %}
+(not possible)
 {% endtab %}
 
 {% tab title="C/C++" %}
@@ -181,6 +200,17 @@ if err != nil {
 ```
 {% endhint %}
 {% endtab %}
+
+{% tab title="Python" %}
+```python
+sum = instance.exports.sum
+result = sum(3, 4)
+```
+{% endtab %}
+
+{% tab title="C/C++" %}
+(not possible)
+{% endtab %}
 {% endtabs %}
 
 ## Running
@@ -230,6 +260,23 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_exports_function_test.go
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Python" %}
+You should be able to run it using the `python main.py` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-python) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-python.git
+cd wasmer-python
+just prelude
+source .env/bin/activate
+just build-all $target
+python examples/exports_function.py
 ```
 {% endhint %}
 {% endtab %}

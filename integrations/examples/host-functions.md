@@ -126,7 +126,7 @@ Now each time the `add_to_counter` will be run from the Wasm module it will alte
 
 ## Running
 
-We now have everything we need to run the WASM module, let's do it!
+We now have everything we need to run the Wasm module, let's do it!
 
 {% tabs %}
 {% tab title="Rust" %}

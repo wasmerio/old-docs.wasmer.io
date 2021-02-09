@@ -1,12 +1,12 @@
 ---
 description: >-
-  This example illustrates the basics of the basics of interacting with WASM
+  This example illustrates the basics of the basics of interacting with Wasm
   module memory.
 ---
 
 # 💾 Interacting with memory
 
-A WASM module can export its memory. With Wasmer you'll be able to interact with this memory.
+A Wasm module can export its memory. With Wasmer you'll be able to interact with this memory.
 
 In this example we'll illustrate the basics of interacting with the module memory:
 
@@ -327,7 +327,7 @@ It enough for now: we only covered how to interact with the memory through expor
 
 ## Running
 
-We now have everything we need to run the WASM module, let's do it!
+We now have everything we need to run the Wasm module, let's do it!
 
 {% tabs %}
 {% tab title="Rust" %}

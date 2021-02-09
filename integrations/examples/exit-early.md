@@ -2,9 +2,9 @@
 
 WebAssembly is currently always run in the same process synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host \(your application\).
 
-However, there are cases where you may want to interrupt this synchronous execution while the guest WASM module is calling a host function. This can be useful for saving resources, and not returning back to the guest WASM for execution, when you already know the WASM execution will fail, or no longer be needed.
+However, there are cases where you may want to interrupt this synchronous execution while the guest Wasm module is calling a host function. This can be useful for saving resources, and not returning back to the guest Wasm for execution, when you already know the Wasm execution will fail, or no longer be needed.
 
-In this example, we will run a WASM module that calls the imported host function `interrupt_execution`. This host function will immediately stop executing the WebAssembly module.
+In this example, we will run a Wasm module that calls the imported host function `interrupt_execution`. This host function will immediately stop executing the WebAssembly module.
 
 First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. In this example, we will create a new project. Lets create it and navigate to it:
 
@@ -43,13 +43,28 @@ cd wasmer-example-early-exit
 go mod init github.com/$USER/wasmer-example-early-exit
 ```
 {% endtab %}
+
+{% tab title="Python" %}
+{% hint style="info" %}
+The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports_function_early_exit.py).
+
+_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_.
+{% endhint %}
+
+```bash
+mkdir wasmer-example-early-exit
+cd wasmer-example-early-exit
+pip install wasmer
+pip install wasmer_compiler_cranelift
+```
+{% endtab %}
 {% endtabs %}
 
 Now that we have everything set up, let's go ahead and try it out!
 
 ## Setting up
 
-Before we start with the WASM part we'll have to declare the error we'll use to terminate the execution of the guest module:
+Before we start with the Wasm part we'll have to declare the error we'll use to terminate the execution of the guest module:
 
 {% tabs %}
 {% tab title="Rust" %}
@@ -78,13 +93,20 @@ func (self *exitCode) Error() string {
 }
 ```
 {% endtab %}
+
+{% tab title="Python" %}
+```python
+class ExitCode(Exception):
+    pass
+```
+{% endtab %}
 {% endtabs %}
 
 There is nothing special or Wasmer specific here but it will be required later in the example.
 
 ## Defining and importing the host function
 
-To terminate the execution of the WASM module we'll have to define a function on the host which will then be imported in the guest and called whenever execution is not required to continue. Let's do that:
+To terminate the execution of the Wasm module we'll have to define a function on the host which will then be imported in the guest and called whenever execution is not required to continue. Let's do that:
 
 {% tabs %}
 {% tab title="Rust" %}
@@ -117,6 +139,21 @@ importObject.Register(
             earlyExit,
         ),
     },
+)
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+def early_exit():
+    raise ExitCode("oops")
+
+import_object = ImportObject()
+import_object.register(
+    "env",
+    {
+        "early_exit": Function(store, early_exit),
+    }
 )
 ```
 {% endtab %}
@@ -157,7 +194,7 @@ We expect to get an error when calling the `run` function so what we do here is 
 * if we get a success, our test will fail;
 * if we get an error, we try to downcast to our `ExitCode` error.
 
-If downcasting succeeds it means we actually got the expected error so we make the test pass. If it fails, it means the WASM module reported an error but it wasn't the one we expected so we make the test fail.
+If downcasting succeeds it means we actually got the expected error so we make the test pass. If it fails, it means the Wasm module reported an error but it wasn't the one we expected so we make the test fail.
 {% endtab %}
 
 {% tab title="Go" %}
@@ -178,11 +215,22 @@ if err == nil {
 fmt.Println("Exited early with:", err)
 ```
 {% endtab %}
+
+{% tab title="Python" %}
+```go
+try:
+    instance.exports.run(1, 2)
+except RuntimeError as err:
+    assert "oops" in str(err)
+else:
+    assert False
+```
+{% endtab %}
 {% endtabs %}
 
 ## Running
 
-We now have everything we need to run the WASM module, let's do it!
+We now have everything we need to run the Wasm module, let's do it!
 
 {% tabs %}
 {% tab title="Rust" %}
@@ -217,12 +265,29 @@ Exited early with: exit code: 1
 ```
 
 {% hint style="info" %}
-If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer/) codebase directly, you can also do:
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-go/) codebase directly, you can also do:
 
 ```bash
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
 go test examples/example_memory_test.go
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Python" %}
+You should be able to run it using the `python main.py` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-python/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-python.git
+cd wasmer-go
+just prelude
+source .env/bin/activate
+just build-all $target
+python examples/imports_function_early_exit.py
 ```
 {% endhint %}
 {% endtab %}

@@ -114,7 +114,7 @@ let values = ptr.deref(memory, 7, new_str.len() as u32).unwrap();
 
 ## Running
 
-We now have everything we need to run the WASM module, let's do it!
+We now have everything we need to run the Wasm module, let's do it!
 
 {% tabs %}
 {% tab title="Rust" %}

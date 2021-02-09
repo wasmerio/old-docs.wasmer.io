@@ -1,7 +1,7 @@
 ---
 id: wasmer-js-module-transformation
 title: Transforming WASI Modules
-sidebar_label: Data Transfer Between JavaScript & WASM
+sidebar_label: Data Transfer Between JavaScript & Wasm
 ---
 
 # Module Transformation
