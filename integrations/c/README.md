@@ -7,8 +7,11 @@ You can use Wasmer in your C and C++ projects to interact with WebAssembly modul
 
 Some of our language extensions are using the Wasmer C integration under the hood:
 
-* [Wasmer PHP Extension](https://github.com/wasmerio/php-ext-wasm)
-* [Wasmer Go Extension](https://github.com/wasmerio/go-ext-wasm)
+* [Wasmer Go Extension](https://github.com/wasmerio/wasmer-go)
+* [Wasmer PHP Extension](https://github.com/wasmerio/wasmer-php)
+
+Some community made language extensions are also using the Wasmer C integration:
+
 * [WasmerSharp C\# Extension](https://github.com/migueldeicaza/WasmerSharp)
 {% endhint %}
 
