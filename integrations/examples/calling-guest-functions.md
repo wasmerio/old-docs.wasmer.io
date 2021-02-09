@@ -59,7 +59,7 @@ go mod init github.com/$USER/wasmer-example-exports-function
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-python/blob/master/examples/exports_function.py).
 
-_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_.
+_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
 {% endhint %}
 
 ```bash

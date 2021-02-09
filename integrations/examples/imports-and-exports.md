@@ -39,7 +39,7 @@ wasmer = "1.0"
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_imports_exports_test.go).
 
-_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_.
+_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
 
 ```bash
@@ -53,7 +53,7 @@ go mod init github.com/$USER/wasmer-example-imports-exports
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports_exports.go).
 
-_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_.
+_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
 {% endhint %}
 
 ```bash
@@ -68,7 +68,7 @@ pip install wasmer_compiler_cranelift
 {% hint style="info" %}
 The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
 
-_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_.
+_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
 {% endhint %}
 
 ```bash
