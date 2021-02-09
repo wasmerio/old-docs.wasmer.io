@@ -187,7 +187,7 @@ wasmBytes, err := ioutil.ReadFile("./path/to/module.wasm")
 {% endtab %}
 
 {% tab title="Python" %}
-```go
+```python
 wasmBytes = open('./path/to/module.wasm', 'rb').read()
 ```
 {% endtab %}
@@ -267,6 +267,7 @@ from wasmer_compiler_cranelift import Compiler
 engine = engine.JIT(Compiler)
 store = Store(engine)
 module = Module(store, wasm_bytes)
+```
 {% endtab %}
 
 {% tab title="C/C++" %}
