@@ -1,7 +1,7 @@
 # Transforming Modules
 
 {% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/browser/examples/transforming-modules).
+**Note**: The final code for this example can be found on Github: [transforming-modules](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/browser/examples/transforming-modules).
 {% endhint %}
 
 Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](https://github.com/wasmerio/docs.wasmer.io/tree/e0f7639306bb4cf18cd0c23876b80f787d6b5876/integrations/js/module-transformation/README.md) will be always needed until browsers land `BigInt` support in WebAssembly.

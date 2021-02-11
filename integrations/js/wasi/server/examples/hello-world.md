@@ -1,7 +1,7 @@
 # Hello World
 
 {% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/server/examples/hello-world).
+**Note**: The final code for this example can be found on Github: [hello-world](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/server/examples/hello-world).
 {% endhint %}
 
 In this introductory example, we will develop a NodeJS-based application that calls a WebAssembly module that in turn, calls a native "OS" function. This is exactly the same call chain as was used in the client-side example:

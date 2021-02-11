@@ -16,7 +16,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/imports_exports.rs).
+The final **Rust** code for this example can be found on Github: [imports_exports.rs](https://github.com/wasmerio/wasmer/blob/master/examples/imports_exports.rs).
 
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 {% endhint %}
@@ -37,7 +37,7 @@ wasmer = "1.0"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_imports_exports_test.go).
+The final **Go** code for this example can be found on Github: [imports_exports.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_imports_exports_test.go).
 
 _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
@@ -51,7 +51,7 @@ go mod init github.com/$USER/wasmer-example-imports-exports
 
 {% tab title="Python" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports_exports.go).
+The final **Python** code for this example can be found on Github: [imports_exports.py](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports_exports.py).
 
 _Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
 {% endhint %}
@@ -59,14 +59,13 @@ _Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
 ```bash
 mkdir wasmer-example-imports-exports
 cd wasmer-example-imports-exports
-pip install wasmer
-pip install wasmer_compiler_cranelift
+pip install wasmer wasmer_compiler_cranelift
 ```
 {% endtab %}
 
 {% tab title="C/C++" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
+The final **C** code for this example can be found on Github: [imports-exports.c](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/imports-exports.c).
 
 _Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
 {% endhint %}
@@ -379,7 +378,7 @@ go test examples/example_imports_exports_test.go
 {% endtab %}
 
 {% tab title="Python" %}
-You should be able to run it using the `python main.py` command.
+You should be able to run it using the `python imports_exports.py` command.
 
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-python) codebase directly, you can also do:
@@ -387,9 +386,6 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 ```bash
 git clone https://github.com/wasmerio/wasmer-python.git
 cd wasmer-python
-just prelude
-source .env/bin/activate
-just build-all $target
 python examples/imports_exports.py
 ```
 {% endhint %}

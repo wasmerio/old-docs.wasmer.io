@@ -21,7 +21,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/memory.rs).
+The final **Rust** code for this example can be found on Github: [memory.rs](https://github.com/wasmerio/wasmer/blob/master/examples/memory.rs).
 
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 {% endhint %}
@@ -42,7 +42,7 @@ wasmer = "1.0"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_memory_test.go).
+The final **Go** code for this example can be found on Github: [memory.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_memory_test.go).
 
 _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
@@ -56,7 +56,7 @@ go mod init github.com/$USER/wasmer-example-memory
 
 {% tab title="C/C++" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/memory.c).
+The final **C** code for this example can be found on Github: [memory.c](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/memory.c).
 
 _Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
 {% endhint %}

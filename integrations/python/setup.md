@@ -21,9 +21,12 @@ Now it's time to create a new project and add Wasmer as a dependency:
 ```bash
 mkdir wasmer-project
 cd wasmer-project
-pip install wasmer
-pip install wasmer_compiler_cranelift
+pip install wasmer wasmer_compiler_cranelift
 ```
+
+> More compilers are also available:
+> * Singlepass: `pip install wasmer_compiler_singlepass`
+> * LLVM: `pip install wasmer_compiler_llvm`
 
 {% hint style="info" %}
 For a detailed installation instructions, please refer to Wasmer Python integration [documentation](https://github.com/wasmerio/wasmer-python).

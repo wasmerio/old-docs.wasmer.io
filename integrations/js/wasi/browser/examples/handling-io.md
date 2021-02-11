@@ -1,7 +1,7 @@
 # Handling Input and Output
 
 {% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/browser/examples/handling-io).
+**Note**: The final code for this example can be found on Github: [handling-io](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/browser/examples/handling-io).
 {% endhint %}
 
 In the Hello World example, we covered how to run the `helloworld` Wasm module, and then read its output. However, there may be times we want to interact with WASI modules that accept input as well!

@@ -15,7 +15,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/errors.rs).
+The final **Rust** code for this example can be found on Github: [errors.rs](https://github.com/wasmerio/wasmer/blob/master/examples/errors.rs).
 
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 {% endhint %}
@@ -36,7 +36,7 @@ wasmer = "1.0"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_errors_test.go).
+The final **Go** code for this example can be found on Github: [errors.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_errors_test.go).
 
 _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}

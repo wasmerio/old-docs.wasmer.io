@@ -11,7 +11,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer/blob/master/examples/errors.rs).
+The final **Rust** code for this example can be found on Github: [early_exit.rs](https://github.com/wasmerio/wasmer/blob/master/examples/early_exit.rs).
 
 _Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
 {% endhint %}
@@ -32,7 +32,7 @@ wasmer = "1.0"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_early_exit_test.go).
+The final **Go** code for this example can be found on Github: [early_exit.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_early_exit_test.go).
 
 _Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
 {% endhint %}
@@ -46,7 +46,7 @@ go mod init github.com/$USER/wasmer-example-early-exit
 
 {% tab title="Python" %}
 {% hint style="info" %}
-The final code for this example can be found on [GitHub](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports_function_early_exit.py).
+The final **Python** code for this example can be found on Github: [imports_function_early_exit.py](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports_function_early_exit.py).
 
 _Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
 {% endhint %}
@@ -54,8 +54,7 @@ _Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
 ```bash
 mkdir wasmer-example-early-exit
 cd wasmer-example-early-exit
-pip install wasmer
-pip install wasmer_compiler_cranelift
+pip install wasmer wasmer_compiler_cranelift
 ```
 {% endtab %}
 {% endtabs %}
@@ -276,7 +275,7 @@ go test examples/example_memory_test.go
 {% endtab %}
 
 {% tab title="Python" %}
-You should be able to run it using the `python main.py` command.
+You should be able to run it using the `python imports_function_early_exit.py` command.
 
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-python/) codebase directly, you can also do:
@@ -284,9 +283,6 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 ```bash
 git clone https://github.com/wasmerio/wasmer-python.git
 cd wasmer-go
-just prelude
-source .env/bin/activate
-just build-all $target
 python examples/imports_function_early_exit.py
 ```
 {% endhint %}

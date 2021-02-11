@@ -1,7 +1,7 @@
 # Hello World
 
 {% hint style="success" %}
-**Note**: The final code for this example can be found on [GitHub](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/browser/examples/hello-world).
+**Note**: The final code for this example can be found on Github: [hello-world](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/browser/examples/hello-world).
 {% endhint %}
 
 In this introductory example, we will develop a Browser-based application that uses the following call chain.
