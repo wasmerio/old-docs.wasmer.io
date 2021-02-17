@@ -69,6 +69,21 @@ pip install wasmer wasmer_compiler_cranelift
 ```
 {% endtab %}
 
+{% tab title="PHP" %}
+{% hint style="info" %}
+The final **PHP** code for this example can be found on Github: [exports-function.php](https://github.com/wasmerio/wasmer-php/blob/master/examples/exports-function.php).
+
+_Please take a look at the_ [_setup steps for PHP_](../php/setup.md)_._
+{% endhint %}
+
+```bash
+mkdir wasmer-example-exports-function
+cd wasmer-example-exports-function
+composer init --name=wasmer-example-exports-function
+composer require wasm/wasm
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 {% hint style="info" %}
 The final **C** code for this example can be found on Github: [instance.c](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
@@ -129,6 +144,16 @@ result, err := sum.Call(1, 2)
 
 {% tab title="Python" %}
 (not possible)
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+$firstArg = Wasm\Module\Val::newI32(1);
+$secondArg = Wasm\Module\Val::newI32(2);
+$args = new Wasm\Vec\Val([$firstArg->inner(), $secondArg->inner()]);
+
+$result = $sum($args);
+```
 {% endtab %}
 
 {% tab title="C/C++" %}
@@ -207,6 +232,10 @@ result = sum(3, 4)
 ```
 {% endtab %}
 
+{% tab title="PHP" %}
+(not possible)
+{% endtab %}
+
 {% tab title="C/C++" %}
 (not possible)
 {% endtab %}
@@ -273,6 +302,20 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 git clone https://github.com/wasmerio/wasmer-python.git
 cd wasmer-python
 python examples/exports_function.py
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="PHP" %}
+You should be able to run it using the `php exports-function.php` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer PHP [repository](https://github.com/wasmerio/wasmer-php/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-php.git
+cd wasmer-php
+make EXAMPLE=exports-function test-doc-examples
 ```
 {% endhint %}
 {% endtab %}

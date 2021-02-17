@@ -62,6 +62,21 @@ pip install wasmer wasmer_compiler_cranelift
 ```
 {% endtab %}
 
+{% tab title="PHP" %}
+{% hint style="info" %}
+The final **PHP** code for this example can be found on Github: [instance.py](https://github.com/wasmerio/wasmer-php/blob/master/examples/instance.php).
+
+_Please take a look at the_ [_setup steps for PHP_](../php/setup.md)_._
+{% endhint %}
+
+```bash
+mkdir wasmer-example-instance
+cd wasmer-example-instance
+composer init --name=wasmer-project-instance
+composer require wasm/wasm
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 {% hint style="info" %}
 The final **C** code for this example can be found on Github: [instance.c](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
@@ -151,6 +166,20 @@ wasm_bytes = wat2wasm(
 ```
 {% endtab %}
 
+{% tab title="PHP" %}
+```php
+$wasmBytes = Wasm\Wat::wasm(<<<'WAT'
+    (module
+      (type $add_one_t (func (param i32) (result i32)))
+      (func $add_one_f (type $add_one_t) (param $value i32) (result i32)
+        local.get $value
+        i32.const 1
+        i32.add)
+      (export "add_one" (func $add_one_f)))
+WAT);
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 const char *wat_string =
@@ -188,6 +217,18 @@ wasmBytes, err := ioutil.ReadFile("./path/to/module.wasm")
 {% tab title="Python" %}
 ```python
 wasmBytes = open('./path/to/module.wasm', 'rb').read()
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```python
+$wasmBytes = file_get_contents('./path/to/module.wasm');
+
+if (false === $wasmBytes) {
+  echo '> Error loading module!'.PHP_EOL;
+  
+  exit(1);
+}
 ```
 {% endtab %}
 
@@ -269,6 +310,14 @@ module = Module(store, wasm_bytes)
 ```
 {% endtab %}
 
+{% tab title="PHP" %}
+```php
+$engine = Wasm\Engine::new();
+$store = Wasm\Store::new($engine);
+$module = Wasm\Module::new($store, $wasmBytes);
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 wasm_engine_t* engine = wasm_engine_new();
@@ -310,6 +359,12 @@ instance, err := wasmer.NewInstance(module, importObject)
 {% tab title="Python" %}
 ```go
 instance = Instance(module)
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+$instance = Wasm\Instance::new($store, $module);
 ```
 {% endtab %}
 
@@ -383,6 +438,20 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 git clone https://github.com/wasmerio/wasmer-python.git
 cd wasmer-python
 python examples/instance.py
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="PHP" %}
+You should be able to run it using the `php instance.php` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer PHP [repository](https://github.com/wasmerio/wasmer-php/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-php.git
+cd wasmer-php
+make EXAMPLE=instance test-doc-examples
 ```
 {% endhint %}
 {% endtab %}
