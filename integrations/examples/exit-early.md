@@ -282,7 +282,7 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 
 ```bash
 git clone https://github.com/wasmerio/wasmer-python.git
-cd wasmer-go
+cd wasmer-python
 python examples/imports_function_early_exit.py
 ```
 {% endhint %}

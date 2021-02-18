@@ -308,7 +308,7 @@ instance, err := wasmer.NewInstance(module, importObject)
 {% endtab %}
 
 {% tab title="Python" %}
-```go
+```python
 instance = Instance(module)
 ```
 {% endtab %}
