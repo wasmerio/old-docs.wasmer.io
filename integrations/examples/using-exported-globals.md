@@ -108,13 +108,13 @@ The first interesting thing to do is to query their type information in order to
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-l​​et one = instance.exports.get_global("one")?;
+let one = instance.exports.get_global("one")?;
 let some = instance.exports.get_global("some")?;
 
-​let one_type = one.ty();
+let one_type = one.ty();
 let some_type = some.ty();
 
-​println!("one type: {:?} {:?}", one_type.mutability, one_type.ty);
+println!("one type: {:?} {:?}", one_type.mutability, one_type.ty);
 println!("some type: {:?} {:?}", some_type.mutability, some_type.ty);
 ```
 {% endtab %}
@@ -132,10 +132,10 @@ some, err := instance.Exports.GetGlobal("some")
 if err != nil {
         panic(fmt.Sprintln("Failed to retrieve the `some` global:", err))
 }
-​
+
 oneType := one.Type()
 someType := some.Type()
-​
+
 fmt.Printf(
     "`one` type: %s %s\n", 
     oneType.Mutability(), 
@@ -261,7 +261,7 @@ if err == nil {
 {% endtab %}
 
 {% tab title="Python" %}
-```go
+```python
 try:
     one.value = 42.0
 except RuntimeError as err:
