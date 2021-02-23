@@ -47,6 +47,21 @@ cd wasmer-example-errors
 go mod init github.com/$USER/wasmer-example-errors
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+{% hint style="info" %}
+The final **PHP** code for this example can be found on Github: [errors.go](https://github.com/wasmerio/wasmer-php/blob/master/examples/errors.php).
+
+_Please take a look at the_ [_setup steps for PHP_](../php/setup.md)_._
+{% endhint %}
+
+```bash
+mkdir wasmer-example-errors
+cd wasmer-example-errors
+composer init --name=wasmer-example-errors
+composer require wasm/wasm
+```
+{% endtab %}
 {% endtabs %}
 
 Now that we have everything set up, let's go ahead and try it out!
@@ -80,6 +95,12 @@ if err != nil {
 }
 
 _, err = divByZero()
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+$divByZero = (new Wasm\Module\Extern($exports[0]))->asFunc();
 ```
 {% endtab %}
 {% endtabs %}
@@ -135,6 +156,20 @@ for index, frame := range frames {
         framesLen - index, 
         frame.FunctionIndex()
     )
+}
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+try {
+    $result = $divByZero();
+
+    echo '`div_by_zero` did not error'.PHP_EOL;
+
+    exit(1);
+} catch (Exception $exception) {
+    echo 'Error caught from `div_by_zero`: '.$exception->getMessage().PHP_EOL;
 }
 ```
 {% endtab %}
@@ -197,5 +232,18 @@ go test examples/example_errors_test.go
 ```
 {% endhint %}
 {% endtab %}
+
+{% tab title="PHP" %}
+You should be able to run it using the `php errors.php` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer PHP [repository](https://github.com/wasmerio/wasmer-php/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-php.git
+cd wasmer-php
+make EXAMPLE=errors test-doc-examples
+```
+{% endhint %}
 {% endtabs %}
 

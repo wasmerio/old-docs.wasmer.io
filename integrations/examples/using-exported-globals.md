@@ -68,6 +68,21 @@ pip install wasmer wasmer_compiler_cranelift
 ```
 {% endtab %}
 
+{% tab title="PHP" %}
+{% hint style="info" %}
+The final **PHP** code for this example can be found on Github: [exports-global.php](https://github.com/wasmerio/wasmer-python/blob/master/examples/exports-global.php).
+
+_Please take a look at the_ [_setup steps for PHP_](../php/setup.md)_._
+{% endhint %}
+
+```bash
+mkdir wasmer-example-exports-globals
+cd wasmer-example-exports-globals
+composer init --name=wasmer-example-exports-globals
+composer require wasm/wasm
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 {% hint style="info" %}
 The final **C** code for this example can be found on Github: [exports-global.c](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/exports-global.c).
@@ -164,6 +179,20 @@ assert some_type.mutable == True
 ```
 {% endtab %}
 
+{% tab title="Python" %}
+```php
+$exports = $instance->exports();
+$one = (new Wasm\Extern($exports[0]))->asGlobal();
+$some = (new Wasm\Extern($exports[1]))->asGlobal();
+
+$oneType = $one->type();
+assert($oneType->mutability() === GlobalType::MUTABILITY_CONST);
+
+$someType = $some->type();
+assert($oneType->mutability() === GlobalType::MUTABILITY_VAR);
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 wasm_mutability_t one_mutability = wasm_globaltype_mutability(one_type);
@@ -222,6 +251,14 @@ assert some_value == 0.0
 ```
 {% endtab %}
 
+{% tab title="PHP" %}
+```php
+$someValue = $some->get()->value();
+
+assert($someValue === 0);
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 wasm_val_t some_value;
@@ -271,6 +308,16 @@ else:
 ```
 {% endtab %}
 
+{% tab title="PHP" %}
+```php
+try {
+    $one->set(42.0);   
+} catch(\Wasm\Exception\RuntimeException $exception) {
+    assert($exception->getMessage() === 'RuntimeError: Attempted to set an immutable global');
+}
+```
+{% endtab %}
+
 {% tab title="C/C++" %}
 ```c
 wasm_val_t one_set_value = WASM_F32_VAL(42);
@@ -311,6 +358,12 @@ if err != nil {
 {% tab title="Python" %}
 ```python
 some.value = 21.0
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+$some->set(42.0);
 ```
 {% endtab %}
 
@@ -395,6 +448,20 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 git clone https://github.com/wasmerio/wasmer-python.git
 cd wasmer-python
 python examples/exports_global.py
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="PHP" %}
+You should be able to run it using the `php exports-global.php` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer PHP [repository](https://github.com/wasmerio/wasmer-php/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-php.git
+cd wasmer-php
+make EXAMPLE=exports-global test-doc-examples
 ```
 {% endhint %}
 {% endtab %}

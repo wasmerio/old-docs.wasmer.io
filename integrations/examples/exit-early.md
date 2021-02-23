@@ -57,6 +57,21 @@ cd wasmer-example-early-exit
 pip install wasmer wasmer_compiler_cranelift
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+{% hint style="info" %}
+The final **PHP** code for this example can be found on Github: [imports-function-early-exit.php](https://github.com/wasmerio/wasmer-php/blob/master/examples/imports-function-early-exit.php).
+
+_Please take a look at the_ [_setup steps for PHP_](../php/setup.md)_._
+{% endhint %}
+
+```bash
+mkdir wasmer-example-early-exit
+cd wasmer-example-early-exit
+composer init --name=wasmer-example-early-exit
+composer require wasm/wasm
+```
+{% endtab %}
 {% endtabs %}
 
 Now that we have everything set up, let's go ahead and try it out!
@@ -97,6 +112,12 @@ func (self *exitCode) Error() string {
 ```python
 class ExitCode(Exception):
     pass
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+class ExitCode extends Exception {}
 ```
 {% endtab %}
 {% endtabs %}
@@ -154,6 +175,19 @@ import_object.register(
         "early_exit": Function(store, early_exit),
     }
 )
+```
+{% endtab %}
+
+{% tab title="PHP" %}
+```php
+function earlyExit() {
+    throw new ExitCode(1);
+}
+
+$funcType = Wasm\Type\FuncType::new(new Wasm\Vec\ValType(), new Wasm\Vec\ValType());
+$func = Wasm\Func::new($store, $funcType, 'earlyExit');
+$extern = $func->asExtern();
+$externs = new Wasm\Vec\Extern([$extern->inner()]);
 ```
 {% endtab %}
 {% endtabs %}
@@ -225,6 +259,20 @@ else:
     assert False
 ```
 {% endtab %}
+
+{% tab title="PHP" %}
+```go
+try {
+    $run($args);
+
+    echo '`run` did not error'.PHP_EOL;
+
+    exit(1);
+} catch (ExitCode $exception) {
+    echo 'Exited early with: '.$exception->getMessage().' '.$exception->getCode().PHP_EOL;
+}
+```
+{% endtab %}
 {% endtabs %}
 
 ## Running
@@ -284,6 +332,20 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 git clone https://github.com/wasmerio/wasmer-python.git
 cd wasmer-python
 python examples/imports_function_early_exit.py
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="PHP" %}
+You should be able to run it using the `php imports-function-early-exit.php` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer PHP [repository](https://github.com/wasmerio/wasmer-php/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-php.git
+cd wasmer-php
+make EXAMPLE=imports-function-early-exit test-doc-examples
 ```
 {% endhint %}
 {% endtab %}
