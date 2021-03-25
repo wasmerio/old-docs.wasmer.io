@@ -57,7 +57,7 @@ WebAssembly features:
 | Singlepass | ✅ | ✅ | [\#347](https://github.com/wasmerio/wasmer/issues/347) |
 | WASI | ✅ | ✅ | ✅\* |
 
-* `poll_fd` is not fully implemented for Windows yet
+\* `poll_fd` is not fully implemented for Windows yet
 
 
 ## Compiler Support by Chipset
