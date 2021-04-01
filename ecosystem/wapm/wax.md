@@ -4,7 +4,7 @@ description: "The WebAssembly package Runner \U0001F3C3\U0001F3FD‍♂️"
 
 # wax
 
-wax allows running any command available in wapm, directy in your shell, without global installations that pollute your directory.
+wax allows running any command available in wapm, directly in your shell, without global installations that pollute your directory.
 
 {% hint style="success" %}
 wax is automatically available when you [install Wasmer](../wasmer/getting-started.md).
