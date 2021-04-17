@@ -47,6 +47,28 @@ wapm run cowsay hello wapm!
                 ||     ||
 ```
 
+The install step can be skipped using `execute`
+
+```text
+wapm execute cowsay hello one-liner! # installs if missing
+```
+
+However, you likely should specify a version to prevent bit-rot and possible security issues.
+```text
+wapm execute cowsay@0.1.3 hello reliable one-liner!
+```
+
+```text
+< hello reliable one-liner! >
+ ---------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+               ||----w |
+                ||     ||
+```
+
+
 Great! You used a WAPM package in your system... now let's try to create our own package and publish it to WAPM so other users can use it
 
 {% hint style="success" %}
