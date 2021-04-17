@@ -179,7 +179,7 @@ assert some_type.mutable == True
 ```
 {% endtab %}
 
-{% tab title="Python" %}
+{% tab title="PHP" %}
 ```php
 $exports = $instance->exports();
 $one = (new Wasm\Extern($exports[0]))->asGlobal();
