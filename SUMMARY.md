@@ -27,7 +27,7 @@
 
 * [Rust](integrations/rust/README.md)
   * [Setup your Rust environment](integrations/rust/setup.md)
-  * [Wasmer Rust API](https://docs.rs/wasmer-runtime/)
+  * [Wasmer Rust API](https://docs.rs/wasmer/)
 * [C/C++](integrations/c/README.md)
   * [Setup your C/C++ environment](integrations/c/setup.md)
   * [Wasmer C API](https://wasmerio.github.io/wasmer/c/)
