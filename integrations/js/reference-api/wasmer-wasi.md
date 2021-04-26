@@ -14,7 +14,7 @@ description: The Package for using WASI easily from Node and the Browser
 
 Constructs a new WASI instance.
 
-The `wasiConfigObject` is is as follows:
+The `wasiConfigObject` is as follows:
 
 ```javascript
 const browserBindings = require("@wasmer/wasi/lib/bindings/browser");
