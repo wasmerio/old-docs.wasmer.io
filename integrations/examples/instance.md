@@ -314,12 +314,12 @@ let module = Module::new(&store, wasm_bytes)?;
 We are creating a store using the default settings provided by Wasmer. In some cases, you may want to use a specific engine or compiler. Here is how you would do:
 
 ```rust
-let engine = JIT::new(&Cranelift::default()).engine();
+let engine = Universal::new(&Cranelift::default()).engine();
 let store = Store::new(&engine);
 let module = Module::new(&store, wasm_bytes)?;
 ```
 
-We created a store with the JIT engine and the Cranelift compiler with its default configuration. These are good defaults but it will be a good thing to adapt this configuration to your needs.
+We created a store with the Universal engine and the Cranelift compiler with its default configuration. These are good defaults but it will be a good thing to adapt this configuration to your needs.
 {% endhint %}
 {% endtab %}
 
@@ -339,7 +339,7 @@ if err != nil {
 ```python
 from wasmer_compiler_cranelift import Compiler
 
-engine = engine.JIT(Compiler)
+engine = engine.Universal(Compiler)
 store = Store(engine)
 module = Module(store, wasm_bytes)
 ```
