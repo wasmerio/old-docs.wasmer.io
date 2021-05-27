@@ -113,6 +113,18 @@ clean:
     rm -f exports-function.o exports-function
 ```
 {% endtab %}
+
+{% tab title="Ruby" %}
+{% hint style="info" %}
+The final **Ruby** code for this example can be found on Github: [exports_function.rb](https://github.com/wasmerio/wasmer-ruby/blob/master/examples/exports_function.rb).
+
+_Please take a look at the_ [_setup steps for Ruby_](../ruby/setup.md)_._
+{% endhint %}
+
+```bash
+gem install wasmer
+```
+{% endtab %}
 {% endtabs %}
 
 Now that we have everything set up, let's go ahead and try it out!
@@ -168,6 +180,13 @@ if (wasm_func_call(sum_func, &args, &results)) {
 
     return 1;
 }
+```
+{% endtab %}
+
+{% tab title="Ruby" %}
+```ruby
+sum = instance.exports.sum
+results = sum.call(1, 2)
 ```
 {% endtab %}
 {% endtabs %}
@@ -237,6 +256,10 @@ result = sum(3, 4)
 {% endtab %}
 
 {% tab title="C/C++" %}
+(not possible)
+{% endtab %}
+
+{% tab title="Ruby" %}
 (not possible)
 {% endtab %}
 {% endtabs %}
@@ -342,6 +365,20 @@ git clone https://github.com/wasmerio/wasmer.git
 cd wasmer/lib/c-api/examples/exports-function.c
 make clean exports-function
 ./exports-function
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Ruby" %}
+You should be able to run it using the `ruby exports_function.rb` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer Ruby [repository](https://github.com/wasmerio/wasmer-ruby/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-ruby.git
+cd wasmer-ruby
+ruby examples/exports_function.rb
 ```
 {% endhint %}
 {% endtab %}

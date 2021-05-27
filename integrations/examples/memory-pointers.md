@@ -41,6 +41,17 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 wasmer = "2.0"
 ```
 {% endtab %}
+{% tab title="Ruby" %}
+{% hint style="info" %}
+The final **Ruby** code for this example can be found on Github: [exports_memory.rb](https://github.com/wasmerio/wasmer-ruby/blob/master/examples/exports_memory.rb).
+
+_Please take a look at the_ [_setup steps for Ruby_](../ruby/setup.md)_._
+{% endhint %}
+
+```bash
+gem install wasmer
+```
+{% endtab %}
 {% endtabs %}
 
 Now that we have everything set up, let's go ahead and try it out!
@@ -78,6 +89,19 @@ println!("String offset: {:?}", ptr.offset());
 println!("String length: {:?}", length);
 ```
 {% endtab %}
+{% tab title="Ruby" %}
+```ruby
+memory = instance.exports.mem
+```
+
+Let's call the `hello` exported function: it will return what we'll call a pointer.
+
+```ruby
+pointer = instance.exports.hello.()
+```
+
+This pointer is actually just an integer which is the position in the memory where we'll find our data.
+{% endtab %}
 {% endtabs %}
 
 Now that we have our pointer, let's read the data. We know we are about to read a string and the `load` function gave us its length. We have everything we need!
@@ -87,6 +111,13 @@ Now that we have our pointer, let's read the data. We know we are about to read 
 ```rust
 let str = ptr.get_utf8_string(memory, length as u32).unwrap();
 println!("Memory contents: {:?}", str);
+```
+{% endtab %}
+{% tab title="Ruby" %}
+```ruby
+reader = memory.uint8_view pointer
+returned_string = reader.take(13).pack("U*")
+raise "Error" unless returned_string == 'Hello, World!'
 ```
 {% endtab %}
 {% endtabs %}
@@ -137,6 +168,19 @@ If you want to run the examples from the Wasmer [repository](https://github.com/
 git clone https://github.com/wasmerio/wasmer.git
 cd wasmer
 cargo run --example exported-memory --release --features "cranelift"
+```
+{% endhint %}
+{% endtab %}
+{% tab title="Ruby" %}
+You should be able to run it using the `ruby instance.rb` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer Ruby [repository](https://github.com/wasmerio/wasmer-ruby/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-ruby.git
+cd wasmer-ruby
+ruby examples/exports_memory.rb
 ```
 {% endhint %}
 {% endtab %}

@@ -68,7 +68,7 @@ Now that we have everything set up, let's go ahead and try it out!
 
 ## Handling the error
 
-There is nothing special about the Wasm module or the way we'll set it up.
+There is nothing special about the Wasm module, or the way we'll set it up.
 
 The only things we'll need to do are:
 
