@@ -264,7 +264,7 @@ fclose(file);
 
 The next step will be to compile the module. To do this, we'll need two things: the Wasm module as bytes and a `Store`.
 
-The `Store` is a representation of the actual state of the module: it represents the state of every entities in the module during its lifecycle. It also holds the engine which is what will be used to actually compile the module.
+The `Store` is a representation of the actual state of the module: it represents the state of every entity in the module during its lifecycle. It also holds the engine which is what will be used to actually compile the module.
 
 Here is how we can create the store and compile the module:
 

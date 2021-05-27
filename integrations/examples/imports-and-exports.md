@@ -9,7 +9,7 @@ description: >-
 
 In this example we'll be using a sample Wasm module which exports some entities and requires us to also import some of them.
 
-The goal here is to give you an idea of how to work with imports and exports. We won't go into the details of each entities, they'll be covered in more details in the other examples.
+The goal here is to give you an idea of how to work with imports and exports. We won't go into the details of each entity, they'll be covered in more details in the other examples.
 
 First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. In this example, we will create a new project. Lets create it and navigate to it:
 
