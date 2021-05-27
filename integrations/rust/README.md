@@ -12,11 +12,11 @@ Some of our language extensions are using the Wasmer Rust crate under the hood.
 * [Wasmex Elixir Extension](https://github.com/tessi/wasmex)
 {% endhint %}
 
-In this section we will go through the instructions on how to setup your Rust environment, to then visit different examples of how to use Wasmer in Rust.
+In this section we will go through the instructions on how to set up your Rust environment, to then visit different examples of how to use Wasmer in Rust.
 
 {% page-ref page="setup.md" %}
 
-{% embed url="https://docs.rs/wasmer/1.0.0/wasmer/" caption="" %}
+{% embed url="https://docs.rs/wasmer/2.0.0/wasmer/" caption="" %}
 
 ## Published Crates
 
