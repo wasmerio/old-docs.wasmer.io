@@ -339,7 +339,7 @@ if err != nil {
 ```python
 from wasmer_compiler_cranelift import Compiler
 
-engine = engine.Universal(Compiler)
+engine = engine.JIT(Compiler)
 store = Store(engine)
 module = Module(store, wasm_bytes)
 ```

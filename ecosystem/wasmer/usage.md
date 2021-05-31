@@ -65,7 +65,7 @@ FLAGS:
         --llvm                      Use LLVM compiler
         --enable-multi-value        Enable support for the multi value proposal
         --dylib                     Use Dynamic Library Engine
-        --lib                       Use Library Engine
+        --staticlib                 Use Staticlib Engine
         --enable-reference-types    Enable support for the reference types proposal
         --enable-simd               Enable support for the SIMD proposal
         --singlepass                Use Singlepass compiler
@@ -156,7 +156,7 @@ FLAGS:
         --llvm                      Use LLVM compiler
         --enable-multi-value        Enable support for the multi value proposal
         --dylib                     Use Dynamic Library Engine
-        --lib                       Use Library Engine
+        --staticlib                 Use Staticlib Engine
         --enable-reference-types    Enable support for the reference types proposal
         --enable-simd               Enable support for the SIMD proposal
         --singlepass                Use Singlepass compiler
@@ -189,7 +189,7 @@ FLAGS:
         --llvm                      Use LLVM compiler
         --enable-multi-value        Enable support for the multi value proposal
         --dylib                     Use Dynamic Library Engine
-        --lib                       Use Library Engine
+        --staticlib                 Use Staticlib Engine
         --enable-reference-types    Enable support for the reference types proposal
         --enable-simd               Enable support for the SIMD proposal
         --singlepass                Use Singlepass compiler
@@ -230,7 +230,7 @@ FLAGS:
         --llvm                      Use LLVM compiler
         --enable-multi-value        Enable support for the multi value proposal
         --dylib                     Use Dynamic Library Engine
-        --lib                       Use Library Engine
+        --staticlib                 Use Staticlib Engine
         --enable-reference-types    Enable support for the reference types proposal
         --enable-simd               Enable support for the SIMD proposal
         --singlepass                Use Singlepass compiler
@@ -263,7 +263,7 @@ FLAGS:
         --llvm                      Use LLVM compiler
         --enable-multi-value        Enable support for the multi value proposal
         --dylib                     Use Dynamic Library Engine
-        --lib                       Use Library Engine
+        --staticlib                 Use Staticlib Engine
         --enable-reference-types    Enable support for the reference types proposal
         --enable-simd               Enable support for the SIMD proposal
         --singlepass                Use Singlepass compiler
