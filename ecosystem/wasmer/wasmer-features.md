@@ -36,8 +36,8 @@ WebAssembly features:
 | Import & export of mutable globals | ✅ | ✅ | ✅ |
 | Non-trapping float-to-int conversions | ✅ | ✅ | ✅ |
 | Sign-extension operations | ✅ | ✅ | ✅ |
-| Reference types (Phase 4) | 🔄 | 🔄 | 🔄 |
-| SIMD (Phase 3) | ⬜ | ✅ | ✅ |
+| Reference types | 🔄 | ✅ | ✅ |
+| SIMD (Phase 4) | ✅ | ✅ | ✅ |
 | Threads (Phase 2) | ✅ | 🔄 | ✅ |
 
 {% hint style="info" %}
@@ -75,9 +75,9 @@ Here are some of the features in each of those:
 
 |  | Rust | C / C++ | Go | Python | Ruby |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Terminate in host call | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
+| Terminate in host call | ✅ | ⬜ | ✅ | ✅ | ✅ |
 | WASI | ✅ | ✅ | ✅ | ✅ | ⬜ |
 | WASI FS API | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-| Serialize/Deserialize | ✅ | ✅ | ✅ | ✅ | ⬜ |
+| Serialize/Deserialize | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Metering | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
 
