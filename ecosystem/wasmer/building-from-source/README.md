@@ -52,7 +52,7 @@ Build Wasmer:
 make build-wasmer
 ```
 
-**Note**: you should see this `Enabled Compilers:: singlepass` in console. 
+**Note**: you should see this `Enabled Compilers: singlepass` in console. 
 
 You may disable Singlepass compiler with `export ENABLE_SINGLEPASS=0`.
 
@@ -157,6 +157,5 @@ You can generate the C-API for a specific compiler and engine with:
   * **Universal**: `make build-capi-llvm-universal`
   * **Native Engine**: `make build-capi-llvm-native`
 {% endhint %}
-
 
 
