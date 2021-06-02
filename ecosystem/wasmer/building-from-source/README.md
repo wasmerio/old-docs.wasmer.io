@@ -114,9 +114,9 @@ make build-capi
 
 This will generate the shared library \(depending on your system\):
 
-* Windows: `package/release/libwasmer_c_api.dll`
-* macOS: `target/release/libwasmer_runtime_c_api.dylib`
-* Linux: `target/release/libwasmer_runtime_c_api.so`
+* Windows: `target/release/libwasmer_c_api.dll`
+* macOS: `target/release/libwasmer_c_api.dylib`
+* Linux: `target/release/libwasmer_c_api.so`
 
 If you want to generate the library and headers for using them easily, you can execute:
 
@@ -133,12 +133,13 @@ package/
   headers/
     wasm.h
     wasmer.h
-    wasmer.hh
-    wasmer_wasm.h
 ```
 
 {% hint style="warning" %}
-By default, the Wasmer C API shared library is built with Cranelift as the _default_ compiler and Universal engine.  
+By default, the Wasmer C API shared library will include all the compilers and
+engines available in the system where is built.
+Defaulting to `cranelift` and the `universal` engine if available.
+
 You can generate the C-API for a specific compiler and engine with:
 
 * **Singlepass**:
