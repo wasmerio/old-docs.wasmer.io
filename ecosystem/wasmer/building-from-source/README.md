@@ -52,8 +52,9 @@ Build Wasmer:
 make build-wasmer
 ```
 
-**Note**: you should see this as the first line in the console:  
-`Available compilers: singlepass`
+**Note**: you should see this `Enabled Compilers: singlepass` in console. 
+
+You may disable Singlepass compiler with `export ENABLE_SINGLEPASS=0`.
 
 ### Cranelift Compiler
 
@@ -64,7 +65,9 @@ make build-wasmer
 ```
 
 **Note**: should see this as the first line in the console:  
-`Available compilers: cranelift`
+`Enabled Compilers: cranelift`
+
+You may disable Cranelift compiler with `export ENABLE_CRANELIFT=0`.
 
 ### LLVM Compiler
 
@@ -80,8 +83,10 @@ And create a Wasmer release
 make build-wasmer
 ```
 
-**Note**: you should see this as the first line in the console:  
-`Available compilers: llvm`
+**Note**: you should see this in the console:  
+`Enabled Compilers: llvm`
+
+You may disable LLVM compiler with `export ENABLE_LLVM=0`.
 
 ### All compilers
 
@@ -91,8 +96,8 @@ Once you have LLVM and Rust, you can just run:
 make build-wasmer
 ```
 
-**Note**: you should see this as the first line in the console:  
-`Available compilers: singlepass cranelift llvm`
+**Note**: you should see this in the console:  
+`Enabled Compilers: singlepass cranelift llvm`
 
 ## Running your Wasmer binary
 
@@ -152,6 +157,5 @@ You can generate the C-API for a specific compiler and engine with:
   * **Universal**: `make build-capi-llvm-universal`
   * **Native Engine**: `make build-capi-llvm-native`
 {% endhint %}
-
 
 
