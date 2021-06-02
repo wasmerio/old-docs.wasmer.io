@@ -26,7 +26,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "1.0"
+wasmer = "2.0"
 ```
 {% endtab %}
 
@@ -70,6 +70,18 @@ mkdir wasmer-example-early-exit
 cd wasmer-example-early-exit
 composer init --name=wasmer-example-early-exit
 composer require wasm/wasm
+```
+{% endtab %}
+
+{% tab title="Ruby" %}
+{% hint style="info" %}
+The final **Ruby** code for this example can be found on Github: [imports_function_early_exit.rb](https://github.com/wasmerio/wasmer-ruby/blob/master/examples/imports_function_early_exit.rb).
+
+_Please take a look at the_ [_setup steps for Ruby_](../ruby/setup.md)_._
+{% endhint %}
+
+```bash
+gem install wasmer
 ```
 {% endtab %}
 {% endtabs %}
@@ -190,6 +202,19 @@ $extern = $func->asExtern();
 $externs = new Wasm\Vec\Extern([$extern->inner()]);
 ```
 {% endtab %}
+
+{% tab title="Ruby" %}
+```ruby
+def early_exit
+  raise "oops"
+end
+
+func_type = Wasmer::FunctionType.new([], [])
+func = Wasmer::Function.new(store, method(:early_exit), func_type)
+import_object = Wasmer::ImportObject.new
+import_object.register("env", { :early_exit => func })
+```
+{% endtag %}
 {% endtabs %}
 
 As we saw in previous examples we defined a Rust function, wrap it in a native function definition and import it in the guest module, in the `env` namespace, using the `ImportObject`.
@@ -273,6 +298,18 @@ try {
 }
 ```
 {% endtab %}
+
+{% tab title="Ruby" %}
+```ruby
+begin
+  instance.exports.run.(1, 2)
+rescue RuntimeError => e
+  puts e.message
+else
+  raise "There was no error"
+end
+```
+{% endtab %}
 {% endtabs %}
 
 ## Running
@@ -346,6 +383,20 @@ If you want to run the examples from the Wasmer PHP [repository](https://github.
 git clone https://github.com/wasmerio/wasmer-php.git
 cd wasmer-php
 make EXAMPLE=imports-function-early-exit test-doc-examples
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Ruby" %}
+You should be able to run it using the `ruby imports_function_early_exit.rb` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer Ruby [repository](https://github.com/wasmerio/wasmer-ruby/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-ruby.git
+cd wasmer-ruby
+ruby examples/imports_function_early_exit.rb
 ```
 {% endhint %}
 {% endtab %}

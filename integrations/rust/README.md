@@ -12,11 +12,11 @@ Some of our language extensions are using the Wasmer Rust crate under the hood.
 * [Wasmex Elixir Extension](https://github.com/tessi/wasmex)
 {% endhint %}
 
-In this section we will go through the instructions on how to setup your Rust environment, to then visit different examples of how to use Wasmer in Rust.
+In this section we will go through the instructions on how to set up your Rust environment, to then visit different examples of how to use Wasmer in Rust.
 
 {% page-ref page="setup.md" %}
 
-{% embed url="https://docs.rs/wasmer/1.0.0/wasmer/" caption="" %}
+{% embed url="https://docs.rs/wasmer/2.0.0/wasmer/" caption="" %}
 
 ## Published Crates
 
@@ -28,8 +28,9 @@ Wasmer publishes various Crates:
   * [`wasmer-compiler-cranelift`](https://crates.io/crates/wasmer-compiler-cranelift): The Cranelift compiler \(normal compilation, a bit faster runtime\)
   * [`wasmer-compiler-llvm`](https://crates.io/crates/wasmer-compiler-llvm): The LLVM compiler \(slower compilation, super fast runtime\)
 * **Engines**:
-  * [`wasmer-engine-jit`](https://crates.io/crates/wasmer-engine-jit): The JIT Engine
-  * [`wasmer-engine-native`](https://crates.io/crates/wasmer-engine-native): The Native Engine
+  * [`wasmer-engine-universal`](https://crates.io/crates/wasmer-engine-universal): The Universal Engine
+  * [`wasmer-engine-dylib`](https://crates.io/crates/wasmer-engine-dylib): The Dynamic Library Engine
+  * [`wasmer-engine-staticlib`](https://crates.io/crates/wasmer-engine-staticlib): The Static Library Engine
 * **Integrations**:
   * [`wasmer-wasi`](https://crates.io/crates/wasmer-wasi): Wasmer's implementation of the WASI standard. This allows you to run Wasm in a POSIX-like environment with a file system and permissions.
   * [`wasmer-emscripten`](https://crates.io/crates/wasmer-emscripten): Wasmer's implementation of the Emscripten ABI. This allows you to run Wasm in a less sandboxed way in a 32bit Linux-like environment.

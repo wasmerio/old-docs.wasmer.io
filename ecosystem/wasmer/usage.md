@@ -61,11 +61,11 @@ FLAGS:
         --cranelift                 Use Cranelift compiler
         --enable-verifier           Enable compiler internal verification
     -h, --help                      Prints help information
-        --jit                       Use JIT Engine
+        --universal                 Use Universal Engine
         --llvm                      Use LLVM compiler
         --enable-multi-value        Enable support for the multi value proposal
-        --native                    Use Native Engine
-        --object-file               Use ObjectFile Engine
+        --dylib                     Use Dynamic Library Engine
+        --staticlib                 Use Staticlib Engine
         --enable-reference-types    Enable support for the reference types proposal
         --enable-simd               Enable support for the SIMD proposal
         --singlepass                Use Singlepass compiler
@@ -152,11 +152,11 @@ FLAGS:
         --cranelift                 Use Cranelift compiler
         --enable-verifier           Enable compiler internal verification
     -h, --help                      Prints help information
-        --jit                       Use JIT Engine
+        --universal                 Use Universal Engine
         --llvm                      Use LLVM compiler
         --enable-multi-value        Enable support for the multi value proposal
-        --native                    Use Native Engine
-        --object-file               Use ObjectFile Engine
+        --dylib                     Use Dynamic Library Engine
+        --staticlib                 Use Staticlib Engine
         --enable-reference-types    Enable support for the reference types proposal
         --enable-simd               Enable support for the SIMD proposal
         --singlepass                Use Singlepass compiler
@@ -185,11 +185,11 @@ FLAGS:
         --disable-cache             Disable the cache
         --enable-verifier           Enable compiler internal verification
     -h, --help                      Prints help information
-        --jit                       Use JIT Engine
+        --universal                 Use Universal Engine
         --llvm                      Use LLVM compiler
         --enable-multi-value        Enable support for the multi value proposal
-        --native                    Use Native Engine
-        --object-file               Use ObjectFile Engine
+        --dylib                     Use Dynamic Library Engine
+        --staticlib                 Use Staticlib Engine
         --enable-reference-types    Enable support for the reference types proposal
         --enable-simd               Enable support for the SIMD proposal
         --singlepass                Use Singlepass compiler
@@ -226,11 +226,11 @@ FLAGS:
         --cranelift                 Use Cranelift compiler
         --enable-verifier           Enable compiler internal verification
     -h, --help                      Prints help information
-        --jit                       Use JIT Engine
+        --universal                 Use Universal Engine
         --llvm                      Use LLVM compiler
         --enable-multi-value        Enable support for the multi value proposal
-        --native                    Use Native Engine
-        --object-file               Use ObjectFile Engine
+        --dylib                     Use Dynamic Library Engine
+        --staticlib                 Use Staticlib Engine
         --enable-reference-types    Enable support for the reference types proposal
         --enable-simd               Enable support for the SIMD proposal
         --singlepass                Use Singlepass compiler
@@ -259,11 +259,11 @@ FLAGS:
         --enable-verifier           Enable compiler internal verification
     -f, --fail-fast                 A flag to indicate wast stop at the first error or continue
     -h, --help                      Prints help information
-        --jit                       Use JIT Engine
+        --universal                 Use Universal Engine
         --llvm                      Use LLVM compiler
         --enable-multi-value        Enable support for the multi value proposal
-        --native                    Use Native Engine
-        --object-file               Use ObjectFile Engine
+        --dylib                     Use Dynamic Library Engine
+        --staticlib                 Use Staticlib Engine
         --enable-reference-types    Enable support for the reference types proposal
         --enable-simd               Enable support for the SIMD proposal
         --singlepass                Use Singlepass compiler

@@ -138,17 +138,17 @@ package/
 ```
 
 {% hint style="warning" %}
-By default, the Wasmer C API shared library is built with Cranelift as the _default_ compiler and JIT engine.  
+By default, the Wasmer C API shared library is built with Cranelift as the _default_ compiler and Universal engine.  
 You can generate the C-API for a specific compiler and engine with:
 
 * **Singlepass**:
-  * **JIT**: `make build-capi-singlepass-jit`
+  * **Universal**: `make build-capi-singlepass-universal`
   * **Native Engine**: not yet available ⚠️
 * **Cranelift**:
-  * **JIT**: `make build-capi-cranelift-jit`
+  * **Universal**: `make build-capi-cranelift-universal`
   * **Native Engine**: `make build-capi-cranelift-native`
 * **LLVM**: `make build-capi-llvm`
-  * **JIT**: `make build-capi-llvm-jit`
+  * **Universal**: `make build-capi-llvm-universal`
   * **Native Engine**: `make build-capi-llvm-native`
 {% endhint %}
 
