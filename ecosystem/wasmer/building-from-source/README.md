@@ -54,7 +54,7 @@ make build-wasmer
 
 **Note**: you should see this `Enabled Compilers:: singlepass` in console. 
 
-You may disable singlepass compiler with `export ENABLE_SINGLEPASS=0`.
+You may disable Singlepass compiler with `export ENABLE_SINGLEPASS=0`.
 
 ### Cranelift Compiler
 
@@ -67,7 +67,7 @@ make build-wasmer
 **Note**: should see this as the first line in the console:  
 `Enabled Compilers: cranelift`
 
-You may disable singlepass compiler with `export ENABLE_CRANELIFT=0`.
+You may disable Cranelift compiler with `export ENABLE_CRANELIFT=0`.
 
 ### LLVM Compiler
 
