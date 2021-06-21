@@ -214,7 +214,7 @@ func = Wasmer::Function.new(store, method(:early_exit), func_type)
 import_object = Wasmer::ImportObject.new
 import_object.register("env", { :early_exit => func })
 ```
-{% endtag %}
+{% endtab %}
 {% endtabs %}
 
 As we saw in previous examples we defined a Rust function, wrap it in a native function definition and import it in the guest module, in the `env` namespace, using the `ImportObject`.
