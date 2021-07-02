@@ -77,6 +77,6 @@
 * [Built with Wasmer](community/built-with-wasmer.md)
 * [Wasmer Twitter](https://twitter.com/wasmerio)
 * [Wasmer Slack](https://slack.wasmer.io)
-* [Wasmer Blog](https://medium.com/wasmer)
+* [Wasmer Blog](https://wasmer.io/posts/)
 * [Wasmer on Github](https://github.com/wasmerio/)
 
