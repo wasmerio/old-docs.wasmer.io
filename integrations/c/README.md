@@ -19,7 +19,7 @@ In this section we will go through the instructions on how to setup your C/C++ e
 
 {% page-ref page="setup.md" %}
 
-{% embed url="https://wasmerio.github.io/wasmer/c/" caption="Wasmer C API" %}
+{% embed url="https://docs.rs/wasmer-c-api/*/wasmer_c_api/wasm_c_api/index.html" caption="Wasmer C API docs" %}
 
 Now, let's start setting up your C/C++ environment!
 
