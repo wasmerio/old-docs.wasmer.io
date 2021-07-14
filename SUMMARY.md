@@ -30,7 +30,7 @@
   * [Wasmer Rust API](https://docs.rs/wasmer/)
 * [C/C++](integrations/c/README.md)
   * [Setup your C/C++ environment](integrations/c/setup.md)
-  * [Wasmer C API](https://wasmerio.github.io/wasmer/c/)
+  * [Wasmer C API](https://docs.rs/wasmer-c-api/*/wasmer_c_api/wasm_c_api/index.html)
 * [Javascript](integrations/js/README.md)
   * [WASI](integrations/js/wasi/README.md)
     * [Browser](integrations/js/wasi/browser/README.md)
