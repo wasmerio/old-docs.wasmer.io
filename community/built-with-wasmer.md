@@ -20,7 +20,6 @@ description: "A place for all things Wasmer and WebAssembly. Feel free to add yo
 * Nebula [source](https://github.com/nebula-os/npk)
 * Romy [source](https://github.com/catt-io/romy)
 * WAStyle [source](https://github.com/Menci/wastyle)
-* CosmWasm [source](https://github.com/CosmWasm/cosmwasm)
 
 ### Javascript
 
@@ -53,7 +52,7 @@ description: "A place for all things Wasmer and WebAssembly. Feel free to add yo
 ## Blockchains
 
 * [NEAR Protocol](https://near.org/)
-* [Cosmos](https://cosmos.network/)
+* [CosmWasm] (https://github.com/CosmWasm/cosmwasm)
 * [SpaceMesh](https://spacemesh.io/)
 * [ChainSafe](https://chainsafe.io/)
 * [Fluence Labs](https://fluence.network/)
