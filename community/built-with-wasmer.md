@@ -20,6 +20,7 @@ description: "A place for all things Wasmer and WebAssembly. Feel free to add yo
 * Nebula [source](https://github.com/nebula-os/npk)
 * Romy [source](https://github.com/catt-io/romy)
 * WAStyle [source](https://github.com/Menci/wastyle)
+* CosmWasm [source](https://github.com/CosmWasm/cosmwasm)
 
 ### Javascript
 
