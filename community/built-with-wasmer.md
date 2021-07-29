@@ -52,7 +52,7 @@ description: "A place for all things Wasmer and WebAssembly. Feel free to add yo
 ## Blockchains
 
 * [NEAR Protocol](https://near.org/)
-* [CosmWasm] (https://github.com/CosmWasm/cosmwasm)
+* [CosmWasm] (https://cosmwasm.com)
 * [SpaceMesh](https://spacemesh.io/)
 * [ChainSafe](https://chainsafe.io/)
 * [Fluence Labs](https://fluence.network/)
