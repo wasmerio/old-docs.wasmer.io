@@ -54,7 +54,7 @@ WebAssembly features:
 | :--- | :--- | :--- | :--- |
 | Cranelift | ✅ | ✅ | ✅ |
 | LLVM | ✅ | ✅ | ✅ |
-| Singlepass | ✅ | ✅ | [\#347](https://github.com/wasmerio/wasmer/issues/347) |
+| Singlepass | ✅ | ✅ | ✅
 | WASI | ✅ | ✅ | ✅\* |
 
 \* `poll_fd` is not fully implemented for Windows yet
