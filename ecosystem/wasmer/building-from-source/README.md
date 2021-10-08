@@ -28,8 +28,8 @@ Windows support is fully supported. WASI is fully supported, but Emscripten supp
 
 1. Install [Visual Studio](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15)
 2. Install [Rust for Windows](https://win.rustup.rs/)
-3. Install [Git for Windows](https://git-scm.com/download/win). Allow it to add `git.exe` to your PATH \(default settings for the installer are fine\).
-5. \(optional\) Install [LLVM 10.0](https://prereleases.llvm.org/win-snapshots/LLVM-10.0.0-e20a1e486e1-win64.exe)
+3. Install [Git for Windows](https://git-scm.com/download/win). Allow it to add `git.exe` to your PATH(default settings for the installer are fine\).
+4. \(optional\) Install [LLVM 11.0](https://prereleases.llvm.org/win-snapshots/LLVM-11.0.0-2663a25f-win64.exe)
 
 ## Building the Wasmer Runtime
 
@@ -52,8 +52,9 @@ Build Wasmer:
 make build-wasmer
 ```
 
-**Note**: you should see this as the first line in the console:  
-`Available compilers: singlepass`
+**Note**: you should see this `Enabled Compilers: singlepass` in console. 
+
+You may disable Singlepass compiler with `export ENABLE_SINGLEPASS=0`.
 
 ### Cranelift Compiler
 
@@ -64,15 +65,18 @@ make build-wasmer
 ```
 
 **Note**: should see this as the first line in the console:  
-`Available compilers: cranelift`
+`Enabled Compilers: cranelift`
+
+You may disable Cranelift compiler with `export ENABLE_CRANELIFT=0`.
 
 ### LLVM Compiler
 
 If you want support for the Wasmer LLVM compiler, then you will also need to ensure:
 
 * Ensure that LLVM 10.0.x &gt; is installed on your system
+  * You can refer to [LLVM install instructions](https://github.com/wasmerio/wasmer/tree/master/lib/compiler-llvm#requirements)
   * You can also [download and use a prebuilt LLVM binary](https://releases.llvm.org/download.html)
-* In case `llvm-config` is not accessible, set the correct environment variable for LLVM to access: For example, the environment variable for LLVM 10.0.x would be: `LLVM_SYS_100_PREFIX=/path/to/unpacked/llvm-10.0` 
+* In case `llvm-config` is not accessible, set the correct environment variable for LLVM to access: For example, the environment variable for LLVM 11.0.x would be: `LLVM_SYS_110_PREFIX=/path/to/unpacked/llvm-11.0`
 
 And create a Wasmer release
 
@@ -80,8 +84,10 @@ And create a Wasmer release
 make build-wasmer
 ```
 
-**Note**: you should see this as the first line in the console:  
-`Available compilers: llvm`
+**Note**: you should see this in the console:  
+`Enabled Compilers: llvm`
+
+You may disable LLVM compiler with `export ENABLE_LLVM=0`.
 
 ### All compilers
 
@@ -91,8 +97,8 @@ Once you have LLVM and Rust, you can just run:
 make build-wasmer
 ```
 
-**Note**: you should see this as the first line in the console:  
-`Available compilers: singlepass cranelift llvm`
+**Note**: you should see this in the console:  
+`Enabled Compilers: singlepass cranelift llvm`
 
 ## Running your Wasmer binary
 
@@ -114,9 +120,9 @@ make build-capi
 
 This will generate the shared library \(depending on your system\):
 
-* Windows: `package/release/libwasmer_c_api.dll`
-* macOS: `target/release/libwasmer_runtime_c_api.dylib`
-* Linux: `target/release/libwasmer_runtime_c_api.so`
+* Windows: `target/release/libwasmer_c_api.dll`
+* macOS: `target/release/libwasmer_c_api.dylib`
+* Linux: `target/release/libwasmer_c_api.so`
 
 If you want to generate the library and headers for using them easily, you can execute:
 
@@ -133,24 +139,24 @@ package/
   headers/
     wasm.h
     wasmer.h
-    wasmer.hh
-    wasmer_wasm.h
 ```
 
 {% hint style="warning" %}
-By default, the Wasmer C API shared library is built with Cranelift as the _default_ compiler and JIT engine.  
+By default, the Wasmer C API shared library will include all the compilers and
+engines available in the system where is built.
+Defaulting to `cranelift` and the `universal` engine if available.
+
 You can generate the C-API for a specific compiler and engine with:
 
 * **Singlepass**:
-  * **JIT**: `make build-capi-singlepass-jit`
+  * **Universal**: `make build-capi-singlepass-universal`
   * **Native Engine**: not yet available ⚠️
 * **Cranelift**:
-  * **JIT**: `make build-capi-cranelift-jit`
+  * **Universal**: `make build-capi-cranelift-universal`
   * **Native Engine**: `make build-capi-cranelift-native`
 * **LLVM**: `make build-capi-llvm`
-  * **JIT**: `make build-capi-llvm-jit`
+  * **Universal**: `make build-capi-llvm-universal`
   * **Native Engine**: `make build-capi-llvm-native`
 {% endhint %}
-
 
 

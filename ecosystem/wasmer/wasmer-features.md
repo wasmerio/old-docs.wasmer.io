@@ -36,8 +36,8 @@ WebAssembly features:
 | Import & export of mutable globals | ✅ | ✅ | ✅ |
 | Non-trapping float-to-int conversions | ✅ | ✅ | ✅ |
 | Sign-extension operations | ✅ | ✅ | ✅ |
-| Reference types (Phase 4) | 🔄 | 🔄 | 🔄 |
-| SIMD (Phase 3) | ⬜ | ✅ | ✅ |
+| Reference types | 🔄 | ✅ | ✅ |
+| SIMD (Phase 4) | ✅ | ✅ | ✅ |
 | Threads (Phase 2) | ✅ | 🔄 | ✅ |
 
 {% hint style="info" %}
@@ -54,7 +54,7 @@ WebAssembly features:
 | :--- | :--- | :--- | :--- |
 | Cranelift | ✅ | ✅ | ✅ |
 | LLVM | ✅ | ✅ | ✅ |
-| Singlepass | ✅ | ✅ | [\#347](https://github.com/wasmerio/wasmer/issues/347) |
+| Singlepass | ✅ | ✅ | ✅
 | WASI | ✅ | ✅ | ✅\* |
 
 \* `poll_fd` is not fully implemented for Windows yet

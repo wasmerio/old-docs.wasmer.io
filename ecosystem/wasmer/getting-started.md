@@ -21,7 +21,7 @@ iwr https://win.wasmer.io -useb | iex
 ```
 
 {% hint style="info" %}
-Note: All Wasmer executables can be found on out [Github Releases Page](https://github.com/wasmerio/wasmer/releases).
+Note: All Wasmer executables can be found on our [Github Releases Page](https://github.com/wasmerio/wasmer/releases).
 {% endhint %}
 
 {% hint style="warning" %}

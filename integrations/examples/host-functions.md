@@ -40,7 +40,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "1.0"
+wasmer = "2.0"
 ```
 {% endtab %}
 {% endtabs %}
@@ -54,16 +54,16 @@ Because we want to store data outside of the Wasm module and have host functions
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let shared_counter: Arc<RefCell<i32>> = Arc::new(RefCell::new(0));
+let shared_counter: Arc<Mutex<i32>> = Arc::new(Mutex::new(0));
 
 #[derive(WasmerEnv, Clone)]
 struct Env {
-    counter: Arc<RefCell<i32>>,
+    counter: Arc<Mutex<i32>>,
 }
 ```
 
 {% hint style="info" %}
-Here we use a combination of `Arc` and `RefCell` to guarantee thread safety while allowing mutability.
+Here we use a combination of `Arc` and `Mutex` to guarantee thread safety while allowing mutability.
 {% endhint %}
 {% endtab %}
 {% endtabs %}
@@ -76,11 +76,11 @@ Now that our data is available we'll declare the functions.
 {% tab title="Rust" %}
 ```rust
 fn get_counter(env: &Env) -> i32 {
-    *env.counter.borrow()
+    *env.counter.lock().unwrap()
 }
 
 fn add_to_counter(env: &Env, add: i32) -> i32 {
-    let mut counter_ref = env.counter.borrow_mut();
+    let mut counter_ref = env.counter.lock().unwrap();
 
     *counter_ref += add;
     *counter_ref

@@ -30,7 +30,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "1.0"
+wasmer = "2.0"
 ```
 {% endtab %}
 
@@ -107,8 +107,20 @@ clean:
 ```
 
 Wasmer C API includes the `wasmer.h` header file that you need to include to start using Wasm in C.
-
 {% endtab %}
+
+{% tab title="Ruby" %}
+{% hint style="info" %}
+The final **Ruby** code for this example can be found on Github: [instance.rb](https://github.com/wasmerio/wasmer-ruby/blob/master/examples/instance.rb).
+
+_Please take a look at the_ [_setup steps for Ruby_](../ruby/setup.md)_._
+{% endhint %}
+
+```bash
+gem install wasmer
+```
+{% endtab %}
+
 {% endtabs %}
 
 Now that we have everything set up, let's go ahead and try it out!
@@ -197,6 +209,22 @@ wasm_byte_vec_t wasm_bytes;
 wat2wasm(&wat, &wasm_bytes);
 ```
 {% endtab %}
+
+{% tab title="Ruby" %}
+```php
+wasm_bytes = Wasmer::wat2wasm(
+  (<<~WAST)
+  (module
+    (type $add_one_t (func (param i32) (result i32)))
+    (func $add_one_f (type $add_one_t) (param $value i32) (result i32)
+      local.get $value
+      i32.const 1
+      i32.add)
+    (export "add_one" (func $add_one_f)))
+  WAST
+)
+```
+{% endtab %}
 {% endtabs %}
 
 Let's assume we have the binary version of the module \(i.e the `.wasm` file\), here is how we would have loaded it:
@@ -221,7 +249,7 @@ wasmBytes = open('./path/to/module.wasm', 'rb').read()
 {% endtab %}
 
 {% tab title="PHP" %}
-```python
+```php
 $wasmBytes = file_get_contents('./path/to/module.wasm');
 
 if (false === $wasmBytes) {
@@ -258,13 +286,20 @@ if (fread(wasm_bytes.data, file_size, 1, file) != 1) {
 fclose(file);
 ```
 {% endtab %}
+
+{% tab title="Ruby" %}
+```ruby
+file = File.expand_path "greet.wasm", File.dirname(__FILE__)
+bytes = IO.read file, mode: "rb"
+```
+{% endtab %}
 {% endtabs %}
 
 ## Compiling the Wasm module
 
 The next step will be to compile the module. To do this, we'll need two things: the Wasm module as bytes and a `Store`.
 
-The `Store` is a representation of the actual state of the module: it represents the state of every entities in the module during its lifecycle. It also holds the engine which is what will be used to actually compile the module.
+The `Store` is a representation of the actual state of the module: it represents the state of every entity in the module during its lifecycle. It also holds the engine which is what will be used to actually compile the module.
 
 Here is how we can create the store and compile the module:
 
@@ -279,12 +314,12 @@ let module = Module::new(&store, wasm_bytes)?;
 We are creating a store using the default settings provided by Wasmer. In some cases, you may want to use a specific engine or compiler. Here is how you would do:
 
 ```rust
-let engine = JIT::new(&Cranelift::default()).engine();
+let engine = Universal::new(&Cranelift::default()).engine();
 let store = Store::new(&engine);
 let module = Module::new(&store, wasm_bytes)?;
 ```
 
-We created a store with the JIT engine and the Cranelift compiler with its default configuration. These are good defaults but it will be a good thing to adapt this configuration to your needs.
+We created a store with the Universal engine and the Cranelift compiler with its default configuration. These are good defaults but it will be a good thing to adapt this configuration to your needs.
 {% endhint %}
 {% endtab %}
 
@@ -329,6 +364,15 @@ if (!module) {
 
     return 1;
 }
+```
+{% endtab %}
+
+{% tab title="Ruby" %}
+```ruby
+store = Wasmer::Store.new
+module_ = Wasmer::Module.new store, wasm_bytes
+
+raise "Error" unless module
 ```
 {% endtab %}
 {% endtabs %}
@@ -378,6 +422,15 @@ if (!instance) {
 
   return 1;
 }
+```
+{% endtab %}
+
+{% tab title="Ruby" %}
+```ruby
+import_object = Wasmer::ImportObject.new
+instance = Wasmer::Instance.new module_, import_object
+
+raise "Error" unless instance
 ```
 {% endtab %}
 {% endtabs %}
@@ -477,6 +530,20 @@ git clone https://github.com/wasmerio/wasmer.git
 cd wasmer/lib/c-api/examples/instance.c
 make clean instance
 ./instance
+```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Ruby" %}
+You should be able to run it using the `ruby instance.rb` command.
+
+{% hint style="info" %}
+If you want to run the examples from the Wasmer Ruby [repository](https://github.com/wasmerio/wasmer-ruby/) codebase directly, you can also do:
+
+```bash
+git clone https://github.com/wasmerio/wasmer-ruby.git
+cd wasmer-ruby
+ruby examples/instance.rb
 ```
 {% endhint %}
 {% endtab %}
