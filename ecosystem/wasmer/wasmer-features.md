@@ -76,7 +76,7 @@ Here are some of the features in each of those:
 |  | Rust | C / C++ | Go | Python | Ruby |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Terminate in host call | ✅ | ⬜ | ✅ | ✅ | ✅ |
-| WASI | ✅ | ✅ | ✅ | ✅ | ⬜ |
+| WASI | ✅ | ✅ | ✅ | ✅ | ✅ |
 | WASI FS API | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
 | Serialize/Deserialize | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Metering | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
