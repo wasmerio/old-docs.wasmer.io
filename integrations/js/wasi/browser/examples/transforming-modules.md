@@ -86,7 +86,7 @@ startWasiTask()
 On the both the browser screen and the JavaScript console, you should see the text `Done!`.
 
 {% hint style="warning" %}
-### Known Limitation
+#### Known Limitation
 
 This example is somewhat contrived because the WebAssembly module has been hard-coded to return the text string `Done!` rather than the time value from `clock_time_get`.
 
@@ -104,4 +104,3 @@ cd docs.wasmer.io/integrations/js/wasi/browser/examples/transforming-modules
 npm run dev
 ```
 {% endhint %}
-

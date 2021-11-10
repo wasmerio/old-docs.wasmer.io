@@ -22,62 +22,59 @@ The Wasmer WebAssembly runtime provides various features for users and developer
 
 Runtime features:
 
-|  | Singlepass | Cranelift | LLVM |
-| :--- | :--- | :--- | :--- |
-| Emscripten | ✅ | ✅ | ✅ |
-| WASI | ✅ | ✅ | ✅ |
+|            | Singlepass | Cranelift | LLVM |
+| ---------- | ---------- | --------- | ---- |
+| Emscripten | ✅          | ✅         | ✅    |
+| WASI       | ✅          | ✅         | ✅    |
 
 WebAssembly features:
 
-|  | Singlepass | Cranelift | LLVM |
-| :--- | :--- | :--- | :--- |
-| Bulk memory operations	| ✅ | ✅ | ✅ |
-| Multi-value return | 🔄 | ✅ | ✅ |
-| Import & export of mutable globals | ✅ | ✅ | ✅ |
-| Non-trapping float-to-int conversions | ✅ | ✅ | ✅ |
-| Sign-extension operations | ✅ | ✅ | ✅ |
-| Reference types | 🔄 | ✅ | ✅ |
-| SIMD (Phase 4) | ✅ | ✅ | ✅ |
-| Threads (Phase 2) | ✅ | 🔄 | ✅ |
+|                                       | Singlepass | Cranelift | LLVM |
+| ------------------------------------- | ---------- | --------- | ---- |
+| Bulk memory operations                | ✅          | ✅         | ✅    |
+| Multi-value return                    | 🔄         | ✅         | ✅    |
+| Import & export of mutable globals    | ✅          | ✅         | ✅    |
+| Non-trapping float-to-int conversions | ✅          | ✅         | ✅    |
+| Sign-extension operations             | ✅          | ✅         | ✅    |
+| Reference types                       | 🔄         | ✅         | ✅    |
+| SIMD (Phase 4)                        | ✅          | ✅         | ✅    |
+| Threads (Phase 2)                     | ✅          | 🔄        | ✅    |
 
 {% hint style="info" %}
-## Legend
+### Legend
 
 * ✅ Supported
 * 🔄 In the works
-* ⬜ Not yet supported \(please ping us if you need this feature!\)
+* ⬜ Not yet supported (please ping us if you need this feature!)
 {% endhint %}
 
 ## Support by Operating System
 
-|  | Linux | macOS | Windows |
-| :--- | :--- | :--- | :--- |
-| Cranelift | ✅ | ✅ | ✅ |
-| LLVM | ✅ | ✅ | ✅ |
-| Singlepass | ✅ | ✅ | ✅
-| WASI | ✅ | ✅ | ✅\* |
+|            | Linux | macOS | Windows |
+| ---------- | ----- | ----- | ------- |
+| Cranelift  | ✅     | ✅     | ✅       |
+| LLVM       | ✅     | ✅     | ✅       |
+| Singlepass | ✅     | ✅     | ✅       |
+| WASI       | ✅     | ✅     | ✅\*     |
 
 \* `poll_fd` is not fully implemented for Windows yet
 
-
 ## Compiler Support by Chipset
 
-|  | x86_64 | arm64 | x86 |
-| :--- | :--- | :--- | :--- |
-| Cranelift | ✅ | ✅ | ✅ |
-| LLVM | ✅ | ✅ | ✅ |
-| Singlepass | ✅ | 🔄 | ⬜ |
+|            | x86\_64 | arm64 | x86 |
+| ---------- | ------- | ----- | --- |
+| Cranelift  | ✅       | ✅     | ✅   |
+| LLVM       | ✅       | ✅     | ✅   |
+| Singlepass | ✅       | 🔄    | ⬜   |
 
 ## Language Embeddings
 
-Wasmer enables WebAssembly usage in a lot of different languages.
-Here are some of the features in each of those:
+Wasmer enables WebAssembly usage in a lot of different languages. Here are some of the features in each of those:
 
-|  | Rust | C / C++ | Go | Python | Ruby |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Terminate in host call | ✅ | ⬜ | ✅ | ✅ | ✅ |
-| WASI | ✅ | ✅ | ✅ | ✅ | ✅ |
-| WASI FS API | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-| Serialize/Deserialize | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Metering | ✅ | ⬜ | ⬜ | ⬜ | ⬜ |
-
+|                        | Rust | C / C++ | Go | Python | Ruby |
+| ---------------------- | ---- | ------- | -- | ------ | ---- |
+| Terminate in host call | ✅    | ⬜       | ✅  | ✅      | ✅    |
+| WASI                   | ✅    | ✅       | ✅  | ✅      | ✅    |
+| WASI FS API            | ✅    | ⬜       | ⬜  | ⬜      | ⬜    |
+| Serialize/Deserialize  | ✅    | ✅       | ✅  | ✅      | ✅    |
+| Metering               | ✅    | ⬜       | ⬜  | ⬜      | ⬜    |
