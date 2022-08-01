@@ -14,7 +14,7 @@ In this example, we'll create a system for getting and adjusting a counter value
 
    the current global counter.
 
-2. There will be an `add_to_counter` function will add the passed
+2. There will be an `add_to_counter` function that will add the passed
 
    `i32` value to the counter, and return an `i32` of the current
 
@@ -40,7 +40,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "2.0"
+wasmer = "3.0"
 ```
 {% endtab %}
 {% endtabs %}
@@ -56,7 +56,7 @@ Because we want to store data outside of the Wasm module and have host functions
 ```rust
 let shared_counter: Arc<Mutex<i32>> = Arc::new(Mutex::new(0));
 
-#[derive(WasmerEnv, Clone)]
+#[derive(Clone)]
 struct Env {
     counter: Arc<Mutex<i32>>,
 }
@@ -75,12 +75,12 @@ Now that our data is available we'll declare the functions.
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-fn get_counter(env: &Env) -> i32 {
-    *env.counter.lock().unwrap()
+fn get_counter(env: FunctionEnvMut<Env>) -> i32 {
+    *env.data().counter.lock().unwrap()
 }
 
-fn add_to_counter(env: &Env, add: i32) -> i32 {
-    let mut counter_ref = env.counter.lock().unwrap();
+fn add_to_counter(env: &FunctionEnvMut<Env>, add: i32) -> i32 {
+    let mut counter_ref = env.data().counter.lock().unwrap();
 
     *counter_ref += add;
     *counter_ref
@@ -96,14 +96,14 @@ The last thing we need to do now is to imports the function in the Wasm module.
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let get_counter_func = Function::new_native_with_env(
-    &store, 
+let get_counter_func = Function::new_typed_with_env(
+    &mut store, 
     Env { counter: shared_counter.clone() }, 
     get_counter
 );
 
-let add_to_counter_func = Function::new_native_with_env(
-    &store, 
+let add_to_counter_func = Function::new_typed_with_env(
+    &mut store, 
     Env { counter: shared_counter.clone() }, 
     add_to_counter
 );
@@ -116,9 +116,9 @@ let import_object = imports! {
 };
 ```
 
-We use `Function::new_native_with_env` here to tell Wasmer our host functions need our `Env` to be passed in addition to other arguments.
+We use `Function::new_typed_with_env` here to tell Wasmer our host functions need our `Env` to be passed in addition to other arguments.
 
-If the host function does not need external data \(it is pure\) we can use `Function::new_native` instead of `Function::new_native_with_env`.
+If the host function does not need external data \(it is pure\) we use the `new_typed` function instead, which has the same signature except that it doesn't take the `env` parameter.
 {% endtab %}
 {% endtabs %}
 

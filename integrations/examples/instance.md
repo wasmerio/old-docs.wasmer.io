@@ -30,7 +30,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "2.0"
+wasmer = "3.0"
 ```
 {% endtab %}
 
@@ -306,20 +306,20 @@ Here is how we can create the store and compile the module:
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let store = Store::default();
+let mut store = Store::default();
 let module = Module::new(&store, wasm_bytes)?;
 ```
 
 {% hint style="info" %}
-We are creating a store using the default settings provided by Wasmer. In some cases, you may want to use a specific engine or compiler. Here is how you would do:
+We are creating a store using the default settings provided by Wasmer. In some cases, you may want to use a specific compiler. Here is how you would do:
 
 ```rust
-let engine = Universal::new(&Cranelift::default()).engine();
-let store = Store::new(&engine);
+let compiler_config = Cranelift::default();
+let mut store = Store::new(compiler_config);
 let module = Module::new(&store, wasm_bytes)?;
 ```
 
-We created a store with the Universal engine and the Cranelift compiler with its default configuration. These are good defaults but it will be a good thing to adapt this configuration to your needs.
+We created a store with the Cranelift compiler with its default configuration. These are good defaults but it will be a good thing to adapt this configuration to your needs.
 {% endhint %}
 {% endtab %}
 
@@ -388,8 +388,8 @@ In fact, Wasm modules can define entities they need to work properly. These are 
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let import_object = imports! {};
-let instance = Instance::new(&module, &import_object)?;
+let imports = imports! {};
+let instance = Instance::new(&mut store, &module, &imports)?;
 ```
 {% endtab %}
 
