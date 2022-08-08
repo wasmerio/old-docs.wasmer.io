@@ -36,7 +36,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "2.0"
+wasmer = "3.0"
 ```
 {% endtab %}
 
@@ -100,14 +100,14 @@ Each page of memory is 64 KiB in size.
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let mem_size: NativeFunc<(), i32> = instance
+let mem_size: TypedFunction<(), i32> = instance
     .exports
-    .get_native_function("mem_size")?;
+    .get_typed_function(&store, "mem_size")?;
 let memory = instance.exports.get_memory("memory")?;
 
-assert_eq!(memory.size(), Pages::from(1));
-assert_eq!(memory.size().bytes(), Bytes::from(65536 as usize));
-assert_eq!(memory.data_size(), 65536);
+assert_eq!(memory.size(&store), Pages::from(1));
+assert_eq!(memory.size(&store).bytes(), Bytes::from(65536 as usize));
+assert_eq!(memory.data_size(&store), 65536);
 
 let result = mem_size.call()?;
 assert_eq!(Pages::from(result as u32), memory.size());
@@ -163,9 +163,9 @@ A memory can be grown to allow storing more things into it. This is easily done 
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-memory.grow(2)?;
-assert_eq!(memory.size(), Pages::from(3));
-assert_eq!(memory.data_size(), 65536 * 3);
+memory.grow(&mut store, 2)?;
+assert_eq!(memory.size(&store), Pages::from(3));
+assert_eq!(memory.data_size(&store), 65536 * 3);
 ```
 {% endtab %}
 
@@ -203,19 +203,19 @@ Let's start by using absolute memory addresses to write and read a value.
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let get_at: NativeFunc<i32, i32> = instance
+let get_at: TypedFunction<i32, i32> = instance
     .exports
-    .get_native_function("get_at")?;
-let set_at: NativeFunc<(i32, i32), ()> = instance
+    .get_typed_function(&store, "get_at")?;
+let set_at: TypedFunction<(i32, i32), ()> = instance
     .exports
-    .get_native_function("set_at")?;
+    .get_typed_function(&store, "set_at")?;
 
 let mem_addr = 0x2220;
 let val = 0xFEFEFFE;
 
-set_at.call(mem_addr, val)?;
+set_at.call(&mut store, mem_addr, val)?;
 
-let result = get_at.call(mem_addr)?;
+let result = get_at.call(&mut store, mem_addr)?;
 println!("Value at {:#x?}: {:?}", mem_addr, result);
 ```
 {% endtab %}
@@ -284,9 +284,9 @@ Now assume we want to write a value at the end of the second memory page and the
 let page_size = 0x1_0000;
 let mem_addr = (page_size * 2) - mem::size_of_val(&val) as i32;
 let val = 0xFEA09;
-set_at.call(mem_addr, val)?;
+set_at.call(&mut store, mem_addr, val)?;
 
-let result = get_at.call(mem_addr)?;
+let result = get_at.call(&mut store, mem_addr)?;
 println!("Value at {:#x?}: {:?}", mem_addr, result);
 ```
 {% endtab %}

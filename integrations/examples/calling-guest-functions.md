@@ -13,7 +13,7 @@ Exported function are the entities you will probably use the most: they will be 
 Exported function come in two flavors:
 
 * Dynamic functions;
-* Native functions.
+* Typed functions.
 
 We'll cover both flavors in this example.
 
@@ -37,7 +37,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "2.0"
+wasmer = "3.0"
 ```
 {% endtab %}
 
@@ -138,7 +138,7 @@ We'll start by fetching the guest function and see how to call it using the dyna
 ```rust
 let sum = instance.exports.get_function("sum")?;
 let args = [Value::I32(1), Value::I32(2)];
-let result: Box<[Val]> = sum.call(&args)?;
+let result: Box<[Val]> = sum.call(&mut store, &args)?;
 ```
 {% endtab %}
 
@@ -206,17 +206,17 @@ To use this flavor, we have the choice of fetching the function again or transfo
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let sum = sum.native::<(i32, i32), i32>()?;
+let sum: TypedFunction<(i32, i32), i32> = sum.typed(&store)?;
 let result: i32 = sum.call(3, 4)?;
 ```
 
 {% hint style="info" %}
-Here we reused the previously fetched function and turned it into a native one. We could have directly fetched it as a native function:
+Here we reused the previously fetched function and turned it into a typed one. We could have directly fetched it as a typed function:
 
 ```rust
-let sum = instance
+let sum: TypedFunction<(i32, i32), i32> = instance
     .exports
-    .get_native_function::<(i32, i32), i32>("sum")?;
+    .get_typed_function::<(i32, i32), i32>("sum")?;
 ```
 {% endhint %}
 {% endtab %}

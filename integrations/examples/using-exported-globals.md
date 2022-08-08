@@ -35,9 +35,8 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "2.0"
+wasmer = "3.0"
 ```
-{% endcode %}
 {% endtab %}
 
 {% tab title="Go" %}
@@ -126,8 +125,8 @@ The first interesting thing to do is to query their type information in order to
 let one = instance.exports.get_global("one")?;
 let some = instance.exports.get_global("some")?;
 
-let one_type = one.ty();
-let some_type = some.ty();
+let one_type = one.ty(&store);
+let some_type = some.ty(&store);
 
 println!("one type: {:?} {:?}", one_type.mutability, one_type.ty);
 println!("some type: {:?} {:?}", some_type.mutability, some_type.ty);
@@ -225,7 +224,7 @@ The global API is straightforward: it provides a dedicated method to get the val
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let some_value = some.get();
+let some_value = some.get(&mut store);
 
 println!("`some` value: {:?}", some_value);
 ```
@@ -278,7 +277,7 @@ First we'll try to set the value of a immutable global and see what happens:
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let result = one.set(Value::F32(42.0));
+let result = one.set(&mut store, Value::F32(42.0));
 
 assert_eq!(
     result.expect_err("Expected an error").message(),

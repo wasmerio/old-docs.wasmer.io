@@ -31,7 +31,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "2.0"
+wasmer = "3.0"
 ```
 {% endtab %}
 
@@ -110,7 +110,7 @@ Let's create the import object:
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let import_object = imports! {
+let imports = imports! {
     "" => {
         "host_function" => host_function,
     },
@@ -185,7 +185,7 @@ Now that we have our import object ready, we'll need to use it when instantiatin
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let instance = Instance::new(&module, &import_object)?;
+let instance = Instance::new(&mut store, &module, &imports)?;
 ```
 {% endtab %}
 
