@@ -30,7 +30,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "2.0"
+wasmer = "3.0"
 ```
 {% endtab %}
 
@@ -81,8 +81,11 @@ Here is the easy part, getting and calling the function:
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let div_by_zero = instance.exports.get_function("div_by_zero")?.native::<(), i32>()?;
-let result = div_by_zero.call();
+let div_by_zero: TypedFunction<(), i32> = instance
+    .exports
+    .get_function("div_by_zero")?
+    .typed(&mut store)?;
+let result = div_by_zero.call(&mut store);
 ```
 {% endtab %}
 

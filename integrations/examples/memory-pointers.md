@@ -38,7 +38,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "2.0"
+wasmer = "3.0"
 ```
 {% endtab %}
 {% tab title="Ruby" %}
@@ -74,9 +74,8 @@ The load function will return two things: the offset of the contents and its len
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let load = instance
-    .exports
-    .get_native_function::<(), (WasmPtr<u8, Array>, i32)>("load")?;
+let load: TypedFunction<(), (WasmPtr<u8>, i32)> =
+    instance.exports.get_typed_function(&mut store, "load")?;
 
 let memory = instance.exports.get_memory("mem")?;
 ```
@@ -84,7 +83,7 @@ let memory = instance.exports.get_memory("mem")?;
 When importing the function we tell Wasmer that it return a `WasmPtr` as its first return value. This `WasmPtr` is what will give us the ability to interact with the memory.
 
 ```rust
-let (ptr, length) = load.call()?;
+let (ptr, length) = load.call(&mut store)?;
 println!("String offset: {:?}", ptr.offset());
 println!("String length: {:?}", length);
 ```
@@ -109,7 +108,8 @@ Now that we have our pointer, let's read the data. We know we are about to read 
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let str = ptr.get_utf8_string(memory, length as u32).unwrap();
+let memory_view = memory.view(&store);
+let str = ptr.read_utf8_string(&memory_view, length as u32).unwrap();
 println!("Memory contents: {:?}", str);
 ```
 {% endtab %}
@@ -130,14 +130,19 @@ It's now time to write a new string int the guest module's memory. To do that wi
 
 {% tabs %}
 {% tab title="Rust" %}
-What we do here is dereferencing the pointer to get a slice of `Cell`s: we want this slice to be the size of the new string starting at the same offset as our pointer. This allows us to completely overwrite the old string with the new one.
+What we do here is get a slice of `Cell`s: we want this slice to be the size of the new string starting at the same offset as our pointer. This allows us to completely overwrite the old string with the new one.
 
 {% hint style="info" %}
 We could have just changed a single word in the old string. To do that we would have changed the offset and length of the slice when dereferencing the pointer. Here is how we would have done the dereferencing part if we wanted to only change the "World!" part:
 
 ```rust
 let new_str = b"Wasmer!";
-let values = ptr.deref(memory, 7, new_str.len() as u32).unwrap();
+let (mut ptr, length) = load.call(&mut store)?;
+ptr.add_offset(7)?;
+let values = ptr.slice(&memory_view, new_str.len() as u32).unwrap();
+for i in 0..new_str.len() {
+    values.index(i as u64).write(new_str[i]).unwrap();
+}
 ```
 {% endhint %}
 {% endtab %}

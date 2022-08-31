@@ -26,7 +26,7 @@ We have to modify `Cargo.toml` to add the Wasmer dependencies as shown below:
 ```yaml
 [dependencies]
 # The Wasmer API
-wasmer = "2.0"
+wasmer = "3.0"
 ```
 {% endtab %}
 
@@ -143,13 +143,13 @@ To terminate the execution of the Wasm module we'll have to define a function on
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-fn early_exit() {
-    RuntimeError::raise(Box::new(ExitCode(1)));
+fn early_exit() -> Result<(), ExitCode> {
+    Err(ExitCode(1))
 }
 
 let import_object = imports! {
     "env" => {
-        "early_exit" => Function::new_native(&store, early_exit),
+        "early_exit" => Function::new_typed(&mut store, early_exit),
     }
 };
 ```
@@ -217,7 +217,7 @@ import_object.register("env", { :early_exit => func })
 {% endtab %}
 {% endtabs %}
 
-As we saw in previous examples we defined a Rust function, wrap it in a native function definition and import it in the guest module, in the `env` namespace, using the `ImportObject`.
+As we saw in previous examples we defined a Rust function, wrap it in a native function definition and import it in the guest module, in the `env` namespace, using the `Imports`.
 
 ## Handling the error
 
@@ -226,11 +226,10 @@ Our module will call the `early_exit` function once we call its `run` function \
 {% tabs %}
 {% tab title="Rust" %}
 ```rust
-let run_func: NativeFunc<(i32, i32), i32> = instance
-    .exports
-    .get_native_function("run")?;
+let run_func: TypedFunction<(i32, i32), i32> = instance
+    .exports.get_typed_function(&mut store, "run")?;
 
-match run_func.call(1, 7) {
+match run_func.call(&mut store, 1, 7) {
     Ok(result) => {
         bail!("Expected early termination with `ExitCode`, found: {}", result);
     }   
