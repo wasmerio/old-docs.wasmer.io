@@ -48,6 +48,10 @@ EG: `wapm install -g cowsay`
 
 Executes a package command with the `run` cli command. The command will be run with the Wasmer runtime.
 
+## `wapm run-background-update-check`
+
+Runs the background updater explicitly.
+
 ## `wapm validate <wapm_package_dir>`
 
 Validate the sources of local WAPM modules. Will display an error if the sources are not valid WebAssembly.
@@ -67,6 +71,10 @@ Prints all commands and modules for a package in the current directory.
 ## `wapm uninstall <package>`
 
 The opposite of `wapm install`. Uninstall globally with the `-g` flag.
+
+## `wapm add`
+
+Adds packages to the manifest without installing them.
 
 ## `wapm bin`
 
