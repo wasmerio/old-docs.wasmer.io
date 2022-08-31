@@ -31,6 +31,7 @@ description: "A place for all things Wasmer and WebAssembly. Feel free to add yo
 
 * AssemblyScript [source](https://github.com/onsails/wasmer-as)
 * Using AssemblyScript inside Rust example [source](https://github.com/bobbo/wasmer-assemblyscript-example)
+* AssemblyScript binding helpers for rust [source](https://github.com/cppccn/as-ffi-bindings), [crate](https://crates.io/crates/as-ffi-bindings)
 * Using AssemblyScript with Wasmer3 in Rust [source](https://github.com/poria-cat/wasmer3-assemblyscript-example)
 
 ## Go
