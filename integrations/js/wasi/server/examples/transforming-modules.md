@@ -4,7 +4,7 @@
 **Note**: The final code for this example can be found on Github: [transforming-modules](https://github.com/wasmerio/docs.wasmer.io/tree/master/integrations/js/wasi/server/examples/transforming-modules).
 {% endhint %}
 
-Irrespective of whether your JavaScript code runs on the client or the server, the statement shown below to [transform a WASI module](https://github.com/wasmerio/docs.wasmer.io/tree/e0f7639306bb4cf18cd0c23876b80f787d6b5876/integrations/js/module-transformation/README.md) will be always needed until browsers land `BigInt` support in WebAssembly.
+Irrespective of whether your WebAssembly module is invoked from JavaScript code running in the client or the server, it is safest to assume that the statement shown below to [transform a WASI module](https://github.com/wasmerio/docs.wasmer.io/tree/e0f7639306bb4cf18cd0c23876b80f787d6b5876/integrations/js/module-transformation/README.md) will be always needed.
 
 ## Setup Instructions
 
@@ -28,51 +28,58 @@ The call to function `lowerI64Imports` performs the all-important transformation
 Now that the interface has been transformed, we can instantiate the WebAssembly module and invoke it as before.
 
 ```javascript
-const fs  = require("fs")
+const fs = require("fs")
 const { WASI } = require("@wasmer/wasi")
-const nodeBindings = require("@wasmer/wasi/lib/bindings/node");
 const { lowerI64Imports } = require("@wasmer/wasm-transformer")
 
-const wasmFilePath = "./clocktimeget.wasm"
+const wasmFilePath = "./clock_time_get.wasm"
 
+const testVal1 = "0xDEADBEEFDEADBEEF"
+const testVal2 = "0xBADC0FFEE0DDF00D"
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Instantiate a new WASI Instance
 let wasi = new WASI({
   args: [wasmFilePath],
   env: {},
-  bindings: {
-     ...(nodeBindings.default || nodeBindings),
-    fs: fs
-  }
 })
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Async function to run our Wasm module/instance
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Async function to run WASI module/instance
 const startWasiTask =
   async pathToWasmFile => {
-    // Fetch the Wasm module and transform its interface
-    let wasmBytes        = new Uint8Array(fs.readFileSync(pathToWasmFile))
-    let loweredWasmBytes = lowerI64Imports(wasmBytes)
-
-    // Instantiate the WebAssembly file
-    let wasmModule = await WebAssembly.compile(wasmBytes);
-    let instance = await WebAssembly.instantiate(wasmModule, {
-      ...wasi.getImports(wasmModule)
-    });
+    let { instance } = await WebAssembly.instantiate(
+      // Transform the Wasm module so that i64 values can be used in function interfaces
+      lowerI64Imports(
+      // Fetch the WASM module
+      new Uint8Array(fs.readFileSync(pathToWasmFile))
+      ),
+      // Grant access to the host functions imported by Wasm
+      { wasi_unstable: wasi.wasiImport },
+    )
 
     // Start the WASI instance
     wasi.start(instance)
+
+    return instance.exports
   }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Everything starts here
 startWasiTask(wasmFilePath)
+  .then(wasmFns => {
+    // wasmFns.test_i64ToHexStr(BigInt(testVal1))
+    // wasmFns.test_i64ToHexStr(BigInt(testVal2))
+
+    wasmFns.writeTimeNanos()
+  })
 ```
 
 Run the program:
 
 ```bash
 $ node server.js
-Done!
+0006acadc1dd8f18
 ```
 
 {% hint style="info" %}
@@ -84,4 +91,3 @@ cd docs.wasmer.io/integrations/js/wasi/server/examples/transforming-modules
 npm run dev
 ```
 {% endhint %}
-
