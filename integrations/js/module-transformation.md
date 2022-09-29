@@ -12,7 +12,7 @@ For a variety or reasons, the specification for passing 64-bit integers between 
 In spite of this, different vendors have gone ahead and implemented their own partial solutions.
 For instance, programs running in NodeJS are able (with certain limitations) to work with `BigInt` values in the WebAssembly interface; however, that same WebAssembly program will probably fail if instantiated by a browser with an error such as `TypeError: Cannot convert a BigInt value to a number`
 
-Since the standard has not yet been finalised, it is safest to assume that you will always fall into this an implementation gap anytime a WebAssembly module needs to pass an `i64` value out to a host function (typically implemented through WASI).
+Since the standard has not yet been finalised, it is safest to assume that you will always fall into this implementation gap anytime a WebAssembly module needs to pass an `i64` value out to a host function (typically implemented through WASI).
 
 A good example here is the WASI function [clock\_time\_get](https://github.com/WebAssembly/WASI/blob/main/phases/snapshot/docs.md#-clock_time_getid-clockid-precision-timestamp---resulttimestamp-errno).
 

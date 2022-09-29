@@ -32,7 +32,7 @@ const fs = require("fs")
 const { WASI } = require("@wasmer/wasi")
 const { lowerI64Imports } = require("@wasmer/wasm-transformer")
 
-const wasmFilePath = "./clock_time_get.wasm"
+const wasmFilePath = "./clocktimeget.wasm"
 
 const testVal1 = "0xDEADBEEFDEADBEEF"
 const testVal2 = "0xBADC0FFEE0DDF00D"
