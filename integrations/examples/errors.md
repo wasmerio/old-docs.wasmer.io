@@ -8,7 +8,7 @@ description: >-
 
 There will come a time when running a WebAssembly module will not work, and trying to figure out why it does not work can be a difficult task! In the current MVP of WebAssembly, debugging isn't explicitly defined for runtimes both in and out of the browser. So we'll have to write some error handling code ourselves.
 
-In this example, we will load a WebAssembly module that purposely produces an error in its exported function call. The Host \(our Rust application\) will pattern match for the error and output the error message returned from Wasmer.
+In this example, we will load a WebAssembly module that purposely produces an error in its exported function call. The Host (our Rust application) will pattern match for the error and output the error message returned from Wasmer.
 
 First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. In this example, we will create a new project. Lets create it and navigate to it:
 
@@ -17,7 +17,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% hint style="info" %}
 The final **Rust** code for this example can be found on Github: [errors.rs](https://github.com/wasmerio/wasmer/blob/master/examples/errors.rs).
 
-_Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
+_Please take a look at the_ [_setup steps for Rust_](../rust/)_._
 {% endhint %}
 
 ```bash
@@ -36,9 +36,9 @@ wasmer = "3.0"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final **Go** code for this example can be found on Github: [errors.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_errors_test.go).
+The final **Go** code for this example can be found on Github: [errors.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example\_errors\_test.go).
 
-_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
+_Please take a look at the_ [_setup steps for Go_](../go/)_._
 {% endhint %}
 
 ```bash
@@ -52,7 +52,7 @@ go mod init github.com/$USER/wasmer-example-errors
 {% hint style="info" %}
 The final **PHP** code for this example can be found on Github: [errors.go](https://github.com/wasmerio/wasmer-php/blob/master/examples/errors.php).
 
-_Please take a look at the_ [_setup steps for PHP_](../php/setup.md)_._
+_Please take a look at the_ [_setup steps for PHP_](../php/)_._
 {% endhint %}
 
 ```bash
@@ -189,11 +189,9 @@ If we got an error we format a nice message containing information to help debug
 
 We now have everything we need to run the Wasm module, let's do it!
 
-{% tabs %}
-{% tab title="Rust" %}
 You should be able to run it using the `cargo run` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Instantiating module...
 Calling `div_by_zero` function...
@@ -211,12 +209,10 @@ cd wasmer
 cargo run --example errors --release --features "cranelift"
 ```
 {% endhint %}
-{% endtab %}
 
-{% tab title="Go" %}
 You should be able to run it using the `go run main.go` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Instantiating module...
 Calling `div_by_zero` function...
@@ -234,9 +230,7 @@ cd wasmer-go
 go test examples/example_errors_test.go
 ```
 {% endhint %}
-{% endtab %}
 
-{% tab title="PHP" %}
 You should be able to run it using the `php errors.php` command.
 
 {% hint style="info" %}
@@ -248,5 +242,3 @@ cd wasmer-php
 make EXAMPLE=errors test-doc-examples
 ```
 {% endhint %}
-{% endtabs %}
-

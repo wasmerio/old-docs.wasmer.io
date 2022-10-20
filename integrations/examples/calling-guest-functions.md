@@ -4,7 +4,7 @@ description: >-
   tables. This example illustrates how to call exported functions.
 ---
 
-# ↪️ Calling guest \(exported\) functions
+# ↪️ Calling guest (exported) functions
 
 In this example we'll see how to use exported functions.
 
@@ -22,9 +22,9 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final **Rust** code for this example can be found on Github: [exports_function.rs](https://github.com/wasmerio/wasmer/blob/master/examples/exports_function.rs).
+The final **Rust** code for this example can be found on Github: [exports\_function.rs](https://github.com/wasmerio/wasmer/blob/master/examples/exports\_function.rs).
 
-_Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
+_Please take a look at the_ [_setup steps for Rust_](../rust/)_._
 {% endhint %}
 
 ```bash
@@ -43,9 +43,9 @@ wasmer = "3.0"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final **Go** code for this example can be found on Github: [exports_function.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_exports_function_test.go).
+The final **Go** code for this example can be found on Github: [exports\_function.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example\_exports\_function\_test.go).
 
-_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
+_Please take a look at the_ [_setup steps for Go_](../go/)_._
 {% endhint %}
 
 ```bash
@@ -57,9 +57,9 @@ go mod init github.com/$USER/wasmer-example-exports-function
 
 {% tab title="Python" %}
 {% hint style="info" %}
-The final **Python** code for this example can be found on Github: [exports_function.py](https://github.com/wasmerio/wasmer-python/blob/master/examples/exports_function.py).
+The final **Python** code for this example can be found on Github: [exports\_function.py](https://github.com/wasmerio/wasmer-python/blob/master/examples/exports\_function.py).
 
-_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
+_Please take a look at the_ [_setup steps for Python_](../python.md)_._
 {% endhint %}
 
 ```bash
@@ -73,7 +73,7 @@ pip install wasmer wasmer_compiler_cranelift
 {% hint style="info" %}
 The final **PHP** code for this example can be found on Github: [exports-function.php](https://github.com/wasmerio/wasmer-php/blob/master/examples/exports-function.php).
 
-_Please take a look at the_ [_setup steps for PHP_](../php/setup.md)_._
+_Please take a look at the_ [_setup steps for PHP_](../php/)_._
 {% endhint %}
 
 ```bash
@@ -88,7 +88,7 @@ composer require wasm/wasm
 {% hint style="info" %}
 The final **C** code for this example can be found on Github: [instance.c](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
 
-_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
+_Please take a look at the_ [_setup steps for C/C++_](../c/)_._
 {% endhint %}
 
 ```bash
@@ -116,9 +116,9 @@ clean:
 
 {% tab title="Ruby" %}
 {% hint style="info" %}
-The final **Ruby** code for this example can be found on Github: [exports_function.rb](https://github.com/wasmerio/wasmer-ruby/blob/master/examples/exports_function.rb).
+The final **Ruby** code for this example can be found on Github: [exports\_function.rb](https://github.com/wasmerio/wasmer-ruby/blob/master/examples/exports\_function.rb).
 
-_Please take a look at the_ [_setup steps for Ruby_](../ruby/setup.md)_._
+_Please take a look at the_ [_setup steps for Ruby_](../ruby/)_._
 {% endhint %}
 
 ```bash
@@ -272,7 +272,7 @@ We now have everything we need to run the Wasm module, let's do it!
 {% tab title="Rust" %}
 You should be able to run it using the `cargo run` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Instantiating module...
 Calling `sum` function...
@@ -295,7 +295,7 @@ cargo run --example exported-function --release --features "cranelift"
 {% tab title="Go" %}
 You should be able to run it using the `go run main.go` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Instantiating module...
 Calling `sum` function...
@@ -346,7 +346,7 @@ make EXAMPLE=exports-function test-doc-examples
 {% tab title="C/C++" %}
 You should be able to run it using the `make clean exports-function && ./exports-function` command. The output should look like this:
 
-```text
+```
 Creating the store...
 Compiling module...
 Creating imports...
@@ -383,4 +383,3 @@ ruby examples/exports_function.rb
 {% endhint %}
 {% endtab %}
 {% endtabs %}
-

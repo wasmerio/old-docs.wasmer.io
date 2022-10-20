@@ -23,7 +23,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% hint style="info" %}
 The final **Rust** code for this example can be found on Github: [memory.rs](https://github.com/wasmerio/wasmer/blob/master/examples/memory.rs).
 
-_Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
+_Please take a look at the_ [_setup steps for Rust_](../rust/)_._
 {% endhint %}
 
 ```bash
@@ -42,9 +42,9 @@ wasmer = "3.0"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final **Go** code for this example can be found on Github: [memory.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_memory_test.go).
+The final **Go** code for this example can be found on Github: [memory.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example\_memory\_test.go).
 
-_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
+_Please take a look at the_ [_setup steps for Go_](../go/)_._
 {% endhint %}
 
 ```bash
@@ -58,7 +58,7 @@ go mod init github.com/$USER/wasmer-example-memory
 {% hint style="info" %}
 The final **C** code for this example can be found on Github: [memory.c](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/memory.c).
 
-_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
+_Please take a look at the_ [_setup steps for C/C++_](../c/)_._
 {% endhint %}
 
 ```bash
@@ -89,7 +89,7 @@ Now that we have everything set up, let's go ahead and try it out!
 
 ## Querying memory information
 
-The first interesting thing to do is to query information about the memory. To do that we must either have access to the memory \(i.e it has to be exported\) or we must have access to an exported function which is able to give us this information.
+The first interesting thing to do is to query information about the memory. To do that we must either have access to the memory (i.e it has to be exported) or we must have access to an exported function which is able to give us this information.
 
 {% hint style="info" %}
 One important thing to note: the size of the memory can be expressed as a number of pages or a number of bytes.
@@ -323,7 +323,9 @@ In the previous examples, we used hexadecimal notation but you are free to use d
 
 It enough for now: we only covered how to interact with the memory through exported functions. If you want to know more, see the following example:
 
-{% page-ref page="memory-pointers.md" %}
+{% content-ref url="memory-pointers.md" %}
+[memory-pointers.md](memory-pointers.md)
+{% endcontent-ref %}
 
 ## Running
 
@@ -333,7 +335,7 @@ We now have everything we need to run the Wasm module, let's do it!
 {% tab title="Rust" %}
 You should be able to run it using the `cargo run` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Instantiating module...
 Querying memory size...
@@ -357,7 +359,7 @@ cargo run --example memory --release --features "cranelift"
 {% tab title="Go" %}
 You should be able to run it using the `go run main.go` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Instantiating module...
 Querying memory size...
@@ -385,7 +387,7 @@ go test examples/example_memory_test.go
 {% tab title="C/C++" %}
 You should be able to run it using the `make clean memory && ./memory` command. The output should look like this:
 
-```text
+```
 Creating the store...
 Compiling module...
 Creating imports...
@@ -411,4 +413,3 @@ make clean memory
 {% endhint %}
 {% endtab %}
 {% endtabs %}
-

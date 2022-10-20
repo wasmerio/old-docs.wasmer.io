@@ -23,14 +23,12 @@
   * [Compile C/C++ to Wasm WASI](ecosystem/wasienv/compile-c-c++-to-wasm-wasi.md)
   * [Compile Swift to Wasm WASI](ecosystem/wasienv/compile-swift-to-wasm-wasi.md)
 
-## 🔧 Language Integrations <a id="integrations"></a>
+## 🔧 Language Integrations <a href="#integrations" id="integrations"></a>
 
 * [Rust](integrations/rust/README.md)
-  * [Setup your Rust environment](integrations/rust/setup.md)
   * [Wasmer Rust API](https://docs.rs/wasmer/)
 * [C/C++](integrations/c/README.md)
-  * [Setup your C/C++ environment](integrations/c/setup.md)
-  * [Wasmer C API](https://docs.rs/wasmer-c-api/*/wasmer_c_api/wasm_c_api/index.html)
+  * [Wasmer C API](https://docs.rs/wasmer-c-api/\*/wasmer\_c\_api/wasm\_c\_api/index.html)
 * [Javascript](integrations/js/README.md)
   * [WASI](integrations/js/wasi/README.md)
     * [Browser](integrations/js/wasi/browser/README.md)
@@ -51,26 +49,23 @@
     * [@wasmer/wasmfs](integrations/js/reference-api/wasmer-wasmfs.md)
   * [Wasmer-JS on Github](https://github.com/wasmerio/wasmer-js)
 * [Go](integrations/go/README.md)
-  * [Setup your Go environment](integrations/go/setup.md)
   * [Wasmer Go API](https://pkg.go.dev/github.com/wasmerio/wasmer-go/wasmer)
-* [Python](integrations/python/README.md)
-  * [Setup your Python environment](integrations/python/setup.md)
+* [Python](integrations/python.md)
 * [PHP](integrations/php/README.md)
-  * [Setup your PHP environment](integrations/php/setup.md)
   * [Wasmer PHP API](https://wasmerio.github.io/wasmer-php/)
 * [Ruby](integrations/ruby/README.md)
-  * [Setup your Ruby environment](integrations/ruby/setup.md)
-  * [Wasmer Ruby API](https://wasmerio.github.io/wasmer-ruby/wasmer_ruby/)
+  * [Wasmer Ruby API](https://wasmerio.github.io/wasmer-ruby/wasmer\_ruby/)
+* [OCaml](integrations/ocaml.md)
 * [Examples](integrations/examples/README.md)
   * [⭐️ Instantiating a Wasm module](integrations/examples/instance.md)
   * [🔁 Imports & exports](integrations/examples/imports-and-exports.md)
-  * [↪️ Calling guest \(exported\) functions](integrations/examples/calling-guest-functions.md)
-  * [↩️ Exposing host \(imported\) functions](integrations/examples/host-functions.md)
-  * [✏️ Using guest \(exported\) globals](integrations/examples/using-exported-globals.md)
+  * [↪️ Calling guest (exported) functions](integrations/examples/calling-guest-functions.md)
+  * [↩️ Exposing host (imported) functions](integrations/examples/host-functions.md)
+  * [✏️ Using guest (exported) globals](integrations/examples/using-exported-globals.md)
   * [💾 Interacting with memory](integrations/examples/memory.md)
   * [⚠️ Handling Errors](integrations/examples/errors.md)
   * [🛑 Interrupting Execution](integrations/examples/exit-early.md)
-  * [► Using memory pointers](integrations/examples/memory-pointers.md)
+  * [➡ Using memory pointers](integrations/examples/memory-pointers.md)
 
 ## 👥 Community
 
@@ -79,4 +74,3 @@
 * [Wasmer Slack](https://slack.wasmer.io)
 * [Wasmer Blog](https://wasmer.io/posts/)
 * [Wasmer on Github](https://github.com/wasmerio/)
-

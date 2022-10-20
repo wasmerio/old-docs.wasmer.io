@@ -1,6 +1,6 @@
 # 🛑 Interrupting Execution
 
-WebAssembly is currently always run in the same process synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host \(your application\).
+WebAssembly is currently always run in the same process synchronously. Thus, once WebAssembly starts executing, you have to wait for the execution to complete to continue running code on the host (your application).
 
 However, there are cases where you may want to interrupt this synchronous execution while the guest Wasm module is calling a host function. This can be useful for saving resources, and not returning back to the guest Wasm for execution, when you already know the Wasm execution will fail, or no longer be needed.
 
@@ -11,9 +11,9 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final **Rust** code for this example can be found on Github: [early_exit.rs](https://github.com/wasmerio/wasmer/blob/master/examples/early_exit.rs).
+The final **Rust** code for this example can be found on Github: [early\_exit.rs](https://github.com/wasmerio/wasmer/blob/master/examples/early\_exit.rs).
 
-_Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
+_Please take a look at the_ [_setup steps for Rust_](../rust/)_._
 {% endhint %}
 
 ```bash
@@ -32,9 +32,9 @@ wasmer = "3.0"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final **Go** code for this example can be found on Github: [early_exit.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_early_exit_test.go).
+The final **Go** code for this example can be found on Github: [early\_exit.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example\_early\_exit\_test.go).
 
-_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
+_Please take a look at the_ [_setup steps for Go_](../go/)_._
 {% endhint %}
 
 ```bash
@@ -46,9 +46,9 @@ go mod init github.com/$USER/wasmer-example-early-exit
 
 {% tab title="Python" %}
 {% hint style="info" %}
-The final **Python** code for this example can be found on Github: [imports_function_early_exit.py](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports_function_early_exit.py).
+The final **Python** code for this example can be found on Github: [imports\_function\_early\_exit.py](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports\_function\_early\_exit.py).
 
-_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
+_Please take a look at the_ [_setup steps for Python_](../python.md)_._
 {% endhint %}
 
 ```bash
@@ -62,7 +62,7 @@ pip install wasmer wasmer_compiler_cranelift
 {% hint style="info" %}
 The final **PHP** code for this example can be found on Github: [imports-function-early-exit.php](https://github.com/wasmerio/wasmer-php/blob/master/examples/imports-function-early-exit.php).
 
-_Please take a look at the_ [_setup steps for PHP_](../php/setup.md)_._
+_Please take a look at the_ [_setup steps for PHP_](../php/)_._
 {% endhint %}
 
 ```bash
@@ -75,9 +75,9 @@ composer require wasm/wasm
 
 {% tab title="Ruby" %}
 {% hint style="info" %}
-The final **Ruby** code for this example can be found on Github: [imports_function_early_exit.rb](https://github.com/wasmerio/wasmer-ruby/blob/master/examples/imports_function_early_exit.rb).
+The final **Ruby** code for this example can be found on Github: [imports\_function\_early\_exit.rb](https://github.com/wasmerio/wasmer-ruby/blob/master/examples/imports\_function\_early\_exit.rb).
 
-_Please take a look at the_ [_setup steps for Ruby_](../ruby/setup.md)_._
+_Please take a look at the_ [_setup steps for Ruby_](../ruby/)_._
 {% endhint %}
 
 ```bash
@@ -221,7 +221,7 @@ As we saw in previous examples we defined a Rust function, wrap it in a native f
 
 ## Handling the error
 
-Our module will call the `early_exit` function once we call its `run` function \(which is an exported function\). Let's get the function, call it and see how we can handle the error:
+Our module will call the `early_exit` function once we call its `run` function (which is an exported function). Let's get the function, call it and see how we can handle the error:
 
 {% tabs %}
 {% tab title="Rust" %}
@@ -319,7 +319,7 @@ We now have everything we need to run the Wasm module, let's do it!
 {% tab title="Rust" %}
 You should be able to run it using the `cargo run` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Instantiating module...
 Calling `run` function...
@@ -340,7 +340,7 @@ cargo run --example early-exit --release --features "cranelift"
 {% tab title="Go" %}
 You should be able to run it using the `go run main.go` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Instantiating module...
 Calling `run` function...
@@ -400,4 +400,3 @@ ruby examples/imports_function_early_exit.rb
 {% endhint %}
 {% endtab %}
 {% endtabs %}
-

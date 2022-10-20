@@ -17,7 +17,7 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% hint style="info" %}
 The final **Rust** code for this example can be found on Github: [instance.rs](https://github.com/wasmerio/wasmer/blob/master/examples/instance.rs).
 
-_Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
+_Please take a look at the_ [_setup steps for Rust_](../rust/)_._
 {% endhint %}
 
 ```bash
@@ -36,9 +36,9 @@ wasmer = "3.0"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final **Go** code for this example can be found on Github: [instance.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_instance_test.go).
+The final **Go** code for this example can be found on Github: [instance.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example\_instance\_test.go).
 
-_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
+_Please take a look at the_ [_setup steps for Go_](../go/)_._
 {% endhint %}
 
 ```bash
@@ -52,7 +52,7 @@ go mod init github.com/$USER/wasmer-example-instance
 {% hint style="info" %}
 The final **Python** code for this example can be found on Github: [instance.py](https://github.com/wasmerio/wasmer-python/blob/master/examples/instance.py).
 
-_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
+_Please take a look at the_ [_setup steps for Python_](../python.md)_._
 {% endhint %}
 
 ```bash
@@ -66,7 +66,7 @@ pip install wasmer wasmer_compiler_cranelift
 {% hint style="info" %}
 The final **PHP** code for this example can be found on Github: [instance.py](https://github.com/wasmerio/wasmer-php/blob/master/examples/instance.php).
 
-_Please take a look at the_ [_setup steps for PHP_](../php/setup.md)_._
+_Please take a look at the_ [_setup steps for PHP_](../php/)_._
 {% endhint %}
 
 ```bash
@@ -81,7 +81,7 @@ composer require wasm/wasm
 {% hint style="info" %}
 The final **C** code for this example can be found on Github: [instance.c](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/instance.c).
 
-_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
+_Please take a look at the_ [_setup steps for C/C++_](../c/)_._
 {% endhint %}
 
 ```bash
@@ -113,14 +113,13 @@ Wasmer C API includes the `wasmer.h` header file that you need to include to sta
 {% hint style="info" %}
 The final **Ruby** code for this example can be found on Github: [instance.rb](https://github.com/wasmerio/wasmer-ruby/blob/master/examples/instance.rb).
 
-_Please take a look at the_ [_setup steps for Ruby_](../ruby/setup.md)_._
+_Please take a look at the_ [_setup steps for Ruby_](../ruby/)_._
 {% endhint %}
 
 ```bash
 gem install wasmer
 ```
 {% endtab %}
-
 {% endtabs %}
 
 Now that we have everything set up, let's go ahead and try it out!
@@ -227,7 +226,7 @@ wasm_bytes = Wasmer::wat2wasm(
 {% endtab %}
 {% endtabs %}
 
-Let's assume we have the binary version of the module \(i.e the `.wasm` file\), here is how we would have loaded it:
+Let's assume we have the binary version of the module (i.e the `.wasm` file), here is how we would have loaded it:
 
 {% tabs %}
 {% tab title="Rust" %}
@@ -443,7 +442,7 @@ We now have everything we need to run the Wasm module, let's do it!
 {% tab title="Rust" %}
 You should be able to run it using the `cargo run` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Instantiating module...
 Calling `add_one` function...
@@ -464,7 +463,7 @@ cargo run --example instance --release --features "cranelift"
 {% tab title="Go" %}
 You should be able to run it using the `go run main.go` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Instantiating module...
 Calling `add_one` function...
@@ -473,6 +472,7 @@ Results of `add_one`: 2
 
 {% hint style="info" %}
 If you want to run the examples from the Wasmer [repository](https://github.com/wasmerio/wasmer-go/) codebase directly, you can also do:
+
 ```bash
 git clone https://github.com/wasmerio/wasmer-go.git
 cd wasmer-go
@@ -512,7 +512,7 @@ make EXAMPLE=instance test-doc-examples
 {% tab title="C/C++" %}
 You should be able to run it using the `make clean instance && ./instance` command. The output should look like this:
 
-```text
+```
 Creating the store...
 Compiling module...
 Creating imports...
@@ -548,4 +548,3 @@ ruby examples/instance.rb
 {% endhint %}
 {% endtab %}
 {% endtabs %}
-

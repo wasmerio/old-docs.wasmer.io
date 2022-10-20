@@ -105,10 +105,9 @@ register an existing key pair with WAPM
 delete the key pair matching `<public-key-id>`
 
 {% hint style="warning" %}
-## Telemetry
+### Telemetry
 
-During the alpha, telemetry \(specifically error logging to Sentry\) is enabled by default in the WAPM CLI. We send and record information such as IP address, operating system name and version, and the error/panic message.
+During the alpha, telemetry (specifically error logging to Sentry) is enabled by default in the WAPM CLI. We send and record information such as IP address, operating system name and version, and the error/panic message.
 
-To disable it, run `wapm config set telemetry.enabled false` or compile from source \(the telemetry feature is disabled in the build by default\).
+To disable it, run `wapm config set telemetry.enabled false` or compile from source (the telemetry feature is disabled in the build by default).
 {% endhint %}
-

@@ -4,30 +4,29 @@ description: >-
   tables. This example illustrates how to expose functions from the host.
 ---
 
-# ↩️ Exposing host \(imported\) functions
+# ↩️ Exposing host (imported) functions
 
 Up until now, our WebAssembly program has only been able to do pure computation, that is, take arguments and return values. Most interesting use cases require more than just computation though. In this section we'll go over how to give the Wasm modules we run extra abilities in the form of host functions.
 
 In this example, we'll create a system for getting and adjusting a counter value. However, host functions are not limited to storing data outside of Wasm, they're normal host functions and can do anything that the host can do.
 
-1. There will be a `get_counter` function that will return an `i32` of
+1.  There will be a `get_counter` function that will return an `i32` of
 
-   the current global counter.
+    the current global counter.
+2.  There will be an `add_to_counter` function that will add the passed
 
-2. There will be an `add_to_counter` function that will add the passed
+    `i32` value to the counter, and return an `i32` of the current
 
-   `i32` value to the counter, and return an `i32` of the current
-
-   global counter.
+    global counter.
 
 First we are going to want to initialize a new project. To do this we can navigate to our project folder, or create one. In this example, we will create a new project. Lets create it and navigate to it:
 
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final **Rust** code for this example can be found on Github: [imports_function_env.rs](https://github.com/wasmerio/wasmer/blob/master/examples/imports_function_env.rs).
+The final **Rust** code for this example can be found on Github: [imports\_function\_env.rs](https://github.com/wasmerio/wasmer/blob/master/examples/imports\_function\_env.rs).
 
-_Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
+_Please take a look at the_ [_setup steps for Rust_](../rust/)_._
 {% endhint %}
 
 ```bash
@@ -118,7 +117,7 @@ let import_object = imports! {
 
 We use `Function::new_typed_with_env` here to tell Wasmer our host functions need our `Env` to be passed in addition to other arguments.
 
-If the host function does not need external data \(it is pure\) we use the `new_typed` function instead, which has the same signature except that it doesn't take the `env` parameter.
+If the host function does not need external data (it is pure) we use the `new_typed` function instead, which has the same signature except that it doesn't take the `env` parameter.
 {% endtab %}
 {% endtabs %}
 
@@ -132,7 +131,7 @@ We now have everything we need to run the Wasm module, let's do it!
 {% tab title="Rust" %}
 You should be able to run it using the `cargo run` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Instantiating module...
 Initial ounter value: 0
@@ -152,4 +151,3 @@ cargo run --example imported-function-env --release --features "cranelift"
 {% endhint %}
 {% endtab %}
 {% endtabs %}
-

@@ -16,9 +16,9 @@ First we are going to want to initialize a new project. To do this we can naviga
 {% tabs %}
 {% tab title="Rust" %}
 {% hint style="info" %}
-The final **Rust** code for this example can be found on Github: [imports_exports.rs](https://github.com/wasmerio/wasmer/blob/master/examples/imports_exports.rs).
+The final **Rust** code for this example can be found on Github: [imports\_exports.rs](https://github.com/wasmerio/wasmer/blob/master/examples/imports\_exports.rs).
 
-_Please take a look at the_ [_setup steps for Rust_](../rust/setup.md)_._
+_Please take a look at the_ [_setup steps for Rust_](../rust/)_._
 {% endhint %}
 
 ```bash
@@ -37,9 +37,9 @@ wasmer = "3.0"
 
 {% tab title="Go" %}
 {% hint style="info" %}
-The final **Go** code for this example can be found on Github: [imports_exports.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example_imports_exports_test.go).
+The final **Go** code for this example can be found on Github: [imports\_exports.go](https://github.com/wasmerio/wasmer-go/blob/master/examples/example\_imports\_exports\_test.go).
 
-_Please take a look at the_ [_setup steps for Go_](../go/setup.md)_._
+_Please take a look at the_ [_setup steps for Go_](../go/)_._
 {% endhint %}
 
 ```bash
@@ -51,9 +51,9 @@ go mod init github.com/$USER/wasmer-example-imports-exports
 
 {% tab title="Python" %}
 {% hint style="info" %}
-The final **Python** code for this example can be found on Github: [imports_exports.py](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports_exports.py).
+The final **Python** code for this example can be found on Github: [imports\_exports.py](https://github.com/wasmerio/wasmer-python/blob/master/examples/imports\_exports.py).
 
-_Please take a look at the_ [_setup steps for Python_](../python/setup.md)_._
+_Please take a look at the_ [_setup steps for Python_](../python.md)_._
 {% endhint %}
 
 ```bash
@@ -67,7 +67,7 @@ pip install wasmer wasmer_compiler_cranelift
 {% hint style="info" %}
 The final **C** code for this example can be found on Github: [imports-exports.c](https://github.com/wasmerio/wasmer/blob/master/lib/c-api/examples/imports-exports.c).
 
-_Please take a look at the_ [_setup steps for C/C++_](../c/setup.md)_._
+_Please take a look at the_ [_setup steps for C/C++_](../c/)_._
 {% endhint %}
 
 ```bash
@@ -212,7 +212,9 @@ That's it! Easy right?
 
 We did not go into the details of how to create the imported entities, we encourage you to read other examples to know more about this:
 
-{% page-ref page="host-functions.md" %}
+{% content-ref url="host-functions.md" %}
+[host-functions.md](host-functions.md)
+{% endcontent-ref %}
 
 ## Fetching exports
 
@@ -306,13 +308,21 @@ if (memory == NULL) {
 
 Again, we'll not cover how to use these entities here as this is the topic of other, more detailed, examples:
 
-{% page-ref page="calling-guest-functions.md" %}
+{% content-ref url="calling-guest-functions.md" %}
+[calling-guest-functions.md](calling-guest-functions.md)
+{% endcontent-ref %}
 
-{% page-ref page="host-functions.md" %}
+{% content-ref url="host-functions.md" %}
+[host-functions.md](host-functions.md)
+{% endcontent-ref %}
 
-{% page-ref page="using-exported-globals.md" %}
+{% content-ref url="using-exported-globals.md" %}
+[using-exported-globals.md](using-exported-globals.md)
+{% endcontent-ref %}
 
-{% page-ref page="memory.md" %}
+{% content-ref url="memory.md" %}
+[memory.md](memory.md)
+{% endcontent-ref %}
 
 ## Running
 
@@ -322,7 +332,7 @@ We now have everything we need to run the Wasm module, let's do it!
 {% tab title="Rust" %}
 You should be able to run it using the `cargo run` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Creating the imported function...
 Creating the imported global...
@@ -351,7 +361,7 @@ cargo run --example imports-exports --release --features "cranelift"
 {% tab title="Go" %}
 You should be able to run it using the `go run main.go` command. The output should look like this:
 
-```text
+```
 Compiling module...
 Creating the imported function...
 Creating the imported global...
@@ -394,7 +404,7 @@ python examples/imports_exports.py
 {% tab title="C/C++" %}
 You should be able to run it using the `make clean imports-exports && ./imports-exports` command. The output should look like this:
 
-```text
+```
 Creating the store...
 Compiling module...
 Creating the imported function...
@@ -423,4 +433,3 @@ make clean imports-exports
 {% endhint %}
 {% endtab %}
 {% endtabs %}
-
