@@ -244,7 +244,7 @@ ARGS:
     <FILE>    File to validate as WebAssembly
 ```
 
-## `wamser wast`
+## `wasmer wast`
 
 Run spec testsuite
 
