@@ -1,6 +1,6 @@
 # Testing
 
-Thanks to [spec tests](https://github.com/wasmerio/wasmer/tree/master/lib/spectests/spectests) we can ensure 100% compatibility with the WebAssembly spec test suite.
+Thanks to [spec tests](https://github.com/wasmerio/wasmer/tree/master/tests/wast/spec) we can ensure 100% compatibility with the WebAssembly spec test suite.
 
 You can run all the tests with:
 
