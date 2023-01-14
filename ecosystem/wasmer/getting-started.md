@@ -34,7 +34,7 @@ In this example, we will be using Python compiled to WebAssembly. To do this we 
 wasmer run python/python
 ```
 
-Which should bring up the QuickJS prompt which you can then interact with. See an example below:
+Which should bring up the Python prompt which you can then interact with. See an example below:
 
 <figure><img src="../../.gitbook/assets/Screenshot 2022-11-21 at 5.42.17 PM.png" alt=""><figcaption><p>wasmer CLI running the WAPM Python package</p></figcaption></figure>
 
