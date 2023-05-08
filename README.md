@@ -27,7 +27,7 @@ to name but a few...
 
 ## Social
 
-For the latest articles on Wasmer features and developments, check out [our blog](https://medium.com/wasmer) or [follow us on Twitter](https://twitter.com/wasmerio)!
+For the latest articles on Wasmer features and developments, check out [our blog](https://wasmer.io/posts/) or [follow us on Twitter](https://twitter.com/wasmerio)!
 
 ## Tutorials
 
