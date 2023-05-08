@@ -28,7 +28,7 @@
 - [Rust](integrations/rust/README.md)
   - [Wasmer Rust API](https://docs.rs/wasmer/)
 - [C/C++](integrations/c/README.md)
-  - [Wasmer C API](https://docs.rs/wasmer-c-api/*/wasmer_c_api/wasm_c_api/index.html)
+  - [Wasmer C API](https://docs.rs/wasmer-c-api/)
 - [Javascript](integrations/js/README.md)
   - [WASI](integrations/js/wasi/README.md)
     - [Browser](integrations/js/wasi/browser/README.md)
